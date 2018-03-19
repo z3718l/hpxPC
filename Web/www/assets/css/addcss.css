@@ -1,0 +1,451 @@
+/*------已认证css start------------------------------------------------------------------------*/
+/*btn------------------*/
+
+
+.btn-addchg1{
+    padding-bottom: 8%;
+    margin-top: 2%;
+}
+
+.acced{
+    font-size: 10px
+}
+.add{
+
+    margin-left: 45px;
+    margin-right: 10px;
+    border: none;
+    background-color: #f55a14;
+    border-radius: 2px;color: white
+}
+
+.chg{
+    margin-left: 10px;
+    border: 1px solid #f55a14;
+    border-radius: 2px;
+    color: #f55a14;
+}
+.sub{
+    background-color: #f55a14;
+    border: none;
+    border-radius: 2px;
+    color: white ;
+    margin-top: -10px
+}
+.band{
+    background-color: #1a2b71;
+    color: white ;
+    margin-top: -0.5%
+}
+.deband{
+    background-color: #1a2b71;
+    color: white ;
+    margin-top: -0.5%
+}
+
+.tab1{
+    padding-top: 2%;margin-left: 0.8%;
+}
+/*box------------------*/
+.bigbox{
+    padding: 0.4%;
+    padding-left: 0.6%;
+    border: 3px solid #1a2b71;
+
+
+}
+.smallbox{
+    width: 99.7%;
+    height: 99.2%;
+    border: 1px solid #1a2b71;
+    padding: 20% 20% 10% 20%
+
+}
+.smallbox .p1{
+    color:black;!important;
+}
+.smallbox .p2{
+    color:black;!important;
+    padding-bottom: 10%
+}
+
+.renzheng{
+    margin-top: -28%;
+    margin-left: -27%;
+}
+
+
+
+.line-m{
+    padding-top: 3% ;
+    margin-left: 2%;
+    border: 2px solid #d7d7d7
+}
+.line-m div .name{
+    padding-bottom: 2%;
+}
+.c-list{
+    padding-bottom: 2%
+}
+.c-list span{
+    margin-left: 2%
+}
+.name1{
+    margin-top: -3%
+}
+.name1 .zs{
+    padding-bottom: 2%
+}
+.tip{
+    font-size:4px;color: #505050;!important;
+    margin-top: 20%;
+}
+
+/*------已认证css end------------------------------------------------------------------------*/
+
+/*------账户绑定css start------------------------------------------------------------------------*/
+.user-right{
+    width: 80%;
+    background-color: white;
+}
+.user-right .right-top{
+    width: 100%;
+    height: 45px;
+    background-color: #1a2b71;
+}
+.user-right p{
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+}
+.user-right .content{
+    height: 882px;
+    background-color: white;
+}
+.process{
+    width: 90%;
+    padding-left: 60px;
+    padding-top:50px ;
+    height: 130px;
+    float: left;
+}
+.process1{
+    width: 20%;
+    height: 20px;
+    float: left;
+}
+
+.process1 img{
+    padding-left:20px;
+}
+.process1 p {
+    color: #1a2b71;
+    font-size: 15px;
+    padding-top: -5px;
+}
+.p-line{
+    width: 150px;
+    margin-top:20px;
+    height: 2px;
+    float: left;
+    background-color: #e7e7e7;
+}
+.process2{
+    width: 15%;
+    height: 60px;
+    float: left;
+}
+
+.process2 img{
+    padding-top: 5px;
+    padding-left:10px;
+}
+.process2 p{
+    padding-top: 10px;
+    color: #1a2b71 ;
+    font-size: 15px;
+}
+.process3{
+    width: 15%;
+    height: 60px;
+    float: left;
+}
+
+.process3 img{
+    padding-top: 10px;
+    padding-left:10px;
+}
+.process3 p{
+    padding-top: 5px;
+    color: #1a2b71 ;
+    font-size: 15px;
+}
+.explain{
+    padding-top: 2%;
+    height: 40px;
+    padding-left: 50px;
+    float: left;
+}
+.explain1{
+    margin-bottom: -4%;
+height: 40px;
+    padding-left: 50px;
+    float: left;
+}
+.line{
+    height: 1px;
+    background-color: #505050;
+    float: left;
+}
+.explain p {
+    line-height: 200%;
+    font-size: 13px;
+    color: #505050;
+}
+.explain p span{
+    color: #f55a14;
+}
+.nav nav ul{
+    height: 34px;
+    border-bottom: 1px solid #d8d8d8;
+}
+.nav nav li{
+    padding: 5px 10px;
+    font-size:18px;
+}
+.nav .nav-selected,.nav-selected a{
+    background:#f55a14;
+    color:#fff;
+}
+.nav{
+    margin-top:-20px;
+    float: left;
+    background-color: white;
+}
+.search{
+    margin: 40px 0;
+}
+.search span{
+    color: #1a2b71;
+    font-size: 18px;
+    line-height: 33px;
+
+}
+.search button{
+    height: 33px;
+    padding: 5px;
+    border:none;
+    color:#fff;
+    border-radius: 5px;
+    margin:0 5px;
+
+}
+.search-btn-1{
+    background: #1a2b71;
+}
+.search-btn-2{
+    background: #f55a14;
+}
+.search button img {
+    position: relative;
+    left: -5px;
+}
+.table table{
+    width:100%;
+}
+.table th{
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+.table td{
+    background: #f8f8f8;
+    height: 60px;
+    text-align: center;
+}
+.table td button{
+    background: #1a2b71;
+    padding: 5px;
+    color:#fff;
+    border:none;
+    border-radius: 2px;
+    margin:3px;
+}
+.table td .table-btn-2{
+    width:30px;
+    height: 30px;
+    background:url(../img/del.png) no-repeat;
+    background-position: 3px 3px;
+    position: relative;
+    top: 5px;
+}
+
+.phone p{
+    width: 10%;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.phone p span{
+    color: #f55a14;
+}
+.phone .phone_t{
+    width: 30%;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.sex{
+    margin-left: 140px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.sex p{
+    width: 70px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.sex p span{
+    color: #f55a14;
+}
+.sex .sex_t{
+    width: 50px;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.deal{
+    margin-left: 103px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.deal p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.deal p span{
+    color: #f55a14;
+}
+.deal .deal_t{
+    width: 70px;
+    height: 30px;
+    margin-left: 0px;
+    margin-top: 5px;
+    float: left;
+}
+.deal img{
+    margin-top: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+    float: left;
+}
+
+
+.address{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.address p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.address .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+
+.study{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.study p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.study .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+.import_1{
+    width: 250px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_1 img{
+    margin-top: 10px;
+    width: 180px;
+    height: 120px;
+    float: left;
+}
+.import_1 p{
+    padding-top: 110px;
+    color: #505050;
+    float: left;
+}
+.import_2{
+    width: 530px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_2 img{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 150px;
+    height: 100px;
+    float: left;
+}
+.import_2 p{
+    padding-top: 90px;
+    color: #505050;
+    float: left;
+}
+.sure{
+    width: 500px;
+    height: 50px;
+    float: left;
+}
+.sure input{
+    width: 200px;
+    height: 40px;
+    background-color: #f55a14;
+    color: white;
+    border: 0px;
+    font-size: 15px;
+    margin-left: 220px;
+}
+/*------账户绑定css end------------------------------------------------------------------------*/
+

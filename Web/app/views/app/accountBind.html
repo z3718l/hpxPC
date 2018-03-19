@@ -1,0 +1,52 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        账户绑定
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page67">
+            <div class="part1">
+                <a href="" ng-class="{'on': accountTypeCode == 501}" ng-click="changeType(501)">卖方/出票方</a><a href="" ng-class="{'on': accountTypeCode == 502}" ng-click="changeType(502);">买方/收票方</a>
+            </div>
+            <div class="part2">
+                <h3>添加银行账户<span ng-if="accountTypeCode == 501">（卖方/出票方可绑定任一银行账户）</span><span ng-if="accountTypeCode == 502">（买方/收票方须绑定兴业银行账户）</span></h3>
+
+                <div class="line"></div>
+                <ul class="part3" ng-repeat="item in AccountData" ng-if="item.account_type_code == accountTypeCode">
+                    <li>银行名称：<span>{{ item.account_person | limitTo: 12 }}{{ item.bank_name.length > 12 ? '...' : '' }}</span></li>
+                    <!--<li>账户类型名称：<span>{{account_type_name}}</span></li>-->
+                    <li>账号：<span>{{ item.account_number }}</span></li>
+                    <li>默认账户：<span>{{ item.is_default }}</span></li>
+                    <li>审核状态：<span>{{ item.statusToDescription }}</span></li>
+                    <li>备注：<span>{{ item.description }}</span></li>
+                    <li><div class="line"></div></li>
+                </ul>
+                <div class="con">
+                    <!-- <img src="images/icon42.png" alt=""> -->
+                    <div class="upload" ui-sref="app.addAccount"><!--<input type="file" name="" id="">--></div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="page21-2">
+            <div class="part1">
+                <div class="con1"><a href="" ng-class="{true:'on',false:''}[isSeller]" ng-click="changeClass(501);getAccountData(501)">卖方/出票方</a><a href="" ng-class="{true:'',false:' on'}[isSeller]" ng-click="changeClass(502);getAccountData(502)">买方/收票方</a></div>
+                <div class="con2"><input type="text" placeholder="关键词"><a ui-sref="app.addAccount" class="btn-add">新增</a></div>
+            </div>
+
+            <div ng-repeat="item in AccountData">
+                <div class="item">
+                    <p>银行名称：{{item.bank_name}}</p>
+                    <p>账户：{{item.account_person}}</p>
+                    <p>默认账户：{{item.is_default}}</p><p><span>审核状态：{{item.verify_status}}</span></p>
+                    <div class="operate">
+                        <a href="" class="btn1 on">详细</a>
+                        <a href="" class="btn2" ng-class="{true:'',false:' on'}[item.is_verified]" ng-disabled="item.is_verified" ng-click="verify(item.id)">鉴权</a>
+                        <a href="" class="btn3 on" ng-click="deleteEnterpriseAccount(item.id)">删除</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>-->
+    </ion-content>
+</ion-view>

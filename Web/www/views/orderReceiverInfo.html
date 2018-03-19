@@ -1,0 +1,855 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" href="../../www/assets/css/udekx.css" />
+<script src="../../templates/main/js/udex1.js"></script>
+<script src="../../templates/main/js/udex2.js"></script>
+<link rel="stylesheet" href="../../templates/main/css/my-customkl.css" />
+<div ng-cloak ng-controller="orderReceiverInfoController">
+    <div class="user-right">
+        <div class="right-top col-md-12 row right-top-nav">
+            <p ng-if="model.order_status_id>=804 && model.order_status_id<810">我要收票 > 我的竞价 > 交易中</p>
+            <p ng-if="model.order_status_id>=810 && model.order_status_id<814">我要收票 > 我的竞价 > 交易完成</p>
+            <p ng-if="model.order_status_id==816">我要收票 > 我的竞价 > 交易中止</p>
+        </div>
+        <!-- 向导栏 start-->
+        <div class="content col-md-12 row col-xs-12" style="margin-left: 0px;">
+            <div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==101">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}" >发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 804 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 805 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">支付票款</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 807 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 807),'zhende':(model.bill_status_code >= 807)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 807),'zhende':(model.bill_status_code >= 807)}">&nbsp;&nbsp;&nbsp;&nbsp;背书</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 808 ? '' : '-gray'}}.png">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 808),'zhende':(model.bill_status_code >= 808)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 808),'zhende':(model.bill_status_code >= 808)}">&nbsp;&nbsp;&nbsp;&nbsp;签收</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" ng-src="assets/img/user-right-point{{model.bill_status_code >= 810 ? '' : '-gray'}}.png">
+                    <h6 style="width: 81px;margin-top:20%;margin-left:-10px;" ng-class="{'zhende':(model.bill_status_code >=810 ),'jiade':(model.bill_status_code < 810)}">系统核验解冻</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'zhende':(model.bill_status_code >=810 ),'jiade':(model.bill_status_code < 810)}">&nbsp;交易完成</h6>
+                </div>
+            </div>
+            <!--<div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==102">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 804 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 805 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">&nbsp;&nbsp;&nbsp;&nbsp;双方</h6>
+                    <h6 style="width: 90px;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">线下交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 810 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%">&nbsp;&nbsp;&nbsp;&nbsp;确认</h6>
+                    <h6 style="width: 90px;margin-top:40%">完成交易</h6>
+                </div>
+            </div>-->
+        </div>
+        <!-- 向导栏 end-->
+
+        <div class="form-group col-md-12" ng-if="model.bill_type_id==102 && model.order_status_id>=810">
+            <div class="form-inline">
+                <label class="control-label col-md-2">出票企业:</label>
+                <div class="col-md-6 form-control-static">
+                    {{model.drawer_name}}
+                </div>
+                <label class="control-label col-md-2">企业等级:</label>
+                <div class="col-md-2 form-control-static">
+                    <img ng-src="{{ model.drawer_avg_star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img ng-src="{{ model.drawer_avg_star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img ng-src="{{ model.drawer_avg_star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img ng-src="{{ model.drawer_avg_star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img ng-src="{{ model.drawer_avg_star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                </div>
+            </div>
+            <div class="form-inline">
+                <label class="control-label col-md-2">联系人:</label>
+                <div class="col-md-2 form-control-static">
+                    {{model.drawer_contact_name}}
+                </div>
+                <!--<label class="control-label col-md-2">联系电话:</label>
+                <div class="col-md-2 form-control-static">
+                    {{model.drawer_contact_phone}}
+                </div>-->
+                <label class="control-label col-md-2">交易地点:</label>
+                <div class="col-md-2 form-control-static">
+                    {{ model.product_location_province }} {{ model.product_location }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-horizontal" style="margin-bottom:60px;">
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;color:#333;font-size:16px">
+                票据信息
+                <img ng-src="assets/img/{{filter.rote == 1 ? 'hp_down' : 'hp_left'}}.png" ng-click="billshowhide()" />
+            </div>
+            <div class="accordionshow" id="billaccordion">
+                <div class="col-md-4">
+                    <div class="tb-booth tb-pic tb-s250" style="margin-top:25px;">
+                        <a href="{{model.bill_front_photo_path}}" target="_blank">
+                            <img class="jqzoom" align="right" ng-src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" alt="汇票正面未上传" width="230" height="200" />
+                        </a>
+                        <!--<a href="{{model.bill_front_photo_path}}" target="_blank">
+                            <img class="jqzoom" align="right" ng-src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" alt="汇票正面未上传" width="230" height="200" />
+                        </a>-->
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票据号：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_number }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">承兑人全称：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.acceptor_name }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票据类型：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_type_name }} {{ model.acceptor_type_name }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票面金额[元]：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_sum_price | currency }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">汇票到期日：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}
+                            <!--(剩余{{ model.remaining_day }}天)-->
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">背书次数：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.endorsement_number }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">汇票瑕疵：</label>
+                        <div class="col-md-9 form-control-static">
+                            <div ng-repeat="item in model.bill_flaw_names">
+                                <!--<span class="col-md-3">{{ item }}</span>-->
+                                <span class="form-inline" style="float:left;">{{ item }}&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                            <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;color:#333;font-size:16px">
+                订单信息
+            </div>
+            <div class="col-md-12" ng-if="model.bill_type_id==101" style="width: 96%;border: 1px solid #ebebeb;margin-left: 2%;margin-top: 2%;margin-bottom: 2%;padding:0 0 0 0 ">
+                <div class="col-md-8" style="margin-top:3%;">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">订单号码：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_number }}
+                        </div>
+                        <label class="control-label col-md-3">交易方式：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_type_name }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">                     
+                        <label class="control-label col-md-3" ng-if="model.trade_type_code==701">贴现利率：</label>
+                        <div class="col-md-3 form-control-static"  ng-if="model.trade_type_code==701">
+                            {{ model.order_rate }}<span ng-if="model.bill_type_id==101">%</span><span ng-if="model.bill_type_id==102">‰</span>
+                        </div>
+                        <div ng-if="model.order_type_name=='现票卖断'">
+                            <label class="control-label col-md-3">每十万加：</label>
+                            <div class="col-md-3 form-control-static">
+                                {{ model.order_every_plus| currency}}
+                            </div>
+                        </div>
+                        <label class="control-label col-md-3" ng-if="model.trade_type_code==702"></label>
+                        <div class="col-md-3 form-control-static" ng-if="model.trade_type_code==702">
+
+                        </div>
+                        <div ng-if="model.order_type_name=='预约出票'">
+                            <label ng-if="model.trade_type_code==702" class="col-md-3 control-label">每十万贴息：</label>
+                            <div ng-if="model.trade_type_code==702" class="col-md-3 form-control-static">
+                                <span ng-if="model.order_rate>0">
+                                    {{ model.order_rate | currency }}元
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">贴现金额：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.order_total_price | currency }}
+                        </div>
+                        <label class="control-label col-md-3" style="margin-left: -44px;">生成时间：</label>
+                        <div class="col-md-4 form-control-static" style="width: 148px;margin-left: -3%;">
+                            {{ model.order_time | date:'yyyy-MM-dd HH:mm' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ck" style="background:#ebebeb">
+                    <div class="form-group">
+                        <div class="lctd"></div>
+                        <label class="control-label col-md-8" style="margin-left: -35%;">订单状态：</label>
+                        <label style="color:#ff5a14"><span><label ng-if="model.order_status_id >= 810">总时长：{{hpxDatekx}}</label></span></label>
+                        <div class="col-md-12 form-control-static form-group">
+                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div> 
+                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 806),'rosl':(model.bill_status_code != 806)}"><em>●</em><font>收票方支付票款</font><label style="margin-left: 20%;">{{hpxDates[2]}}</label></div>
+                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 807),'rosl':(model.bill_status_code != 807)}"><em>●</em><font>出票方背书确认</font><label style="margin-left: 20%;">{{hpxDates[3]}}</label></div>
+                            <div class="accordionhide" id="fileaccordion">
+                                <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code ==808),'rosl':(model.bill_status_code != 808)}"> <em>●</em><font>收票方签收确认</font><label style="margin-left: 20%;">{{hpxDates[4]}} </label></div>
+                                <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code >= 810),'rosl':(model.bill_status_code < 810 && model.bill_status_code >808)}">
+                                    <em>●</em>
+                                    <font>银行核验解冻</font> <label style="margin-left: 24%;">{{hpxDates[5]}}<span style="display:none">{{model.order_status_id}}</span></label>
+                                </div>
+                            </div>
+                            <span ng-click="tog()" style="margin-left: 45%;position: relative;top: 14px;color: #87868B;cursor:pointer;">查看详情 <label class="rote" id="trans" style="margin-left: 5%;font-size: 21px;position: relative;top: 3px;">﹀</label></span>
+                            <!--<div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code >= 810),'rosl':(model.bill_status_code < 810 && model.bill_status_code >808)}">
+                                <em>●</em>
+                                <font>银行核验解冻</font> <label style="margin-left: 24%;">{{hpxDates[5]}}<span style="display:none">{{model.order_status_id}}</span></label>
+                            </div>
+                            <div class="text-left "  style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code ==808),'rosl':(model.bill_status_code != 808)}"> <em>●</em><font>收票方签收确认</font><label style="margin-left: 20%;">{{hpxDates[4]}} </label></div>
+                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 807),'rosl':(model.bill_status_code != 807)}"><em>●</em><font>出票方背书确认</font><label style="margin-left: 20%;">{{hpxDates[3]}}</label></div>
+                            <div class="accordionhide" id="fileaccordion">
+                                <div class="text-left "  style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 806),'rosl':(model.bill_status_code != 806)}"><em>●</em><font>收票方支付票款</font><label style="margin-left: 20%;">{{hpxDates[2]}}</label></div>
+                                <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div> 
+                            </div>
+                            <span ng-click="tog()" style="margin-left: 45%;position: relative;top: 14px;color: #87868B;cursor:pointer;">查看详情 <label class="rote" id="trans" style="margin-left: 5%;font-size: 21px;position: relative;top: 3px;">﹀</label></span>-->
+                        </div>
+
+                    </div>
+                    <div class="form-group" ng-if="model.order_status_id == 816">
+                        <label class="control-label col-md-8">订单状态：</label>
+                        <div class="col-md-12 form-control-static form-group">
+                            <div class="text-center"><font color="red">交易中止</font></div>
+                        </div>
+                    </div>
+                </div>
+
+           
+            </div>
+            <!--<div ng-if="model.order_status_id == 804 && model.bill_type_id==101">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;color:#333;font-size:16px">
+                    出票方提现账户
+                </div>
+                <div class="col-md-12">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">机构名称：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.drawer_enterprise_name }}
+                        </div>
+                        <label class="control-label col-md-2">开户行：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.drawer_account_bank }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">账号：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.drawer_account_number }}
+                        </div>
+                        <label class="control-label col-md-2">联行号：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.drawer_account_bank_number }}
+                        </div>
+                        <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                    </div>
+                </div>
+            </div>-->
+            <div ng-if="model.bill_type_id==102" class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">交易信息</div>
+            <div class="col-md-12" ng-if="model.bill_type_id==102">
+                <div class="form-inline col-md-12">
+                    <label class="col-md-2 control-label">期望利率：</label>
+                    <div class="col-md-3 form-control-static">
+                        <span ng-if="model.bill_rate>0">
+                            {{model.bill_rate}}<span ng-if="model.bill_type_id==102">‰</span><span ng-if="model.bill_type_id==101">%</span>
+                        </span>
+                    </div>
+                    <label class="col-md-2 control-label">期望交易额[元]：</label>
+                    <div class="col-md-3 form-control-static">
+                        <span ng-if="model.bid_deal_price>0">
+                            {{model.bid_deal_price | currency }}
+                        </span>
+                    </div>
+                    <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                </div>
+                <div class="form-inline col-md-12">
+                    <label class="control-label col-md-2">交易方式：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.trade_type_name }}
+                    </div>
+                    <label class="control-label col-md-2">备注：</label>
+                    <div class="col-md-5 form-control-static">
+                        {{ model.description }}
+                    </div>
+                    <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                </div>
+                <div class="form-inline col-md-12">
+                    <label class="control-label col-md-2">收票公司：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.receiver_enterprise_name }}
+                    </div>
+                    <label class="control-label col-md-2">联系人：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.contact_name }}
+                    </div>
+                    <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+                </div>
+                <!--<div class="form-inline">
+                    <div>
+                        <label class="control-label col-md-2">联系方式：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.contact_phone }}
+                        </div>
+                    </div>
+                </div>-->
+                <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
+            </div>
+
+            <div ng-if="model.order_status_id >= 811 && (model.order_appraisals.drawer_appraisal.description.length>0 || model.order_appraisals.receiver_appraisal.description.length>0)">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价信息</div>
+                <div class="form-inline" ng-if="model.order_appraisals.drawer_appraisal.description.length>0">
+                    <label class="control-label col-md-2">出票方评分：</label>
+                    <div class="col-md-10 form-control-static">
+                        <img ng-src="{{ model.order_appraisals.drawer_appraisal.star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.drawer_appraisal.star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.drawer_appraisal.star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.drawer_appraisal.star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.drawer_appraisal.star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    </div>
+                    <label class="control-label col-md-2">出票方评价：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.order_appraisals.drawer_appraisal.description }}
+                    </div>
+                    <div ng-if="model.order_appraisals.drawer_appraisal.additional_description.length > 0">
+                        <label class="control-label col-md-2" style="font-size:12px;">追加评价：</label>
+                        <div class="col-md-10 form-control-static">
+                            {{ model.order_appraisals.drawer_appraisal.additional_description }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inline" ng-if="model.order_appraisals.receiver_appraisal.description.length>0">
+                    <label class="control-label col-md-2">收票方评分：</label>
+                    <div class="col-md-10 form-control-static">
+                        <img ng-src="{{ model.order_appraisals.receiver_appraisal.star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.receiver_appraisal.star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.receiver_appraisal.star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.receiver_appraisal.star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img ng-src="{{ model.order_appraisals.receiver_appraisal.star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    </div>
+                    <label class="control-label col-md-2">收票方评价：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.order_appraisals.receiver_appraisal.description }}
+                    </div>
+                    <div ng-if="model.order_appraisals.receiver_appraisal.additional_description.length > 0">
+                        <label class="control-label col-md-2" style="font-size:12px;">追加评价：</label>
+                        <div class="col-md-10 form-control-static">
+                            {{ model.order_appraisals.receiver_appraisal.additional_description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group" ng-if="model.order_status_id >= 804 && model.bill_type_id==101">
+                <div class="text-center" ng-if="model.order_status_id < 810">
+                    <div class="form-group form-inline col-xs-12 col-md-12">
+                        <laber class="infor-img-circle col-md-12 col-xs-12 text-center">
+                            <span class="col-md-8 col-xs-12"></span>
+                            <ul class="col-md-4 col-xs-12">
+                                <li><img ng-src="assets/img/circle_{{countValue > 0 ? 1:2}}.png"></li>
+                                <li><img ng-src="assets/img/circle_{{countValue > 1 ? 1:2}}.png"></li>
+                                <li><img ng-src="assets/img/circle_{{countValue > 2 ? 1:2}}.png"></li>
+                            </ul>
+                        </laber>
+                    </div>
+                </div>
+                <div class="text-center" ng-if="model.order_status_id != 816">
+                    <div class="text-center" ng-if="model.order_status_id == 804">
+                        <font class="col-md-12" size="3" color="blue">出票方已确认交易</font>
+                        <font class="col-md-12" size="3" color="blue">请支付票款，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 805">
+                        <font class="col-md-12" size="3" color="blue">正在充值付款</font>
+                        <font class="col-md-12" size="3" color="blue">已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 806">
+                        <font class="col-md-12" size="3" color="blue">已付款</font>
+                        <font class="col-md-12" size="3" color="blue">待出票方背书，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 807">
+                        <font class="col-md-12" size="3" color="blue">出票方已背书</font>
+                        <font class="col-md-12" size="3" color="blue">请签收，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 808">
+                        <font class="col-md-12" size="3" color="blue">等待系统核验解冻，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                        <!--<font class="col-md-12" size="3" color="blue">交易结束</font>-->
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 810">
+                        <font class="col-md-12" size="3" color="blue">系统核验解冻</font>
+                        <font class="col-md-12" size="3" color="blue">交易完成</font>
+                    </div>
+                </div>
+            </div>
+
+        <div class="text-center">
+            <button class="btn btn-success width-100" ng-if="model.order_status_id == 804 && model.bill_type_id==101 && identity.enterprise_id == model.receiver_id" ng-click="showPay()" ng-disabled="idDisable"><i class="fa fa-share-square-o"></i> 确认付款</button>
+            <!--showPay   ng-click="showendorsements()"-->
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 807 && model.bill_type_id==101" ng-click="validate()" ng-disabled="idDisable"><i class="fa fa-share-square-o"></i> 确认签收</button>
+            <!--<button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 807 && model.bill_type_id==101 && model.order_endorsements.length==0" ng-click="validate()"><i class="fa fa-share-square-o"></i> 确认签收0</button>-->
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 810 || model.order_status_id == 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 评价</button>
+            <!--<button type="button" class="btn btn-success width-100" ng-if="model.order_status_id >= 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 追加评价</button>-->
+            <div class="col-md-12 form-group form-inline text-center" ng-if="model.bill_type_id==101 && model.order_status_id == 804">
+                <div class="text-left col-md-6 col-md-offset-3"><strong>温馨提示：</strong>请尽快进行确认付款操作，操作成功后，款项将冻结在兴业代管专户。操作前，可先确认兴业执剑人见证代管系统账户中有足够余额。</div>
+            </div>
+            <div class="col-md-12 form-group form-inline text-center" ng-if="model.bill_type_id==101 && model.order_status_id == 805">
+                <!--<div style="background-color:#fefef0;width:100%;">-->
+                    <div class="text-left col-md-7 col-md-offset-3" style="border:1px dashed #87868B;margin-top:25px;background: #fafaf0;">
+                        <strong>温馨提示：</strong>充值付款过程中，如遇以下情况，请及时处理！
+                        <p>1、在15分钟内充值成功且余额充足，仍停留在此页面时，请联系客服协助处理；</p>
+                        <p>2、超过15分钟后未完成充值或充值后仍余额不足，请登录<a href="#">兴业执剑人见证代管系统</a>进行充值付款</p>
+                    </div>
+                <!--</div>-->
+            </div>
+        </div>
+
+         <div class="modal fade" id="modal-address">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <ng-form name="addressForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="modal-title form-group">
+                                <i class="fa fa-lg fa-edit text-success"></i><font size="4">收票方：</font><font size="2">请付款并确认</font>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">订单编号：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.order_number }}
+                                    </div>
+                                    <label class="control-label col-md-3">总扣款额：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.order_total_prices | currency }}元&nbsp; ({{ amountInWords(model.order_total_prices) }})
+                                    </div>
+                                    <label class="control-label col-md-3">付款户：</label>
+                                    <!--收票人企业-->
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.receiver_enterprise_name }}
+                                    </div>
+                                    <label class="control-label col-md-3">执剑人账户号：</label>
+                                    <!--执剑人虚拟号-->
+                                    <div class="col-md-9 form-control-static">
+                                        {{ hfindAccY.saler_buyer_v_acct_no }}
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label class="control-label col-md-3">手机验证码：</label>
+                                    <div class="reg-form-list-cont col-md-8 row">
+                                        <label class="reg-icon reg-icon-3"></label>
+                                        <input class="reg-mess col-md-7" style="height:34px" type="text" ng-model="model.verifyCode" placeholder="请输入短信验证码">
+                                        <button class="btn btn-mess col-md-5" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</button>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="pay()" ng-disabled="!filter.payRule || !model.order_pay_type_id || !hfindAccY.saler_buyer_v_acct_no || isDisable"><i class="fa fa-share-square-o"></i> 确认</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" ng-click="load()"><i class="fa fa-share-square-o"></i> 取消</button>
+                            <div class="col-md-6 text-center" style="margin-left: 14%;width: 59%;">
+                                <input type="checkbox" id="ownBillOffer" style="vertical-align:middle; margin-top:-2px;" ng-model="filter.payRule" ng-change="ruleChange()"><font size="1" color="red" >本人已阅读并同意<a  ng-click="rulekChange()">《票 据 应 收 款 转 让 服 务 合 同》</a></font>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+            <div id="modal-rule" class="modal fade" style="width:128%;margin-left:-15%;">
+                <div class="modal-dialog" style="width:50%;">
+                    <div class="modal-content">
+                        <ng-form name="ruleForm" novalidate>
+                            <div class="modal-header">
+                                <div class="modal-title form-group" style="padding-left:15px;">
+                                    <i class="fa fa-lg fa-edit text-success"></i>票 据 应 收 款 转 让 服 务 合 同
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group" style="padding-left:15px;padding-right:15px;">
+
+                                        <div style="margin-bottom: 20px;float:left">
+
+                                            <span style="padding-bottom: 6px;display: inline-block;width:315px;padding-left:10px;">
+                                                <label>甲方（转让方）：</label>{{ model.drawer_name }}
+                                            </span>
+                                        </div>
+
+                                        <div style="margin-bottom: 20px;float:left">
+
+                                            <span style="padding-bottom: 6px;display: inline-block;width:279px;padding-left:10px;">
+                                                <label>法定代表人或负责人：{{model.b_legalname}}</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="padding-left:15px;padding-right:15px;">
+
+                                        <div style="margin-bottom: 20px;float:left">
+
+                                            <span style="padding-bottom: 6px;display: inline-block;width:315px;padding-left:10px;">
+                                                <label>乙方（受让方）：</label>{{ model.receiver_enterprise_name }}
+                                            </span>
+                                        </div>
+
+                                        <div style="margin-bottom: 20px;float:left">
+
+                                            <span style="padding-bottom: 6px;display: inline-block;width:279px;padding-left:10px;">
+                                                <label>法定代表人或负责人：{{model.a_legalname}}</label>
+                                            </span>
+                                        </div>
+                                        <div style="margin-bottom: 20px;float:left">
+                                            丙 方（信息平台）： <span>上海票趣信息科技有限公司</span><br />
+                                            根据《中华人民共和国合同法》、《中华人民共和国票据法》及相关法律法规的规定，甲乙丙三方在平等、自愿的基础上，就票据应收款转让及服务等有关事宜达成协议如下：
+                                        </div>
+                                        <div style="margin-bottom: 20px;float:left">
+                                            第一条 释义<br />
+                                            <span style="font-weight:bold">一、 甲方：</span>指拟在丙方提供的信息平台上转让票据应收款的一方，根据本合同表述的需要，甲方在本合同中也可称之为转让方。<br />
+                                            <span style="font-weight:bold">二、 乙方：</span>指拟在丙方提供的信息平台上受让票据应收款的一方，根据本合同表述的需要，乙方在本合同中也可称之为受让方。<br />
+                                            <span style="font-weight:bold">三、 信息平台：</span>指丙方开发的<span>汇票线平台</span>，为交易双方提供交易服务的互联网网站及交易系统，根据本合同表述的需要，丙方在本合同中也可称之为信息平台。<br />
+                                            <span style="font-weight:bold">四、标的票据：</span>指转让方在信息平台上发布的转让方拟转让其票据应收款于受让方的商业汇票。<br />
+                                            <span style="font-weight:bold">五、 发布日：</span>就一笔标的票据而言，指其发布时间所在日期。<br />
+                                            <span style="font-weight:bold">六、 兴业数字金融服务（上海）股份有限公司票据流转资金代管专户：</span>指甲方、乙方、丙方同意，由丙方合作机构兴业数字金融服务（上海）股份有限公司（简称“兴业数金”）为方便转让方与受让方资金流转和安全而在兴业银行开立的票据流转资金代管专户（简称“票据流转资金代管专户”）。<br />
+                                            <span style="font-weight:bold">七、 服务费：</span>指信息平台及合作机构兴业数金基于其为交易双方提供的票据应收款转让相关服务而向受让方单方收取的服务费。<br />
+                                            <span style="font-weight:bold;">八、提现费（电汇费）:指转让方提现产生的费用，实际上由受让方承担</span><br />
+                                            <span style="font-weight:bold"><label>九、</label> 票据应收款：</span>指标的票据的承兑人承担的在票据到期日无条件支付的票据款项。<br />
+                                            <span style="font-weight:bold"><label>十、</label>  票据应收款转让：</span>指转让方通过信息平台提供的服务在信息平台与受让方达成协议将票据背书转让方式将票据应收款无条件不可撤销地转让给受让方的行为。<br />
+                                            <span style="font-weight:bold;">十一、  贴现金额：</span>指转让方与受让方签订交易合同时所达成的成交金额，即信息平台于转让成功时自票据流转资金代管专户实际划入转让方收款账户的金额，其数额等于总扣款额减去服务费与提现费（电汇费）后的余额。<br />
+                                            <span style="font-weight:bold;">十二、</span> <label>总</label>扣<label>款</label>额：指受让方就受让标的实际应支付的款项，即信息平台于受让方支付标的金额时实际从受让方账户里扣划至票据流转资金代管专户的款项，其数额等于贴现金额加上服务费与提现费（电汇费）后的金额。<br />
+                                            <span style="font-weight:bold;">十三、</span>转让成功：本协议第六条第一款第5点条款赋予的含义。<br />
+                                            <span style="font-weight:bold;">十四、</span> 转让失败：本协议第六条第一款第6点、第7点相关条款赋予的含义。<br />
+                                            第二条 票据应收款的转让<br />
+                                            甲方同意根据本合同约定的条款及条件向乙方转让相应的票据应收款，乙方同意根据本合同约定的条款及条件向甲方支付本合同约定的金额。<br />
+                                            第三条 乙方对价支付的前提条件<br />
+                                            只有在以下条件全部满足的情形下，乙方才有义务向甲方支付受让票据的对价：<br />
+                                            1.本合同已生效；<br />
+                                            2.本合同项下甲方转让的标的票据不存在任何争议、纠纷。<br />
+                                            3.甲方已将标的票据成功背书给乙方。<br />
+                                            第四条 对价支付<br />
+                                            一、上述第三条约定的对价支付的前提条件全部满足之后，乙方委托丙方（并且甲方同意由乙方委托丙方）将数额等于实收金额的资金通过兴业银行资金代管专户转入甲方银行账户。<br />
+                                            二、本合同各方均同意，在前述第三条约定前提条件全部满足的情形下，丙方合作机构兴业数金将根据乙方的委托于成交日当日将乙方提前划入票据流转资金代管专户的数额等于实收金额的资金通过票据流转资金代管专户转入甲方指定的银行账户，但若因系统关闭或故障等待特殊原因无法成交日当日完成划款，则兴业数金可于下一个工作日完成划款。<br />
+                                            三、本合同各方均确认及同意有关款项的计算规则：甲方实收金额（成交金额）=乙方实扣金额-转让服务费。<br />
+
+                                            第五条 转让服务费<br />
+                                            一、甲乙双方确认本合同基于丙方提供的转让服务达成，并同意由乙方单方面向丙方支付转让服务费；甲乙双方无条件不可撤销地同意，委托兴业数金通过其自主研发的执剑人票据见证代管系统为甲乙双方提供票据流转见证、资金代管等服务，由此产生的相关服务费包含在乙方向丙方支付的转让服务费中并由丙方代收。<br />
+                                            二、转让服务费等于乙方实际支付的实扣金额与甲方实际收取金额之间的差额，转让服务费=转让票据票面金额*转让服务费率，乙方同意根据本合同约定的服务费率向丙方支付转让服务费。转让服务费率以丙方公布的收费规则为准。<br />
+                                            三、乙方委托兴业数金代管资金时，其向票据流转资金代管专户划转受让票据应收款的资金时应同时将转让服务费一并转让。<br />
+
+                                            第六条 信息对接、资金代转及划转服务<br />
+                                            一、丙方及丙方合作机构根据标的票据转让订单为甲乙双方提供信息对接、资金代管及划转服务：<br />
+                                            1.转让方将拟转让的标的票据于丙方信息平台发布后，受让方对其进行报价，转让方同意成交金额并确认在线签署本合同后，订单生效，进入实际交易阶段。<br />
+                                            2.受让方在有效时间内（30分钟）成功提交有效付款指令将受让资金及相应服务费划转入票据流转资金代管专户后，兴业银行将自动将成交金额及服务费从受让方银行账户中划入票据流转资金代管专户，同时信息平台就该笔转让订单对受让方显示“你已支付交易款，请等待持票方完成背书”，对转让方显示“资金方已打款，请完成背书并确认”。<br />
+                                            3.当一笔标的票据在信息平台上对转让方显示“资金方已打款，请完成背书并确认”的状态时，转让方应当根据丙方及丙方合作机构执剑人票据见证代管系统的提示在有效时间内（30分钟）办理标的票据的背书手续；若转让方将标的票据成功背书给受让方，且转让方在有效时间内点击确认完成背书操作，则信息平台就该笔转让订单对转让方显示“你已完成背书，请等待资金方签收电票”，对受让方显示“持票方已背书，请完成签收和申请解冻交易款”；<br />
+                                            4.当一笔标的票据在信息平台上对受让方显示“持票方已背书，请完成签收和申请解冻交易款”的状态时，受让方应在有效时间（30分钟）内点击确认完成签收操作并解冻交易款。若受让方未在有效时间内接收票据背书，则视为拒绝接收票据背书。若在受让方签收票据背书之前，转让方撤销票据背书导致受让方无法签收票据，则视为撤销背书。<br />
+                                            5.若受让方接收标的票据背书后在信息平台确认签收并解冻交易款，丙方合作机构兴业银行通过执剑人票据见证代管系统将对标的票据的背书状态进行见证核实，若转让方成功将标的票据背书给受让方，则构成转让成功。转让成功后，则转让方可通过执剑人票据见证代管系统发出指令将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内；若受让方接收标的票据背书后未在信息平台确认签收并解冻交易款，且执剑人票据代管系统进行核验后，确认受让方已成功接收标的票据背书，则执剑人票据见证代管系统有权自行将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内，由此产生的任何后果由受让方承担。<br />
+                                            6.在前述情形下，若受让方未于有效时间内成功提交有效付款指令将资金转入票据流转资金代管专户，或受让方银行账户内资金不足成交金额及服务费，或受让方主动取消交易，或拒绝接收票据背书，则票据应收款转让失败，由此产生合同无法履行的责任由受让方承担。若受让方已经将资金转入票据流转资金代管专户，转让方未在有效时间将标的票据背书，或转让方在票据背书后撤销背书、或转让方主动取消交易，则票据应收款转让失败，由此产生合同无法履行的责任由转让方承担。<br />
+                                            7.转让失败的，信息平台向转让方及受让方发出转让失败通知，同时票据流转资金代管专户将账户内数额等于受让方实付金额的资金退回受让方执剑人票据见证代管系统的电子账户内；转让方与受让方将无法对该笔标的票据转让订单进行任何操作。<br />
+                                            二、信息平台正常发起转让的时间段为银行工作日的9：00-16：30，在16：30时后需要进行票据应收款转让见证审核的订单，将在次日进行；信息平台根据业务情况针对转让的时间段进行调整并经预先公告的，则按照公告后的时间段进行转让。<br />
+
+                                            第七条 甲方的保证与承诺<br />
+                                            一、甲方是一家根据中国法律设立的法人企业，自设立至今始终有效存续，且目前经营状况正常，具备签署本合同并履行合同义务的民事权利能力和民事行为能力，甲方应根据丙方要求提供营业执照等主体资格资料。<br />
+                                            二、 其签署本合同并履行本合同项下的义务（包括但不限于向乙方转让票据）已经得到甲方内部充分的授权，所需的外部审批及同意（若有）亦已全部取得。<br />
+                                            三、 签署本合同是甲方真实意思表示，本合同的签署不会导致违反适用于甲方的任何法律法规、规范性文件或甲方章程或类似文件，也不会违反其与任何第三方签订的任何协议或承诺；本合同生效后，将构成甲方有约束力及执行力的义务。<br />
+                                            四、 除本合同签署前已书面通知丙方的（若有）以外，甲方不存在任何可能对本合同履行产生重大不利影响的诉讼、仲裁、执行、申诉、复议、重组、破产、清算等程序及其他事件或情况。<br />
+                                            五、本合同项下的标的票据为合法、真实、有效且不存在票据诈骗等违法犯罪情形，不属于风险票据、已挂失票据或公示催告票据，标的票据记载事项完整，甲方为该标的票据的合法持有人并享有完整的票据应收款；<br />
+                                            六、 标的票据为甲方背书受让，甲方保证其直接前手的背书是真实有效并对其真实性负责；标的票据为甲方以其他合法方式取得的，甲方保证其受让是合法有效的并对合法性负责。<br />
+                                            七、 除根据本合同甲方与乙方之间因转让票据产生的权利及负担外，标的票据及票据应收款均不能存在本合同未做披露的任何债务负担或者第三方的权利主张、抵消权、质押或其他负担，甲方享有的票据收益权不存在本合同未做披露的法律上的障碍，且转让后票据应收款上不存在本合同未做披露的任何债务负担或第三方的权利主张或抵消权。<br />
+                                            八、 本合同生效后，甲方无权再对标的票据进行向除乙方之外的任何第三方转让标的票据。<br />
+                                            九、 甲方在丙方提交的标的票据信息、背书账户信息等信息真实有效，否则由甲方提供信息错误造成的一切损失由甲方承担。<br />
+                                            十、甲方在此无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并委托丙方合作机构兴业数金代管票据应收款转让项下的款项。<br />
+                                            十一、 标的票据转让过程中，甲方所有操作必须依照信息平台的提示进行并保障甲方联系方式的畅通，否则由于甲方操作失误造成的一切损失由甲方承担。所需注意环节包括但不限于在订单进行中时，且满足本协议第6条情形下，甲方才可进行背书，并在对应环节有效时间内完成相应的操作行为，否则，自愿承担由此产生的全部不利结果。<br />
+                                            十二、 甲方保证履行本合同项下转让方的承诺及义务。<br />
+
+                                            第八条 乙方的保证与承诺<br />
+                                            一、乙方是一家根据中国法律设立的法人企业，自设立至今始终有效存续，且目前经营状况正常，具备签署本合同并履行合同义务的民事权利能力和民事行为能力，乙方应根据丙方要求提供营业执照等主体资格资料。<br />
+                                            二、 其签署本合同并履行本合同项下的义务已经得到乙方内部充分的授权，所需的外部审批及同意（若有）亦已全部取得。<br />
+                                            三、 签署本合同是乙方真实意思表示，本合同的签署不会导致违反适用于乙方的任何法律法规、规范性文件或乙方章程或类似文件，也不会违反其与任何第三方签订的任何协议或承诺；本合同生效后，将构成乙方有约束力及执行力的义务。<br />
+                                            四、 乙方不存在任何可能对本合同履行产生重大不利影响的诉讼、仲裁、执行、申诉、复议、重组、破产、清算等程序及其他事件或情况。<br />
+                                            五、 乙方在丙方信息平台提交的标的票据被背书账户信息等真实有效，否则由乙方提供信息错误造成的一切损失由乙方承担。<br />
+                                            六、 乙方无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并由丙方合作机构兴业数金代管票据应收款转让项下的资金。<br />
+                                            七、 标的票据转让过程中，乙方所有操作必须依照信息平台的提示进行并保障乙方联系方式的畅通，否则由于乙方操作失误造成的一切损失由乙方承担。所需注意环节包括但不限于满足本协议第六条情形下，乙方需及时根据本协议约定办理票据背书相关手续，并在对应环节有效时间内完成相关操作；否则，自愿承担由此产生的全部不利结果。<br />
+                                            八、 乙方保证履行本合同项下受让方的承诺及义务。<br />
+
+                                            第九条 违约责任<br />
+                                            任何一方违反本合同项下任何承诺及保证或违反本合同项下任何其他义务，则构成违约。守约方有权要求违约方限期纠正违约行为并采取补救措施。违约方的违约行为给对方造成损失，应予赔偿。<br />
+
+                                            第十条 争议解决<br />
+                                            一、 任何一方本合同的订立、效力、解释、履行及争议的解决均适用中华人民共和国法律。<br />
+                                            二、 凡由本合同引起的或与本合同有关的争议和纠纷，各方应协商解决；不能协商或协商不能达成一致的，同意提交上海仲裁委员会根据其先行有效的仲裁规则仲裁解决，仲裁地点为上海市。<br />
+
+                                            第十一条 合同生效<br />
+                                            各方同意本合同以下任何一种形式生效：<br />
+                                            1.本合同自甲、乙、丙三方根据电子签名相关法律法规线上签署之日生效。<br />
+                                            2.本合同自甲、乙双方通过信息平台阅读并点击同意接受本合同后生效。<br />
+
+                                            第十二条 其他事宜<br />
+                                            本合同未尽事宜，由三方协商并签订补充合同确定，补充合同与本合同具有同等法律效力。<br />
+                                            第十三条 转让订单概要<br />
+                                            标的票据信息、背书人信息、被背书人信息、成交对价信息：<br /><br />
+                                            <table class="xytab">
+                                                <tr>
+                                                    <td colspan="2"><span style="margin-left:15%">票据信息概要</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>票据类型</td>
+                                                    <td>{{ model.bill_type_name }} {{ model.acceptor_type_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>票据号</td>
+                                                    <td>{{ model.bill_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>承兑人全称</td>
+                                                    <td>{{ model.acceptor_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>票面金额</td>
+                                                    <td>{{ model.bill_sum_price | currency }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>汇票到期日</td>
+                                                    <td>{{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}<span ng-if="model.remaining_day>0 && model.bill_status_code<804">(剩余{{ model.remaining_day }}天)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"><span style="margin-left:15%">背书人信息(转让方)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>背书人户名</td>
+                                                    <td>{{ model.drawer_enterprise_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>背书人开户行</td>
+                                                    <td>{{ hpxGetAcc.drawerAccountName }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>银行帐号</td>
+                                                    <td>  {{ hfindAccX.account_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>联行号</td>
+                                                    <td>{{ hfindAccX.bank_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"><span style="margin-left:20%">被背书人(受让方)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>被背书人户名</td>
+                                                    <td>{{ model.receiver_enterprise_name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>被背书人开户行</td>
+                                                    <td><span>{{hfindAccs}}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>银行帐号</td>
+                                                    <td>{{hfindAccY.account_number}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>联行号</td>
+                                                    <td>{{hfindAccY.bank_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"><span style="margin-left:15%">成交金额</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span>贴现</span>金额</td>
+                                                    <td>￥&nbsp;&nbsp;{{model.order_total_price}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>服务费</td>
+                                                    <td>￥&nbsp;&nbsp;<span>0.00</span></td>
+                                                <!--<tr>
+                                                    <td><span>提现费(电汇费)</span></td>
+                                                    <td><label id="qest_label">{{phxPay.withdrawal_procedure | currency}}</label></td>
+                                                </tr>-->
+                                                <tr>
+                                                    <td><span>总扣款额</span></td>
+                                                    <td>{{ phxPay.hpxZong | currency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:left">甲方、乙方均已通读上述条款，甲方、乙方对其的本合同下的权利义务已充分熟悉；甲乙双方对本合同所有内容均无异议。</td>
+                                                </tr>
+                                            </table><br /><br />
+                                            <div class="col-md-offset-8">签订日期： {{filter.newYear}} 年 {{filter.newMonth}} 月 {{filter.newToday}} 日</div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-sm btn-warning" ng-click="submitRule()"><i class="fa fa-edit"></i> 同意并继续</button>
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade hpxcc" id="modal-xingyePay">
+                <div class="modal-dialog">
+                    <div class="modal-content hpxPc">
+                        <div class="modal-header">
+                            <span class="hpxAimg"><img src="../../www/assets/img/hpxMoney.png" /></span>
+                            <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true" style="font-size:56px;margin-right:10px;">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-size:21px;margin-bottom:18px;display:block;padding-left:5px;">您好，您的兴业（执剑人）电子账户余额不足，请及时</span>
+                            <span style="font-size:21px;padding-left:5px;">进行充值付款，以免影响交易！</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm xingyeBtn" ng-click="xingyePayA()">前往充值及付款</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-Hvalidate">
+                <div class="modal-dialog">
+                    <div class="modal-content col-md-10">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>确认签收背书?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span>如果未经核实进行操作，后果自负！！！</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="hvalidate()"><i class="fa fa-share-square-o"></i> 是</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 否</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-payRecharge">
+                <div class="modal-dialog">
+                    <div class="modal-content col-md-10">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认账户余额</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span>您好，您的兴业（执剑人）电子账户余额不足，请及时登录<a>兴业执剑人见证代管系统</a>进行充值并付款，以免影响交易！</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="payRecharge()"><i class="fa fa-share-square-o"></i> 前往充值及付款</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-pay-confirm">
+                <div class="modal-dialog">
+                    <div class="modal-content col-md-10">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认支付是否成功</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span>请检查是否支付成功,点击支付完成查看支付状态!</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="refresh()"><i class="fa fa-share-square-o"></i> 支付完成</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 支付失败</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="modal fade" id="modal-endorsements">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width:600px;">
+                    <ng-form name="endorsementsForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="modal-title form-group">
+                                <i class="fa fa-lg fa-edit text-success"></i><font size="4">收票方：</font><font size="2">请确认背书已签收</font>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">背书文件：</label>
+                                <div class="col-md-9"></div>
+                                <div class="form-control-static col-md-12">
+                                    <div ng-repeat="item in model.order_endorsements">
+                                        <div class="col-md-6 text-center" >
+                                            <!--<a href="{{item.endorsement_path}}" target="_blank" class="tb-booth tb-pic tb-s250">-->
+                                                <img class="jqzoom" ng-src="{{item.endorsement_path}}" rel="{{item.endorsement_path}}" alt="背书文件加载失败" style="width:250px;"/>
+                                            <!--</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="confirm()"><i class="fa fa-share-square-o"></i> 确认</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                            <br /><span style="font-size:10px;color:red;">背书文件仅供参考，请到电票交易系统核实票据是否签收！如果未经核实进行操作，后果自负！！！</span>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

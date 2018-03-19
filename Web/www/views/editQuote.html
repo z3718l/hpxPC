@@ -1,0 +1,530 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+<link rel="stylesheet" type="text/css" href="assets/css/msncss.css">
+<!--<script src="../../templates/main/js/zb.js"></script>-->
+<div ng-cloak ng-controller="editQuoteController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right-top col-md-12 row " style="margin-left: 0px">
+            <p>机构报价 > 我要报价</p>
+        </div>
+        <div class="content col-md-12 row" style="margin-left: 0px;">
+            <div class="explain col-md-12">
+                <div class="line col-md-11 text-right"></div>
+            </div>
+            <div class="table col-md-12 text-center">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;margin: 0 0 0 -30px;color:#333;font-size:16px;text-align:left">
+                    报价信息
+                </div>
+                <form class="form-horizontal col-md-12" role="form">
+                    <div class="form-group ">
+
+                        <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 票据类型：</label>
+                        <div class="col-md-10 text-left">
+                            <label class="radio-inline col-md-2" ng-repeat="item in billStyleData">
+                                <input type="radio" style="margin-top: -6%" ng-change="billStyleChange()" value="{{item.code}}" ng-model="model.bill_style_id"> {{ item.constant_name }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="line col-md-11 text-left" style="margin-bottom: 1.5%">
+                        <div class="line col-md-12"></div>
+                    </div>
+                    <div ng-if="model.bill_style_id == 201 || model.bill_style_id == 202">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 期限：</label>
+                            <div class="col-md-10 text-left">
+                                <label class="radio-inline col-md-2" ng-repeat="item in deadlineTypeData">
+                                    <input type="radio" style="margin-top: -6%" value="{{item.code}}" ng-model="model.deadline_type_code"> {{ item.constant_name }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="line col-md-11 text-left" style="margin-bottom: 1.5%">
+                            <div class="line col-md-12"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 交易方式：</label>
+                        <div class="col-md-10 text-left">
+                            <div ng-if="model.bill_style_id == 201||model.bill_style_id == 203">
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1801" ng-model="model.trade_type_id" /> 买断
+                                </label>
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1802" ng-model="model.trade_type_id" /> 回复打款
+                                </label>
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1803" ng-model="model.trade_type_id" /> 直贴
+                                </label>
+                            </div>
+                            <div ng-if="model.bill_style_id == 202||model.bill_style_id == 204">
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1801" ng-model="model.trade_type_id" /> 买断
+                                </label>
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1803" ng-model="model.trade_type_id" /> 直贴
+                                </label>
+                            </div>
+                            <div ng-if="model.bill_style_id==205">
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1801" ng-model="model.trade_type_id" /> 买断
+                                </label>
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1804" ng-model="model.trade_type_id" /> 回购
+                                </label>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="line col-md-11 text-left" style="margin-bottom: 1.5%">
+                        <div class="line col-md-11"></div>
+                    </div>
+
+                    <!-- 按需要隐藏 -->
+                    <div ng-if="model.bill_style_id == 205">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 贸易背景：</label>
+                            <div class="col-md-10 text-left">
+                                <label class="radio-inline col-md-2" ng-repeat="item in tradeBackgroundData">
+                                    <input type="radio" style="margin-top: -6%" value="{{item.code}}" ng-model="model.trade_background_code"> {{ item.constant_name }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="line col-md-11 text-left" style="margin-bottom: 1.5%">
+                            <div class="line col-md-12"></div>
+                        </div>
+                    </div>
+                    <div ng-if="model.bill_style_id == 205">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 额度：</label>
+                            <div class="col-md-10 text-left">
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="0" ng-model="model.max_price_type" ng-click="model.max_price = 0" /> 不限
+                                </label>
+                                <label class="radio-inline col-md-2">
+                                    <input type="radio" style="margin-top: -6%" value="1" ng-model="model.max_price_type" /> 具体额度
+                                </label>
+                                <label class="radio-inline" style="margin-left: -7%">
+                                    <input type="number" style="margin-top: -5%" class="form-control width-100" ng-if="model.max_price_type==1" ng-model="model.max_price" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="line col-md-11 text-left" style="margin-bottom: 1.5%">
+                            <div class="line col-md-12"></div>
+                        </div>
+                    </div>
+                    <!-- 202 -->
+                    <div class="form-group" ng-if="model.bill_style_id==202" style="margin-top: 8%">
+                        <div class="col-md-11 col-xs-11">
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">年利率</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate01" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate02" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate03" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate04" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate05" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate06" required><span class="row col-md-4 table-input-span">%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!-- 203 -->
+                    <div class="form-group" ng-if="model.bill_style_id==203" style="margin-top: 8%">
+                        <div class="col-md-11">
+                            <div class="form-inline" style="margin-bottom: 2%;">180天及以上</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate01" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate02" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate03" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate04" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate05" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate06" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate07" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate11" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate12" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate13" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate14" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate15" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate16" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate17" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate21" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate22" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate23" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate24" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate25" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate26" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate27" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-11">
+                            <div class="form-inline" style="margin-bottom: 2%;"><input type="number" min="0" max="180"  class="form-control input-sm width-50" ng-model="model.deadline_days"> - 180 天</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate31" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate32" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate33" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate34" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate35" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate36" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate37" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate41" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate42" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate43" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate44" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate45" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate46" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate47" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate51" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate52" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate53" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate54" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate55" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate56" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate57" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-11" ng-if="model.deadline_days>0">
+                            <div class="form-inline" style="margin-bottom: 2%;">0 - <input type="number" min="0" max="180" class="form-control input-sm width-50" ng-model="model.deadline_days" > 天</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate61" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate62" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate63" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate64" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate65" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate66" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate67" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate71" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate72" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate73" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate74" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate75" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate76" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate77" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate81" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate82" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate83" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate84" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate85" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate86" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate87" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!-- 204 -->
+                    <div class="form-group" ng-if="model.bill_style_id==204" style="margin-top: 8%">
+                        <div class="col-md-11">
+                            <div class="form-inline" style="margin-bottom: 2%;">360天及以上</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate01" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate02" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate03" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate04" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate05" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate06" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate07" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate11" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate12" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate13" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate14" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate15" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate16" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate17" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate21" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate22" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate23" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate24" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate25" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="" ng-model="model.offer_detail.offer_rate26" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate27" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-11">
+                            <div class="form-inline" style="margin-bottom: 2%;"><input type="number" min="0" max="360" class="form-control input-sm width-50" ng-model="model.deadline_days"> - 360 天</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate31" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate32" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate33" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate34" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate35" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate36" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate37" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate41" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate42" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate43" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate44" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate45" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate46" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate47" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate51" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate52" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate53" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate54" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate55" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate56" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate57" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-11" ng-if="model.deadline_days > 0" >
+                            <div class="form-inline" style="margin-bottom: 2%;">0 - <input type="number" min="0" max="180" class="form-control input-sm width-50"    ng-model="model.deadline_days"> 天</div>
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>承兑机构</strong></td>
+                                        <td class="col-md-1"><strong>国股行</strong></td>
+                                        <td class="col-md-1"><strong>城商行</strong></td>
+                                        <td class="col-md-1"><strong>三农行</strong></td>
+                                        <td class="col-md-1"><strong>村镇</strong></td>
+                                        <td class="col-md-1"><strong>外资</strong></td>
+                                        <td class="col-md-1"><strong>财务公司</strong></td>
+                                        <td class="col-md-1"><strong>每十万加</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">100万以上</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate61" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate62" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate63" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate64" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate65" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate66" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate67" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万-100万</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate71" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate72" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate73" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate74" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate75" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate76" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate77" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">50万以下</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate81" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate82" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate83" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate84" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate85" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" ng-model="model.offer_detail.offer_rate86" required><span class="row col-md-4 table-input-span">%</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate87" required><span class="row col-md-4 table-input-span">元</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!-- 205 -->
+                    <div class="form-group" ng-if="model.bill_style_id==205" style="margin-top: 8%">
+                        <div class="col-md-11 col-xs-11">
+                            <table class="table table-striped" style="margin-top: -2%;font-size: 14px">
+                                <thead>
+                                    <tr class="f-size">
+                                        <td class="col-md-1"><strong>票据类型</strong></td>
+                                        <td class="col-md-1"><strong>利率</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color:#fff;">
+                                        <td><span style="font-size: 14px;">电票</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate01" required><span class="row col-md-4 table-input-span">%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span style="font-size: 14px;">纸票</span></td>
+                                        <td class="col-md-1 col-xs-1"><input type="number" step="0.01" class="form-control row col-md-2 col-xs-2 table-input" style="margin-left:1%;" ng-model="model.offer_detail.offer_rate02" required><span class="row col-md-4 table-input-span">‰</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group" style="margin-top: 3%">
+                        <div class="col-md-10">
+                            <label for="inputPassword" class="col-sm-2 control-label"><strong>联系人姓名:</strong></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" ng-model="model.contact_name">
+                            </div>
+                            <label for="inputPassword" class="col-sm-2 control-label">联系方式:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" ng-model="model.contact_phone">
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10" ng-if="model.bill_style_id == 201 || model.bill_style_id == 203 || model.bill_style_id == 205">
+                            <label class="col-md-2 control-label"><strong>交易地点：</strong></label>
+                            <div class="col-md-4">
+                                <select class="form-control" ng-model="model.trade_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()">
+                                    <option value="">省/直辖市</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in CityData">
+                                    <option value="">市/区</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="col-md-11 col-sm-11 col-xs-11 text-left" style="border-left: 5px solid #ff5a14;margin: 0 0 0 -30px;color:#333;font-size:16px">
+                            备注说明
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="5" ng-model="model.description"></textarea>                             
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:3%">
+                            <div class="col-md-3"></div>
+                            <button class="btn btn-default col-md-2 add" type="button" ng-disabled="!identity.enterprise_id || identity.enterprise_id == 0" ng-click="save()">马上报价</button>
+                            <button class="btn btn-default col-md-2 chg" type="button" ng-click="colse()">关闭</button>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

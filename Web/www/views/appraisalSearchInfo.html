@@ -1,0 +1,123 @@
+﻿<div ng-controller="appraisalSearchController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                           data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">评价查询</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <a class="btn btn-success" ui-sref="app.setting.queryOrderInfo"><i class="fa fa-level-up"></i>&nbsp;订单评价</a>
+                                </div>
+                                <div class="pull-right">
+                                    <input class="form-control" type="text" ng-model="filter.phoneNumber"
+                                           placeholder="管理员或者操作员手机号(严格匹配)">
+                                    <input class="form-control" type="text" ng-model="filter.customerName"
+                                           placeholder="客户名称(严格匹配)">
+                                    <input class="form-control" type="text" ng-model="filter.enterpriseName "
+                                           placeholder="企业名称">
+
+                                    <button class="btn btn-sm btn-info" ng-click="refresh()"><i
+                                            class="fa fa-search"></i> 筛选
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-table" ng-table="tableParams"
+                           class="table table-striped table-bordered table-hover table-condensed">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                            <td data-title="'企业名称'" class="text-center">{{ item.enterprise_name }}</td>
+                            <td data-title="'管理员名称'" class="text-center">{{ item.admin_name }}</td>
+                            <td data-title="'管理员电话'" class="text-center">{{ item.admin_phone }}</td>
+                            <td class="text-center width-100 text-nowrap">
+                                <button class="btn btn-info btn-xs" ng-click="show(item)"><i class="fa fa-edit"></i> 详细
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal fade" id="modal-show">
+                    <div class="modal-dialog" style="width:1100px">
+                        <div class="modal-content">
+                            <ng-form name="checkForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                    </button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>企业评价详情</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 企业名称：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.enterprise_name }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 管理员名称：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.admin_name }}
+                                            </div>
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 管理员电话：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.admin_phone }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group width-full">
+                                            <h4>己方评价<small>(自己对别人的评价)</small></h4>
+                                            <hr/>
+                                            <table class="table table-striped table-bordered table-hover table-condensed"
+                                                   ng-if="model.order_appraisal.length > 0">
+                                                <tr>
+                                                    <th width="200px" class="text-center">被评价公司名称</th>
+                                                    <th class="text-center">评价详情</th>
+                                                </tr>
+                                                <tr ng-repeat="item in model.order_appraisal" ng-if="item.to_enterprise_id == model.id">
+                                                    <td width="200px" class="text-center">{{ item.to_enterprise_name }}</td>
+                                                    <td class="text-center">{{ item.description }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <h4>己方评价<small>(别人对自己的评价)</small></h4>
+                                            <hr/>
+                                            <table class="table table-striped table-bordered table-hover table-condensed"
+                                                   ng-if="model.order_appraisal.length > 0">
+                                                <tr>
+                                                    <th width="200px" class="text-center">评价公司名称</th>
+                                                    <th class="text-center">评价详情</th>
+                                                </tr>
+                                                <tr ng-repeat="item in model.order_appraisal" ng-if="item.enterprise_id == model.id">
+                                                    <td width="200px" class="text-center">{{ item.enterprise_name }}</td>
+                                                    <td class="text-center">{{ item.description }}</td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-white" data-dismiss="modal"><i
+                                            class="fa fa-share-square-o"></i> 关闭
+                                    </button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

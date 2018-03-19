@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <%set string category_title=get_category_title(model.category_id,"")%>
+    <meta charset="utf-8" />
+    <title>{model.seo_title}</title>
+    <meta name="keywords" content="{model.seo_keywords}" />
+    <meta name="description" content="{model.seo_description}" />
+    <link href="<%templateskin%>/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/slide.css" rel="stylesheet" type="text/css" />
+    <script src="<%templateskin%>/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/slide.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/base.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!--Header-->
+    <%template src="_header.html"%>
+    <!--/Header-->
+
+    <container>
+        <div class="kind-money-all-bg hpx-padding">
+            <div class="container">
+                <div class="list-cont row">
+                    <div class="panel-heading text-center">{model.title}</div>
+                    <div class="time text-center">
+                        <span>来源：汇票线</span>
+                        <span>发布日期：<%datetostr({model.add_time}, yyyy-MM-dd)%></span>
+                    </div>
+                    <div class="article-cont">
+                        {model.content}
+                    </div>
+                </div>
+                <!--附件列表-->
+                <div class="conttit"></div>
+                <ul class="attach-list">
+                    <%if(model.attach!=null)%>
+                    <%foreach(DTcms.Model.article_attach modelt in model.attach)%>
+                    <li>
+                        <a href="javascript:;" onclick="downLink({modelt.point},'{config.webpath}tools/download.ashx?site={site.build_path}&id={modelt.id}');">
+                            附件：{modelt.file_name}
+                        </a>
+                        <i>
+                            大小：
+                            <%if {modelt.file_size}>1024%>
+                            <%csharp%>
+                            string tempSize = (modelt.file_size/1024f).ToString("#.##");
+                            <%/csharp%>
+                            {tempSize}MB
+                            <%else%>
+                            {modelt.file_size}KB
+                            <%/if%>
+                        </i>
+                        <i>
+                            下载：
+                            <script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_attach_count&id={modelt.id}"></script>次
+                        </i>
+                        </a>
+                    </li>
+                    <%/foreach%>
+                    <%/if%>
+                </ul>
+                <!--/附件列表-->
+            </div>
+        </div>
+    </container>
+
+    <!--Footer-->
+    <%template src="_footer.html"%>
+    <!--/Footer-->
+</body>
+</html>

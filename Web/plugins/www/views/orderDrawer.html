@@ -1,0 +1,19 @@
+﻿<div ng-controller="orderDrawerController">
+    <div class="bill-query-cont">
+        <div class="user-line-hd"><strong>出票订单</strong></div>
+        <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed">
+            <tr ng-repeat="item in $data">
+                <td data-title="'序号'" width="10%" class="text-center">{{ $index + 1 }}</td>
+                <td data-title="'订单类型'" class="text-center">{{ item.order_type_name }}</td>
+                <td data-title="'订单金额'" class="text-right">{{ item.order_total_price | currency }}<span class="f16"></span></td>
+                <td data-title="'订单利率'" class="text-right">{{ item.order_rate }}</td>
+                <td data-title="'订单生成时间'" class="text-center">{{ item.order_time | date: 'yyyy-MM-dd' }}</td>
+                <td data-title="'交易方式'" class="text-center">{{ item.order_pay_type_name }}</td>
+                <td data-title="'订单状态'" class="text-center">{{ item.order_status_name }}</td>
+                <td class="text-center width-100 text-nowrap">
+                    <button class="btn btn-success btn-xs" href="javascript:;" ui-sref="app.main.orderDrawerInfo({ 'id': item.id })"><i class="fa fa-edit"></i> 详细</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

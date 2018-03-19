@@ -1,0 +1,121 @@
+﻿.btn {   -webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 4px;display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border-radius: 4px}
+.btn-default:hover {
+    color: #fff;
+    background-color: #ff5a14;
+    border-color: #ff5a14;
+}
+.btn-warning:hover {
+    color: #fff!important;
+    background-color: #ff5a14!important;
+    border-color: #ff5a14!important;
+}
+.btn-warning {
+    color: #fff!important;
+    background-color: #ff5a14!important;
+    border-color: #ff5a14!important;
+}
+table>thead>tr>th{
+        vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+}
+table tr td:nth-child(1){
+    height: 40px !important;
+    font-size: 16px;
+    width:13%;
+}
+.table-striped>tbody>tr:nth-of-type(odd){
+    background:#fff;
+}
+.table tr:nth-child(even){
+    background:#fff;
+}
+
+.fa-edit:before, .fa-pencil-square-o:before{
+    color:#999999;
+}
+.fa-trash-o:before{
+    color:#999999;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    background:#ff5a14;
+    border:1px solid #ebebeb;
+}
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover{
+   color:#FFF!important;
+    background-color: #ff5a14!important;
+    border-color:#ff5a14!important;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default{
+    color: #fff;
+    background-color: #ff5a14!important;
+    border-color: #ebebeb!important;
+}
+.pagination>li>a, .pagination>li>span{
+        position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #333;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.table{
+    background:#fff;
+}
+.table>thead>tr>th{
+    background:#fff;
+    text-align:center;
+}
+.font{
+    font-size:16px;
+    text-align:center;
+}
+.btn-group, .btn-group-vertical{
+       display: inline-block;
+    vertical-align: middle;
+    padding-top: 27px;
+    position: relative;
+    top: -34px;
+}
+.ng-table-header ng-scope{
+    text-align:center!important;
+}
+/*.btn-success {
+    color: #fff;
+    background-color: #ff5a14;
+    border-color: #ebebeb;
+}*/
+/*.btn-success:hover{
+    color:#fff;
+    background-color: #999999;
+    border-color: #999999;
+}*/
+/*.btn-success:link*/
+.btn-success.disabled, .btn-success.disabled.active, .btn-success.disabled.focus, .btn-success.disabled:active, .btn-success.disabled:focus, .btn-success.disabled:hover, .btn-success[disabled], .btn-success[disabled].active, .btn-success[disabled].focus, .btn-success[disabled]:active, .btn-success[disabled]:focus, .btn-success[disabled]:hover, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success.active, fieldset[disabled] .btn-success.focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:hover{
+     background-color: none;
+    border-color: none;
+}
+
+
+
+

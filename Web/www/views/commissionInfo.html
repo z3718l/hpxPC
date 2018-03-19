@@ -1,0 +1,80 @@
+﻿<div ng-controller="commissionController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">手续费管理</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <input type="text" ng-model="filter.enterpriseName" class="form-control input-sm" placeholder="企业名称" />
+                                    <button class="btn btn-sm btn-info" ng-click="refresh()"><i class="fa fa-search"></i> 筛选</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-bordered table-hover table-condensed">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                            <td data-title="'企业名称'"  class="text-center">{{ item.enterprise_name }}</td>
+                            <td data-title="'百分比'" sortable="'commission_rate'" class="text-center">{{ item.commission_rate }}</td>
+                            <td data-title="'上限'" sortable="'commission_limit'" class="text-center">{{ item.commission_limit }}</td>
+                            <td data-title="'操作'" class="text-center width-100 text-nowrap">
+                                <button class="btn btn-info btn-xs" ng-click="edit(item)"><i class="fa fa-edit"></i> 修改</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- #手续费修改模态框 -->
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <ng-form name="editForm" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i> 手续费信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal form-inline">
+                            <div class="form-group" ng-class="{ 'has-error': editForm.enterprise_name.$invalid && !editForm.enterprise_name.$pristine }">
+                                <label class="col-md-5 control-label"><font color="red">*</font> 企业名称：</label>
+                                <div class="col-md-7">
+                                    <input type="text" name="start_time" ng-model="model.enterprise_name" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': editForm.commission_rate.$invalid && editForm.commission_rate.$dirty }">
+                                <label class="col-md-5 control-label"><font color="red">*</font> 百分比：</label>
+                                <div class="col-md-7">
+                                    <input type="text" name="end_time" ng-model="model.commission_rate" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': editForm.commission_limit.$invalid && editForm.commission_limit.$dirty }">
+                                <label class="col-md-5 control-label"><font color="red">*</font>上限 ：</label>
+                                <div class="col-md-7">
+                                    <input type="text" name="description" ng-model="model.commission_limit" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-success" ng-click="save()" ng-disabled="editForm.$invalid"><i class="fa fa-save"></i> 保存</button>
+                        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+</div>
+

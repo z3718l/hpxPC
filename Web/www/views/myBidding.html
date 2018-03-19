@@ -1,0 +1,156 @@
+﻿<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<div ng-cloak ng-controller="myBiddingController">
+    <div class="user-right">
+        <div class="right-top col-md-12 row right-top-nav">
+            <p style="font-size:14px;color:#3a3a3a;">我要收票 > 我的竞价</p>
+        </div>
+        <div class="content col-md-12 row" style="margin-left: 0px;">
+            <div class="screen-nav col-md-12 row right-top-nav">
+                <nav class="row" style="margin-left: -8%;margin-top: -2%;">
+                    <ul>
+                        <li ng-class="{'content-nav-act': filter.choiceBillType == 101}"><a href="javascript:;" ng-click="choiceEBillType()" ng-class="{'contents-nav-act': filter.choiceBillType == 101}">电票</a></li>
+                        <li ng-class="{'content-nav-act': filter.choiceBillType == 102}"><a href="javascript:;" ng-click="choicePBillType()" ng-class="{'contents-nav-act': filter.choiceBillType == 102}">纸票</a></li>
+                        <li style="float:right;">
+                            <input type="checkbox" id="autointerval" style="vertical-align:middle; margin-top:-2px;" ng-click="checkAutointerval()" /><font size="1">自动刷新</font>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="rows">
+                    <ul>
+                        <li ng-class="{'h_selected':filter.choiceStatus == 880}" ng-click="choiceTradeStatusAll()">
+                            全部&nbsp;<font><strong>{{ filter.choiceBillType == 101 ? numberModel.all_ele_bid_number : numberModel.all_paper_bid_number}}</strong></font>
+                        </li>
+                        <li ng-class="{'h_selected':filter.choiceStatus == 881}" ng-click="choiceTradeStatusBidding()">
+                            竞价&nbsp;<font><strong>{{ filter.choiceBillType == 101 ? numberModel.all_ele_bid_publish_number : numberModel.all_paper_bid_publish_number}}</strong></font>
+                        </li>
+                        <li ng-class="{'h_selected':filter.choiceStatus == 882}" ng-click="choiceTradeStatusTrade()">
+                            交易中&nbsp;<font><strong>{{ filter.choiceBillType == 101 ? numberModel.all_ele_bid_running_order_number : numberModel.all_paper_bid_running_number }}</strong></font>
+                        </li>
+                        <li ng-class="{'h_selected':filter.choiceStatus == 883}" ng-click="choiceTradeStatusComplete()"  ng-if="filter.choiceBillType==101" >
+                            <span>
+                                交易完成&nbsp;<font><strong>{{ filter.choiceBillType == 101 ? numberModel.all_ele_bid_finished_order_number : numberModel.all_ele_bid_finished_order_number}}</strong></font>
+                            </span>
+                        </li>
+                        <li ng-class="{'h_selected':filter.choiceStatus == 883}" ng-click="choiceTradeStatusComplete()"  ng-if="filter.choiceBillType==102" >
+                            <span>
+                            交易完成&nbsp;<font><strong>{{ filter.choiceBillType == 102 ? numberModel.all_paper_bid_finished_number : numberModel.all_paper_bid_finished_number}}</strong></font>
+                                </span>
+                        </li>
+
+                        <li ng-class="{'h_selected':filter.choiceStatus == 884}" ng-click="choiceTradeStatusFail()">
+                            交易中止&nbsp;<font><strong>{{ filter.choiceBillType == 101 ? numberModel.all_ele_bid_failed_order_number : numberModel.all_ele_finished_order_number }}</strong></font>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+            <div class="tab-content">
+                <div class="text-center">
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed text-center">
+                        <thead>
+                            <tr>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102">汇票类型</th>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 ||  filter.choiceBillType==102">承兑人</th>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 ||  filter.choiceBillType==102" sortable="'trade_type_code'">交易方式</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_number'">订单号</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101">出票人</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101">被背书人</th>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102" sortable="'bill_sum_price'">票面金额</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_sum_price'">票面金额</th>
+                                <th ng-if="filter.choiceStatus==881" sortable="'bid_rate_price'">贴现金额</th>
+                                <th ng-if="filter.choiceBillType==101 && filter.status>=804" sortable="'order_total_price'">订单金额</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101">生成时间</th>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102">汇票到期日</th>
+                                <!--<th style="width:10%;" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102">剩余天数</th>-->
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102" sortable="'id'">发布时间</th>
+                                <th ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || ((filter.choiceStatus==882 || filter.choiceStatus==883 || filter.choiceStatus==884) && filter.choiceBillType==102)">状态</th>
+                                <th style="width:11%;" ng-if="(filter.choiceStatus==882 || filter.choiceStatus==883) && filter.choiceBillType==102">利率/每10万</th>
+                                <th ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_status_code'">订单状态</th>
+                                <th>操作</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in $data" class="text-center">
+                                <td data-title="'汇票类型'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102">{{ item.bill.bill_type_name }}</td>
+                                <td data-title="'承兑人'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 ||  filter.choiceBillType==102">{{ item.bill.acceptor_name | limitTo: 6 }}{{ item.bill.acceptor_name.length > 6 ? '...' : '' }}</td>
+                                <td data-title="'交易方式'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 ||  filter.choiceBillType==102" sortable="'trade_type_code'">{{ item.bill.trade_type_name }}</td>
+
+                                <td data-title="'订单号'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_number'">{{ item.order_number }}</td>
+                                <td data-title="'出票人'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101">{{ item.drawer_name | limitTo: 6 }}{{ item.drawer_name.length > 6 ? '...' : '' }}</td>
+                                <td data-title="'被背书人'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101">{{ item.receiver_name | limitTo: 6 }}{{ item.receiver_name.length > 6 ? '...' : '' }}</td>
+
+                                <td data-title="'票面金额'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102" sortable="'bill_sum_price'">{{ item.bill.bill_sum_price | currency }}</td>
+                                <td data-title="'票面金额'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_sum_price'">{{ item.bill_sum_price | currency }}</td>
+
+                                <td data-title="'贴现金额'" class="text-center" ng-if="filter.choiceStatus==881" sortable="'bid_rate_price'">{{ item.bid_deal_price | currency }}</td>
+                                <td data-title="'订单金额'" class="text-center" ng-if="filter.choiceBillType==101 && filter.status>=804" sortable="'order_total_price'">{{ item.order_total_price | currency }}</td>
+                                <td data-title="'生成时间'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'publishing_time'">{{ item.order_time | date: 'yyyy-MM-dd' }}</td>
+
+                                <td data-title="'汇票到期日'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102">{{ item.bill.bill_deadline_time | date: 'yyyy-MM-dd' }}</td>
+                                
+                                <td data-title="'发布时间'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || filter.choiceBillType==102" sortable="'id'">{{ item.bill.publishing_time | date: 'yyyy-MM-dd' }}</td>
+
+                                <td data-title="'状态'" class="text-center" ng-if="filter.choiceStatus==880 || filter.choiceStatus==881 || ((filter.choiceStatus==882 || filter.choiceStatus==883 || filter.choiceStatus==884) && filter.choiceBillType==102)">{{ item.bill.status_name }}</td>
+                                <td data-title="'利率'" class="text-center" ng-if="(filter.choiceStatus==882 || filter.choiceStatus==883) && filter.choiceBillType==102">{{ item.bill.bid_rate }}</td>
+                                <!--<td data-title="'报价数'" ng-if="filter.choiceStatus==882" sortable="'bid_number'">{{ item.bid_number }}</td>-->
+                                <td data-title="'订单状态'" class="text-center" ng-if="(filter.choiceStatus==884 || filter.choiceStatus==883 || filter.choiceStatus==882) && filter.choiceBillType==101" sortable="'bill_status_code'">{{ item.order_status_name }}</td>
+                                <td data-title="'操作'" class="text-center width-100 text-nowrap">
+                                    <!--<a class="det" href="javascript:;" ui-sref="app.main.publish({ 'id': item.id })" ng-if="item.is_checked == -1 && item.is_alive==0"><i class="fa fa-edit"></i> 修改</a>-->
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="filter.choiceStatus==880 && item.bid_result!=2 && item.bill.bill_type_id == 101 && (item.bill.status_code == 805 || item.bill.status_code == 809)"><i class="fa fa-edit"></i> 详细</a>
+                                    <!--<a class="det" href="javascript:;" ui-sref="app.free.readBill({ 'id': item.id,'check':3 })" ng-if=" "><i class="fa fa-edit"></i> 查看</a>-->
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="filter.choiceStatus==880 && item.bid_result!=2 && (item.bill.status_code ==802 || item.bill.status_code ==803)"><i class="fa fa-edit"></i> 详细</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="filter.choiceStatus==880 && item.bill.status_code ==801 && item.bid_result!=2"><i class="fa fa-edit"></i> 详细</a>
+                                    <!--<a class="det" href="javascript:;" ui-sref="app.free.readBill({ 'id': item.bill_id,'check':3 })" ng-if="(filter.choiceStatus==880 || filter.choiceStatus==881)&& item.bid_result==2"><i class="fa fa-edit"></i> 详细</a>-->
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="filter.choiceStatus==881 && item.bid_result!=2"><i class="fa fa-edit"></i> 详细</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.id })" ng-if="(identity.enterprise_id == item.receiver_id && item.bid_result!=2 && filter.choiceStatus==882 && item.order_status_id >= 803 && item.bill_status_code < 806) || (filter.choiceStatus==880 && item.bill.status_code >= 804 && item.bill.status_code <= 806 && item.bill.bill_type_id==102 && item.bid_result!=2)"><i class="fa fa-edit"></i> 付款</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.order_id })" ng-if="filter.choiceStatus==880 && item.bill.status_code >= 804 && item.bill.status_code < 806 && item.bill.bill_type_id==101 && item.bid_result!=2"><i class="fa fa-edit"></i> 付款</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.id })" ng-if="(identity.enterprise_id == item.receiver_id && filter.choiceStatus==882 && item.bill_status_code == 807 && item.bid_result!=2) || (identity.enterprise_id == item.bid_enterprise_id && item.bid_result!=2 && filter.choiceStatus==880 && item.bill.status_code == 807 && item.bill.bill_type_id==102)"><i class="fa fa-edit"></i> 签收</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.order_id })" ng-if="identity.enterprise_id == item.bid_enterprise_id && item.bid_result!=2 && filter.choiceStatus==880 && item.bill.status_code == 807 && item.bill.bill_type_id==101"><i class="fa fa-edit"></i> 签收</a>
+                                    <a class="det" href="javascript:;" ng-click="deleteOrder(item)" ng-if="filter.choiceStatus==884 || (identity.enterprise_id == item.bid_enterprise_id && item.bid_result!=2 && filter.choiceStatus==880 && item.bill.status_code == 816 && item.bill.bill_type_id==102)"><i class="fa fa-edit"></i> 删除</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.order_id })" ng-if="identity.enterprise_id == item.bid_enterprise_id && filter.choiceStatus==880 && (item.bill.status_code == 806 || item.bill.status_code ==808) && item.bill.bill_type_id==101 && item.bid_result!=2"><i class="fa fa-edit"></i> 查看</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.order_id })" ng-if="identity.enterprise_id == item.bid_enterprise_id && filter.choiceStatus==880 && item.bid_result!=2 && item.bill.status_code == 816 && item.bill.bill_type_id==101"><i class="fa fa-edit"></i> 查看</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.id })" ng-if="identity.enterprise_id == item.receiver_id && filter.choiceStatus==882 && item.bid_result!=2 && (item.bill_status_code==806 || item.bill_status_code == 808 || item.bill_status_code == 809)"><i class="fa fa-edit"></i> 查看</a>
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="identity.enterprise_id == item.receiver_id && item.bid_result!=2 && filter.choiceStatus==882 && item.bill.status_code == 809 && item.bill.bill_type_id==102||!identity.enterprise_id "><i class="fa fa-edit"></i> 查看</a>
+                                    <!--<a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.id })" ng-if="(item.is_checked != -1 && identity.enterprise_id == item.receiver_id && filter.choiceStatus==883) || (filter.choiceStatus==880 && item.bill.status_code >= 810 && item.bill.status_code < 816)"><i class="fa fa-edit"></i> 评价</a>-->
+                                    <!--<a class="btn btn-info btn-xs" style="color: white;" href="javascript:;" ui-sref="app.main.orderDrawerInfo({ 'id': item.id })" ng-if="item.is_checked != -1 && filter.choiceorder == 1 && identity.enterprise_id == item.drawer_id && filter.choiceStatus==882"><i class="fa fa-edit"></i> 背书</a>-->
+                                    <!--<a href="javascript:;" ng-click="remove(item)" ng-disabled="item.is_checked ==0"><i class="fa fa-trash-o"></i></a>-->
+                                    <div class="text-center width-100 text-nowrap" ng-if="identity.enterprise_id == item.receiver_id && filter.choiceStatus==883 && item.bill_type_id == 101 && item.bid_result!=2">
+                                        <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.id })"><i class="fa fa-edit"></i> 详细</a><br ng-if="item.bill_status_code<812" />
+                                        <a class="det" href="javascript:;" ui-sref="app.main.evaluate({'type_id': item.bill_type_id, 'to_id':item.id,'gettype':3})" ng-if="item.bill_status_code<812"><i class="fa fa-edit"></i> 评价</a>
+                                    </div>
+                                    <div class="text-center width-100 text-nowrap" ng-if="identity.enterprise_id == item.receiver_id && filter.choiceStatus==883 && item.bill.bill_type_id == 102 && item.bid_result!=2">
+                                        <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})"><i class="fa fa-edit"></i> 详细</a><br ng-if="item.bill.status_code<812" />
+                                        <a class="det" href="javascript:;" ui-sref="app.main.evaluate({'type_id': item.bill.bill_type_id, 'to_id':item.bill_id,'gettype':3})" ng-if="item.bill.status_code<812"><i class="fa fa-edit"></i> 评价</a>
+                                    </div>
+                                    <div class="text-center width-100 text-nowrap" ng-if="filter.choiceStatus==880 && item.bill.status_code >= 810 && item.bill.status_code < 816 && item.bill.bill_type_id == 102 && item.bid_result!=2">
+                                        <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})"><i class="fa fa-edit"></i> 详细</a><br ng-if="item.bill.status_code<812" />
+                                        <a class="det" href="javascript:;" ui-sref="app.main.evaluate({'type_id': item.bill.bill_type_id, 'to_id':item.bill_id,'gettype':3})" ng-if="item.bill.status_code<812"><i class="fa fa-edit"></i> 评价</a>
+                                    </div>
+                                    <div class="text-center width-100 text-nowrap" ng-if="filter.choiceStatus==880 && item.bill.status_code >= 810 && item.bill.status_code < 816 && item.bill.bill_type_id==101 && item.bid_result!=2">
+                                        <a class="det" href="javascript:;" ui-sref="app.main.orderReceiverInfo({ 'id': item.order_id })"><i class="fa fa-edit"></i> 详细</a><br ng-if="item.bill.status_code<812" />
+                                        <a class="det" href="javascript:;" ui-sref="app.main.evaluate({'type_id': item.bill.bill_type_id, 'to_id':item.order_id,'gettype':3})" ng-if="item.bill.status_code<812"><i class="fa fa-edit"></i> 评价</a>
+                                    </div>
+                                    <div class="text-center width-100 text-nowrap" ng-if="filter.choiceStatus==880 && item.bill.status_code == 809 && item.bill.bill_type_id == 102 && item.bid_result!=2">
+                                        <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})"><i class="fa fa-edit"></i> 详细</a>
+                                    </div>
+                                    <a class="det" href="javascript:;" ui-sref="app.free.readBillBid({ 'id': item.bill_id,'check':3})" ng-if="filter.choiceStatus==882 && item.bill.status_code == 809 && item.bill_type_id == 102 && item.bid_result!=2"><i class="fa fa-edit"></i> 详细</a>
+                                    <a class="det" style="color: #333;" href="javascript:;" ng-click="delete(item)" ng-if="filter.choiceStatus == 880 && item.bid_result==2"><i class="fa fa-trash-o"></i> 删除</a>
+                                    <a class="det" style="color: #333;" href="javascript:;" ng-click="delete(item)" ng-if="filter.choiceStatus == 881 && item.bid_result==2"><i class="fa fa-trash-o"></i> 删除</a>
+                                    <!--<a class="det" style="color: #333;" href="javascript:;" ng-click="deleteOrder(item)" ng-if="filter.choiceStatus==884 || (identity.enterprise_id == item.bid_enterprise_id && item.bid_result!=2 && filter.choiceStatus==880 && item.bill.status_code == 816 && item.bill.bill_type_id==102)"><i class="fa fa-trash-o"></i> 删除</a>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>
+    $(".rows ul li").on("click", function () {
+        $(this).addClass("h_selected").siblings().removeClass("h_selected")
+        $(this).addClass("beds").siblings().removeClass("beds")
+        $(this).addClass("ht").siblings().removeClass("ht")
+    })
+</script>-->

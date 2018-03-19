@@ -1,0 +1,22 @@
+﻿<div ng-controller="calendarController">
+    <div class="form-horizontal form-inline">
+        <div class="form-group">
+            <label class="control-label col-md-2">票据类型:</label>
+            <span class="form-control-static col-md-4">
+                <span ng-repeat="item in billTypeData">
+                    <input type="radio" name="billtype" value="{{item.code}}" ng-model="filter.billTypeId" ng-change="show()"> {{ item.constant_name }}
+                </span>
+            </span>
+            <label class="control-label col-md-2">期限:</label>
+            <span class="form-control-static col-md-4">
+                <span>
+                    <input type="radio" value="6" ng-change="show()" ng-model="filter.number"> 半年
+                </span>
+                <span ng-if="filter.billTypeId == 101">
+                    <input type="radio" value="12" ng-change="show()" ng-model="filter.number"> 一年
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="calendar" calendar="myCalendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+</div>

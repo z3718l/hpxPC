@@ -1,0 +1,281 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+<!--<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">-->
+<div ng-cloak ng-controller="electronicAccountController">
+    <div class="user-right">
+        <div class="right-top col-md-12 col-xs-12 row " style="margin-left: 0px">
+            <p>我的账户 > 兴业电子账户</p>
+        </div>
+        <!--操作员-->
+        <!--<div class="table col-md-12 col-xs-12 text-center" style="padding-top: 2%;margin-left: 0;padding-left:0px;text-align:left" ng-if="agentModel.isChecked == 1 ">
+            <div class="panel panel-inverse">
+                <div class="">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6" style="padding-bottom: 2%;font-size:22px;">
+                                <img src="assets/img/cline.png" alt="" />
+                                <span style="margin-left: 2%">操作员列表</span>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+                                <div class="pull-right">
+                                    <button style="background-color:#fff;border:1px solid #f55a14;" ng-if="identity.is_operator == 0||agentModel.isChecked == 1 " class="btn btn-sm btn-success" ng-click="addOperater()"><i class="fa fa-plus-circle"></i> 绑定操作员</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed" style="/* width: 109%; */width: 933px;margin-left: -2px;">
+                            <tr ng-repeat="item in enterpriseMembers">
+                                <td data-title="'姓名'" class="text-center">{{ item.customer_name }}</td>
+                                <td data-title="'手机号'" class="text-center">{{ item.phone_number }}</td>
+                                <td data-title="'绑定时间'" class="text-center">{{ item.bundling_time|date:'yyyy-MM-dd HH:mm' }}</td>
+                                <td class="text-center width-100 text-nowrap">
+                                    <button style="color:#fff;border:1px solid #ebebeb" class="btn btn-success btn-xs" ng-if="item.member_name != '管理员'" ng-click="addOperater(item)"><i class="fa fa-trash-o"></i> 解除绑定</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="color:#000000;"><span style="color:red;padding-left:15px;padding-bottom:5px;">*</span>温馨提示：联系人（管理员）可以授权多个操作员在本平台，操作员可被多家企业授权绑定。</div>
+                </div>
+                <div class="modal fade" id="modal-add">
+                    <div class="modal-dialog">
+                        <div class="modal-content col-md-10  col-xs-10">
+                            <ng-form name="addForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>操作员</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-4  col-xs-4 control-label"> {{is_remove ? '您的':'操作员'}}手机号: </label>
+                                            <div class="input-group col-md-6  col-xs-6">
+                                                <input type="text" name="operator_phone_number" ng-model="operatorModel.operator_phone_number" class="form-control" placeholder="手机号码" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4  col-xs-4" align='right'> 手机验证码: </label>
+                                            <div class="input-group col-md-6  col-xs-6">
+                                                <input class="form-control" name="operator_phone_number_code" ng-model="operatorModel.operator_phone_number_code" placeholder="手机验证码" required />
+                                                <div class="input-group-addon btn" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-sm btn-success" ng-click="submitOperater()" ng-disabled="addForm.$invalid"><i class="fa fa-save"></i> 提交</button>
+                                    <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="table col-md-12 col-xs-12 text-center" style="padding-top: 2%;margin-left: 0;padding-left:0px;text-align:left">
+            <div class="panel panel-inverse">
+                <div class="">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6" style="padding-bottom: 2%;font-size:22px;">
+                                <img src="assets/img/cline.png" alt="" />
+                                <span style="margin-left: 2%">兴业电子账户</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-11 col-xs-11" style="margin:20px;border:1px solid #11a2b7;padding:5px;width:87%">
+                        <div class="form-group col-md-12 col-xs-12">
+                            <p><strong>{{identifyModel.enterprise_name}}</strong></p>
+                            <p>您的兴业电子账户已经创建成功！恭喜！</p>
+                            <p>登录用户名：{{agentModel.agent_treasurer_phone}}</p>
+                            <p>初始登录密码：{{identifyModel.xingYePassword}}</p>
+                            <p>请您登录<a ng-click="identifySubmit()" style="color:blue;"><strong>兴业执剑人见证代管系统</strong>（兴业银行集团旗下系统）</a>，<strong>及时重置登录密码和支付密码</strong>，提升账户安全等级。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--银行账户信息-->
+        <div class="table col-md-12 col-xs-12 text-center" style="padding-top: 2%;margin-left: 0;padding-left:0px;text-align:left">
+            <div class="panel panel-inverse">
+                <div class="">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6" style="padding-bottom: 2%;font-size:22px;">
+                                <img src="assets/img/cline.png" alt="" />
+                                <span style="margin-left: 2%">银行账户信息</span>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+                                <div class="pull-right">
+                                    <button class="btn btn-sm btn-success" style="background-color: orangered;border:1px solid #ebebeb;" ng-if="identity.is_operator == 0 && (findEnterprise.enterprise_id > 0 || identity.is_verified >=1) && filter.is_vis" ng-click="add(501)"><i class="fa fa-plus-circle"></i> 新增</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <table id="data-tableAccount" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed">
+                            <tr ng-repeat="item in AccountData">
+                                <td data-title="'账号'" class="text-center">{{ item.account_number }}</td>
+                                <td data-title="'机构名称'" class="text-center">{{ item.account_person | limitTo: 12 }}{{ item.account_person.length > 12 ? '...' : '' }}</td>
+                                <td data-title="'审核状态'" class="text-center">{{ item.statusToDescription }}</td>
+                                <td ng-if="identity.is_operator == 0" class="text-center width-100 text-nowrap">
+                                    <button class="btn btn-warning btn-xs btn-xs1" ng-click="read(item)" ng-disabled="item.is_verified==-2" ng-if="item.is_verified!= -1 || findEnterprise.is_alive != -1"><i class="fa fa-edit"></i> 详细</button>
+                                    <button class="btn btn-warning btn-xs btn-xs1" ng-click="verify(item)" ng-if="item.status == 5"><i class="fa fa-edit"></i> 鉴权</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="color:#000000;"><span style="color:red;padding-left:15px;padding-bottom:5px;">*</span>温馨提示：最多可绑定两张银行卡（其中一张必须为兴业银行卡）作为您收、出票的指定账户！</div>
+                <!--开户填写信息的弹窗-->
+                <div class="modal fade" id="modal-addAccount">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:600px;">
+                            <ng-form name="addForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" id="phxC" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i><span style="font-size:18px;color:#333">银行账户</span></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-3 control-label"> 机构名称: </label>
+                                            <div class="col-md-8 col-xs-8 form-control-static">
+                                                {{ findEnterprise.enterprise_name }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md- col-xs-3 control-label"><font color="red">*</font> 机构账号: </label>
+                                            <div class="col-md- col-xs-8 form-control-static">
+                                                <input type="text" name="account_number" ng-model="accountModel.account_number" class="form-control" placeholder="请输入账号" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-3 control-label"><font color="red">*</font> 银行行号: </label>
+                                            <div class="col-md-8 col-xs-8 form-control-static">
+                                                <input type="text" name="account_number" ng-change="findNumber()" ng-model="accountModel.cnaps_code" class="form-control" placeholder="请输入开户行行号填写至支行" ng-pattern="/\d{12}/" maxlength="12" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-3 control-label"><font color="red">*</font> 银行名称: </label>
+                                            <div class="col-md-8 col-xs-8 form-control-static">
+                                                <span>{{accountModel.bank_branch_name}}</span>
+                                                <span ng-if="accountModel.bank_branch_name==null" style="color:#ff5a14">请输入12位正确的开户行行号</span>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <label class="col-md-3 col-xs-3 control-label"> 账户验证: </label>
+                                            <div class="col-md-8 col-xs-8 form-control-static form-inline">
+                                                <input class="col-md-8 col-xs-8 form-control" style="height:34px;width:245px;" type="text" ng-model="accountModel.verify_string" placeholder="请输入该账户收款金额" required />
+                                                <button class="btn btn-mess col-md-4 col-xs-4" ng-click="getVerifyh()" ng-disabled="disableVerify">{{ verifyStr }}</button>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="text-center">
+                                        <button style="background: #ff5a14;border:1px solid #ebebeb" type="submit" class="btn btn-sm btn-success" ng-click="getVerifyh()" ng-disabled="addForm.$invalid || isDisabled"><i class="fa fa-save"></i> 提交报存</button>
+                                        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                    </div>
+                                    <div style="color: #333;background:#f1f1f0;padding: 10px 10px 10px 10px;text-align:left;margin-top:10px;">
+                                        <strong>温馨提示：</strong>点击“账户验证”按钮后，所绑定的银行账户将在10分钟内收到一笔随机汇款，请填写验证金额后再点击“完成绑定”按钮。银行账号一经绑定成功，后期无法更改，请慎重选择常用账号。
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <!--银行卡详细信息弹窗-->
+                <div class="modal fade" id="modal-read">
+                    <div class="modal-dialog" style="width: 600px;">
+                        <div class="modal-content">
+                            <ng-form name="readForm" novalidate>
+                                <div class="modal-header" style="border-bottom:1px solid #ff5a14">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"><span style="color:#333;margin-left:12px">银行账户</span></i></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal form-inline">
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-3 col-xs-3" style="width: 140px;">机构名称</label>
+                                            <div class="col-md-9 col-xs-9">
+                                                <div class="form-control-static" style="width: 400px;">{{ accountModel.account_person }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-3 col-xs-3" style="width: 140px;">机构账号</label>
+                                            <div class="col-md-3 col-xs-3">
+                                                <div class="form-control-static" style="width: 400px;">{{ accountModel.account_number }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-3 col-xs-3" style="width: 140px;">银行行号</label>
+                                            <div class="col-md-3 col-xs-3">
+                                                <div class="form-control-static" style="width: 400px;">{{ accountModel.bank_number }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-3 col-xs-3" style="width: 140px;">银行名称</label>
+                                            <div class="col-md-9 col-xs-9">
+                                                <div class="form-control-static" style="width: 400px;">{{ accountModel.bank_name }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-3 col-xs-3" style="width: 140px;">审核状态</label>
+                                            <div class="col-md-9 col-xs-9">
+                                                <div class="form-control-static" style="width: 400px;">{{ accountModel.statusToDescription }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <!--鉴权弹窗-->
+                <div class="modal fade" id="modal-verify">
+                    <div class="modal-dialog">
+                        <div class="modal-content col-md-10 col-xs-10">
+                            <ng-form name="verifyForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>账户鉴权</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-3 control-label"><font color="red">*</font> 鉴权金额: </label>
+                                            <div class="col-md-8 col-xs-8">
+                                                <input type="number" placeholder="请输入不超过1元的金额" name="account_number" ng-model="accountModel.verify_string" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-sm btn-success" ng-click="verifySubmit()" ng-disabled="!accountModel.verify_string"><i class="fa fa-save"></i> 提交</button>
+                                    <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--兴业电子账户-->
+        <!--<div class="col-md-11 col-xs-11" style="margin:20px;border:1px solid #11a2b7;padding:5px;width:87%">
+            <div class="form-group col-md-12 col-xs-12">
+                <p><strong>{{identifyModel.enterprise_name}}</strong></p>
+                <p>您的兴业电子账户已经创建成功！恭喜！</p>
+                <p>登录用户名：{{agentModel.agent_treasurer_phone}}</p>
+                <p>初始登录密码：{{identifyModel.xingYePassword}}</p>
+                <p>请您登录<a ng-click="identifySubmit()" style="color:blue;"><strong>兴业执剑人见证代管系统</strong>（兴业银行集团旗下系统）</a>，<strong>及时重置登录密码和支付密码</strong>，提升账户安全等级。</p>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 text-center" style="margin-bottom:50px;margin-top:10px;">
+            <button type="submit" class="btn btn-sm btn-success" ng-click="identifySubmit()"> 登录兴业执剑人见证代管系统</button>
+        </div>-->
+        
+    </div>
+</div>

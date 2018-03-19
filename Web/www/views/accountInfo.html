@@ -1,0 +1,159 @@
+<div ng-cloak ng-controller="accountInfoController">  
+    <!-- 右侧 start-->
+    <div class="user-right" >
+        <div class="col-md-12 col-xs-12">
+            <div class="person col-md-2 col-xs-2">
+                <img src="assets/img/person-img.png">
+                <p>欢迎您来到汇票线!</p>
+                <span style="cursor:pointer;color:#f55a14;" ui-sref="app.main.accountStatus">实名认证>></span>
+            </div>
+            <form class="form-horizontal col-md-9 col-xs-9 information-form" role="form">
+                <div class="form-group form-inline" >
+                    <label class="col-md-8 col-md-pull-1 col-xs-8 col-xs-pull-1 text-center infor-username text-left">{{identity.enterprise_name}}</label>
+                    <div class="col-md-1 col-xs-2 infor-img"><img src="assets/img/tongzhi.jpg"></div>
+                    <label class="col-md-2 col-md-pull-2 col-xs-2 col-xs-pull-2 control-label infor-infor" style="width:24%" >通知消息&nbsp;<font color="red"><a ng-click="messagek()"  style="color:#ff0000;cursor:pointer" >({{pagemessage}})</a></font></label>
+                </div>
+                <div class="infor-line form-group form-inline">
+                    <laber class="col-md-3 col-xs-3" style="margin-left:-5%">
+                        联系人：{{identity.customer_name}}
+                    </laber>
+                    <laber class="col-md-4 col-xs-4">
+                        手机号：{{identity.phone_number}}
+                    </laber>
+                    <laber  class="infor-img-circle col-md-5  col-xs-5" >
+                        <span class="col-md-6 col-xs-6">信息完整:</span>
+                        <ul class="col-md-6 col-xs-6">
+                            <div ng-if="identity.is_verified>1">
+                                <li ng-repeat="i in getNumber(identity.is_verified-1)"><img src="assets/img/circle_1.png"></li>
+                                <li ng-repeat="i in getNumber(6-identity.is_verified)"><img src="assets/img/circle_2.png"></li>
+                            </div>
+                            <div ng-if="identity.is_verified==0 || identity.is_verified==-1">
+                                <li ng-repeat="i in getNumber(5)"><img src="assets/img/circle_2.png"></li>
+                            </div>
+                            <div ng-if="identity.is_verified==1">
+                                <li ng-repeat="i in getNumber(5)"><img src="assets/img/circle_1.png"></li>
+                            </div>
+                        </ul>
+                    </laber>
+                </div>
+                <div class="form-group form-inline" style="margin-left:-7%">
+                    <laber class="col-md-3 col-xs-3">
+                        <span ng-if="identity.is_verified == 1 || identity.is_verified >= 3" style="margin-left:-3px">企业信息：已认证</span>
+                        <span ng-if="identity.is_verified != 1 && identity.is_verified < 3" style="margin-left:-3px">企业信息：未认证</span>
+                    </laber>
+                    <laber class="col-md-4 col-xs-4" style="margin-left:-21px">
+                        所在地址：{{Hcustomer.trade_location_province}} {{Hcustomer.trade_location_city}}
+                    </laber>
+                    <laber class="infor-img-star col-md-5 col-xs-5">
+                        <span class="col-md-5 col-xs-5">用户等级:</span>
+                        <ul class="col-md-7 col-xs-7">
+                            <li ng-repeat="i in getNumber(identity.customer_level)"><img src="assets/img/star_1.png"></li>
+                            <li ng-repeat="i in getNumber(5-identity.customer_level)"><img src="assets/img/star_2.png"></li>
+                        </ul>
+                    </laber>
+                </div>
+            </form>
+        </div>
+        <div class="infor-cutoff"></div>
+
+        <div ng-if='!filter.showSaler'>
+          <div class="nav-css col-md-12 col-xs-12 text-center" >
+              <nav class="hpxAcco">
+                  <ul>
+                      <li class="col-md-2 col-xs-2 nav-selected" ng-click='filter.showSaler=false'>我是买方</li>
+                      <li class="col-md-2 col-xs-2" ng-click='filter.showSaler=true'>我是卖方</li>
+                  </ul>
+              </nav>
+              <div class="col-md-12 col-xs-12 release-m row form-group">
+                  <table class="table release-table">
+                      <tr ng-if="identity.is_verified != 1 && identity.is_verified != 4">
+                          <tr ng-if="identity.is_verified == 0 && customer.is_verified == 0">
+                              <td class="col-md-10 col-xs-10">联系人信息未完善，请先完善联系人信息！！！</td>
+                              <td class="col-md-2 col-xs-2">
+                                  <button class="release-btn" ui-sref="app.main.accountStatus">马上完善</button>
+                              </td>
+                          </tr>
+                          <tr ng-if="identity.is_operator == 0">
+                              <tr ng-if="identity.is_verified == -1 || (identity.is_verified == 0 && customer.is_verified == 1)">
+                                  <td class="col-md-10 col-xs-10">企业信息未注册，请注册企业信息！！！</td>
+                                  <td class="col-md-2 col-xs-2">
+                                      <button class="release-btn" ui-sref="app.main.accountStatus">马上注册</button>
+                                  </td>
+                              </tr>
+                              <tr ng-if="identity.is_verified == 2">
+                                  <td class="col-md-10 ">机构认证资料已提交，正在审核中，请稍候！</td>
+                                  <td class="col-md-2">
+                                     
+                                  </td>
+                              </tr>
+                              <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 0">
+                                  <td class="col-md-10 col-xs-10">如需进行电票交易，请前往机构认证--经办人信息，创建兴业电子账户！</td>
+                                  <td class="col-md-2 col-xs-2">
+                                      <button class="release-btn" ui-sref="app.main.enterpriseInfo">马上创建</button>
+                                  </td>
+                              </tr>
+                              <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 1">
+                                  <td class="col-md-10 col-xs-10">经办人资料已提交，正在审核中，请稍候！</td>
+                                  <td class="col-md-2 col-xs-2">
+                                      
+                                  </td>
+                              </tr>
+                              <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 2">
+                                  <td class="col-md-10 col-xs-10">经办人信息审核失败，请前往修改！</td>
+                                  <td class="col-md-2 col-xs-2">
+                                      <button class="release-btn" ui-sref="app.main.enterpriseInfo">马上修改</button>
+                                  </td>
+                              </tr>
+                              <tr ng-if="identity.is_verified == 3">
+                                  <td class="col-md-10 col-xs-10">银行账号未绑定，请绑定银行账户！！！</td>
+                                  <td class="col-md-2 col-xs-2">
+                                      <button class="release-btn" ui-sref="app.main.enterpriseAccountInfo">马上绑定</button>
+                                  </td>
+                              </tr>
+                          </tr>
+                      </tr>
+                      <tr ng-if="identity.can_publish_offer == 1 && (identity.is_verified >= 0 || identity.is_verified == -1)">
+                          <td class="col-md-10 col-xs-10">我有<span class="release-span">{{ eleNumber.all_ele_bid_running_order_number }}</span>条电票订单处于交易中，
+                          有<span class="release-span">{{ paperNumber.all_paper_bid_running_number }}</span>条纸票订单处于交易中 </td>
+                          <td class="col-md-2 col-xs-2">
+                              <button class="release-btn" ui-sref="app.main.myBidding">马上查看</button>
+                          </td>
+                      </tr>
+                      <tr ng-if="identity.can_receive == 1">
+                          <td class="col-md-10 col-xs-10">想要收票？马上寻找票源吧！</td>
+                          <td class="col-md-2 col-xs-2">
+                              <button class="release-btn" ui-sref="app.free.queryBill">寻找票据</button>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+        </div>
+        <div ng-if='filter.showSaler'>
+          <div class="nav-css col-md-12 col-xs-12 text-center" >
+              <nav class="hpxAcco">
+                  <ul>
+                      <li class="col-md-2 col-xs-2" ng-click='filter.showSaler=false'>我是买方</li>
+                      <li class="col-md-2 col-xs-2 nav-selected" ng-click='filter.showSaler=true'>我是卖方</li>
+                  </ul>
+              </nav>
+              <div class="col-md-12 col-xs-12 release-m row form-group">
+                  <table class="table release-table">
+                      <tr ng-if="identity.can_publish_offer == 1 && (identity.is_verified >= 0 || identity.is_verified == -1)">
+                          <td class="col-md-10 col-xs-10">我有<span class="release-span">{{ eleNumber.all_ele_publish_number }}</span>条电票订单处于交易中，有<span class="release-span">{{ paperNumber.all_paper_publish_number }}</span>条纸票订单处于交易中 </td>
+                          <td class="col-md-2 col-xs-2">
+                              <button class="release-btn" ui-sref="app.main.myBill">马上查看</button>
+                          </td>
+                      </tr>
+                      <tr ng-if="identity.can_sell_electronic_bill == 1 || can_sell_paper_bill == 1">
+                          <td class="col-md-10 col-xs-10">想要出票？马上发布票据吧！</td>
+                          <td class="col-md-2 col-xs-2">
+                              <button class="release-btn" ui-sref="app.main.publish">发布票据</button>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,207 @@
+﻿<div ng-controller="orderReceiverInfoController">
+    <div class="bill-query-cont">
+        <!-- 向导栏 start-->
+        <div class="guide-bar">
+            <div class="guide-bar-cont">
+                <div class="guide-line"></div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 801]" class="guide-order-bgcolor-sel">1</span>
+                    <p>出票方发布信息</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 801]" class="guide-order-bgcolor-sel">2</span>
+                    <p>收票方竞价购票</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 804]" class="guide-order-bgcolor-sel">3</span>
+                    <p>出票方确认交易</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 805]" class="guide-order-bgcolor-sel">4</span>
+                    <p>收票方支付票款</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 807]" class="guide-order-bgcolor-sel">5</span>
+                    <p>出票方背书</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 808]" class="guide-order-bgcolor-sel">6</span>
+                    <p>收票方签收</p>
+                </div>
+                <div class="guide-order">
+                    <span ng-class="{ true: 'guide-order-bgcolor-sel', false: 'guide-order-bgcolor'}[model.order_status_id >= 810]" class="guide-order-bgcolor-sel">7</span>
+                    <p>监管户支付票款</p>
+                </div>
+            </div>
+        </div>
+        <!-- 向导栏 end-->
+        <div class="user-line-hd"><strong>订单详细信息</strong></div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-2">订单类型：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_type_name }}
+                </div>
+                <label class="control-label col-md-2">订单号码：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_number }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">订单金额[元]：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_total_price }}
+                </div>
+                <label class="control-label col-md-2">订单利率：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_rate }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">交易方式：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_pay_type_name }}
+                </div>
+                <label class="control-label col-md-2">订单状态：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_status_name }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">生成时间：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_time | date:'yyyy-MM-dd' }}
+                </div>
+                <label class="control-label col-md-2">更新时间：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_update_time | date:'yyyy-MM-dd' }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">收票人手续费：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.receiver_commission | currency }}
+                </div>
+                <label class="control-label col-md-2">票据号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.bill_number }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">订单折扣：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_discount }}
+                </div>
+                <label class="control-label col-md-2">订单描述：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.description }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="user-line-hd"> <strong>订单手续费支付情况</strong></div>
+                <label class="control-label col-md-2">支付状态：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_commission.commission_paid_status_name }}
+                </div>
+                <label class="control-label col-md-2">描述：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_commission.description }}
+                </div>
+            </div>
+            <div class="bill-flaw mt10 row">
+                <div class="user-line-hd mt10"><strong> 汇票背书</strong></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <td>背书</td>
+                            <td>背书消息</td>
+                            <td>描述</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in model.order_endorsements">
+                            <td>{{ $index + 1 }}</td>
+                            <td><div><a href="{{item.endorsement_address}}" target="_blank">{{ item.endorsement_file_name }}</a></div></td>
+                            <td>{{ order.endorsement_message }}</td>
+                            <td>{{ order.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+            <!--<div class="user-line-hd mt10"> 订单物流</div>
+            <div class="form-group">
+                <label class="control-label col-md-2">公司名称：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_logistics.logistic_company_name }}
+                </div>
+                <label class="control-label col-md-2">快递单号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.order_logistics.logistic_number }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">物流地址：</label>
+                <div class="col-md-10 form-control-static">
+                    {{ model.order_logistics.receiver_address }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">描述：</label>
+                <div class="col-md-10 form-control-static">
+                    {{ model.order_logistics.description }}
+                </div>
+            </div>-->
+        </div>
+        <div class="text-right">
+            <button type="button" class="btn btn-lg btn-warning" ng-if="model.order_status_id == 803 && model.is_receiver_commission_paid == 0" ng-click="payCommission()"><i class="fa fa-share-square-o"></i> 支付手续费</button>
+            <button type="button" class="btn btn-lg btn-success" ng-if="model.order_status_id == 804" ng-click="showPay()"><i class="fa fa-share-square-o"></i> 付款</button>
+            <button type="button" class="btn btn-lg btn-warning" ng-if="model.order_status_id == 807" ng-click="confirm()"><i class="fa fa-share-square-o"></i> 确认背书</button>
+        </div>
+        <div class="modal fade" id="modal-address">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <ng-form name="addressForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>付款</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">背书账号：</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control width-200" ng-model="addressModel.receiver_account_id" ng-options="item.id as item.account_number for item in accounts"></select>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group" ng-if="model.bill_type_id == 102">
+                                    <label class="control-label col-md-3">物流地址：</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control width-200" ng-model="addressModel.receiver_address_id" ng-options="item.id as item.address for item in addresses"></select>
+                                    </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">支付方式</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control width-200" ng-model="addressModel.order_pay_type_id" ng-options="item.code as item.constant_name for item in orderPayTypeData" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">备注：</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" ng-model="addressModel.description" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="pay()" ng-disabled="addressForm.$invalid || addressModel.order_pay_type_id == 1200  "><i class="fa fa-share-square-o"></i> 付款</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                        </div>
+                     </ng-form>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿<div ng-controller="accountInfoController">
+    <div class="user-right">
+        <!-- 个人信息 start-->
+        <div class="user-right-info">
+            <div class="user-head-portrait col-md-2"><img src="assets/img/hpx-13.jpg" /></div>
+            <div class="user-info-detail col-md-10">
+                <div class="user-info-name" ng-model="identity.enterprise_name">{{identity.enterprise_name}}</div>
+                <div class="user-info-account">
+                    <div class="form-group">
+                        <span class="col-md-3">欢迎您来到汇票线！</span>
+                        <span class="col-md-4">用户名：{{identity.customer_name}}</span>
+                        <span class="col-md-5 user-info-notice"><i></i>通知消息</span>
+                    </div>
+                    <!--<div class="form-group">
+                        <div class="col-md-6">
+                            <a>上传头像</a>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 个人信息 end-->
+        <div class="issue-order user-right-info">
+            <div ng-if="identity.is_verified == -1 || identity.is_verified == 0">
+                <div class="col-md-10">企业信息未注册，请注册企业信息！！！</div>
+                <div class="col-md-2 col-xs-2 text-center margin-button">
+                <a href="javascript:;" ui-sref="app.main.customerInfo" class="electric-money-button button-bgcolor-orange white">马上注册</a>
+            </div>
+            </div>
+            <div ng-if="identity.is_verified == 2">
+                <div class="col-md-10">资料已提交，正在审核中，请稍候！</div>
+            </div>
+            <div ng-if="identity.is_verified == 3">
+            <div class="col-md-10">银行账号未注册，请注册银行账户！！！</div>
+            <div class="col-md-2 col-xs-2 text-center margin-button">
+                <a href="javascript:;" ui-sref="app.main.enterpriseAccountInfo" class="electric-money-button button-bgcolor-orange white">马上注册</a>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="issue-order user-right-info" ng-if="identity.can_publish_offer == 1">
+            <div class="col-md-10">我的竞价<span class="g-orange">{{ filter.count }}</span>条交易订单状态已经竞价成功</div>
+            <div class="col-md-2 col-xs-2 text-center margin-button">
+                <a href="javascript:;" ui-sref="app.main.myBidding" class="electric-money-button button-bgcolor-orange white">马上查看</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 出票订单 start-->
+        <div class="issue-order user-right-info" ng-if="identity.can_sell_electronic_bill == 1 || can_sell_paper_bill == 1">
+            <div class="col-md-7">出票订单<span class="g-orange">{{ drawerCount }}</span>条交易订单状态处于交易进行中</div>
+            <div class="col-md-3 g-gray f13">有票据？赶紧发布出票需求吧！</div>
+            <div class="col-md-2 col-xs-2 text-center margin-button">
+                <a href="javascript:;" ui-sref="app.main.publish" class="electric-money-button button-bgcolor-orange white">马上发布</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 出票订单 end-->
+        <!-- 收票订单 start-->
+        <div class="issue-order user-right-info" ng-if="identity.can_receive == 1">
+            <div class="col-md-7">收票订单<span class="g-orange">{{ receiverCount }}</span>条交易订单状态处于交易进行中</div>
+            <div class="col-md-3 g-gray f13">想要收票？马上寻找票源吧！</div>
+            <div class="col-md-2 col-xs-2 text-center margin-button">
+                <a href="javascript:;" ui-sref="app.free.queryBill({ 'id': 0 })" class="electric-money-button button-bgcolor-orange white">寻找票源</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 收票订单 end-->
+    </div>
+</div>

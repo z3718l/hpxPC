@@ -1,0 +1,12 @@
+﻿<div ng-cloak ng-controller="informationController">
+    <div ng-class="{ 'bill-query-cont': identity }">
+        <div class="list-cont row">
+            <div class="panel-heading text-center">{{ model.title }}</div>
+            <div class="time text-center">
+                <span>来源：汇票线</span>
+                <span>发布日期：{{ model.publishing_time | date: 'yyyy-MM-dd' }}</span>
+            </div>
+            <div class="article-cont" ng-bind-html="detail"></div>
+        </div>
+    </div>
+</div>

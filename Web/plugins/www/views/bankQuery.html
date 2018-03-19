@@ -1,0 +1,70 @@
+﻿<div ng-controller="bankQueryController">
+    <!-- 右侧 start-->
+    <div class="user-right" style="min-height:200px;">
+        <div class="right_top col-md-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 行号查询</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 行号查询</p>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 name-search" style="padding-bottom:2em;">
+                <div class="col-md-12">
+                    <label class="radio-inline">
+                        <input type="radio" name="search" value="radio-1" ng-click="byName=0" id="rough" checked="checked">行名模糊查询
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="search" value="radio-2" ng-click="byName=1" id="accurate">行号精确查询
+                    </label>
+                </div>
+                <div ng-if="byName">
+                  <div class="col-md-6">
+                      <span>请输入行号：</span>
+                      <input onkeyup="this.value=this.value.replace(/\D/g,'')" ng-model="model.precise_id" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="public-search">
+                      <!--<input type="number" name="" class="border-orange ">-->
+                  </div>
+                  <div class="search  col-md-12">
+                      <button class="btn btn-1 btn-orange border-orange" ng-click="queryPrecise(model.precise_id)">查询</button>
+                      <button class="btn btn-1 btn-grey border-orange" ng-click="model.precise_id=null">清空</button>
+                  </div>
+                </div>
+                <div ng-if="!byName">
+                  <div class="select col-md-12">
+                        <select class="col-xs-2 right-10 public-search" ng-model="model.province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()">
+                            <option value="">省/直辖市</option>
+                        </select>
+                        <select class="col-xs-2 right-10 public-search" ng-model="model.address_id" ng-options="item.id as item.address_name for item in CityData" ng-change="cityChange()">
+                            <option value="">市/区</option>
+                        </select>
+                        <!--<select class="col-xs-2 right-10 public-search" ng-model="model.address_id" ng-options="item.id as item.address_name for item in AddressData">
+                            <option value="">县(区)</option>
+                        </select>-->
+                        <select class="col-xs-3 right-10 public-search" ng-model="model.head_bank_id" ng-options="item.id as item.bank_name for item in bankData">
+                            <option value="">银行名称</option>
+                        </select>
+                  </div>
+                  <div class="search  col-md-12">
+                      <span>关键字：</span><input type="text" ng-model="model.keyword" name="" class="public-search right-50" style="width:300px;" placeholder="如：农业 上海（最多支持两个关键字）">
+                      <button class="btn btn-1 btn-grey border-orange" ng-click="model.keyword=null">清空</button>
+                      <button class="btn btn-1 btn-orange border-orange" ng-click="queryVague()">查询</button>
+                  </div>
+                </div>
+                <div ng-if="branchData.length" style="margin-top:160px;" >
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed text-center">
+                        <tr class="text-center">
+                            <th>序号</th>
+                            <th>大额行号</th>
+                            <th>银行名称</th>
+                            <th>联系电话</th>
+                        </tr>
+                        <tr ng-repeat="item in $data" class="text-center">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ item.bank_number }}</td>
+                            <!--<td data-title="'总行名称'">{{ item.head_bank_name }}</td>-->
+                            <td>{{ item.bank_name }}</td>
+                            <!--<td data-title="'地址'">{{ item.bank_address }}</td>-->
+                            <td><span class="nowarp-hidden">{{ item.description }}</span></td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+    <!-- 右侧 end-->
+</div>

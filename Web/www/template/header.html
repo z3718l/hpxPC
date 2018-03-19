@@ -1,0 +1,254 @@
+﻿
+<link rel="stylesheet" href="../../templates/main/css/contenle.css" />
+<link rel="stylesheet" href="../../www/assets/css/style.css" />
+<div ng-controller="headerController">
+    <div class="container-fluid lkteheader">
+        <div class="container-fluid lktetop" style="width:1200px">
+            <div class="row-fluid ">
+                <div class="htops">
+                    <div class="kf"><div class="nmbphs"></div><span>客服热线：400-772-0575</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>客服时间：上午9：00---下午17：30 ( 工作日 ) </span></div>
+                    <div class="kfs">
+                        <span id="divUser" ng-if="identity" class="col-md-9 col-xs-9 contact text-right wez">
+                            欢迎您！{{identity.customer_name}}
+                            <span style="color:#fff">|</span>
+                            <a href="javascript:" ; ui-sref="app.main.accountInfo" style="color:#fff">个人中心</a>
+                            <span style="color:#fff">|</span>
+                            <a  href="javascript:;" ng-click="logout();" style="color:#fff">退出登录</a>
+                        </span>
+                        <span id="divAnonymous" ng-if="!identity" class="col-md-9 col-xs-8 contact text-right wez">
+                            <a href="/aspx/main/insurance.aspx" target="_blank" style="color:#fff">安全保障</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="/aspx/main/help.aspx" target="_blank" style="color:#fff">新手引导</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a ui-sref="app.loginInfo"   style="color:#fff">登录</a>
+                            <span>|</span>
+                            <a href="javascript:;" ui-sref="app.signup" style="color:#fff">注册</a>
+                            <!--&nbsp;&nbsp;
+                            <a class="phone icontu" href="javascript:;"></a>
+                            <a class="weixin icontu" href="javascript:;"></a>-->
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid lktebottom" style="width:1156px">
+                <div class="bomp">
+                    <div class="bomp1" style="margin-left: 28px;">
+                        <img  onclick="javascript: window.location.href = '/index.aspx'" ng-class="{'menuheader': $state.includes('app.main.accountInfo')}" src="../../templates/main/images/logo1.png" />
+                        <img style="margin: 20px 0 0 20px;width: 199px" src="../../templates/main/images/png.png" />
+                    </div>
+                    <div class="bomp2" style="margin-right: -26px;">
+                        <div class="nvmenu">
+                            <ul>
+                                <li  onmousemove="bigImga(this)" onmouseout="normalImga(this)" onclick="javascript: window.location.href = '/index.aspx'" ng-class="{'menuheader': $state.includes('app.main.accountInfo')}">首页</li>
+                                <li  onmousemove="bigImgb(this)" onmouseout="normalImgb(this)" ng-click="publishbill()" ng-class="{'menuheader': ($state.includes('app.main.publish') || $state.includes('app.main.myBill') || $state.includes('app.free.readBill') ||  $state.includes('app.free.readBillSelf'))}">我要出票</li>
+                                <li  onmousemove="bigImgc(this)" onmouseout="normalImgc(this)" onclick="javascript: window.location.href = '/www/index.html#/app/free/queryBill'" ng-class="{'menuheader': ($state.includes('app.free.queryBill') || $state.includes('app.free.myBidding') || $state.includes('app.main.myBidding') || $state.includes('app.main.orderReceiverInfo')|| $state.includes('app.free.readBillBid')|| $state.includes('app.free.readBillSup'))}">我要收票</li>
+                                <li  onmousemove="bigImgd(this)" onmouseout="normalImgd(this)" ng-click="editQuoteaccount()" ng-class="{'menuheader': ($state.includes('app.main.editQuote') || $state.includes('app.main.quote') || $state.includes('app.free.queryOffer') || $state.includes('app.free.readOffer'))}">机构报价</li>
+                                <li  onmousemove="bigImge(this)" onmouseout="normalImge(this)" class="hpzs" ng-class="{'menuheader': ($state.includes('app.main.discountCalculator') || $state.includes('app.free.calculator') || $state.includes('app.main.bankQuery') || $state.includes('app.free.querybank') || $state.includes('app.main.billCalendar') || $state.includes('app.free.calendar') || $state.includes('app.main.publicQuery') || $state.includes('app.free.querypublic') || $state.includes('app.main.businessQuery') || $state.includes('app.free.queryenterprise'))}">汇票助手</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="container-fluid kbottom" style="margin-left: 51.7%;">
+
+
+                <ul>
+                    <li class="bv1" onclick="javascript: window.location.href = '/www/index.html#/app/free/calculator'">
+                        <div class="bv1s"></div>
+
+                        <label class="lbtext" style="color:#fff">
+                            贴现计算器
+                        </label>
+
+                    </li>
+                    <li class="bv2" onclick="javascript: window.location.href = '/www/index.html#/app/free/calendar'">
+                        <div class="bv2s"></div>
+                        <label class="lbtext" style="color:#fff">
+                            开票日历
+                        </label>
+                    </li>
+                    <li class="bv3" onclick="javascript: window.location.href = '/www/index.html#/app/free/querypublic'">
+                        <div class="bv3s"></div>
+                        <label class="lbtext" style="color:#fff">
+                            挂失查询
+                        </label>
+                    </li>
+                    <li class="bv4" onclick="javascript: window.location.href = '/www/index.html#/app/free/querybank'">
+                        <div class="bv4s"></div>
+                        <label class="lbtext" style="color:#fff">
+                            行号查询
+                        </label>
+                    </li>
+                    <li class="bv5" onclick="javascript: window.location.href = '/www/index.html#/app/free/queryenterprise'">
+                        <div class="bv5s"></div>
+                        <label class="lbtext" style="color:#fff">
+                            工商查询
+                        </label>
+                    </li>
+                </ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+
+
+<script>
+
+
+                $(".hpzs").hover(function () {
+                    $(".kbottom").show();
+                }, function () {
+
+                    //$(".kbottom").hide();
+
+                });
+                $(".kbottom").hover(function () {
+                    $(".kbottom").show();
+                }, function () {
+
+                    $(".kbottom").hide();
+
+                });
+                $(".lkteheader").hover(function () {
+                    //$(".kbottom").show();
+                }, function () {
+
+                    $(".kbottom").hide();
+
+                });
+
+                $(".bv1").hover(function () {
+                    $(".bv1 label").css("color", "#ff5a14");
+                    $(".bv1s").css("background-position","601px -131px");
+                }, function () {
+                    $(".bv1 label").css("color", "#fff");
+                    $(".bv1s").css("background-position", "601px -70px");
+
+                });
+                $(".bv2").hover(function () {
+                    $(".bv2 label").css("color", "#ff5a14");
+                    $(".bv2s").css("background-position", "470px -131px");
+                }, function () {
+                    $(".bv2 label").css("color", "#fff");
+                    $(".bv2s").css("background-position", "470px -70px");
+
+                });
+                $(".bv3").hover(function () {
+                    $(".bv3 label").css("color", "#ff5a14");
+                    $(".bv3s").css("background-position", "340px -131px");
+                }, function () {
+                    $(".bv3 label").css("color", "#fff");
+                    $(".bv3s").css("background-position", "340px -70px");
+
+                });
+                $(".bv4").hover(function () {
+                    $(".bv4 label").css("color", "#ff5a14");
+                    $(".bv4s").css("background-position", "214px -131px");
+                }, function () {
+                    $(".bv4 label").css("color", "#fff");
+                    $(".bv4s").css("background-position", "214px -70px");
+
+                });
+                $(".bv5").hover(function () {
+                    $(".bv5 label").css("color", "#ff5a14");
+                    $(".bv5s").css("background-position", "82px -131px");
+                }, function () {
+                    $(".bv5 label").css("color", "#fff");
+                    $(".bv5s").css("background-position", "82px -70px");
+
+                });
+                function showWeixin() {
+                    document.getElementById("weixin").style.display = "block";
+                }
+                function hideWeixin() {
+                    document.getElementById("weixin").style.display = "none";
+                }
+                function bigImga(x) {
+                    x.style.border = "2px  0 2px 0 solid #ff5a14"
+                    x.style.background = "url(../../../templates/main/images/thg.png)center no-repeat";
+              
+                }
+                function normalImga(x) {
+                    x.style.background = "none";
+                    x.style.color = "#333";
+                }
+                function bigImgb(x) {
+                    x.style.border = "2px  0 2px 0 solid #ff5a14"
+                    x.style.background = "url(../../../templates/main/images/thg.png)center no-repeat";
+                   
+                }
+                function normalImgb(x) {
+                    x.style.background = "none";
+                    x.style.color = "#333";
+                }
+                function bigImgc(x) {
+                    x.style.border = "2px  0 2px 0 solid #ff5a14"
+                    x.style.background = "url(../../../templates/main/images/thg.png)center no-repeat";
+                    
+                }
+                function normalImgc(x) {
+                    x.style.background = "none";
+                    x.style.color = "#333";
+                }
+                function bigImgd(x) {
+                    x.style.border = "2px  0 2px 0 solid #ff5a14"
+                    x.style.background = "url(../../../templates/main/images/thg.png)center no-repeat";
+              
+                }
+                function normalImgd(x) {
+                    x.style.background = "none";
+                    x.style.color = "#333";
+                }
+                function bigImge(x) {
+                    x.style.border = "2px  0 2px 0 solid #ff5a14"
+                    x.style.background = "url(../../../templates/main/images/thg.png)center no-repeat";
+                    
+                }
+                function normalImge(x) {
+                    x.style.background = "none";
+                    x.style.color = "#333";
+                }
+             
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

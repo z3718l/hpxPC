@@ -1,0 +1,229 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+<div ng-controller="enterpriseController">
+    <!-- 右侧 start-->
+    <div class="user-right" >
+        <div class="right-top col-md-12 row " style="margin-left: 0px">
+            <p>个人中心 > 我的账号 > 机构认证</p>
+        </div>
+        <div class="content col-md-12 row " style="margin-left: 0px">
+          <div class="process row col-md-12">
+              <div class="process1 col-md-3 col-xs-4">
+                  <img  src="assets/img/user-right-point.png">
+                  <h5>联系人信息</h5>
+              </div>
+              <div class="p-line col-md-1 "></div>
+              <div class="process1 col-md-3 col-xs-4">
+                  <img src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 3) ? '' : '-gray'}}.png">
+                  <h5>机构认证</h5>
+              </div>
+              <div class="p-line col-md-1 "></div>
+              <div class="process1 col-md-3 col-xs-4">
+                  <img src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 4) ? '' : '-gray'}}.png">
+                  <h5 >账户绑定</h5>
+              </div>
+          </div>
+          <div class="explain col-md-12">
+              <div class="line col-md-11 text-center"></div>
+          </div>
+        </div>
+        <div class="content col-md-12 row" style="margin-left: 0px;" ng-if="!model.is_verified || model.is_verified <= 0 || model.is_verified == 2">
+            <div  class="col-md-12">
+                <form class="form-horizontal col-md-12" role="form">
+                    <div  class="col-md-12 col-xs-6" >
+                        <h5 class="col-md-12 text-left" style="line-height: 200%">审核状态 :
+                          <span style="color: #f55a14" ng-if="model.id == 0">资料未完善</span>
+                          <span style="color: #f55a14" ng-if="model.id != 0">{{ model.verify_status }}</span>
+                          <span style="color: #f55a14" ng-if="model.is_verified == -1">,{{ model.verify_description }}</span>
+                        </h5>
+                    </div>
+                    <div  class="col-md-12 col-xs-6">
+                        <h5 class="col-md-12 text-left" style="line-height: 200%">必备资料</h5>
+                    </div>
+                </form>
+            </div>
+            <div class="explain col-md-12">
+                <div class="line col-md-11 text-center"></div>
+            </div>
+
+            <div class="table col-md-12 text-center" >
+                <ng-form name="editForm" class="form-horizontal col-md-12" role="form">
+                  <!-- 填写资料 -->
+                  <div ng-if="!model.is_verified || model.is_verified < 1">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">机构名称 : </label>
+                        <input  class="col-md-4 text-left " style="border: 1px solid #bfbfbf;"  name="enterprise_name" ng-model="model.enterprise_name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">营业执照注册号 : </label>
+                        <input class="col-md-4 text-left "style="border: 1px solid #bfbfbf;" name="credential_number" ng-model="model.credential_number" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right" >营业执照上传 : </label>
+                        <div class="col-sm-4" style="margin-left: -15px" ngf-select="uploadFiles($files, $invalidFiles, setCredentialID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                            <img style="height: 160px; width: 253px;" ng-src="{{model.credential_photo_address}}" required />
+                        </div>
+                        <!-- <img src="assets/img/hpx-14.jpg" class="col-md-4 text-left " style="margin-left: -15px"> -->
+                        <h5 class="col-md-5 text-left " style="padding-top: 135px">上传执照</h5>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">法人代表 : </label>
+                        <div class="col-sm-3" style="margin-left: -15px" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                            <img style="height: 116px; width: 183px;" ng-src="{{model.artificial_person_front_photo_address}}" required />
+                        </div>
+                        <div class="col-sm-3" style="margin-left: -15px" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                            <img style="height: 116px; width: 183px;" ng-src="{{model.artificial_person_back_photo_address}}" required />
+                        </div>
+                        <h5 class="col-md-3 text-left " style="padding-top: 90px">上传身份证</h5>
+                    </div>
+                    <div class="form-group" style="margin-top:50px;">
+                        <div class="col-md-4"></div>
+                        <input type="button" class="col-md-2 text-center btn" style="background-color: #f55a14;border: 0px;color: white;" ng-disabled="editForm.$invalid" ng-click="save()" value="提交审核">
+                    </div>
+                  </div>
+                  <!-- 只读模式 -->
+                  <div ng-if="model.is_verified == 2">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">机构名称 : </label>
+                        <div class="col-md-4 text-left ">{{model.enterprise_name}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">营业执照注册号 : </label>
+                        <div class="col-md-4 text-left ">{{model.credential_number}}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right" >营业执照上传 : </label>
+                        <div class="col-sm-4" style="margin-left: -15px">
+                            <img style="height: 160px; width: 253px;" ng-src="{{model.credential_photo_address}}" required />
+                        </div>
+                        <!-- <img src="assets/img/hpx-14.jpg" class="col-md-4 text-left " style="margin-left: -15px"> -->
+                        <h5 class="col-md-5 text-left " style="padding-top: 135px">上传执照</h5>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-md-3 text-right ">法人代表 : </label>
+                        <div class="col-sm-3" style="margin-left: -15px">
+                            <img style="height: 116px; width: 183px;" ng-src="{{model.artificial_person_front_photo_address}}" required />
+                        </div>
+                        <div class="col-sm-3" style="margin-left: -15px">
+                            <img style="height: 116px; width: 183px;" ng-src="{{model.artificial_person_back_photo_address}}" required />
+                        </div>
+                        <h5 class="col-md-3 text-left " style="padding-top: 90px">上传身份证</h5>
+                    </div>
+                    <div class="form-group" style="margin-top:50px;">
+                        <div class="col-md-4"></div>
+                        <input type="button" class="col-md-2 text-center btn" style="background-color: #f55a14;border: 0px;color: white;" ng-disabled="true" ng-click="save()" value="审核中">
+                    </div>
+                  </div>
+                </ng-form>
+
+            </div>
+        </div>
+
+        <!-- 已经认证状态 -->
+        <div class="content col-md-12 row" style="margin-left: 0px;" ng-if="model.is_verified == 1 || model.is_verified >= 3">
+            <div class="table col-md-12 text-center" >
+                <form role="form">
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="bigbox col-md-6 text-center" >
+                            <div class="smallbox " >
+                                <div class="renzheng">
+                                    <img src="assets/img/acc.png" alt="" />
+                                    <span style="font-size: 10px">
+                                        已认证
+                                    </span>
+                                </div>
+
+                                <p class="text-center" style="color:black ">{{ model.enterprise_name }}</p>
+                                <p class="text-center" style="color:black;padding-bottom: 10%">营业执照注册号：{{ model.credential_number }}</p>
+                                <div class="col-md-2"></div>
+                                <button ng-if="identity.is_operator == 0" class="btn btn-default col-md-8 text-center sub" type="button" ng-click="edit(true)" >修改</button>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="explain col-md-12" style="padding-top: 2%">
+                <div class="line col-md-11 text-right"></div>
+            </div>
+            <!-- 操作员列表 -->
+            <div class="table col-md-12 text-center" style="padding-top: 2%;margin-left: 0.8%">
+                <div class="panel panel-inverse">
+                    <div class="panel-body">
+                        <div class="form-inline filter-option">
+                            <div class="row">
+                                <div class="col-md-6" style="padding-bottom: 2%">
+                                    <img src="assets/img/cline.png" alt=""/>
+                                    <span style="margin-left: 2%">操作员列表</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pull-right">
+                                        <button style="background-color: #1a2b71;" ng-if="identity.is_operator == 0" class="btn btn-sm btn-success" ng-click="addOperater()"><i class="fa fa-plus-circle"></i> 绑定操作员</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px;">
+                            <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed">
+                                <tr ng-repeat="item in enterpriseMembers">
+                                    <td data-title="'姓名'" class="text-left">{{ item.customer_name }}</td>
+                                    <td data-title="'手机号'" class="text-left">{{ item.phone_number }}</td>
+                                    <td data-title="'绑定时间'" class="text-left">{{ item.bundling_time|date:'yyyy-MM-dd HH:mm' }}</td>
+                                    <!-- <td data-title="'描述'" class="text-left">{{ item.description }}</td> -->
+                                    <td class="text-left width-100 text-nowrap">
+                                        <button style="background-color: #1a2b71;" class="btn btn-success btn-xs" ng-if="item.member_name != '管理员'" ng-click="addOperater(item)"><i class="fa fa-trash-o"></i> 解除绑定</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="modal fade" id="modal-add">
+                        <div class="modal-dialog">
+                            <div class="modal-content col-md-10">
+                                <ng-form name="addForm" novalidate>
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>操作员</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label"> {{is_remove ? '您的':'操作员'}}手机号: </label>
+                                                <div class="input-group col-md-6">
+                                                    <input type="text" name="operator_phone_number" ng-model="model.operator_phone_number" class="form-control" placeholder="手机号码" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" align='right'> 手机验证码: </label>
+                                                <div class="input-group col-md-6">
+                                                  <input class="form-control" name="operator_phone_number_code" ng-model="model.operator_phone_number_code" placeholder="手机验证码" required />
+                                                  <div class="input-group-addon btn" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-sm btn-success" ng-click="submitOperater()" ng-disabled="addForm.$invalid"><i class="fa fa-save"></i> 提交</button>
+                                        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                    </div>
+                                </ng-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <p class=" col-md-10 text-left" style="color: #505050;"><span style="color: red ">*</span> 提示：联系人（管理员）可以授权多个操作员在本平台，操作员可被多家企业授权绑定。</p>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧 end-->
+</div>

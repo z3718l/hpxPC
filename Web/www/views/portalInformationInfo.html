@@ -1,0 +1,144 @@
+<div ng-controller="portalInformationController">
+    <ol class="breadcrumb pull-right">
+        <li><a ui-sref="app.home">汇票线</a></li>
+        <li><a ui-sref="app.portalInformation">发布信息管理</a></li>
+        <li class="active">发布信息设置</li>
+    </ol>
+    <h1 class="page-header"><i class="fa fa-lg text-success fa-fax"></i>发布信息设置</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">发布信息设置</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <label>开始时间</label>
+                                    <input type="date" id="publishingTimeS" name="publishingTimeS" ng-model="filter.publishingTimeS" ng-change="reflash()" />
+                                    <label>结束时间</label>
+                                    <input type="date" id="publishingTimeB" name="publishingTimeB" ng-model="filter.publishingTimeB" ng-change="reflash()" />
+                                    <select ng-model="filter.informationTypeId" ng-options="item.id as item.information_type_name for item in informationTypes" ng-change="reflash()" class="form-control input-sm">
+                                        <option value="">所有信息...</option>
+                                    </select>
+                                    <input type="text" ng-model="filter.keyword" class="form-control input-sm" placeholder="关键字" />
+                                    <button class="btn btn-sm btn-primary" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                    <button class="btn btn-sm btn-info" ng-click="edit()"><i class="fa fa-plus-circle"></i> 新增</button>
+                                    <!--<a href="http://localhost:57939/www/index.html#/app/portalInformation/test">新增</a>-->
+                                    <!--<button class="btn btn-info" ng-click="add()"><i class="fa fa-plus-circle"></i> 新增</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-bordered table-hover table-condensed">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" width="2%" class="text-center">{{ first + $index }}</td>
+                            <td data-title="'发布类型'" class="text-left">{{ item.information_type_name }}</td>
+                            <td data-title="'信息标题'" class="text-left">{{ item.title }}</td>
+                            <td data-title="'信息副标题'" class="text-left">{{ item.subtitle }}</td>
+                            <td data-title="'关键字'" sortable="'main_keyword'" class="text-left">{{ item.main_keyword }}</td>
+                            <td data-title="'官方链接'" class="text-left">{{ item.related_link }}</td>
+                            <td data-title="'发布时间'" width="10%" sortable="'publishing_time'" class="text-center">{{ item.publishing_time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                            <td data-title="'截止时间（仅对通知公告类有效）'" width="5%" class="text-center">{{ item.deadline_time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                            <td data-title="'描述'" class="text-left">{{ item.description }}</td>
+                            <td data-title="'操作'" class="text-center width-100 text-nowrap">
+                                <button class="btn btn-success btn-xs" ng-click="edit(item)"><i class="fa fa-edit"></i> 编辑</button>
+                                <button class="btn btn-success btn-xs" ng-click="remove(item)"><i class="fa fa-trash-o"></i> 删除</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal fade" id="modal-edit">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <ng-form name="editForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>发布信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal form-inline">
+                                        <div class="form-group width-full" ng-class="{ 'has-error': editForm.information_type_id.$invalid && !editForm.information_type_id.$pristine }">
+                                            <label class="col-md-2 control-label"><font color="red">*</font> 发布信息类型: </label>
+                                            <div class="col-md-10">
+                                                <select ng-model="model.information_type_id" name="information_type_id" ng-options="item.id as item.information_type_name for item in informationTypes" class="form-control">
+                                                    <option value="">请选择信息类型...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-class="{ 'has-error': editForm.main_keyword.$invalid && !editForm.main_keyword.$pristine }">
+                                            <label class="col-md-4 control-label"><font color="red">*</font> 主关键字: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="main_keyword" ng-model="model.main_keyword" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">次关键字: </label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="second_keyword" ng-model="model.second_keyword" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">第三关键字: </label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="third_keyword" ng-model="model.third_keyword" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-class="{ 'has-error': editForm.title.$invalid && !editForm.title.$pristine }">
+                                            <label class="col-md-2 control-label"><font color="red">*</font> 信息标题: </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="title" ng-model="model.title" class="form-control width-full" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">信息副标题: </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="subtitle" ng-model="model.subtitle" class="form-control width-full" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">官方链接: </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="related_link" ng-model="model.related_link" class="form-control width-full" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">截止日期(仅适用于通知公告): </label>
+                                            <div class="col-md-10">
+                                                <input type="datetime-local" name="deadline_time" ng-model="model.deadline_time" class="form-control width-150" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-class="{ 'has-error': editForm.detail.$invalid && !editForm.detail.$pristine }">
+                                            <label class="col-md-2 control-label"><font color="red">*</font> 详细信息: </label>
+                                            <div class="col-md-10">
+                                                <textarea ueditor name="detail" style="height: 500px;" ng-model="model.detail" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label"> 发布信息描述: </label>
+                                            <div class="col-md-10">
+                                                <input type="text" name="description" ng-model="model.description" class="form-control width-full" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-sm btn-success" ng-click="save()" ng-disabled="editForm.$invalid"><i class="fa fa-save"></i> 保存</button>
+                                    <button type="button" class="btn btn-sm btn-info" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

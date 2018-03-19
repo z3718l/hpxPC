@@ -1,0 +1,126 @@
+﻿<div ng-controller="businessQueryController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right_top col-md-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 工商查询</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 工商查询</p>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 enterprise-search">
+            <div class="search  col-md-12">
+                <span>请输入企业名称关键字：</span><input type="text" ng-model="enterpriseName" name="" placeholder="请至少输入四个关键字" class="right-50">
+                <button class="btn btn-1 btn-orange border-orange" ng-click="query(enterpriseName)">查询</button>
+            </div>
+            <table class="col-md-12">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">序号</th>
+                        <th class="col-md-4">企业全称</th>
+                        <th class="col-md-2">注册时间</th>
+                        <th class="col-md-3">信用代码</th>
+                        <th class="col-md-1"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in enterpriseInfo">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.start_date}}</td>
+                        <td>{{item.credit_code}}</td>
+                        <td class="text-center width-100 text-nowrap">
+                            <button class="btn btn-success btn-xs" ng-click="read(item)"><i class="fa fa-edit"></i> 详细</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 弹出详情 -->
+        <div class="modal fade" id="modal-read">
+            <div class="modal-dialog" style="width: 600px;">
+                <div class="modal-content">
+                    <ng-form name="readForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>企业详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal form-inline">
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">企业全称</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.name }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">注册时间</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.start_date }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">营业执照</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.number }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">信用代码</label>
+                                    <div class="col-md-3">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.credit_code }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">公司法人</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.artificial_person_name }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">成立时间</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.start_date }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">登记机构</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.belong_organization }}</div>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">注册号</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.registered_capital }}</div>
+                                    </div>
+                                </div>-->
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">注册资金</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.registered_capital }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">经营状态</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.status }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3" style="width: 140px;">营业范围</label>
+                                    <div class="col-md-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.scope }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 右侧 end-->
+</div>

@@ -1,0 +1,419 @@
+﻿<div ng-controller="readOfferController">
+    <div ng-class="{ 'bill-query-cont': identity }">
+        <div class="list-cont row">
+            <div class="form-horizontal">
+                <div class="user-line-hd"><strong>报价信息</strong></div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">报价机构：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.enterprise_name }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">票据类型：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.bill_style_name }}
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_style_id == 201 || model.bill_style_id == 202">
+                    <label class="control-label col-md-2">期限：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.deadline_type }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">交易方式：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.trade_type_name }}
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_style_id == 205">
+                    <label class="control-label col-md-2">贸易背景：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.trade_background }}
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_style_id == 205">
+                    <label class="control-label col-md-2">额度：</label>
+                    <div class="col-md-10 form-control-stati">
+                        {{ model.max_price | currency }}
+                    </div>
+                </div>
+                <table class="table table-striped" ng-if="model.bill_style_id==201">
+                    <thead>
+                        <tr>
+                            <th>承兑机构</th>
+                            <th>国股行</th>
+                            <th>城商行</th>
+                            <th>三农行</th>
+                            <th>村镇</th>
+                            <th>外资</th>
+                            <th>财务公司</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>月利率</td>
+                            <td>{{ model.offer_detail.offer_rate01 }}‰
+                            <td>{{ model.offer_detail.offer_rate02 }}‰
+                            <td>{{ model.offer_detail.offer_rate03 }}‰
+                            <td>{{ model.offer_detail.offer_rate04 }}‰
+                            <td>{{ model.offer_detail.offer_rate05 }}‰
+                            <td>{{ model.offer_detail.offer_rate06 }}‰
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped" ng-if="model.bill_style_id==202">
+                    <thead>
+                        <tr>
+                            <th>承兑机构</th>
+                            <th>国股行</th>
+                            <th>城商行</th>
+                            <th>三农行</th>
+                            <th>村镇</th>
+                            <th>外资</th>
+                            <th>财务公司</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>年利率</td>
+                            <td>{{ model.offer_detail.offer_rate01 }}%
+                            <td>{{ model.offer_detail.offer_rate02 }}%
+                            <td>{{ model.offer_detail.offer_rate03 }}%
+                            <td>{{ model.offer_detail.offer_rate04 }}%
+                            <td>{{ model.offer_detail.offer_rate05 }}%
+                            <td>{{ model.offer_detail.offer_rate06 }}%
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="model.bill_style_id==203">
+                    <div class="form-inline">180天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate01 }}‰
+                                <td>{{ model.offer_detail.offer_rate02 }}‰
+                                <td>{{ model.offer_detail.offer_rate03 }}‰
+                                <td>{{ model.offer_detail.offer_rate04 }}‰
+                                <td>{{ model.offer_detail.offer_rate05 }}‰
+                                <td>{{ model.offer_detail.offer_rate06 }}‰
+                                <td>{{ model.offer_detail.offer_rate07 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate11 }}‰
+                                <td>{{ model.offer_detail.offer_rate12 }}‰
+                                <td>{{ model.offer_detail.offer_rate13 }}‰
+                                <td>{{ model.offer_detail.offer_rate14 }}‰
+                                <td>{{ model.offer_detail.offer_rate15 }}‰
+                                <td>{{ model.offer_detail.offer_rate16 }}‰
+                                <td>{{ model.offer_detail.offer_rate17 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate21 }}‰
+                                <td>{{ model.offer_detail.offer_rate22 }}‰
+                                <td>{{ model.offer_detail.offer_rate23 }}‰
+                                <td>{{ model.offer_detail.offer_rate24 }}‰
+                                <td>{{ model.offer_detail.offer_rate25 }}‰
+                                <td>{{ model.offer_detail.offer_rate26 }}‰
+                                <td>{{ model.offer_detail.offer_rate27 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-inline">{{ model.deadline_days }} - 180 天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate31 }}‰
+                                <td>{{ model.offer_detail.offer_rate32 }}‰
+                                <td>{{ model.offer_detail.offer_rate33 }}‰
+                                <td>{{ model.offer_detail.offer_rate34 }}‰
+                                <td>{{ model.offer_detail.offer_rate35 }}‰
+                                <td>{{ model.offer_detail.offer_rate36 }}‰
+                                <td>{{ model.offer_detail.offer_rate37 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate41 }}‰
+                                <td>{{ model.offer_detail.offer_rate42 }}‰
+                                <td>{{ model.offer_detail.offer_rate43 }}‰
+                                <td>{{ model.offer_detail.offer_rate44 }}‰
+                                <td>{{ model.offer_detail.offer_rate45 }}‰
+                                <td>{{ model.offer_detail.offer_rate46 }}‰
+                                <td>{{ model.offer_detail.offer_rate47 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate51 }}‰
+                                <td>{{ model.offer_detail.offer_rate52 }}‰
+                                <td>{{ model.offer_detail.offer_rate53 }}‰
+                                <td>{{ model.offer_detail.offer_rate54 }}‰
+                                <td>{{ model.offer_detail.offer_rate55 }}‰
+                                <td>{{ model.offer_detail.offer_rate56 }}‰
+                                <td>{{ model.offer_detail.offer_rate57 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-inline">0 - {{ model.deadline_days }} 天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate61 }}‰
+                                <td>{{ model.offer_detail.offer_rate62 }}‰
+                                <td>{{ model.offer_detail.offer_rate63 }}‰
+                                <td>{{ model.offer_detail.offer_rate64 }}‰
+                                <td>{{ model.offer_detail.offer_rate65 }}‰
+                                <td>{{ model.offer_detail.offer_rate66 }}‰
+                                <td>{{ model.offer_detail.offer_rate67 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate71 }}‰
+                                <td>{{ model.offer_detail.offer_rate72 }}‰
+                                <td>{{ model.offer_detail.offer_rate73 }}‰
+                                <td>{{ model.offer_detail.offer_rate74 }}‰
+                                <td>{{ model.offer_detail.offer_rate75 }}‰
+                                <td>{{ model.offer_detail.offer_rate76 }}‰
+                                <td>{{ model.offer_detail.offer_rate77 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate81 }}‰
+                                <td>{{ model.offer_detail.offer_rate82 }}‰
+                                <td>{{ model.offer_detail.offer_rate83 }}‰
+                                <td>{{ model.offer_detail.offer_rate84 }}‰
+                                <td>{{ model.offer_detail.offer_rate85 }}‰
+                                <td>{{ model.offer_detail.offer_rate86 }}‰
+                                <td>{{ model.offer_detail.offer_rate87 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="model.bill_style_id==204">
+                    <div class="form-inline">360天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate01 }}‰
+                                <td>{{ model.offer_detail.offer_rate02 }}‰
+                                <td>{{ model.offer_detail.offer_rate03 }}‰
+                                <td>{{ model.offer_detail.offer_rate04 }}‰
+                                <td>{{ model.offer_detail.offer_rate05 }}‰
+                                <td>{{ model.offer_detail.offer_rate06 }}‰
+                                <td>{{ model.offer_detail.offer_rate07 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate11 }}‰
+                                <td>{{ model.offer_detail.offer_rate12 }}‰
+                                <td>{{ model.offer_detail.offer_rate13 }}‰
+                                <td>{{ model.offer_detail.offer_rate14 }}‰
+                                <td>{{ model.offer_detail.offer_rate15 }}‰
+                                <td>{{ model.offer_detail.offer_rate16 }}‰
+                                <td>{{ model.offer_detail.offer_rate17 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate21 }}‰
+                                <td>{{ model.offer_detail.offer_rate22 }}‰
+                                <td>{{ model.offer_detail.offer_rate23 }}‰
+                                <td>{{ model.offer_detail.offer_rate24 }}‰
+                                <td>{{ model.offer_detail.offer_rate25 }}‰
+                                <td>{{ model.offer_detail.offer_rate26 }}‰
+                                <td>{{ model.offer_detail.offer_rate27 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-inline">{{ model.deadline_days }} - 360 天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate31 }}‰
+                                <td>{{ model.offer_detail.offer_rate32 }}‰
+                                <td>{{ model.offer_detail.offer_rate33 }}‰
+                                <td>{{ model.offer_detail.offer_rate34 }}‰
+                                <td>{{ model.offer_detail.offer_rate35 }}‰
+                                <td>{{ model.offer_detail.offer_rate36 }}‰
+                                <td>{{ model.offer_detail.offer_rate37 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate41 }}‰
+                                <td>{{ model.offer_detail.offer_rate42 }}‰
+                                <td>{{ model.offer_detail.offer_rate43 }}‰
+                                <td>{{ model.offer_detail.offer_rate44 }}‰
+                                <td>{{ model.offer_detail.offer_rate45 }}‰
+                                <td>{{ model.offer_detail.offer_rate46 }}‰
+                                <td>{{ model.offer_detail.offer_rate47 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate51 }}‰
+                                <td>{{ model.offer_detail.offer_rate52 }}‰
+                                <td>{{ model.offer_detail.offer_rate53 }}‰
+                                <td>{{ model.offer_detail.offer_rate54 }}‰
+                                <td>{{ model.offer_detail.offer_rate55 }}‰
+                                <td>{{ model.offer_detail.offer_rate56 }}‰
+                                <td>{{ model.offer_detail.offer_rate57 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-inline">0 - {{ model.deadline_days }} 天</div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                                <th>每十万加</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100万以上</td>
+                                <td>{{ model.offer_detail.offer_rate61 }}‰
+                                <td>{{ model.offer_detail.offer_rate62 }}‰
+                                <td>{{ model.offer_detail.offer_rate63 }}‰
+                                <td>{{ model.offer_detail.offer_rate64 }}‰
+                                <td>{{ model.offer_detail.offer_rate65 }}‰
+                                <td>{{ model.offer_detail.offer_rate66 }}‰
+                                <td>{{ model.offer_detail.offer_rate67 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万-100万</td>
+                                <td>{{ model.offer_detail.offer_rate71 }}‰
+                                <td>{{ model.offer_detail.offer_rate72 }}‰
+                                <td>{{ model.offer_detail.offer_rate73 }}‰
+                                <td>{{ model.offer_detail.offer_rate74 }}‰
+                                <td>{{ model.offer_detail.offer_rate75 }}‰
+                                <td>{{ model.offer_detail.offer_rate76 }}‰
+                                <td>{{ model.offer_detail.offer_rate77 }}‰
+                            </tr>
+                            <tr>
+                                <td>50万以下</td>
+                                <td>{{ model.offer_detail.offer_rate81 }}‰
+                                <td>{{ model.offer_detail.offer_rate82 }}‰
+                                <td>{{ model.offer_detail.offer_rate83 }}‰
+                                <td>{{ model.offer_detail.offer_rate84 }}‰
+                                <td>{{ model.offer_detail.offer_rate85 }}‰
+                                <td>{{ model.offer_detail.offer_rate86 }}‰
+                                <td>{{ model.offer_detail.offer_rate87 }}‰
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="table table-striped" ng-if="model.bill_style_id==205">
+                    <thead>
+                        <tr>
+                            <th>票据类型</th>
+                            <th>利率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>电票</td>
+                            <td>{{ model.offer_detail.offer_rate01 }}%
+                        </tr>
+                        <tr>
+                            <td>纸票</td>
+                            <td>{{ model.offer_detail.offer_rate02 }}‰
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group" ng-if="model.bill_style_id == 201 || model.bill_style_id == 203 || model.bill_style_id == 205">
+                    <label class="control-label col-md-2">交易地点：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.trade_province }} {{ model.trade_location }}
+                    </div>
+                </div>
+                <div class="form-group" ng-if="identity && (identity.can_see_offer_detail == 1)">
+                    <label class="control-label col-md-2">联系人姓名：</label>
+                    <div class="col-md-4 form-control-static">
+                        {{ model.contact_name }}
+                    </div>
+                    <label class="control-label col-md-2">联系方式：</label>
+                    <div class="col-md-4 form-control-static">
+                        {{ model.contact_phone }}
+                    </div>
+                </div>
+                <div ng-if="!identity" align="center">
+                    <p><font size="4"><strong><a href="javascript:;" ui-sref="home" style="color:red">登录</a></strong>&nbsp;后查看联系人信息</font></p>
+                </div>
+                <div ng-if="identity && identity.can_see_offer_detail != 1" align="center">
+                    <p><font size="4"><strong>完善&nbsp;<a href="javascript:;" ui-sref="app.main.customerInfo" style="color:red">客户信息</a>&nbsp;并审核通过后查看联系人信息</strong></font></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

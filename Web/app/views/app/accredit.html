@@ -1,0 +1,75 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        机构认证
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page20-identification2">
+            <ul class="part1">
+                <li class="li1"><span>企业名：</span><input ng-disabled="model.id != null && model.id != 0 && !filter.update" type="text" ng-model="model.enterprise_name" placeholder="请输入企业名全称" class="i1"></li>
+                <!--<li class="li2"><span>企业实际经营地址：</span><input type="text" placeholder="请输入企业实际经营地址" class="i2"></li>-->
+            </ul>
+            <ul class="part2">
+                <li class="li1">
+                    <h3>上传营业执照正本</h3>
+                    <!--<p>五证合一<a href="" ng-click="openImgMagnifyModal('images/duozhengheyi.jpg')" class="btn-exp">示例</a><span>三证合一<a href="" ng-click="openImgMagnifyModal('images/duozhengheyi.jpg')" class="btn-exp">示例</a></span></p>-->
+                    <p><a href="" ng-click="openImgMagnifyModal('images/duozhengheyi.jpg')" class="btn-exp">示例</a></p>
+                    <!--<div class="con">
+                         <img src="images/icon42.png" alt=""> 
+                        <div class="upload"><input type="file" name="" id=""></div>
+                    </div>-->
+                    <div class="con">
+                        <img ng-if="model.credential_photo_address != ''" ng-click="openImgMagnifyModal(model.credential_photo_address)" src="{{model.credential_photo_address}}" alt="">
+                        <div ng-if="model.id == null || model.id == 0 || filter.update" class="upload" ng-click="takePhoto(0)"></div>
+                    </div>
+                </li>
+                <li class="li1">
+                    <h3>上传法人代表身份证（正反面）</h3>
+                    <!--<div class="con">
+                         <img src="images/icon42.png" alt=""> 
+                        <div class="upload"><input type="file" name="" id=""></div>
+                    </div>-->
+                    <div class="con">
+                        <img ng-if="model.artificial_person_front_photo_address != ''" ng-click="openImgMagnifyModal(model.artificial_person_front_photo_address)" src="{{model.artificial_person_front_photo_address}}" alt="">
+                        <div ng-if="model.id == null || model.id == 0 || filter.update" class="upload" ng-click="takePhoto(1)"></div>
+                    </div>
+                    <div class="con">
+                        <img ng-if="model.artificial_person_back_photo_address != ''" ng-click="openImgMagnifyModal(model.artificial_person_back_photo_address)" src="{{model.artificial_person_back_photo_address}}" alt="">
+                        <div ng-if="model.id == null || model.id == 0 || filter.update" class="upload" ng-click="takePhoto(2)"></div>
+                    </div>
+                </li>
+                <li class="operate" ng-if="model.id == null || model.id == 0"><input type="submit" ng-click="save()" value="确认提交"></li>
+                <li class="operate" ng-if="model.id != null && model.id != 0"><input type="submit" ng-click="update()" value="修改"></li>
+            </ul>
+        </div>        
+        <!--提示信息-->
+        <div class="alert-bind-info" ng-class="{'show': filter.tip}">
+            <div class="box">
+                <h3>温馨提示</h3>
+                <p>已完善业务授权信息，请进行下一步账户绑定</p>
+                <ul>
+                    <li class="on"><i>1</i>编辑联系人信息</li>
+                    <li class="on"><i>2</i>机构认证</li>
+                    <li><i>3</i>业务授权</li>
+                    <li><i>4</i>账户绑定</li>
+                </ul>
+                <p class="tips">注：进行电票交易须完成四步信息填写，如无需电票交易则填写第一、二步信息即可。</p>
+                <div class="operate">
+                    <a href="" class="btn-cancle" ui-sref="app.user">取消</a><a href="" class="btn-next" ui-sref="app.authorizate">进入下一步</a>
+                </div>
+            </div>
+        </div>
+        <!-- 图片放大页面弹框 -->
+        <script id="imgMagnify.html" type="text/ng-template">
+            <ion-modal-view hide-nav-bar="true" ng-click="closeImgMagnifyModal()">
+                <ion-content class="imgMagnify">
+                    <ion-scroll class="imgMagnify" zooming="true" min-zoom="0.5" max-zoom="3" direction="xy" scrollbar-x="false" scrollbar-y="false" has-bouncing="true" overflow-scroll="false" style="width: 100%; height:100%;">
+                        <div class="imgMagnify">
+                            <img ng-class="{rotate:rotate90}" src="{{img_path}}" />
+                        </div>
+                    </ion-scroll>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

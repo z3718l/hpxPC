@@ -1,0 +1,917 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<div ng-controller="orderReceiverInfoController">
+    <div class="user-right">
+        <div class="right-top col-md-12 row right-top-nav">
+            <p ng-if="model.order_status_id>=804 && model.order_status_id<810">我要收票 > 我的竞价 > 交易中</p>
+            <p ng-if="model.order_status_id>=810 && model.order_status_id<814">我要收票 > 我的竞价 > 交易完成</p>
+            <p ng-if="model.order_status_id==816">我要收票 > 我的竞价 > 交易中止</p>
+        </div>
+        <!-- 向导栏 start-->
+        <div class="content col-md-12 row col-xs-12" style="margin-left: 0px;">
+            <div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==101">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 804 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 805 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">支付票款</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 807 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">&nbsp;&nbsp;&nbsp;&nbsp;背书</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 808 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">&nbsp;&nbsp;&nbsp;&nbsp;签收</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 810 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;监管户</h6>
+                    <h6 style="width: 90px">支付票款</h6>
+                </div>
+            </div>
+            <div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==102">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img src="{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;出票方</h6>
+                    <h6 style="width: 90px">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img src="{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 804 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 805 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;&nbsp;&nbsp;双方</h6>
+                    <h6 style="width: 90px">线下交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 810 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;&nbsp;&nbsp;确认</h6>
+                    <h6 style="width: 90px">完成交易</h6>
+                </div>
+            </div>
+        </div>
+        <!-- 向导栏 end-->
+
+        <div class="form-group col-md-12" ng-if="model.bill_type_id==102 && model.order_status_id>=810">
+            <div class="form-inline">
+                <label class="control-label col-md-2">出票企业:</label>
+                <div class="col-md-6 form-control-static">
+                    {{model.drawer_name}}
+                </div>
+                <label class="control-label col-md-2">企业等级:</label>
+                <div class="col-md-2 form-control-static">
+                    <img src="{{ model.drawer_avg_star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img src="{{ model.drawer_avg_star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img src="{{ model.drawer_avg_star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img src="{{ model.drawer_avg_star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    <img src="{{ model.drawer_avg_star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                </div>
+            </div>
+            <div class="form-inline">
+                <label class="control-label col-md-2">联系人:</label>
+                <div class="col-md-2 form-control-static">
+                    {{model.drawer_contact_name}}
+                </div>
+                <label class="control-label col-md-2">联系电话:</label>
+                <div class="col-md-2 form-control-static">
+                    {{model.drawer_contact_phone}}
+                </div>
+                <label class="control-label col-md-2">交易地点:</label>
+                <div class="col-md-2 form-control-static">
+                    {{ model.product_location_province }} {{ model.product_location }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-horizontal" style="margin-bottom:60px;">
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">票据信息
+                <img src="assets\img\triangle.png" ng-click="billshowhide()" />
+            </div>
+            <!--<div class="col-md-1 col-sm-1 col-xs-1" ng-click="billshowhide()">
+                <img src="assets\img\triangle.png" />
+            </div>-->
+            <div class="accordionshow" id="billaccordion">
+                <div class="col-md-4">
+                    <div class="tb-booth tb-pic tb-s250" style="margin-top:25px;">
+                        <!--<a href="{{model.bill_front_photo_path}}" target="_blank">-->
+                            <img class="jqzoom" align="right" src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" alt="汇票正面未上传" width="230" height="200" />
+                        <!--</a>-->
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票据号：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_number }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">承兑人：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.acceptor_name }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票据类型：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_type_name }} {{ model.acceptor_type_name }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">票面金额[元]：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_sum_price | currency }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">汇票到期日：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}
+                            <!--(剩余{{ model.remaining_day }}天)-->
+                        </div>
+                        <!--<label class="control-label col-md-3">剩余天数：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.remaining_day }}
+                        </div>-->
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">背书次数：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.endorsement_number }}
+                        </div>
+                        <!--<label class="control-label col-md-3">交易方式：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_type_name }}
+                        </div>-->
+                    </div>
+                    
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">汇票瑕疵：</label>
+                        <div class="col-md-9 form-control-static">
+                            <div ng-repeat="item in model.bill_flaw_names">
+                                <!--<span class="col-md-3">{{ item }}</span>-->
+                                <span class="form-inline" style="float:left;">{{ item }}&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">备注：</label>
+                        <div class="col-md-9 form-control-static">
+                            {{ model.description }}
+                        </div>
+                    </div>-->
+                    <!--<div>
+                        <div class="form-group" ng-if="model.trade_type_code == 701 && model.bill_type_id == 101">
+                            <label class="control-label col-md-3">汇票瑕疵：</label>
+                            <div class="col-md-3 form-control-static">
+                                <span ng-repeat="item in billFlawData" class="col-sm-3">
+                                    <input type="checkbox" ng-model="item.checked"> {{ item.constant_name }}
+                                </span>
+                            </div>
+                            <label class="control-label col-md-3">备注说明：</label>
+                            <div class="col-md-3 form-control-static">
+                                {{ model.description }}
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="model.trade_type_code == 701 && model.bill_type_id == 102">
+                            <label class="control-label col-md-3">汇票瑕疵：</label>
+                            <div class="col-md-3 form-control-static">
+                                <span ng-repeat="item in billFlawData2" class="col-sm-3">
+                                    <input type="checkbox" ng-model="item.checked"> {{ item.constant_name }}
+                                </span>
+                            </div>
+                            <label class="control-label col-md-3">备注：</label>
+                            <div class="col-md-3 form-control-static">
+                                {{ model.description }}
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            
+            <div  ng-if="model.bill_type_id==101" class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">订单信息</div>
+            <div class="col-md-12" ng-if="model.bill_type_id==101">
+                <div class="col-md-8">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-3">订单号码：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_number }}
+                        </div>
+                        <!--<label class="control-label col-md-3">订单利率：</label>
+                        <div class="col-md-3 form-control-static">
+                            <label class="col-md-3 control-label" ng-if="model.bill_type_id==101">月利率：</label>
+                            <label class="col-md-3 control-label" ng-if="model.bill_type_id==102">年利率：</label>
+                            <div class="form-inline" ng-if="model.order_rate>0">
+                                {{ model.order_rate }}<span ng-if="model.bill_type_id==102">%</span><span ng-if="model.bill_type_id==101">‰</span>
+                            </div>
+                        </div>-->
+                        <label class="control-label col-md-3">合同号：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_number }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <!--<label class="control-label col-md-3">订单金额[元]：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_total_price | currency }}
+                        </div>-->
+                        <label class="control-label col-md-3">成交金额[元]：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_total_price | currency }}
+                        </div>
+                        <div ng-if="model.order_type_name=='现票卖断'">
+                            <label class="control-label col-md-3">成交利率：</label>
+                            <div class="col-md-3 form-control-static">
+                                {{ model.order_rate }}<span ng-if="model.bill_type_id==101">%</span><span ng-if="model.bill_type_id==102">‰</span>
+                            </div>
+                        </div>
+                        <div ng-if="model.order_type_name=='预约出票'">
+                            <label class="col-md-3 control-label">每十万贴息：</label>
+                            <div class="col-md-3 form-control-static">
+                                {{ model.order_rate | currency }}元
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <!--<label class="control-label col-md-3">交易方式：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.order_pay_type_name }}
+                        </div>-->
+                        <label class="control-label col-md-3">生成时间：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.order_time | date:'yyyy-MM-dd HH:mm' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" ng-if="model.order_status_id != 816">
+                        <label class="control-label col-md-8">订单状态：</label>
+                        <div class="col-md-12 form-control-static form-group" >
+                            <!--<font size="3" color="red"><strong>{{ model.order_status_name }}</strong></font>-->
+                            <div class="text-center" ng-if="model.order_status_id >= 804 && model.order_status_id < 807"><font color="red">出票方(已确认交易)</font></div>
+                            <div class="text-center" ng-if="model.order_status_id >= 805 && model.order_status_id < 808"><font color="red">收票方(已支付票款)</font></div>
+                            <div class="text-center" ng-if="model.order_status_id >= 807"><font color="red">出票方(已确认背书)</font></div>
+                            <div class="text-center" ng-if="model.order_status_id >= 808"><font color="red">收票方(背书已签收)</font></div>
+                            <div class="text-center" ng-if="model.order_status_id >= 810  && model.order_status_id <= 813"><font color="red">监管户(已支付票款)</font></div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="model.order_status_id == 816">
+                        <label class="control-label col-md-8">订单状态：</label>
+                        <div class="col-md-12 form-control-static form-group">
+                            <div class="text-center"><font color="red">交易中止</font></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="model.order_status_id == 804 && model.bill_type_id==101">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">出票方收款账户</div>
+                <div class="col-md-12">
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">企业名称：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.drawer_enterprise_name }}
+                        </div>
+                        <label class="control-label col-md-2">开户行：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.drawer_account_bank }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">账号：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.drawer_account_number }}
+                        </div>
+                        <label class="control-label col-md-2">联行号：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ model.drawer_account_bank_number }}
+                        </div>
+                    </div>
+                    <!--<div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">企业名称：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ drawerAccountModel.account_person }}
+                        </div>
+                        <label class="control-label col-md-2">开户行：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ drawerAccountModel.bank_name }}
+                        </div>
+                    </div>
+                    <div class="form-inline col-md-12">
+                        <label class="control-label col-md-2">账号：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ drawerAccountModel.account_number }}
+                        </div>
+                        <label class="control-label col-md-2">联行号：</label>
+                        <div class="col-md-4 form-control-static">
+                            {{ drawerAccountModel.bank_number }}
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <div ng-if="model.bill_type_id==102" class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">交易信息</div>
+            <div class="col-md-12" ng-if="model.bill_type_id==102">
+                <div class="form-inline col-md-12">
+                    <label class="col-md-2 control-label">期望利率：</label>
+                    <div class="col-md-3 form-control-static">
+                        <span ng-if="model.bill_rate>0">
+                            {{model.bill_rate}}<span ng-if="model.bill_type_id==102">‰</span><span ng-if="model.bill_type_id==101">%</span>
+                        </span>
+                    </div>
+                    <label class="col-md-2 control-label">期望交易额[元]：</label>
+                    <div class="col-md-3 form-control-static">
+                        <span ng-if="model.bid_deal_price>0">
+                            {{model.bid_deal_price | currency }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-inline col-md-12">
+                    <label class="control-label col-md-2">交易方式：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.trade_type_name }}
+                    </div>
+                    <label class="control-label col-md-2">备注：</label>
+                    <div class="col-md-5 form-control-static">
+                        {{ model.description }}
+                    </div>
+                </div>
+                <div class="form-inline col-md-12">
+                    <label class="control-label col-md-2">收票公司：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.receiver_enterprise_name }}
+                    </div>
+                    <label class="control-label col-md-2">联系人：</label>
+                    <div class="col-md-3 form-control-static">
+                        {{ model.contact_name }}
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div>
+                        <label class="control-label col-md-2">联系方式：</label>
+                        <div class="col-md-3 form-control-static">
+                            {{ model.contact_phone }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="model.order_status_id >= 811 && (model.order_appraisals.drawer_appraisal.description.length>0 || model.order_appraisals.receiver_appraisal.description.length>0)">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价信息</div>
+                <div class="form-inline" ng-if="model.order_appraisals.drawer_appraisal.description.length>0">
+                    <label class="control-label col-md-2">出票方评分：</label>
+                    <div class="col-md-10 form-control-static">
+                        <img src="{{ model.order_appraisals.drawer_appraisal.star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.drawer_appraisal.star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.drawer_appraisal.star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.drawer_appraisal.star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.drawer_appraisal.star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    </div>
+                    <label class="control-label col-md-2">出票方评价：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.order_appraisals.drawer_appraisal.description }}
+                    </div>
+                    <div ng-if="model.order_appraisals.drawer_appraisal.additional_description.length > 0">
+                        <label class="control-label col-md-2" style="font-size:12px;">追加评价：</label>
+                        <div class="col-md-10 form-control-static">
+                            {{ model.order_appraisals.drawer_appraisal.additional_description }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inline" ng-if="model.order_appraisals.receiver_appraisal.description.length>0">
+                    <label class="control-label col-md-2">收票方评分：</label>
+                    <div class="col-md-10 form-control-static">
+                        <img src="{{ model.order_appraisals.receiver_appraisal.star>=1 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.receiver_appraisal.star>=2 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.receiver_appraisal.star>=3 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.receiver_appraisal.star>=4 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                        <img src="{{ model.order_appraisals.receiver_appraisal.star>=5 ? 'assets/img/star_1.png' : 'assets/img/star_2.png' }}" />
+                    </div>
+                    <label class="control-label col-md-2">收票方评价：</label>
+                    <div class="col-md-10 form-control-static">
+                        {{ model.order_appraisals.receiver_appraisal.description }}
+                    </div>
+                    <div ng-if="model.order_appraisals.receiver_appraisal.additional_description.length > 0">
+                        <label class="control-label col-md-2" style="font-size:12px;">追加评价：</label>
+                        <div class="col-md-10 form-control-static">
+                            {{ model.order_appraisals.receiver_appraisal.additional_description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group" ng-if="model.order_status_id >= 804 && model.bill_type_id==101">
+                <div class="text-center" ng-if="model.order_status_id < 810">
+                    <!--<img src="assets/img/wait.gif" />-->
+                    <!--<font class="col-md-12" color="red" size="4">{{ second }}</font>-->
+                    <div class="form-group form-inline col-xs-12 col-md-12">
+                        <laber class="infor-img-circle col-md-12 col-xs-12 text-center">
+                            <span class="col-md-8 col-xs-12"></span>
+                            <ul class="col-md-4 col-xs-12">
+                                <li><img src="assets/img/circle_{{countValue > 0 ? 1:2}}.png"></li>
+                                <li><img src="assets/img/circle_{{countValue > 1 ? 1:2}}.png"></li>
+                                <li><img src="assets/img/circle_{{countValue > 2 ? 1:2}}.png"></li>
+                            </ul>
+                        </laber>
+                    </div>
+                </div>
+                <div class="text-center" ng-if="model.order_status_id != 816">
+                    <div class="text-center" ng-if="model.order_status_id == 804">
+                        <font class="col-md-12" size="3" color="blue">出票方已确认交易</font>
+                        <font class="col-md-12" size="3" color="blue">请支付票款，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 806">
+                        <font class="col-md-12" size="3" color="blue">已付款</font>
+                        <font class="col-md-12" size="3" color="blue">待出票方背书，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 807">
+                        <font class="col-md-12" size="3" color="blue">出票方已背书</font>
+                        <font class="col-md-12" size="3" color="blue">请签收，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 808">
+                        <font class="col-md-12" size="3" color="blue">等待监管户打款，已等待<span ng-if="filter.waitTimeH>0">{{ filter.waitTimeH }}小时</span>{{ filter.waitdateM }}分钟{{filter.waitdateS}}秒</font>
+                        <!--<font class="col-md-12" size="3" color="blue">交易结束</font>-->
+                    </div>
+                    <div class="text-center" ng-if="model.order_status_id == 810">
+                        <font class="col-md-12" size="3" color="blue">监管户已支付票款</font>
+                        <font class="col-md-12" size="3" color="blue">交易完成</font>
+                    </div>
+                </div>
+                <!--<div class="text-center" ng-if="model.order_status_id == 816">
+                    <font class="col-md-12" size="3" color="blue">订单终止</font>
+                    <font class="col-md-12" size="3" color="blue">交易结束</font>
+                </div>-->
+            </div>
+            <!--<div class="form-group" ng-if="model.order_status_id >= 804 && model.bill_type_id==102">
+                <div class="text-center">
+                    <img src="assets/img/wait.gif" />
+                    <div class="form-group form-inline col-xs-12 col-md-12">
+                        <laber class="infor-img-circle col-md-12 col-xs-12 text-center">
+                            <span class="col-md-8 col-xs-12"></span>
+                            <ul class="col-md-4 col-xs-12">
+                                <li><img src="assets/img/circle_{{countValue > 0 ? 1:2}}.png"></li>
+                                <li><img src="assets/img/circle_{{countValue > 1 ? 1:2}}.png"></li>
+                                <li><img src="assets/img/circle_{{countValue > 2 ? 1:2}}.png"></li>
+                            </ul>
+                        </laber>
+                    </div>
+                </div>
+                <div class="text-center" ng-if="model.order_status_id == 810">
+                    <font class="col-md-12" size="3" color="blue">线下交易完成</font>
+                    <font class="col-md-12" size="3" color="blue">待评价</font>
+                </div>
+                <div class="text-center" ng-if="model.order_status_id >= 812">
+                    <font class="col-md-12" size="3" color="blue">交易已完成</font>
+                    <font class="col-md-12" size="3" color="blue">感谢您使用汇票线平台</font>
+                </div>
+            </div>-->
+
+            <!--<div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">被背书人详细信息</div>
+            <div class="col-md-12">
+                <div class="col-md-7">
+                    <label class="control-label col-md-3">被背书人：</label>
+                    <div class="col-md-9 form-control-static">
+                        {{ model.receiver_account_person }}
+                    </div>
+                    <label class="control-label col-md-3">账号：</label>
+                    <div class="col-md-9 form-control-static">
+                        {{ model.receiver_account_number }}
+                    </div>
+                    <label class="control-label col-md-3">开户行：</label>
+                    <div class="col-md-9 form-control-static">
+                        {{ model.receiver_account_bank }}
+                    </div>
+                    <label class="control-label col-md-3">行号：</label>
+                    <div class="col-md-9 form-control-static">
+                        {{ model.receiver_account_bank_number }}
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div style="float:right; margin-right:40px;">
+                        <button  class="btn btn-success width-100" ng-if="model.order_status_id == 804" ng-disabled="!filter.payRule" ng-click="showPay()"><i class="fa fa-share-square-o"></i> 确认付款</button>
+                        <button  class="btn btn-success width-100" ng-if="model.order_status_id == 807"  ng-disabled="!filter.payRule" ng-click="showendorsements()"><i class="fa fa-share-square-o"></i> 签收</button>
+                        <div style="float:right; margin-right:60px;">
+                            <button class="btn btn-success width-100" ng-if="model.order_status_id == 810" ng-click="showevaluatesell()">评价</button>
+                            <button class="btn btn-success width-100" ng-if="model.order_status_id == 813" ng-click="showaddevaluatesell()">追加评价</button>
+                        </div>
+                     </div>
+                    <div class="col-md-12 form-group form-inline text-right" ng-if="model.order_status_id == 804 || model.order_status_id == 807">
+                         <input type="checkbox" id="ownBillOffer" style="vertical-align:middle; margin-top:-2px;" ng-model="filter.payRule" ng-change="ruleChange()"><font size="1" color="red">本人已阅读并同意《汇票线交易规则》</font>
+                    </div>
+            </div>
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">交易双方信息</div>
+            <div class="form-group" style="font-size:16px;">
+                <label class="control-label col-md-2"><strong>收票方</strong></label>
+                <div class="col-md-4 form-control-static"></div>
+                <label class="control-label col-md-2"><strong>出票方</strong></label>
+                <div class="col-md-4 form-control-static"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">单位信息：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.receiver_enterprise_name }}
+                </div>
+                <label class="control-label col-md-2">单位信息：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.drawer_enterprise_name }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">开户行：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.receiver_account_bank }}
+                </div>
+                <label class="control-label col-md-2">开户行：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.drawer_account_bank }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">账号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.receiver_account_number }}
+                </div>
+                <label class="control-label col-md-2">账号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.drawer_account_number }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">联行号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.receiver_account_bank_number }}
+                </div>
+                <label class="control-label col-md-2">联行号：</label>
+                <div class="col-md-4 form-control-static">
+                    {{ model.drawer_account_bank_number }}
+                </div>
+            </div>
+         </div>-->
+
+        <div class="text-center">
+            <button  class="btn btn-success width-100" ng-if="model.order_status_id == 804 && model.bill_type_id==101 && identity.enterprise_id == model.receiver_id" ng-click="showPay()"><i class="fa fa-share-square-o"></i> 确认付款</button>
+            <!--showPay-->
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 807 && model.bill_type_id==101 && model.order_endorsements.length>0" ng-click="showendorsements()"><i class="fa fa-share-square-o"></i> 确认签收</button>
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 807 && model.bill_type_id==101 && model.order_endorsements.length==0" ng-click="validate()"><i class="fa fa-share-square-o"></i> 确认签收</button>
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 810 || model.order_status_id == 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 评价</button>
+            <!--<button type="button" class="btn btn-success width-100" ng-if="model.order_status_id >= 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 追加评价</button>-->
+            <!--<div class="col-md-12 form-group form-inline text-center" ng-if="model.bill_type_id==101 && model.order_status_id == 804">
+                    <input type="checkbox" id="ownBillOffer" style="vertical-align:middle; margin-top:-2px;" ng-model="filter.payRule" ng-change="ruleChange()"><font size="1" color="red">本人已阅读并同意《汇票线交易规则》</font>
+            </div>-->
+            <!--<button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 810" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 评价</button>
+            <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id >= 812" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 追加评价</button>-->
+            <!--<button type="button" class="btn btn-lg btn-warning" ng-if="model.order_status_id == 803 && model.is_receiver_commission_paid == 0" ng-click="payCommission()"><i class="fa fa-share-square-o"></i> 支付手续费</button>
+            <button type="button" class="btn btn-lg btn-success" ng-if="model.order_status_id == 804" ng-click="showPay()"><i class="fa fa-share-square-o"></i> 付款</button>
+            <button type="button" class="btn btn-lg btn-warning" ng-if="model.order_status_id == 807" ng-click="confirm()"><i class="fa fa-share-square-o"></i> 确认背书</button>-->
+        </div>
+
+         <div class="modal fade" id="modal-address">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <ng-form name="addressForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <!--<h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认被背书人信息</h4>-->
+                            <div class="modal-title form-group">
+                                <i class="fa fa-lg fa-edit text-success"></i><font size="4">收票方：</font><font size="2">请确认被背书方信息</font>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="col-md-4" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">请确认收票方信息</div>
+                                <div class="form-group col-md-8">
+                                    <div class="col-md-12">
+                                        <select class="form-control width-200" ng-change="accountChange()" ng-model="model.receiver_account_id" ng-options="item.id as item.bank_name for item in accounts"></select>
+                                    </div>
+                                </div>
+                                <!--<div class="user-line-hd form-inline form-group">
+                                    <strong class="col-md-3">收票人信息</strong>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-7">
+                                        <label>选择背书账号</label>
+                                        <select class="form-control width-200" ng-change="accountChange()" ng-model="model.receiver_account_id" ng-options="item.id as item.account_number for item in accounts"></select>
+                                    </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">企业名称：</label>
+                                    <div class="col-md-9 form-control-static">{{ accountModel.account_person }}</div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="col-md-3 control-label">开户行：</label>
+                                    <div class="col-md-9 form-control-static">{{ accountModel.bank_name }}</div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="col-md-3 control-label">账号：</label>
+                                    <div class="col-md-9 form-control-static">{{ accountModel.account_number }}</div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="col-md-3 control-label">联行号：</label>
+                                    <div class="col-md-9 form-control-static">{{ accountModel.bank_number }}</div>
+                                </div>
+                                <div class="user-line-hd form-inline form-group">
+                                    <strong class="col-md-3">票据详细信息</strong>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">票据号：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.bill_number }}
+                                    </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="control-label col-md-3">票据类型：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.bill_type_name }}  {{ model.acceptor_type_name }}
+                                    </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                        <label class="control-label col-md-3">承兑方名称：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.acceptor_name }}
+                                    </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="control-label col-md-3">票面金额：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.bill_sum_price | currency }}元&nbsp; ({{ amountInWords(model.bill_sum_price) }})
+                                    </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="control-label col-md-3">汇票到期日：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}
+                                    </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                    <label class="control-label col-md-3">剩余天数：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.remaining_day }}
+                                    </div>
+                                <!--</div>
+                                <div class="user-line-hd form-inline form-group">
+                                    <strong class="col-md-3">收票人信息</strong>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">被背书人：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.receiver_account_person }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">账号：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.receiver_account_number }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">开户行：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.receiver_account_bank }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">行号：</label>
+                                    <div class="col-md-9 form-control-static">
+                                        {{ model.receiver_account_bank_number }}
+                                    </div>
+                                </div>
+                                <div class="form-group">-->
+                                    <label class="control-label col-md-3">支付方式：</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control width-200" ng-model="model.order_pay_type_id" ng-options="item.code as item.constant_name for item in orderPayTypeData"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">手机验证码：</label>
+                                    <div class="reg-form-list-cont col-md-8 row">
+                                        <label class="reg-icon reg-icon-3"></label>
+                                        <input class="reg-mess col-md-7" style="height:34px" type="text" ng-model="model.verifyCode" placeholder="请输入短信验证码">
+                                        <button class="btn btn-mess col-md-5" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</button>
+                                    </div>
+                                </div>
+                                        
+                                <!--<div class="form-group">
+                                    <label class="control-label col-md-3">背书账号：</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control width-200" ng-model="addressModel.receiver_account_id" ng-options="item.id as item.account_number for item in accounts"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">支付方式</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control width-200" ng-model="addressModel.order_pay_type_id" ng-options="item.code as item.constant_name for item in orderPayTypeData" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">备注：</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" ng-model="addressModel.description" />
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="pay()" ng-disabled="!model.verifyCode || !model.receiver_account_id || !model.order_pay_type_id"><i class="fa fa-share-square-o"></i> 确认</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                            <br /><span style="font-size:10px;color:red;">请核实以上交易信息，如果未经核实进行操作，后果自负！！！</span>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+         <div class="modal fade" id="modal-pay-confirm">
+            <div class="modal-dialog">
+                <div class="modal-content col-md-10">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认支付是否成功</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span>请检查知否支付成功,点击支付完成查看支付状态!</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-success" ng-click="refresh()"><i class="fa fa-share-square-o"></i> 支付完成</button>
+                        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 支付失败</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-endorsements">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width:600px;">
+                    <ng-form name="endorsementsForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="modal-title form-group">
+                                <i class="fa fa-lg fa-edit text-success"></i><font size="4">收票方：</font><font size="2">请确认背书已签收</font>
+                            </div>
+                            <!--<h3>收票企业：</h3><h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认背书已签收</h4>-->
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">背书文件：</label>
+                                <div class="col-md-9"></div>
+                                <div class="form-control-static col-md-12">
+                                    <div ng-repeat="item in model.order_endorsements">
+                                        <div class="col-md-6 text-center" >
+                                            <!--<a href="{{item.endorsement_path}}" target="_blank" class="tb-booth tb-pic tb-s250">-->
+                                                <img class="jqzoom" src="{{item.endorsement_path}}" rel="{{item.endorsement_path}}" alt="背书文件加载失败" style="width:250px;"/>
+                                            <!--</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">手机验证码：</label>
+                                <div class="reg-form-list-cont col-md-8 row">
+                                     <label class="reg-icon reg-icon-3"></label>
+                                    <input class="reg-mess col-md-7" style="height:34px" type="text" ng-model="model.verifyCode" placeholder="请输入短信验证码">
+                                    <button class="btn btn-mess col-md-5" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</button>
+                                </div>
+                            </div>
+                        </div>-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-success" ng-click="confirm()"><i class="fa fa-share-square-o"></i> 确认</button>
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                            <br /><span style="font-size:10px;color:red;">背书文件仅供参考，请到电票交易系统核实票据是否签收！如果未经核实进行操作，后果自负！！！</span>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+    <!--<div class="modal fade" id="modal-evaluatesell">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <ng-form name="evaluatesell" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>评价</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <strong class="col-md-3">评价详情</strong><br />
+                                    <div class="col-md-6">
+                                        <span style="color:red">*</span>描述相符
+                                        <img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click="">
+                                    </div>
+                                    <div class="form-inline col-md-6" style="display:inline-block">
+                                        <div ng-if="star==1">1分 失望</div>
+                                        <div ng-if="star==2">2分 一般</div>
+                                        <div ng-if="star==3">3分 良好</div>
+                                        <div ng-if="star==4">4分 满意</div>
+                                        <div ng-if="star==5">5分 非常满意</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <span style="color:red">*</span>买家服务
+                                        <img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click="">
+                                    </div>
+                                    <div class="form-inline col-md-6" style="display:inline-block">
+                                        <div ng-if="star==1">1分 失望</div>
+                                        <div ng-if="star==2">2分 一般</div>
+                                        <div ng-if="star==3">3分 良好</div>
+                                        <div ng-if="star==4">4分 满意</div>
+                                        <div ng-if="star==5">">5分 非常满意</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <span style="color:red">*</span>物流服务
+                                        <img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click=""><img class="light" src="assets/img/star_2.png" ng-click="">
+                                    </div>
+                                    <div class="form-inline col-md-6" style="display:inline-block">
+                                        <div ng-if="star==1">1分 失望</div>
+                                        <div ng-if="star==2">2分 一般</div>
+                                        <div ng-if="star==3">3分 良好</div>
+                                        <div ng-if="star==4">4分 满意</div>
+                                        <div ng-if="star==5">5分 非常满意</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <strong class="col-md-3">评价描述</strong>
+                                    <div class="col-md-12 form-control-static">
+                                        <textarea class="t_area" style="width:100%;height:200px;overflow:visible" placeholder="请在此输入您的具体评价，评价内容不能为空！"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-success width-100" style="text-align:center">提交评价</button>
+                            </div>
+                        </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addevaluatesell">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <ng-form name="addevaluatesell" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>评价</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <strong class="col-md-3">评价描述</strong>
+                                    <div class="col-md-12 form-control-static">
+                                        <textarea class="t_area" style="width:100%;height:200px;overflow:visible" placeholder="请在此输入您的具体评价（评价内容，不能为空）！"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success width-100" style="text-align:center">提交评价</button>
+                        </div>
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>-->

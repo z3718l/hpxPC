@@ -1,0 +1,146 @@
+<div ng-controller="headerController">
+    <!--<script type="text/javascript">
+        $(function () {
+            if ($.cookie('customer') && $.cookie('customer') != "null") {
+                var identity = JSON.parse($.cookie('customer'));
+                $("#userName").html(identity.customer_name);
+            }
+            else {
+                $("#divUser").hide();
+            }
+        });
+
+        logout = function () {
+            if (confirm('确定要退出吗？')) {
+                $.cookie('customer', null);
+                window.location.href = window.location.href;
+            }
+        }
+    </script>-->
+    <header>
+        <!-- 顶部 start-->
+        <nav class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-4">
+                        <div class="telBox">
+                            <span class="tel"><em></em>客服电话：400-772-0575</span>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-xs-8 contact text-right">
+                        <!--<a href="" class="phone icontu"></a>手机
+                        <a href="" class="weixin icontu" onmouseover="showWeixin()" onmouseout="hideWeixin()"><img src="<%templateskin%>/images/weixin.jpg" id="weixin" style="display: none; position: absolute; left:-140px; top:40px; z-index:999;" /></a>微信-->
+                    </div>
+                    <span id="divUser" class="col-md-9 col-xs-8 contact text-right">
+                        <span ng-if="identity">
+                            欢迎您！{{identity.customer_name}}
+                            <span>|</span>
+                            <a href="javascript:"; ui-sref="app.main.accountInfo">个人中心</a>
+                            <span>|</span>
+                            <a href="javascript:;" ng-click="logout();">退出登录</a>
+                        </span>
+                        <span ng-if="!identity">
+                            <a href="/index.aspx">登录</a>
+                            <span>|</span>
+                            <a href="javascript:;" ui-sref="app.signup">注册</a>
+                        </span>
+                    </span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </nav>
+        <!-- 顶部 end-->
+        <!-- logo+导航 start-->
+        <nav class="main-nav hpx-nav">
+            <div class="container">
+                <div class="row">
+                    <!-- logo start-->
+                    <h1 class="col-md-5 col-xs-12">
+                        <a href="/index.aspx" target="_self"><img src="assets/img/logo.jpg" class="logo" /></a>
+                    </h1>
+                    <!-- logo end-->
+                    <!-- 导航 start-->
+                    <div class="col-md-7 col-xs-12">
+                        <ul class="navbar">
+                            <li><a href="/index.aspx">首页</a></li>
+                            <li><a href="javascript:;" ng-click="publishbill()">我要出票</a></li>
+                            <li><a href="/www/index.html#/app/free/queryBill">我要收票</a></li>
+                            <li><a href="javascript:;" ng-click="editQuoteaccount()">机构报价</a></li>
+                            <li><a href="/index.aspx#agent">汇票助手</a></li>
+                        </ul>
+                    </div>
+                    <!-- 导航 end-->
+                </div>
+            </div>
+        </nav>
+        <!-- logo+导航 end-->
+        <!--<script>
+        function showWeixin() {
+            document.getElementById("weixin").style.display = "block";
+        }
+        function hideWeixin() {
+            document.getElementById("weixin").style.display = "none";
+        }
+        </script>-->
+    </header>
+    <!-- 头部 end-->
+
+
+    <!--<header>
+
+        <nav class="header" style="background-color: #edebeb;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-4">
+                        <div class="telBox">
+                            <span class="tel"><em></em>客服电话：400-772 0575</span>
+                        </div>
+                    </div>
+                    <span class="col-md-9 col-xs-8 contact text-right">
+                        <span ng-if="identity">
+                            欢迎您！{{identity.customer_name}}
+                            <span>|</span>
+                            <a href="javascript:"; ui-sref="app.main.accountInfo">个人中心</a>
+                            <span>|</span>
+                            <a href="javascript:;" ng-click="logout();">退出登录</a>
+                        </span>
+                        <span ng-if="!identity">
+                            <a href="/index.aspx">登录</a>
+                            <span>|</span>
+                            <a href="javascript:;" ui-sref="app.signup">注册</a>
+                        </span>
+                        <a href="" class="weixin icontu" ng-mouseenter="weixin = true" ng-mouseleave="weixin = false"><img src="assets/img/weixin.jpg" ng-show="weixin" style="position: absolute; left:-140px; top:40px; z-index:999;" /></a>
+                        <a href="" class="phone icontu" title="正在开发中..."></a> &nbsp;&nbsp;&nbsp;
+                    </span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </nav>
+     
+
+        <nav class="main-nav hpx-nav">
+            <div class="container">
+                <div class="row">
+                    
+                    <h1 class="col-md-5 col-xs-12">
+                        <a href="" target="_self"><img src="assets/img/logo.jpg" class="logo" /></a>
+                    </h1>
+                 
+
+                    <div class="col-md-7  col-xs-12">
+                        <ul class="navbar-nav ">
+                          <li><a href="/index.aspx">首页</a></li>
+                          <li><a href="javascript:;" ui-sref="app.main.publish">我要出票</a></li>
+                          <li><a href="javascript:;" ui-sref="app.free.queryBill">我要收票</a></li>
+                          <li><a href="javascript:;" ui-sref="app.main.editQuote">我要报价</a></li>
+                          <li><a href="javascript:;" ng-click="tbd()">汇票助手</a></li>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+        </nav>
+       
+    </header>-->
+   
+</div>

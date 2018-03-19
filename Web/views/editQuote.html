@@ -1,0 +1,445 @@
+﻿<div ng-controller="editQuoteController">
+    <div class="bill-query-cont">
+        <ng-form name="editForm" novalidate>
+                <div class="form-horizontal">
+                    <div class="user-line-hd"><strong>报价信息</strong></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><span class="g-orange">*</span> 票据类型：</label>
+                        <div class="col-md-10 form-control-static">
+                            <span ng-repeat="item in billStyleData">
+                                <input type="radio" ng-change="billStyleChange()" value="{{item.code}}" ng-model="model.bill_style_id"> {{ item.constant_name }}
+                            </span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group" ng-if="model.bill_style_id < 205">
+                        <label class="control-label-bill col-md-2">承兑机构</label>
+                        <span class="control-label-bill col-md-2" ng-repeat="item in acceptorTypeData">
+                            <input ng-change="acceptorTypeChange()" type="checkbox" ng-model="item.checked"> {{ item.constant_name }}
+                        </span>
+                    </div>-->
+                    <div class="form-group" ng-if="model.bill_style_id == 201 || model.bill_style_id == 202">
+                        <label class="control-label col-md-2"><span class="g-orange">*</span> 期限：</label>
+                        <div class="col-md-10 form-control-static">
+                            <span ng-repeat="item in deadlineTypeData">
+                                <input type="radio" value="{{item.code}}" ng-model="model.deadline_type_code"> {{ item.constant_name }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><span class="g-orange">*</span> 交易方式：</label>
+                        <div class="col-md-10 form-control-static">
+                            <span ng-if="model.bill_style_id == 201||model.bill_style_id == 203">
+                                <input type="radio" value="1801" ng-model="model.trade_type_id" /> 买断
+                                <input type="radio" value="1802" ng-model="model.trade_type_id" /> 回复打款
+                                <input type="radio" value="1803" ng-model="model.trade_type_id" /> 直贴
+                            </span>
+                            <span ng-if="model.bill_style_id == 202||model.bill_style_id == 204">
+                                <input type="radio" value="1801" ng-model="model.trade_type_id" /> 买断
+                                <input type="radio" value="1803" ng-model="model.trade_type_id" /> 直贴
+                            </span>
+                            <span ng-if="model.bill_style_id==205">
+                                <input type="radio" value="1801" ng-model="model.trade_type_id" /> 买断
+                                <input type="radio" value="1804" ng-model="model.trade_type_id" /> 回购
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="model.bill_style_id == 205">
+                        <label class="control-label col-md-2"><span class="g-orange">*</span> 贸易背景：</label>
+                        <div class="col-md-10 form-control-static">
+                            <span ng-repeat="item in tradeBackgroundData">
+                                <input type="radio" value="{{item.code}}" ng-model="model.trade_background_code"> {{ item.constant_name }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="model.bill_style_id == 205">
+                        <label class="control-label col-md-2"><span class="g-orange">*</span> 额度：</label>
+                        <div class="col-md-10 form-control-static form-inline">
+                            <input type="radio" value="0" ng-model="model.max_price_type" ng-click="model.max_price = 0" /> 不限
+                            <input type="radio" value="1" ng-model="model.max_price_type" /> 具体额度
+                            <input type="number" class="form-control width-100" ng-if="model.max_price_type==1" ng-model="model.max_price" />
+                        </div>
+                    </div>
+                    <table class="table table-striped" ng-if="model.bill_style_id==201">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>月利率</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate01" required>‰</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate02" required>‰</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate03" required>‰</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate04" required>‰</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate05" required>‰</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate06" required>‰</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped" ng-if="model.bill_style_id==202">
+                        <thead>
+                            <tr>
+                                <th>承兑机构</th>
+                                <th>国股行</th>
+                                <th>城商行</th>
+                                <th>三农行</th>
+                                <th>村镇</th>
+                                <th>外资</th>
+                                <th>财务公司</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>年利率</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate01" required>%</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate02" required>%</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate03" required>%</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate04" required>%</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate05" required>%</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate06" required>%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="model.bill_style_id==203">
+                        <div class="form-inline">180天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate01" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate02" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate03" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate04" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate05" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate06" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate07" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate11" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate12" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate13" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate14" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate15" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate16" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate17" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate21" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate22" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate23" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate24" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate25" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate26" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate27" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-inline"><input type="number" min="0" max="180" class="form-control input-sm width-50" ng-model="model.deadline_days"> - 180 天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate31" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate32" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate33" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate34" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate35" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate36" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate37" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate41" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate42" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate43" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate44" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate45" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate46" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate47" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate51" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate52" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate53" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate54" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate55" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate56" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate57" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-inline">0 - <input type="number" min="0" max="180" class="form-control input-sm width-50" ng-model="model.deadline_days"> 天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate61" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate62" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate63" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate64" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate65" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate66" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate67" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate71" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate72" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate73" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate74" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate75" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate76" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate77" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate81" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate82" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate83" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate84" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate85" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate86" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate87" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="model.bill_style_id==204">
+                        <div class="form-inline">360天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate01" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate02" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate03" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate04" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate05" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate06" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate07" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate11" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate12" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate13" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate14" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate15" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate16" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate17" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate21" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate22" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate23" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate24" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate25" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate26" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate27" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-inline"><input type="number" min="0" max="360" class="form-control input-sm width-50" ng-model="model.deadline_days"> - 360 天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate31" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate32" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate33" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate34" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate35" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate36" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate37" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate41" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate42" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate43" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate44" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate45" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate46" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate47" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate51" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate52" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate53" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate54" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate55" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate56" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate57" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-inline">0 - <input type="number" min="0" max="360" class="form-control input-sm width-50" ng-model="model.deadline_days"> 天</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>承兑机构</th>
+                                    <th>国股行</th>
+                                    <th>城商行</th>
+                                    <th>三农行</th>
+                                    <th>村镇</th>
+                                    <th>外资</th>
+                                    <th>财务公司</th>
+                                    <th>每十万加</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>100万以上</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate61" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate62" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate63" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate64" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate65" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate66" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate67" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万-100万</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate71" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate72" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate73" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate74" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate75" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate76" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate77" required></td>
+                                </tr>
+                                <tr>
+                                    <td>50万以下</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate81" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate82" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate83" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate84" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate85" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate86" required>‰</td>
+                                    <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate87" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table table-striped" ng-if="model.bill_style_id==205">
+                        <thead>
+                            <tr>
+                                <th>票据类型</th>
+                                <th>利率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>电票</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate01" required>%</td>
+                            </tr>
+                            <tr>
+                                <td>纸票</td>
+                                <td class="form-inline"><input class="form-control width-50" ng-model="model.offer_detail.offer_rate02" required>‰</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">联系人姓名：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="model.contact_name">
+                        </div>
+                        <label class="control-label col-md-2">联系方式：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="model.contact_phone">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="model.bill_style_id == 201 || model.bill_style_id == 203 || model.bill_style_id == 205">
+                        <label class="control-label col-md-2">交易地点：</label>
+                        <div class="col-md-10 form-inline">
+                            <select class="form-control width-150" ng-model="model.trade_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()"><option value="">省</option></select>
+                            <select class="form-control width-150" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in CityData"><option value="">市</option></select>
+                        </div>
+                    </div>
+                    <div class="user-line-hd"><strong>备注说明</strong></div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+            <div class="text-center">
+                <a href="" style="text-align:center;" ng-click="save()" class="electric-money-button button-bgcolor-orange white query-button">马上报价</a>
+                <a href="" style="text-align:center;" class="electric-money-button button-bgcolor-orange white query-button" data-dismiss="modal"> 关闭</a>
+            </div>
+        </ng-form>
+    </div>
+</div>

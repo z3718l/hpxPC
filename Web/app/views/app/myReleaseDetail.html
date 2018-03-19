@@ -1,0 +1,640 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-share" menu-toggle="right"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        票据详情
+    </ion-nav-title>
+    <ion-content>
+        <div class="wrap">
+            <a ng-if="model.bill_type_id==102 && identity && ((model.bid_number >=1 && filter.check!=1) || filter.check==2)" ng-class="{true: 'g-btn-list on', false: 'g-btn-list'}[open2==true]" ng-click="changeOpen2()">出票方信息 </a>
+            <ul ng-if="model.bill_type_id==102 && identity && ((model.bid_number >=1 && filter.check!=1) || filter.check==2) && open2==true" class="g-list">
+                <li>出票企业：<span class="r">{{billModel.drawer_name}}</span></li>
+                <li>企业等级：
+                    <span class="r">
+                        <i ng-class="{true: 'star on', false: 'star'}[billModel.drawer_avg_star>0]"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[billModel.drawer_avg_star>1]"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[billModel.drawer_avg_star>2]"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[billModel.drawer_avg_star>3]"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[billModel.drawer_avg_star>4]"></i>
+                    </span>
+                </li>
+                <li>联系人：<span class="r">{{billModel.drawer_contact_name}}</span></li>
+                <li>联系电话：<span class="r">{{billModel.drawer_contact_phone}}</span></li>
+                <li>交易地点：<span class="r">{{ billModel.product_location_province }} {{ billModel.product_location }}</span></li>
+            </ul>
+            <a ng-class="{true: 'g-btn-list on', false: 'g-btn-list'}[open==true]" ng-click="changeOpen()">票据信息 </a>
+            <ul class="g-list" ng-if="open==true">
+                <li>票据号：<span class="r">{{billModel.bill_number}}</span></li>
+                <li>票据类型：<span class="r">{{billModel.bill_type_name}} {{billModel.acceptor_type_name}}</span></li>
+                <li>票面金额（元）：<span class="r">{{billModel.bill_sum_price / 10000 |number:2 }} 万</span></li>
+                <!--<li>票面金额（元）：<span class="r">{{billModel.bill_sum_price / 10000 |number:2 | currency: '￥'}}</span></li>-->
+                <li>到期日：<span class="r">{{billModel.bill_deadline_time | date: 'yyyy-MM-dd' }}</span><span ng-if="billModel.remaining_day>0 && billModel.bill_status_code<804">（剩余{{billModel.remaining_day}}天）</span></li>
+                <li>承兑人：<span class="r">{{billModel.acceptor_name}}</span></li>
+                <li>票据瑕疵：<span class="r" ng-repeat="item in billModel.bill_flaw_names">{{item}}&nbsp;&nbsp;&nbsp;</span></li>
+            </ul>
+            <ul class="g-img-box-lr g-mb2"  ng-if="open==true">
+                <!--<li><img src="images/img71-1.png" alt=""></li>-->
+                <li><img ng-click="openImgMagnifyModal(billModel.bill_front_photo_path)" src="{{billModel.bill_front_photo_path}}"></li>
+                <!--<li><img src="images/img71-2.png" alt=""></li>-->
+                <li><img ng-click="openImgMagnifyModal(billModel.bill_back_photo_path)" src="{{billModel.bill_back_photo_path}}"></li>
+            </ul>
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>交易信息</div>
+                <ul class="g-list">
+                    <li ng-if="billModel.trade_type_code==701 && billModel.bill_status_code<806">
+                        期望利率：<span class="r" ng-if="billModel.bill_rate>0">
+                            {{billModel.bill_rate}}<span ng-if="billModel.bill_type_id==102">‰</span><span ng-if="billModel.bill_type_id==101">%</span>
+                        </span>
+                    </li>
+                    <li ng-if="billModel.trade_type_code==701 && billModel.bill_status_code>=806">
+                        成交利率：<span class="r" ng-if="billModel.bill_rate>0">
+                            {{billModel.bill_rate}}<span ng-if="billModel.bill_type_id==102">‰</span><span ng-if="billModel.bill_type_id==101">%</span>
+                        </span>
+                    </li>
+                    <li ng-if="billModel.bill_status_code<806">期望交易金额（元）：<span class="r" ng-if="billModel.bill_deal_price>0">{{billModel.bill_deal_price | currency: '￥'}}</span></li>
+                    <li ng-if="billModel.bill_status_code>=806">成交交易金额（元）：<span class="r" ng-if="billModel.bill_deal_price>0">{{billModel.bill_deal_price | currency: '￥'}}</span></li>
+                    <li>交易方式：<span class="r">{{billModel.trade_type_name}}</span></li>
+                    <li>备注：{{billModel.description}}</li>
+                </ul>
+            </div>
+
+            <!--800 待审核 票据还未发布，等待审核--><!--&& myReleaseDetail.bill_status_code == 800-->
+            <div class="g-operate-price2" ng-if="(billModel.bill_type_id==101 || billModel.bill_type_id==102) && billModel.bill_status_code == 800 ">
+                <div class="g-line-title-pd"><i></i>票据状态</div>
+                <div class="con">
+                    <p ng-if="billModel.is_checked == 0">{{billModel.check_result}}</p>
+                    <p ng-if="billModel.is_checked == 1">{{billModel.check_result}}</p>
+                    <p ng-if="billModel.is_checked == -1">{{billModel.check_result}}</p>
+                    <p>{{billModel.check_result_description}}</p>
+                </div>
+            </div>
+
+            <!--801 发布中 票据审核通过，处于发布状态--><!--&& myReleaseDetail.bill_status_code == 801-->
+            <div class="g-operate-price2" ng-if="(billModel.bill_type_id==101 || billModel.bill_type_id==102) && billModel.bill_status_code == 801">
+                <div class="g-line-title-pd" "><i></i>报价信息</div>
+                <!--显示对该张票据的报价信息-->
+                <div class="con" ng-repeat="item in biddings">
+                    <p>
+                        报价机构：
+                        <span ng-if="filter.check!=1 && item.is_mine!=1">{{ item.bid_enterprise_name | limitTo: 2 }}{{ item.is_mine!=1 ? '***' : '' }}{{ item.bid_enterprise_name | limitTo: -4 }}</span>
+                        <span ng-if="filter.check!=1 && item.is_mine==1">{{ item.bid_enterprise_name}}</span>
+                        <span ng-if="filter.check==1">{{ item.bid_enterprise_name}}</span>
+                    </p>
+                    <p ng-if="billModel.trade_type_code==701">利率：{{ item.bid_rate }}<span ng-if="billModel.bill_type_id==102">‰</span><span ng-if="billModel.bill_type_id==101">%</span></p>
+                    <p ng-if="billModel.trade_type_code==702">每十万贴息[元]：{{ item.bid_rate | currency: '￥' }}</p>
+                    <p ng-if="(billModel.bill_type_id == 101 && identity.can_bid_electronic_bill == 1) || (billModel.bill_type_id == 102 && identity.can_bid_paper_bill == 1)">交易金额：{{ item.bid_deal_price | currency : '￥'}}</p>
+                    <p>报价时间：{{ item.bid_time | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+                    <a class="btn-submit" style="background:#808080;border-color:#808080" ng-if="billModel.publisher_id == identity.enterprise_id&&item.bid_result==2">竞价失效</a>
+                    <a class="btn-submit" ng-click="openAccountModal(item)" ng-if="billModel.publisher_id == identity.enterprise_id&&item.bid_result!=2">选择成交</a>
+                </div>
+                <div class="con" ng-if="biddings == 0">
+                    <p>暂无竞价信息</p>
+                </div>
+                <!--<div class="g-order-status" ng-if="billModel.publisher_id != identity.enterprise_id&&identity.can_see_bill_detail == 1">
+                    <a href="" class="btn" ng-click="openBidModal()">我要竞价</a>
+                </div>-->
+                <div class="g-operate-price" ng-if="billModel.publisher_id != identity.enterprise_id&&identity.can_see_bill_detail == 1">
+                    <p class="p1" ng-if="billModel.bill_type_id==101 && billModel.trade_type_code==701"><span style="display:inline-block;">输入年利率</span><input style="display:inline-block;" type="text" class="i1" ng-model="biddingModel.bid_rate" ng-change="ratechange()">%</p>
+                    <p class="p1" ng-if="billModel.bill_type_id==102 && billModel.trade_type_code==701"><span style="display:inline-block;">输入月利率</span><input style="display:inline-block;" type="text" class="i1" ng-model="biddingModel.bid_rate" ng-change="ratechange()">‰</p>
+                    <p class="p1" ng-if="billModel.bill_type_id==101 && billModel.trade_type_code==702"><span style="display:inline-block;">每十万贴息[元]</span><input style="display:inline-block;" type="text" class="i1" ng-model="biddingModel.bill_rate" ng-change="ratechange()"></p>
+                    <p class="p1" ng-if="billModel.bill_type_id==102 && billModel.trade_type_code==702"><span style="display:inline-block;">每十万贴息[元]</span><input style="display:inline-block;" type="text" class="i1" ng-model="biddingModel.bill_rate" ng-change="ratechange()"></p>
+                    <p class="p2"><span style="display:inline-block;">成交金额</span><span style="display:inline-block">{{biddingModel.bid_deal_price | currency: '￥'}}元</span></p>
+                    <a  class="btn-submit" ng-click="addBidding()">竞 价</a>
+                </div>
+            </div>
+
+            <!--802 待审核 出票企业已指定收票企业，但收票企业未确认--><!--&& myReleaseDetail.bill_status_code == 802 && myReleaseDetail.trade_type_code==702只有在预约出票的情况下存在-->
+            <div class="g-operate-price2" ng-if="billModel.bill_type_id==101 && billModel.bill_status_code == 802 && billModel.trade_type_code==702">
+                <div class="g-line-title-pd"><i></i>票据状态</div>
+                <div class="con">
+                    <p>重新审核中</p>
+                </div>
+            </div>
+
+            <!--804 交易中 达成 生成订单-->
+            <div class="g-operate-price2" ng-if="billModel.bill_type_id==101 && billModel.bill_status_code == 804">
+                <div class="part3 g-mb2">
+                    <div class="g-line-title-pd"><i></i>订单信息</div>
+                    <ul class="g-list">
+                        <li>订单号码：<span class="r">{{orderModel.order_number}}</span></li>
+                        <li>合同号：<span class="r">{{orderModel.order_number}}</span></li>
+                        <li>成交金额（元）：<span class="r">{{orderModel.order_total_price | currency: '￥'}}</span></li>
+                        <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                    </ul>
+                </div>
+                <div class="part3 g-mb2">
+                    <div class="g-line-title-pd"><i></i>出票方收款账号</div>
+                    <ul class="g-list">
+                        <li>企业名称：<span>{{ orderModel.drawer_enterprise_name }}</span></li>
+                        <li>开户行：<span>{{ orderModel.drawer_account_bank }}</span></li>
+                        <li>账号：<span>{{ orderModel.drawer_account_number }}</span></li>
+                        <li>联行号：<span>{{ orderModel.drawer_account_bank_number }}</span></li>
+                    </ul>
+                </div>
+                <div class="g-order-status" ng-if="billModel.receiver_id == identity.enterprise_id">
+                    <p>出票方已确认交易</p>
+                    <p>请至网页版支付票款(手机端暂不支持)</p>
+                    <!--<a href="" class="btn" ng-click="payModal.show()">确认支付</a>-->
+                </div>
+                <div class="g-order-status" ng-if="billModel.publisher_id == identity.enterprise_id">
+                    <p>等待收票方支付票款</p>
+                </div>
+            </div>
+
+            <!--点击付款的弹出框-->
+            <script id="payPopup.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar>
+                        <header>
+                            <h3>收票方：请确认出票方信息</h3>
+                        </header>
+                    </ion-header-bar>
+                    <ion-content>
+                        <div class="page27">
+                            <div class="part1">
+                                <h3>请确认收票方信息</h3>
+                                <ul>
+                                    <li style="display:inline-block;"><span>账户选择：</span><select style="display:inline-block;width:18em;" ng-change="accountChange()" ng-model="orderModel.receiver_account_id" ng-options="item.id as item.bank_name for item in accounts"></select></li>
+                                    <li style="display:inline-block;"><span>企业名称：</span> {{ accountModel.account_person }}</li>
+                                    <li style="display:inline-block;"><span>开户行：</span> {{ accountModel.bank_name }}</li>
+                                    <li style="display:inline-block;"><span>账号：</span> {{ accountModel.account_number }}</li>
+                                    <li style="display:inline-block;"><span>联行号：</span> {{ accountModel.bank_number }}</li>
+                                </ul>
+                            </div>
+                            <div class="part2">
+                                <h3>手机验证码：</h3>
+                                <div class="yzm">
+                                    <input type="text" ng-model="model.verify_code" placeholder="请输入短信验证码">
+                                    <a href="" class="btn-yzm" ng-class="{'on': disableVerify}" ng-click="getVerify()" ng-disabled="disableVerify">{{verifyStr}}</a>
+                                </div>
+                                <h3>支付方式</h3>
+                                <div class="img-box">
+                                    <!--<img src="images/img271.png" alt="">-->
+                                    <select ng-model="orderModel.order_pay_type_id" ng-options="item.code as item.constant_name for item in orderPayTypeData"></select>
+                                </div>
+                            </div>
+                            <div class="g-order-status">
+
+                                <a class="btn" ng-click="pay()" ng-disabled="!model.verify_code">确认</a>
+                                <a class="btn" ng-click="payModal.hide()">取消</a>
+                            </div>
+                            <div class="tips">请核实以上交易信息，如果未经核实进行操作，后果自负！！！</div>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+
+            <!--点击竞价的弹出框-->
+            <script id="bidPopup.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar>
+                        <header>
+                            <h3>收票方：请输入报价</h3>
+                        </header>
+                    </ion-header-bar>
+                    <ion-content>
+                        <div class="page27">
+                            <div class="part1">
+                                <h3>请确认出票方账户信息</h3>
+                                <ul>
+                                    <li><span>报价机构：</span> {{biddingModel.bid_enterprise_name}}</li>
+                                    <li ng-if="billModel.trade_type_code==701" style="display:inline-block;">
+                                        <span ng-if="billModel.bill_type_id==102">月利率：</span>
+                                        <span ng-if="billModel.bill_type_id==101">年利率：</span>
+                                        <input type="number" min="0" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.5rem;border-radius:.1rem;" ng-model="biddingModel.bid_rate" ng-change="ratechange()" required>
+                                        <div ng-if="billModel.bill_type_id==102" style="display:inline-block;">‰</div>
+                                        <div ng-if="billModel.bill_type_id==101" style="display:inline-block;">%</div>
+                                    </li>
+                                    <li ng-if="billModel.trade_type_code==702">
+                                        <span>每十万贴息[元]：</span>
+                                        <input type="number" min="0" style="font-size:xx-small;width:5em;" ng-model="biddingModel.bill_rate" ng-change="ratechange()" required>
+                                    </li>
+                                    <li style="display:inline-block;">
+                                        <span>贴息金额:</span><div>{{biddingModel.bid_rate_price | currency: '￥'}}</div>
+                                    </li>
+                                    <li style="display:inline-block;">
+                                        <span>大写:</span><div>{{ amountInWords(biddingModel.bid_rate_price) }}</div>
+                                    </li>
+                                    <!--<li></li>-->
+                                    <li style="display:inline-block;">
+                                        <span>成交金额:</span><div>{{biddingModel.bid_deal_price | currency: '￥'}}</div>
+                                    </li>
+                                    <li style="display:inline-block;">
+                                        <span>大写:</span><div>{{ amountInWords(biddingModel.bid_deal_price) }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="g-order-status">
+                                <a class="btn" ng-click="addBidding()">我要竞价</a>
+                                <a class="btn" ng-click="bidModal.hide()">关闭</a>
+                            </div>
+
+                            <div ng-if="model.bill_type_id==102" style="color:#ff0000;">*声明：纸票交易存在风险，本平台不对任何信息进行担保，若出现任何交易损失，概不负责!！</div>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+
+            <!--点击确认背书的弹出框-->
+            <script id="endorsePopup.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar>
+                        <header>
+                            <!--<a href="" class="back"></a>-->
+                            <h3>出票方：请确认已背书</h3>
+                        </header>
+                    </ion-header-bar>
+                    <ion-content>
+                        <!--<div class="h40"></div>-->
+                        <div class="page27">
+                            <div class="part1">
+                                <h3>请确认背书方信息</h3>
+                                <ul>
+                                    <li><span>企业名称：</span> {{ orderModel.drawer_enterprise_name }}</li>
+                                    <li><span>开户行：</span> {{ orderModel.drawer_account_bank }}</li>
+                                    <li><span>账号：</span> {{ orderModel.drawer_account_number }}</li>
+                                    <li><span>联行号：</span> {{ orderModel.drawer_account_bank_number }}</li>
+                                </ul>
+                            </div>
+                            <div class="part2">
+                                <h3>手机验证码：</h3>
+                                <div class="yzm">
+                                    <input type="text" ng-model="model.verify_code" placeholder="请输入短信验证码">
+                                    <a class="btn-yzm" ng-click="getVerify()" ng-class="{'on': !disableVerify}" ng-disabled="disableVerify">{{verifyStr}}</a>
+                                </div>
+                                <h3>背书文件：（非必选项）</h3>
+                                <div class="img-box">
+                                    <!--<img src="images/img271.png" alt="">-->
+                                    <div ng-repeat="file in model.endorsement_file" ng-if="model.endorsement_file.length<=2">
+                                        <img class="jqzoom" src="{{file.endorsement_address}}" rel="{{file.endorsement_address}}" alt="背书文件加载失败" style="width:250px;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="operate">
+
+                                <!--<div class="upload"><input type="file" name="" id="">上传背书文件</div>-->
+                                <div class="upload" ng-click="remove(-1)" ng-disabled="!model.endorsement_file">删除背书文件</div>
+                                <div class="upload" ng-click="takePhoto()">上传背书文件</div>
+                                <a class="btn-sure" ng-click="endorsement()" ng-disabled="!model.verify_code">确认</a>
+                                <a class="btn-cancle" ng-click="endorseModal.hide()">取消</a>
+                            </div>
+                            <div class="tips">请核实以上交易信息，如果未经核实进行操作，后果自负！！！</div>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <!--选择成交选择账户-->
+            <script id="choicePayAccount.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar>
+                        <header>
+                            <!--<a href="" class="back"></a>-->
+                            <h3>出票方：请确认交易信息</h3>
+                        </header>
+                    </ion-header-bar>
+                    <ion-content>
+                        <div class="page27">
+                            <div class="part1">
+                                <h3>收票方信息</h3>
+                                <ul>
+                                    <li><span>单位名称：</span>{{ payModel.receiver_name }}</li>
+                                    <li>
+                                        <span>用户等级：</span>
+                                        <div class="page1">
+                                            <i ng-class="{true: 'star on', false: 'star'}[payModel.receiver_avg_star>0]"></i>
+                                            <i ng-class="{true: 'star on', false: 'star'}[payModel.receiver_avg_star>1]"></i>
+                                            <i ng-class="{true: 'star on', false: 'star'}[payModel.receiver_avg_star>2]"></i>
+                                            <i ng-class="{true: 'star on', false: 'star'}[payModel.receiver_avg_star>3]"></i>
+                                            <i ng-class="{true: 'star on', false: 'star'}[payModel.receiver_avg_star>4]"></i>
+                                        </div>
+                                    </li>
+                                    <li><span>联系人：</span>{{payModel.receiver_contact_name}}</li>
+                                    <li><span>联系电话：</span>{{payModel.receiver_contact_phone}}</li>
+                                </ul>
+                                <hr />
+                                <h3>交易信息</h3>
+                                <ul>
+                                    <li><span>成交金额[元]:</span>{{ payModel.bid_deal_price | currency:'￥'  }} </li>
+                                    <li><span>大写:</span>{{ amountInWords(payModel.bid_deal_price) }}</li>
+                                    <li ng-if="billModel.trade_type_code==701"><span>利率:</span><div ng-if="payModel.bill_rate>0">{{ payModel.bill_rate }}<div style="display:inline-block" ng-if="billModel.bill_type_id==102">‰</div><div style="display:inline-block" ng-if="billModel.bill_type_id==101">%</div></div></li>
+                                    <li ng-if="billModel.trade_type_code==702"><span>每十万贴息[元]:</span><div ng-if="payModel.bill_rate>0">{{ payModel.bill_rate | currency :'￥'}}</div></li>
+                                </ul>
+                                <ul ng-if="billModel.bill_type_id==101">
+                                    <li style="display:inline-block;"><span>出票方收款账户:</span><select ng-change="accountChangeBill()" style="display:inline-block;width:18em;" ng-model="billModel.drawer_account_id" ng-options="item.id as item.bank_name for item in accounts" required></select></li>
+                                    <li style="display:inline-block;"><span>单位名称：</span><div>{{ accountModel.account_person }}</div></li>
+                                    <li style="display:inline-block;"><span>开户行：</span><div>{{ accountModel.bank_name }}</div></li>
+                                    <li style="display:inline-block;"><span>账号：</span><div>{{ accountModel.account_number }}</div></li>
+                                    <li style="display:inline-block;"><span>联行号：</span><div>{{ accountModel.bank_number }}</div></li>
+                                </ul>
+
+                            </div>
+
+                            <div class="g-order-status">
+                                <div style="margin-bottom:0em">
+                                    <input type="checkbox" style="display:inline-block; text-align:center;vertical-align:middle;" ng-model="filter.rule" name=""><font>本人已阅读并同意《汇票线交易规则》</font>
+
+                                </div>
+                                <a class="btn" ng-click="finishBidding()">确认交易</a>
+                                <a class="btn" ng-click="closeAccountModal()">取消</a>
+                                <div ng-if="billModel.bill_type_id==102" style="color:#ff0000;">*声明：纸票交易存在风险，本平台不对任何信息进行担保，若出现任何交易损失，概不负责!！</div>
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+
+            <!-- 评价页面弹框 -->
+            <script id="evaluate.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar>
+                        <header>
+                            <!--<a href="" class="back"></a>-->
+                            <h3>评价详情</h3>
+                        </header>
+                    </ion-header-bar>
+                    <ion-content>
+                        <div class="page58">
+                            <div class="item" ng-if="(billModel.bill_status_code==812||billModel.bill_status_code==813)">
+                                <h3>收票方评价</h3>
+                                <ul>
+                                    <li>
+                                        <span>评分</span>
+                                        <i ng-class="{true: 'star on', false: 'star'}[receiverevalutaModel.star>0]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[receiverevalutaModel.star>1]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[receiverevalutaModel.star>2]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[receiverevalutaModel.star>3]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[receiverevalutaModel.star>4]"></i>
+                                    </li>
+                                    <li><span>内容</span>{{receiverevalutaModel.description}}</li>
+                                </ul>
+                            </div>
+                            <div class="item" ng-if="(billModel.bill_status_code==811||billModel.bill_status_code==813)">
+                                <h3>出票方评价</h3>
+                                <ul>
+                                    <li>
+                                        <span>评分</span>
+                                        <i ng-class="{true: 'star on', false: 'star'}[drawerevalutaModel.star>0]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[drawerevalutaModel.star>1]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[drawerevalutaModel.star>2]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[drawerevalutaModel.star>3]"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[drawerevalutaModel.star>4]"></i>
+                                    </li>
+                                    <li><span>内容</span>{{drawerevalutaModel.description}}</li>
+                                </ul>
+                            </div>
+                            <!--<div class="item" ng-if="filter.check==1 && (billModel.bill_status_code==810 || billModel.bill_status_code==812) && billModel.bill_type_id==101">
+                                <h3>出票方评价</h3>
+                                <ul>
+                                    <li>
+                                        <span>评分</span>
+                                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>0]" ng-click="chioceStar11()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>1]" ng-click="chioceStar12()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>2]" ng-click="chioceStar13()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>3]" ng-click="chioceStar14()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>4]" ng-click="chioceStar15()"></i>
+                                    </li>
+                                    <li><span>内容</span></li>
+                                </ul>
+                            </div>
+                            <div class="txt" ng-if="filter.check==1 && billModel.bill_status_code==810 && billModel.bill_type_id==101">
+                                <textarea name="" id="" cols="30" rows="10" placeholder="请在此输入您对出票方的具体评价（如票据背书，信用等方面）"></textarea>
+                                <div class="g-single-submit">
+                                    <input type="submit" value="提交评价">
+                                    <input type="submit" style="margin-top:.5em;" ng-click="closeEvaluateModal()" value="取消">
+                                </div>
+                            </div>-->
+
+                            <div class="item" ng-if="billModel.bill_status_code==810||(billModel.bill_status_code==811 && filter.check==2)|| (billModel.bill_status_code==812 && filter.check==1)">
+                                <h3 ng-if="filter.check==2">收票方评价</h3>
+                                <h3 ng-if="filter.check==1">出票方评价</h3>
+                                <ul>
+                                    <li>
+                                        <span>评分</span>
+                                        <i ng-class="{true: 'star on', false: 'star'}[evaluateModel.star>0]" ng-click="chioceStar11()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[evaluateModel.star>1]" ng-click="chioceStar12()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[evaluateModel.star>2]" ng-click="chioceStar13()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[evaluateModel.star>3]" ng-click="chioceStar14()"></i>
+                                        <i ng-class="{true: 'star on', false: 'star'}[evaluateModel.star>4]" ng-click="chioceStar15()"></i>
+                                    </li>
+                                    <li><span>内容</span></li>
+                                </ul>
+                            </div>
+                            <div class="txt" ng-if="billModel.bill_status_code==810||(billModel.bill_status_code==811 && filter.check==2)|| (billModel.bill_status_code==812 && filter.check==1)">
+                                <textarea name="" id="" ng-model="evaluateModel.description" cols="30" rows="10" placeholder="请在此输入您对出票方的具体评价（如票据背书，信用等方面）"></textarea>
+                                <div class="g-single-submit">
+                                    <input type="submit" value="提交评价" ng-click="showEvaluatesell()">
+                                </div>
+                            </div>
+                            <div class="g-single-submit">
+                                <input type="submit" style="margin-top:.5em;" ng-click="closeEvaluateModal()" value="取消">
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <!-- 图片放大页面弹框 -->
+            <script id="imgMagnify.html" type="text/ng-template">
+                <ion-modal-view hide-nav-bar="true" ng-click="closeImgMagnifyModal()">
+                    <ion-content class="imgMagnify">
+                        <ion-scroll class="imgMagnify" zooming="true" min-zoom="0.5" max-zoom="3" direction="xy" scrollbar-x="false" scrollbar-y="false" has-bouncing="true" overflow-scroll="false" style="width: 100%; height:100%;">
+                            <div class="imgMagnify">
+                                <img ng-class="{rotate:rotate90}" src="{{img_path}}" />
+                            </div>
+                        </ion-scroll>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+
+
+    <!--纸票达成交易-->
+    <div class="g-operate-price2" ng-if="billModel.bill_type_id==102 && billModel.bill_status_code >= 804">
+        <div class="g-order-status" ng-if="(billModel.receiver_id == identity.enterprise_id || billModel.publisher_id == identity.enterprise_id) && billModel.bill_status_code == 809">
+            <p>达成交易协议，待线下交易</p>
+        </div>
+        <div class="g-order-status" ng-if="billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code == 809">
+            <a class="btn" ng-click="submitbillnew()">确认成交</a>
+        </div>
+        <div class="g-order-status" ng-if="(billModel.receiver_id == identity.enterprise_id || billModel.publisher_id == identity.enterprise_id) && billModel.bill_status_code == 810">
+            <p>线下交易完成，待评价</p>
+            <a class="btn" ng-click="openEvaluateModal()">评价</a>
+        </div>
+        <div class="g-order-status" ng-if="(billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code == 811) || (billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code == 812)">
+            <p>线下交易完成，待评价</p>
+            <a class="btn" ng-if="billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code == 811" ng-click="openEvaluateModal()">评价</a>
+            <a class="btn" ng-if="billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code == 812" ng-click="openEvaluateModal()">评价</a>
+        </div>
+        <div class="g-order-status" ng-if="(billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code == 812) || (billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code == 811)">
+            <p>线下交易完成</p>
+            <a class="btn" ng-if="billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code == 812" ng-click="openEvaluateModal()">完成评价</a>
+            <a class="btn" ng-if="billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code == 811" ng-click="openEvaluateModal()">完成评价</a>
+        </div>
+        <div class="g-order-status" ng-if="(billModel.receiver_id == identity.enterprise_id || billModel.publisher_id == identity.enterprise_id) && billModel.bill_status_code == 813">
+            <!--此处还要显示评价内容-->
+            <p>线下交易完成</p>
+            <a class="btn" ng-click="openEvaluateModal()">完成评价</a>
+        </div>
+    </div>
+
+    <!--805 交易中 收票方已付款到监管账户-->
+    <div ng-if="billModel.bill_type_id==101 && billModel.bill_status_code == 806">
+        <div class="g-operate-price2" ng-if="billModel.receiver_id == identity.enterprise_id">
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>订单信息</div>
+                <ul class="g-list">
+                    <li>订单号码：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>合同号：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>成交金额（元）：<span class="r">{{ orderModel.order_total_price | currency: '￥' }}</span></li>
+                    <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                </ul>
+            </div>
+
+            <div class="g-order-status">
+                <p>已付款</p>
+                <p>待出票方背书</p>
+            </div>
+        </div>
+
+        <div class="g-operate-price2" ng-if="billModel.publisher_id == identity.enterprise_id">
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>订单信息</div>
+                <ul class="g-list">
+                    <li>订单号码：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>合同号：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>成交金额（元）：<span class="r">{{ orderModel.order_total_price | currency: '￥' }}</span></li>
+                    <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                </ul>
+            </div>
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>被背书方信息</div>
+                <ul class="g-list">
+                    <li>企业名称：<span class="r">{{ orderModel.drawer_enterprise_name }}</span></li>
+                    <li>开户行：<span class="r">{{ orderModel.drawer_account_bank }}</span></li>
+                    <li>账号：<span class="r">{{ orderModel.drawer_account_number }}</span></li>
+                    <li>联行号：<span class="r">{{ orderModel.drawer_account_bank_number }}</span></li>
+                    <li class="g-single-submit pd80" ng-click="endorseModal.show()"><input type="submit" value="确认背书"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--807 发布中 票据处于发布状态-->
+    <div ng-if="billModel.bill_type_id==101 && billModel.bill_status_code == 807">
+        <div class="g-operate-price2" ng-if="billModel.receiver_id == identity.enterprise_id">
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>订单信息</div>
+                <ul class="g-list">
+                    <li>订单号码：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>合同号：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>成交金额（元）：<span class="r">{{ orderModel.order_total_price | currency: '￥' }}</span></li>
+                    <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                </ul>
+            </div>
+            <!-- 此处需增加 背书详情-->
+            <div class="g-order-status">
+                <p>出票方已背书</p>
+                <p>请至网页版签收票据(手机端暂不支持)</p>
+                <!--<a class="btn" ng-if="billModel.bill_status_code == 807 && billModel.bill_type_id==101" ng-click="validate()">确认签收</a>-->
+            </div>
+        </div>
+
+        <div class="g-operate-price2" ng-if="billModel.publisher_id == identity.enterprise_id">
+            <div class="g-line-title-pd"><i></i>交易信息</div>
+            <div class="con">
+                <p>背书成功，正在等待收票方确认签收</p>
+            </div>
+        </div>
+    </div>
+
+    <!--808 交易中 已签收-->
+    <div ng-if="billModel.bill_type_id==101 && billModel.bill_status_code == 808">
+        <div class="g-operate-price2" ng-if="billModel.publisher_id == identity.enterprise_id">
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>交易信息</div>
+                <ul class="g-list">
+                    <li>订单号码：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>合同号：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>成交金额（元）：<span class="r">{{ orderModel.order_total_price | currency: '￥' }}</span></li>
+                    <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                </ul>
+            </div>
+
+            <div class="g-order-status">
+                <p>收票方已签收</p>
+                <p>等待监管客户付款</p>
+            </div>
+        </div>
+
+        <div class="g-operate-price2" ng-if="billModel.receiver_id == identity.enterprise_id">
+            <div class="g-line-title-pd"><i></i>交易信息</div>
+            <div class="con">
+                <p>待银行解冻资金</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--809 交易中 已签收--><!--809表示监管账户打款后，等待出票方确认票款，现在好像跳过该步骤-->
+    <!--<div class="g-operate-price2">
+        <div class="g-line-title-pd"><i></i>报价信息</div>
+        <div class="con">
+            <p>8</p>
+        </div>
+    </div>-->
+    <!--810 交易中 已签收-->
+    <div ng-if="billModel.bill_type_id==101 && billModel.bill_status_code >= 810 && billModel.bill_status_code<=813">
+        <div class="g-operate-price2">
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>订单信息</div>
+                <ul class="g-list">
+                    <li>订单号码：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>合同号：<span class="r">{{ orderModel.order_number }}</span></li>
+                    <li>成交金额（元）：<span class="r">{{ orderModel.order_total_price | currency: '￥' }}</span></li>
+                    <li>生成时间：<span class="r">{{ orderModel.order_time | date:'yyyy-MM-dd HH:mm' }}</span></li>
+                </ul>
+            </div>
+
+            <div class="g-order-status">
+                <p ng-if="billModel.bill_status_code==810">监管户支付票款</p>
+                <p>交易结束</p>
+                <a class="btn" ng-if="billModel.bill_status_code==810||( billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code==812)||(billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code==811)" ng-click="openEvaluateModal()">评价</a>
+                <a class="btn" ng-if="billModel.bill_status_code==813||( billModel.publisher_id == identity.enterprise_id && billModel.bill_status_code==811)||(billModel.receiver_id == identity.enterprise_id && billModel.bill_status_code==812)" ng-click="openEvaluateModal()">完成评价</a>
+
+            </div>
+        </div>
+    </div>
+
+    <!--811 812都跳转到评价页面-->
+    <!--813双方都评价完毕-->
+    <!--816 交易中止 发生在804至810之间（804 =< x < 810 ）-->
+    <!--<div class="g-operate-price2">
+        <div class="g-line-title-pd"><i></i>报价信息</div>
+        <div class="con">
+            <p>816</p>
+        </div>
+    </div>-->
+    </div><!--end of wrap-->
+    <!-- 分享弹框 -->
+    <div class="g-alert-shares">
+        <div class="box">
+            <ul class="con">
+                <li><a><img src="images/share1.png" alt="">微信好友</a></li>
+                <li><a><img src="images/share2.png" alt="">微信朋友圈</a></li>
+                <li><a><img src="images/share3.png" alt="">新浪微博</a></li>
+                <li><a><img src="images/share4.png" alt="">QQ好友</a></li>
+                <li><a><img src="images/share5.png" alt="">QQ空间</a></li>
+            </ul>
+            <a class="btn-cancle">取 消</a>
+        </div>
+    </div>
+
+    </ion-content>
+</ion-view>

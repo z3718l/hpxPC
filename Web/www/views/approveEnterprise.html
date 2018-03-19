@@ -1,0 +1,152 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/editstyle.css">
+<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<div ng-cloak ng-controller="approveEnterpriseController">
+    <!-- 右侧 start-->
+    <div class="user-right" style="padding-top: 14px;">
+        <div class="right-top col-md-12 col-xs-12 row " style="margin-left: 0px">
+            <p style="color:#3a3a3a;">账户中心 > 机构认证</p>
+        </div>
+        <div class="content col-md-12 col-xs-12 row" style="width: 100%;border-top: 1px solid #ebebeb;margin-top: -2px;height: 980px;margin-left: 0%;">
+            <div class="process row col-md-12  col-xs-12" style="padding:0px;margin:4% 0 0 0">
+                <div class="table col-md-12 col-xs-12">
+                    <!--机构认证-->
+                    <ng-form ng-if="enterpriseModel.is_alive != 2" name="enterpriseForm" class="form-horizontal col-md-12 col-xs-12" role="form">
+                        <div class="col-md-12 col-xs-12">
+                            <!--<label class="col-md-2">审核状态 : </label><span style="color: #f55a14">审核失败</span>-->
+                            <div class="enterprise-content">
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>企业名称： </label>
+                                    <div class="col-md-4">
+                                        <input class="form-control" style="border: 1px solid #bfbfbf;" name="enterprise_name" placeholder="请输入企业名称" ng-model="enterpriseModel.enterprise_name" required />
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
+                                    <label class="col-md-2 col-xs-2 control-label"> <span style="color: #f55a14">*</span>企业地点：</label>
+                                    <div class="col-md-2 col-xs-2">
+                                        <select class="form-control" style="max-width:110%;" ng-model="enterpriseModel.location_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()" placeholder="省/直辖市">
+                                            <option value="">省/直辖市</option>
+                                        </select>
+                                    </div>
+                                    <div id="tradCity" class="col-md-2 col-xs-2" ng-if="enterpriseModel.location_province_id !=1 && enterpriseModel.location_province_id != 20 && enterpriseModel.location_province_id != 860 && enterpriseModel.location_province_id != 2462">
+                                        <select class="form-control" style="max-width:110%;display:block;" ng-model="enterpriseModel.location_city_id" ng-options="item.id as item.address_name for item in CityData" ng-change="CityChange()" placeholder="市">
+                                            <option value="">市</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2">
+                                        <select class="form-control" style="max-width: 100%;" ng-model="enterpriseModel.location_id" ng-options="item.id as item.address_name for item in AddressData" placeholder="区/县">
+                                            <option value="">区/县</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"> 详情地址：</label>
+                                    <div class="col-md-6 col-xs-6">
+                                        <input type="text" class="form-control" ng-model="enterpriseModel.enterprise_address" placeholder="请输入具体通讯地址" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>营业执照号：</label>
+                                    <div class="col-md-4">
+                                        <input class="form-control" style="border: 1px solid #bfbfbf;" name="credential_number" placeholder="请输入营业执照号" ng-model="enterpriseModel.credential_number" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>营业执照上传：</label>
+                                    <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setCredentialID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 250px; width: 181px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.credential_photo_address}}" required />
+                                    </div>
+                                    <h5 class="col-md-2 text-left" style="padding-top: 282px;margin-left:-83px;"><a style="color:blue; position: relative;top: -48px;" href="assets/img/duozhengheyi.jpg" rel="assets/img/duozhengheyi.jpg" target="_blank">&nbsp;&nbsp; 示例</a></h5>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>法人身份证：</label>
+                                    <div class="col-sm-3" ngf-select="uploadFiles($files, $invalidFiles, legalFrontID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.artificial_person_front_photo_address}}" required />
+                                    </div>
+                                    <div class="col-sm-3" ngf-select="uploadFiles($files, $invalidFiles, legalBackID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.artificial_person_back_photo_address}}" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="line col-md-11 text-center"></div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group" style="margin-top:20px;">
+                                    <div class="col-md-12" style="margin-top:20px;">
+                                        <div class="col-md-5"></div>
+                                        <input type="button" ng-if="enterpriseModel.enterprise_id == 0 || enterpriseModel.enterprise_id == null" class="col-md-2 text-center btn" style="background-color: #f55a14;border: 0px;color: white;" ng-disabled="enterpriseForm.$invalid" ng-click="enterpriseSave()" value="提交审核">
+                                        <input type="button" ng-if="enterpriseModel && enterpriseModel.is_alive == -1" class="col-md-2 text-center btn" style="background-color: #f55a14;border: 0px;color: white;" ng-disabled="enterpriseForm.$invalid" ng-click="enterpriseSave()" value="重新提交">
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div class="text-left" style="background-color:#f1f1f0;margin-top:42px;border:1px dashed #ccc;padding:5px;box-shadow: 0px 0px 0px 10px #f2f2f2;"><strong>温馨提示：</strong>机构认证资料提交审核过程中，请保持通讯畅通，汇票线客服人员可能会与您联系。</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                    <!--机构待审核-->
+                    <ng-form ng-if="enterpriseModel.is_alive == 2" name="enterpriseCheckForm" class="form-horizontal col-md-12 col-xs-12" role="form">
+                        <div class="col-md-12 col-xs-12">
+                            <!--<label class="col-md-2">审核状态 : </label><span style="color: #f55a14">审核失败</span>-->
+                            <div class="enterprise-content">
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>企业名称： </label>
+                                    <div class="col-md-4">
+                                        {{enterpriseModel.enterprise_name}}
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span> 企业地点：</label>
+                                    <div class="col-md-6">
+                                        {{enterpriseModel.location_province}}{{enterpriseModel.location_city}}{{enterpriseModel.location}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"> 详情地址：</label>
+                                    <div class="col-md-6 col-xs-6">
+                                        {{enterpriseModel.enterprise_address}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>营业执照号：</label>
+                                    <div class="col-md-4">
+                                        {{enterpriseModel.credential_number}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>营业执照上传：</label>
+                                    <div class="col-sm-4" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 250px; width: 181px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.credential_photo_address}}" required />
+                                    </div>
+                                    <h5 class="col-md-2 text-left" style="padding-top: 282px;margin-left:-83px;"><a style="color:blue; position: relative;top: -48px;" href="assets/img/duozhengheyi.jpg" rel="assets/img/duozhengheyi.jpg" target="_blank">&nbsp;&nbsp; 示例</a></h5>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-xs-2 control-label"><span style="color: #f55a14">*</span>法人身份证：</label>
+                                    <div class="col-sm-3" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.artificial_person_front_photo_address}}" required />
+                                    </div>
+                                    <div class="col-sm-3" ngf-select="uploadFiles($files, $invalidFiles, legalBackID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{enterpriseModel.artificial_person_back_photo_address}}" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="line col-md-11 text-center"></div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <div class="form-group" style="margin-top:20px;">
+                                    <div class="col-md-12" style="margin-top:20px;">
+                                        <div class="col-md-5"></div>
+                                        <input type="button" ng-if="enterpriseModel.is_alive == 2" class="col-md-2 text-center btn" style="background-color: #f55a14;border: 0px;color: white;" ng-disabled="true" value="等待审核">
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div class="text-left" style="background-color:#f1f1f0;margin-top:42px;border:1px dashed #ccc;padding:5px;box-shadow: 0px 0px 0px 10px #f2f2f2;"><strong>温馨提示：</strong>机构认证资料提交审核过程中，请保持通讯畅通，汇票线客服人员可能会与您联系。</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

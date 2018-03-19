@@ -1,0 +1,310 @@
+﻿<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-customkl.css">
+<!--<script src="../../www/assets/zbs.js"></script>-->
+<div ng-cloak ng-controller="publishController">
+    <div class="user-right">
+        <div class="right-top col-md-12 row " style="margin-left: 0px;margin-bottom: 3%;color:#333" ng-if="filter.tradetype==0">
+            <p style="font-size:14px;color:#3a3a3a;">我要出票 > 发布汇票</p>
+        </div>
+        <div class="right-top col-md-12 row " style="margin-left: 0px;margin-bottom: 3%;color: #333" ng-if="filter.tradetype==1">
+            <p>个人中心 > 我要出票 > 完善汇票</p>
+        </div>
+        <div class="content col-md-12 row col-xs-12" style="margin-left: 0px;margin-top:-6px;">
+            <div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==101">
+                <div class="process3 col-md-1 col-xs-2">
+                    <!--{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.jpg' : 'assets/img/user-right-point-gray.png'}}-->
+                    <!--src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 3) || (findEnterprise.is_alive == 1 || findEnterprise.is_alive >= 3) ? '' : '-gray'}}.jpg"-->
+                    <img ng-src="assets/img/user-right-point{{ model.bill_status_code >= 801? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <!--{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.jpg' : 'assets/img/user-right-point-gray.png'}}-->
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 804 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 805 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">支付票款</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 807 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 807),'zhende':(model.bill_status_code >= 807)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 807),'zhende':(model.bill_status_code >= 807)}">&nbsp;&nbsp;&nbsp;&nbsp;背书</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 808 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 808),'zhende':(model.bill_status_code >= 808)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 808),'zhende':(model.bill_status_code >= 808)}">&nbsp;&nbsp;&nbsp;&nbsp;签收</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 810 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 90px;margin-top:40%;margin-left:-10px;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 811),'zhende':(model.bill_status_code >= 811)}">系统核验解冻</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 811),'zhende':(model.bill_status_code >= 811)}">&nbsp;交易完成</h6>
+                </div>
+            </div>
+            <div class="process row col-md-12 col-xs-12" ng-if="model.bill_type_id==102">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 801 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 801),'zhende':(model.bill_status_code >= 801)}">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 804 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 804),'zhende':(model.bill_status_code >= 804)}">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 805 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">&nbsp;&nbsp;&nbsp;&nbsp;双方</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 805),'zhende':(model.bill_status_code >= 805)}">线下交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img ng-src="assets/img/user-right-point{{model.bill_status_code >= 810 ? '' : '-gray'}}.png" style="margin-bottom: 5px">
+                    <h6 style="width: 50px;margin-top:20%;margin-top:20%" ng-class="{'jiade':(model.bill_status_code < 810),'zhende':(model.bill_status_code >= 810)}">&nbsp;&nbsp;&nbsp;&nbsp;确认</h6>
+                    <h6 style="width: 90px;margin-top:40%;margin-top:40%" ng-class="{'jiade':(model.bill_status_code < 810),'zhende':(model.bill_status_code >= 810)}">完成交易</h6>
+                </div>
+            </div>
+        </div>
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 text-center" style="margin-top: -2%; margin-left: -6%;width:108%;height:3px;background:#ebebeb"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #ff5a14; color:#202020;margin-top:-5%;font-size:16px">
+            基本信息
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <ng-form name="editForm" novalidate>
+                <div class="form-horizontal col-md-12">
+                    <div class="form-group form-inline col-xs-12">
+                        <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 票据类型：</label>
+                        <div class="col-md-4">
+                            <div id="billTypeA" ng-if="identity.can_sell_electronic_bill == 1 || identity.is_verified >= 3 || identity.is_verified == 1" class="btn btn-default" ng-class="{ 'btn-warning': model.bill_type_id == 101 }" ng-click="billTypeChange(101)">电票</div>
+                            <div id="billTypeB" ng-if="identity.can_sell_paper_bill == 1 || identity.enterprise_id==0" class="btn btn-default" ng-class="{ 'btn-warning': model.bill_type_id == 102 }" ng-click="billTypeChange(102)">纸票</div>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline col-xs-12">
+                        <label class="col-md-2 control-label"><span style="color: #f55a14">*</span> 交易方式：</label>
+                        <div class="col-md-10">
+                            <div id="tradeTypeA" class="btn btn-default" ng-class="{ 'btn-warning': model.trade_type_code == 701 }" ng-click="tradeTypeChange(701)">现票卖断</div>
+                            <div id="tradeTypeB" class="btn btn-default" ng-class="{ 'btn-warning': model.trade_type_code == 702 }" ng-click="tradeTypeChange(702)">预约出票</div>
+                            <laber style="color: red">（现票卖断：必须要票面；预约出票：票还没在手，可不用票面）</laber>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline col-xs-12">
+                        <label class="col-md-2 control-label"><span style="color: #f55a14">*</span>票面总金额：</label>
+                        <div class="col-md-10">
+                            <input id="price" class="form-control width-150" type="text" ng-change="onlyNumber(model.bill_sum_price, 10000000000)" ng-model="model.bill_sum_price" ng-pattern="/^[0-9]+([.]{1}[0-9]{0,6}){0,1}$/" required> [元]&nbsp; &nbsp; &nbsp; 大写金额：{{ amountInWords(model.bill_sum_price) }}
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+        </div>
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 text-center" style="margin-top: 10px; margin-left: -25px"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #f55a14;color:#202020;">
+                <div><span style="color: #f55a14" ng-if="model.trade_type_code==701 || ($stateParams.id!=null && $scope.model.trade_type_code == 702 && $scope.model.bill_type_id == 101)"></span> <label style="font-size:16px">上传汇票</label><laber style="color: #999999;font-size:14px" ng-if="model.trade_type_code == 701"> <span style="color:red;">*</span>（汇票正面必须上传）</laber></div>
+            </div>
+            <div class="explain col-md-12 col-xs-12">
+                <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px;background-color: white"></div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="tb-booth tb-pic tb-s250" style="float: right" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                    <img class="jqzoom_front" src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" />
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-12 text-center">
+                <img class="col-mx-12" style="margin-top: 20px" ng-click="removeFront()" src="assets/img/erro.png">
+            </div>
+            <div class="col-md-4">
+                <div class="tb-booth tb-pic tb-s250" style="float: right" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/jpeg,image/gif,image/png" ngf-max-size="10MB">
+                    <img class="jqzoom_back" src="{{model.bill_back_photo_path}}" rel="{{model.bill_back_photo_path}}" />
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-12 text-center">
+                <img class="col-mx-12" style="margin-top: 20px" ng-click="removeBack()" src="assets/img/erro.png">
+            </div>
+        </div>
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px;background-color: white"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #ff5a14;">
+                <div><label style="color:#202020;font-size:16px">附加资料</label><laber style="color: #999999;font-size:14px">（可上传多张背书，商票可上传保函、报表等，预约出票可上传多张票面）</laber></div>
+            </div>
+            <div class="explain col-md-12 col-xs-12">
+                <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px; background-color: white"></div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-2" ng-repeat="file in model.bill_back_files">
+                    <!--<a href="{{file.file_path}}" target="_blank">
+                        {{file.file_name}}
+                    </a>-->
+                    <img src="assets/img/attach.png" ng-click="remove($index)">
+                    <span style="line-height:30px;" class="col-md-12">{{file.file_name | limitTo: 6}} {{ file.file_name.length > 6 ? '...' : '' }}</span>
+                </div>
+                <div class="col-md-2" ng-if="model.bill_back_files.length < 10">
+                    <img src="assets/img/fujia.png" ngf-select="uploadFiles($files, $invalidFiles, add)" ngf-pattern="'*'" accept="*" ngf-max-size="10MB" style="width: 100px;height: 100px;margin-top: 14%;margin-left: 22%">
+                </div>
+            </div>
+            <h6 class="col-md-10 col-xs-11" style="margin-top: 10px;color:#999999;margin-left:3%;font-size:14px">注：最多上传10个文件！</h6>
+        </div>
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 text-center" style="margin-top: 30px; margin-left: -25px"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <div class="col-md-6 col-sm-6 col-xs-6" style="border-left: 5px solid #f55a14;color:#1a2b71;">
+                <div><label style="font-size:16px;color:#202020">其他信息</label><laber style="color: #999999;font-size:14px">（{{ model.trade_type_code==702 ? '以下选项中，承兑机构必填' : '以下为非必填项，但填好有助于加快审核' }}）</laber></div>
+            </div>
+            <div class="explain col-md-12 col-xs-12">
+                <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px;background-color: white"></div>
+            </div>
+            <div class="form-horizontal col-md-12">
+                <div class="form-group" ng-if="model.trade_type_code == 702||model.bill_type_id==101||model.bill_type_id==102" ng-hide="model.bill_type_id==102&&model.trade_type_code == 701||model.bill_type_id==101&&model.trade_type_code == 701">
+                    <label class="control-label col-md-2"><span style="color: #f55a14">*</span> 预约交易日期：</label>
+                    <div class="col-md-4">
+                        <input id="producttime" type="text" class="form-control" uib-datepicker-popup is-open="datepicker.product_deadline_time"
+                               ng-model="model.product_deadline_time" ng-click="datepicker.product_deadline_time=!datepicker.product_deadline_time"
+                               placeholder="本发布的失效日期" required />
+                    </div>
+                    <div class="col-md-1">
+                        <div class="question" ng-click="question()"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2"><span style="color: #f55a14" ng-if="model.trade_type_code==702">*</span> 承兑机构：</label>
+                    <div class="col-md-4">
+                        <select id="acceptortype" class="form-control" ng-model="model.acceptor_type_id" ng-options="item.code as item.constant_name for item in acceptorTypeData"></select>
+                    </div>
+                    <label class="control-label col-md-2">承兑人全称：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" ng-model="model.acceptor_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">票据号：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" ng-if="model.bill_type_id == 101" maxlength="30" ng-model="model.bill_number">
+                        <input type="text" class="form-control" ng-if="model.bill_type_id == 102" maxlength="16" ng-model="model.bill_number">
+                    </div>
+                    <label class="control-label col-md-2">汇票到期日：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="tsm" class="form-control" uib-datepicker-popup is-open="datepicker.bill_deadline_time" ng-model="model.bill_deadline_time" ng-click="datepicker.bill_deadline_time=!datepicker.bill_deadline_time" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">联系人姓名：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" ng-model="model.contact_name" required>
+                    </div>
+                    <label class="control-label col-md-2">联系方式：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" ng-model="model.contact_phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div ng-if="model.trade_type_code == 701">
+                        <label class="control-label col-md-2">期望利率：</label>
+                        <div class="col-md-4 form-inline">
+                            <input type="text" class="form-control" id="lv" ng-change="rateNum(model.bill_rate,100)" style="width:150px;" ng-model="model.bill_rate" required>
+                            <span ng-if="model.bill_type_id==101">%</span>
+                            <span ng-if="model.bill_type_id==102">‰</span>
+                        </div>
+                    </div>
+                    <div ng-if="model.trade_type_code == 702">
+                        <label class="control-label col-md-2">每十万贴息[元]：</label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="model.bill_rate" class="form-control">
+                        </div>
+                    </div>
+                    <label class="control-label col-md-2" ng-if="model.trade_type_code == 701">每十万加[元]：</label>
+                    <label class="control-label col-md-2" ng-if="model.id > 0">贴现金额[元]：</label>
+                    <div class="col-md-4" ng-if="model.trade_type_code == 701">
+                        <input type="number" id="billdealprice" ng-model="model.bill_every_plus" class="form-control">
+                    </div>
+                    <label class="control-label col-md-2" ng-if="!model.id &&(model.trade_type_code == 702)">期望贴现额[元]：</label>
+                    <div class="col-md-4 form-inline" ng-if="!model.id&&(model.trade_type_code == 702)">
+                        <input type="number" min="0" id="billrate" ng-model="model.bill_deal_price" class="form-control ng-pristine ng-untouched ng-valid ng-valid-min" style="width:150px;">
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.trade_type_code == 701">
+                    <label class="control-label col-md-2">期望贴现额[元]：</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" ng-model="model.bill_deal_price" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_type_id != 101" ng-model="model.bill_location_id">
+                    <label class="control-label col-md-2">交易地点：</label>
+                    <div class="col-md-10 form-inline">
+                        <select class="form-control width-150" ng-model="model.product_province_id" ng-options="item.id as item.address_name for item in provinceData" ng-change="provinceChange()"><option value="">省/直辖市</option></select>
+                        <select class="form-control width-150" ng-model="model.product_location_id" ng-options="item.id as item.address_name for item in cityData"><option value="">市/区</option></select>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_type_id == 101">
+                    <label class="control-label col-md-2">汇票瑕疵：</label>
+                    <div class="col-md-10 form-control-static">
+                        <span ng-repeat="item in billFlawData" class="col-sm-3">
+                            <input type="checkbox" style="vertical-align:middle; margin-top:-2px;" ng-model="item.checked" ng-click="billFlawChange(item)"> {{ item.constant_name }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.bill_type_id == 102">
+                    <label class="control-label col-md-2">汇票瑕疵：</label>
+                    <div class="col-md-10 form-control-static">
+                        <span ng-repeat="item in billFlawData2" class="col-sm-3">
+                            <input type="checkbox" style="vertical-align:middle; margin-top:-2px;" ng-model="item.checked" ng-click="billFlawChange2(item)"> {{ item.constant_name }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">背书次数：</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-change="checkInt(model.endorsement_number,100)" ng-model="model.endorsement_number" class="form-control width-50" min="0" ng-pattern="/^\d+$/" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 text-center" style="margin-top: 10px; margin-left: -25px"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #f55a14;">
+                <div style="color:#202020;font-size:16px">备注说明</div>
+            </div>
+            <div class="col-md-2 col-xs-12"></div>
+            <div class="col-md-7 col-xs-12" style="margin-top: 10px;/* border-color: #cccccc; */height: 100px;border: 1px solid #ebebeb;width: 577px;height: 123px;overflow:hidden;">
+                <textarea class="col-md-7 col-xs-12" onfocus="jia()" onblur="qu()" ng-model="model.description" placeholder="如有其他票面信息的特殊说明或需求，可在此处填写" name="textfield3" cols="30" rows="5" style="margin-top: 17px;border-color: rgb(204, 204, 204);border: none;width: 100%;margin-left: 5%;overflow: hidden;width:90%;outline-style:none;outline:none;resize:none;"></textarea>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12"></div>
+        <!--editForm.$invalid-->
+        <input type="button" class="col-md-6 col-xs-12 form-control text-center" ng-click="save()" ng-disabled="isDisable" style="width: 200px; background-color: #f55a14; color: white; border: 0px;margin-top: 40px;" value="马上发布">
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px;background-color: white"></div>
+        </div>
+    </div>
+
+</div>

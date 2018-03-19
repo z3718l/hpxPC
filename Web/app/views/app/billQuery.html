@@ -1,0 +1,98 @@
+<ion-view cache-view="false">
+    <ion-nav-buttons side="right">        
+        <!--<button class="button button-icon icon ion-funnel" menu-toggle="right" ui-sref="app.billOfferSearchCity"></button>-->
+        <a href="" ui-sref="app.billSearchCity" class="titleAddr">{{locationModel.city_name}}</a> </ion-nav-buttons>
+    <ion-nav-title>
+       <!--票源列表--> 
+        <div class="dateTopTitle titleCenter">票源列表</div>
+        <!--<select name="" id="" class="header-select-botttom" ng-model="dateFilter.date_index" ng-options="item.index as item.date for item in dates" ng-change="doRefresh()"></select>-->
+    </ion-nav-title>
+    <!--<ion-header-bar class="bar-subheader bar-stable" style="font-size: 13px; text-align: center; font-weight: bold;">
+        <div class="row">
+            <div class="col-20">承兑机构</div>
+            <div class="col-20">票面金额</div>
+            <div class="col-20">到期日</div>
+            <div class="col-20">剩余时间</div>
+            <div class="col-20">状态</div>
+        </div>
+    </ion-header-bar>-->
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+    
+
+        <!--<header>
+           
+            <select name="" id="" class="header-select-botttom">
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+            </select>
+            <a href="" class="addr">苏州</a>
+        </header>-->
+        <div id="tabBox1" class="tabBox4" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+            <div class="hd">
+                <ul>
+                    <li  ng-class="{'on': tab == 1}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(1)"><span>电票</span></a></li>
+                    <li  ng-class="{'on': tab == 2}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(2)"><span>纸票</span></a></li>
+                </ul>
+            </div>
+            <div class="bd" id="tabBox1-bd">
+                <!-- 银电大票 -->
+                <div class="con" ng-if="tab==1">
+                    <div>
+                        <table class="g-table">
+                            <tr>
+                                <th>承兑机构</th>
+                                <th><a href="" class="btn2 on" ng-click="changeArrow('price')">票面金额<i ng-if="filter.sort == 0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.priceArrow]"></i></a></th>
+                                <th><a href="" class="btn3 on" ng-click="changeArrow('deadline_time')">到期日<i ng-if="filter.sort == 1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.deadlineTimeArrow]"></i></a></th>
+                                <th><a href="" class="btn4">剩余时间</a></th>
+                                <th><a href="" class="btn5">状态</a></th>
+                            </tr>
+                                <tr ng-if="item.remaining_day >= 0 && (show || item.publishing_time == dateTimes[dateFilter.date_index].date )" class="item" ng-repeat="item in listData101" ui-sref="app.myReleaseDetail({myReleaseBillId:item.id, check: 3})">
+                                    <!---see in queryOffer in web--->
+                                    <td><h3>{{ item.acceptor_type_name }}</h3><p class="addr">{{item.enterprise_location.length > 6 ? (item.enterprise_location | limitTo:3) : item.enterprise_location}}</p></td>
+                                    <td>{{ item.bill_sum_price / 10000 |  currency: '￥' }}万</td>
+                                    <td>{{ item.bill_deadline_time | date:'yyyy-MM-dd' }}</td>
+                                    <td>{{ item.remaining_day }}</td>
+                                    <td><i class="orange">{{ item.bill_status_name }}</i></td>
+                                </tr>                           
+                        </table>
+                    </div>
+                </div>
+                <!-- /银电大票 -->
+                <!-- 银纸小票 -->
+                <div class="con" ng-if="tab==2">
+                    <div>
+                        <table class="g-table">
+                            <tr>
+                                <th>承兑机构</th>
+                                <th><a href="" class="btn2 on" ng-click="changeArrow('price')">票面金额<i ng-if="filter.sort == 1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.priceArrow]"></i></a></th>
+                                <th><a href="" class="btn3 on" ng-click="changeArrow('deadline_time')">到期日<i ng-if="filter.sort == 1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.deadlineTimeArrow]"></i></a></th>
+                                <th><a href="" class="btn4">剩余时间</a></th>
+                                <th><a href="" class="btn5">状态</a></th>
+                            </tr>
+                            <tr ng-if="item.remaining_day >= 0 && (show || item.publishing_time == dateTimes[dateFilter.date_index].date)" class="item" ng-repeat="item in listData102" ui-sref="app.myReleaseDetail({myReleaseBillId:item.id, check: 3})">
+                                <!--&& (billSearchModel.city_id == null || billSearchModel.city_id == item.product_location_id)-->
+                                <!---see in queryOffer in web--->
+                                <td><h3>{{ item.acceptor_type_name }}</h3><p class="addr">{{ item.enterprise_location }}</p></td>
+                                <td>{{ item.bill_sum_price / 10000 |currency: '￥'}}万</td>
+                                <td>{{ item.bill_deadline_time | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ item.remaining_day }}</td>
+                                <td><i class="orange">{{ item.bill_status_name }}</i></td>
+                            </tr>                           
+                        </table>
+                    </div>
+                </div>
+                <!-- /银纸小票 -->
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

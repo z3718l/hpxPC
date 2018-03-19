@@ -1,0 +1,14 @@
+﻿<div ng-controller="freeController">
+    <div class="kind-money-all-bg hpx-padding">
+        <div class="container">
+            <!-- 左侧 start-->
+            <div class="user-left" ng-if="identity">
+                <div ng-include src="'template/menu.html'"></div>
+            </div>
+            <!-- 左侧 end-->
+            <!-- 右侧 start-->
+            <div ui-view></div>
+            <!-- 右侧 end-->
+        </div>
+    </div>
+</div>

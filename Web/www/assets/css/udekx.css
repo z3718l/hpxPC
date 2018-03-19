@@ -1,0 +1,417 @@
+﻿*{
+    margin:0;
+    padding:0;
+    list-style:none;
+}  
+
+        
+        .ud1{
+             width:40px;
+            height:40px;
+            margin-top:2px;
+            background-color:#ff5a14;
+            cursor:pointer;
+        }
+        .ud1 img{
+            margin-left: 7%;
+    margin-top: 4px;
+        }
+       .ud1 label{
+        font-size: 14px;
+    margin-left: 0%;
+    position: relative;
+    top: -42px;
+    right: -17%;
+    color: #fff;
+    display: none;
+    cursor:pointer;
+
+       }
+       .ud2{
+               width:40px;
+            height:40px;
+            margin-top:2px;
+            background:#d9d9d9;
+            background-size:100% 100%;
+            text-align: center;
+            overflow:hidden;
+       }
+       .lkm{
+      width:100%;
+      height:32px;
+      background:url(/templates/main/images/icon-packs.png)center no-repeat;
+      margin-left: 7%;
+      margin-top: 4px;
+      background-position: -150px -64px;
+      overflow:hidden;
+       }
+       .qf{
+       width: 100%;
+    height: 100%;
+    background: #ff5a14;
+    margin-top: -88%;
+    font-size: 14px;
+    margin-left: 2%;
+    border-radius: 50%;
+    display:none;
+       }
+       .ud2 label{
+               position: relative;
+    top: -41px;
+    font-size: 14px;
+    /* color: #fff; */
+    right: -4%;
+    color: #fff;
+    display:none;
+       }
+
+      .ud2 span{
+    position: relative;
+    top: -50px;
+    font-size: 14px;
+    color: #fff;
+    right: -5%;
+    display:none;
+      }
+        .ud3{
+            width:40px;
+            height:40px;
+            margin-top:2px;
+            background:#d9d9d9;
+            background-size:100% 100%;
+            text-align: center;
+            overflow:hidden;
+       }
+        .lkm1{
+      width:100%;
+      height:32px;
+      background:url(/templates/main/images/icon-packs.png)center no-repeat;
+      margin-left: 7%;
+      margin-top: 4px;
+      background-position: -248px -128px;
+      overflow:hidden;
+
+       }
+       .qf1{
+       width: 100%;
+    height: 100%;
+    background: #ff5a14;
+    margin-top: -88%;
+    font-size: 14px;
+    margin-left: 2%;
+    border-radius: 50%;
+    display:none;
+       }
+       .ud3 label{
+              position: relative;
+    top: -38px;
+    /* font-size: 14px; */
+    /* color: #fff; */
+    right: -4%;
+    color: #fff;
+    font-size: 14px;
+    display:none;
+       }
+
+      .ud3 span{
+    position: relative;
+    top: -48px;
+    font-size: 14px;
+    color: #fff;
+    right: -5%;
+    display:none;
+      }
+      .kmi{
+    width: 110px;
+    height: 119px;
+    position: fixed;
+    border: 1px solid #ebebeb;
+    /* margin-left: 76%; */
+    /* margin-top: 11%; */
+    background: #ff5a14;
+    text-align: center;
+    right:106px;
+    top: 251px;
+    display:none;
+      }
+      .kmi img{
+              margin-left: 1%;
+    margin-top: 4%;
+}
+      .kmi label{
+              text-align: center;
+    font-size: 12px;
+    position: relative;
+    top: -3px;
+    color:#fff;
+      }
+      
+       .ud4{
+            width:40px;
+            height:40px;
+            margin-top:2px;
+            background:#d9d9d9;
+            background-size:100% 100%;
+            text-align: center;
+            overflow:hidden;
+       }
+         .lkm2{
+      width:100%;
+      height:32px;
+      background:url(/templates/main/images/icon-packs.png)center no-repeat;
+      margin-left: 7%;
+      margin-top: 4px;
+      background-position: -181px -64px;
+      overflow:hidden;
+
+       }
+       .qf2{
+       width: 100%;
+    height: 100%;
+    background: #ff5a14;
+    margin-top: -88%;
+    font-size: 14px;
+    margin-left: 2%;
+    border-radius: 50%;
+    display:none;
+       }
+       .ud4 label{
+    position: relative;
+    top: -30px;
+    /* font-size: 14px; */
+    /* color: #fff; */
+    right: -4%;
+    color: #fff;
+    font-size: 14px;
+    display:none;
+    cursor:pointer;
+       }
+  .kmi1{
+           width:104px;
+    height: 123px;
+    position: fixed;
+    border: 1px solid #ebebeb;
+    /* margin-top: 15%; */
+    background: #ff5a14;
+    text-align: center;
+    /* display: none; */
+    right: 105px;
+    top: 209px;
+    display:none;
+      }
+   .kmi1 ul li{
+       float:left;
+       width:100%;
+   }
+   .kmi1 ul li img{
+           margin-top: 10%;
+    text-align: center;
+   }
+   .kmi1 ul li label{
+           font-size: 12px;
+    color: #fff;
+    position: relative;
+    top:-3px;
+   }
+      .ud5{
+            width:40px;
+            height:40px;
+            margin-top:2px;
+            background:#d9d9d9;
+            background-size:100% 100%;
+            text-align: center;
+            overflow:hidden;
+            cursor:pointer;
+       }
+        .lkm3{
+      width:100%;
+      height:32px;
+      background:url(/templates/main/images/icon-packs.png)center no-repeat;
+      margin-left: 7%;
+      margin-top: 4px;
+      background-position: -248px -64px;
+      overflow:hidden;
+       cursor:pointer;
+       }
+          .qf3{
+       width: 100%;
+    height: 100%;
+    background: #ff5a14;
+    font-size: 14px;
+    color:#fff;
+     cursor:pointer;
+     display:none;
+     text-align:center;
+       }
+          .qf3 label{
+              cursor:pointer;
+          }
+          .fudex{
+       position: fixed;
+    right: 45px;
+    top: 170px;
+    bottom: 0;
+    min-width: 20px;
+          }
+          .hdng{
+    width: 92px;
+    height: 36px;
+    position: fixed;
+     background: url(../../../templates/main/images/fix-service-flash.png)center no-repeat;
+    right: 20px;
+    top: 120px;
+    bottom: 0;
+    padding-left: 70px;
+    min-width: 20px;
+     -webkit-animation: float ease-in-out 1s infinite;
+  animation: float ease-in-out 1s infinite;
+          }
+          /*动画*/
+          @-webkit-keyframes float {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(1em);
+    transform: translateY(1em);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+            /*@media all and (min-width: 1201px) {
+            .fudex{
+    width: 40px;
+    height: 210px;
+    margin-left: 88%;
+    margin-top: 6%;
+    position: fixed;
+    border:1px solid #ebebeb;
+    cursor:pointer;
+    z-index:777;
+            }
+   .hdng{
+    margin-left: 86%;
+    width: 92px;
+    height: 36px;
+    margin-top: 1%;
+    background: url(../../../templates/main/images/fix-service-flash.png)center no-repeat;
+    text-align: center;
+    line-height: 41px;
+     -webkit-animation: float ease-in-out 1s infinite;
+  animation: float ease-in-out 1s infinite;
+  font-size:14px;
+  color:#fff;
+  position:fixed;
+   }
+   .kmi{
+           width: 12%;
+    height: 131px;
+    position: fixed;
+    border: 1px solid #ebebeb;
+    margin-left: 69%;
+    margin-top: 11%;
+    background: #ff5a14;
+    text-align: center;
+    /* display: none; */
+   }
+   .kmi1{
+           width: 20%;
+    height: 131px;
+    position: fixed;
+    border: 1px solid #ebebeb;
+    margin-left: 61%;
+    margin-top: 15%;
+    background: #ff5a14;
+    text-align: center;
+    /* display: none; */
+   }
+   .hourglass {
+            margin: 20px auto;
+            width: 60px;
+            height:30px;
+            animation: flip 10s ease infinite;
+        }
+        .htop {
+            background-image: linear-gradient(red,red);
+            background-color: rgba(239, 236, 202, 0.15);
+            background-size: 100px 100px;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            animation: top-do 10s ease infinite;
+            width: 60px;
+            height: 30px;
+            -webkit-clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            border-top: 3px solid #999999;
+        }
+        .hbottom {
+            background-color: rgba(239, 236, 202, 0.15);
+            background-image: linear-gradient(red, red);
+            background-size: 100px 100px;
+            background-repeat: no-repeat;
+            background-position: 0 100px;
+            animation: bottom-do 10s ease infinite;
+            width: 60px;
+            height: 30px;
+            -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            border-bottom: 3px solid #999999;
+        }
+        .hbottom:after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 25px;
+            left: 29px;
+            background-image: linear-gradient(red, transparent);
+        }
+        @keyframes top-do {
+            95%, 100% {
+                background-position: 0 30px;
+            }
+        }
+        @keyframes bottom-do {
+            95%, 100% {
+                background-position: 0 0;
+            }
+        }
+        @keyframes flip {
+            0%, 95% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+       
+        }
+              @media all and (min-width: 980px) and (max-width: 1200px) {
+            .fudex{
+    width: 40px;
+    height: 210px;
+    margin-left: 90%;
+    margin-top: 6%;
+    position: fixed;
+    border:1px solid #ebebeb;
+    cursor:pointer;
+    z-index:777;
+            }
+
+           
+        }
+              @media all and (min-width: 768px) and (max-width: 979px) {
+            
+     .fudex{
+    width: 40px;
+    height: 210px;
+    margin-left: 90%;
+    margin-top: 6%;
+    position: fixed;
+    border:1px solid #ebebeb;
+    cursor:pointer;
+    z-index:777;
+            }
+            
+        }*/

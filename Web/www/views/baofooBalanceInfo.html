@@ -1,0 +1,132 @@
+﻿<div ng-controller="BaofooBalanceController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">宝付查询服务</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <input type="text" placeholder="请输入开始时间" id="start_time" name="start_time"  class="form-control"  />
+                                    <input type="text" placeholder="请输入结束时间" id="end_time" name="end_time"  class="form-control"  />
+
+                                    <input class="form-control"  type="text" ng-model="filter.enterpriseName" placeholder="请输入企业客户名称">
+                                    <input  class="form-control" type="text" ng-model="filter.personPhone" placeholder="请输入客户手机号(严格匹配)">
+                                    <button class="btn btn-sm btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-bordered table-hover table-condensed">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                            <td data-title="'订单号'" sortable="'order_number'" class="text-center">{{ item.order_number }}</td>
+                            <td data-title="'票据类型'" sortable="'bill_type_id'" class="text-center">{{ item.bill_type_name }}</td>
+                            <td data-title="'票面金额'" sortable="'order_total_price'" class="text-right">{{ item.order_total_price | currency }}</td>
+                            <td data-title="'汇票到期日'" sortable="'bill_deadline_time'" class="text-center">{{ item.bill_deadline_time | date: 'yyyy-MM-dd' }}</td>
+                            <td data-title="'订单状态'" class="text-left">{{ item.order_status_name }}</td>
+                            <td class="text-center width-100 text-nowrap">
+                                <button class="btn btn-info btn-xs" ng-click="check(item)"><i class="fa fa-edit"></i> 详细</button>
+                                <button class="btn btn-info btn-xs" ng-click="show(item)"><i class="fa fa-file-text"></i> 页面</button>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-check">
+        <div class="modal-dialog" style="width:1100px">
+            <div class="modal-content">
+                <ng-form name="checkForm" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>宝付详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-inline filter-option">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="pull-right">
+                                                <select class="form-control" ng-model="filter.type">
+                                                    <option value="3" ng-selected="true">充值</option>
+                                                    <option value="4">提现</option>
+                                                    <option value="5">冻结</option>
+                                                    <option value="6">退款</option>
+                                                    <option value="8">确认支付</option>
+                                                </select>
+                                                <select class="form-control" ng-model="filter.status">
+                                                    <option value="">请选择状态</option>
+                                                    <option value="-1">失败</option>
+                                                    <option value="1">成功</option>
+                                                    <option value="2">等待/失效</option>
+                                                </select>
+                                                <input type="text" placeholder="请输入开始时间" id="time1" name="start_time"  class="form-control"  />
+                                                <input type="text" placeholder="请输入结束时间" id="time2" name="end_time"  class="form-control"  />
+                                                <button class="btn btn-sm btn-info" ng-click="reflash2()"><i class="fa fa-search"></i> 筛选</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table  ng-table="tableParams2" template-pagination="template/pagination.html" class="table table-striped table-bordered table-hover table-condensed">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                                        <td data-title="'交易号'"  class="text-center">{{ item.trans_id }}</td>
+                                        <td data-title="'订单号'"  class="text-center">{{ item.order_id }}</td>
+                                        <td data-title="'企业宝付商户号'"  class="text-center">{{ item.money }}分</td>
+                                        <td data-title="'支付手续费商户号'"  class="text-center">{{ item.fee_member_id}}</td>
+                                        <td data-title="'出票方商户号'"  class="text-center">{{ item.member_id}}</td>
+                                        <td data-title="'交易金额'"  class="text-center">{{ item.drawer_member_id }}</td>
+                                        <td data-title="'交易时间'"  class="text-center">{{ request_time|date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                                        <td data-title="'交易金额'"  class="text-center">{{ item.money }}分</td>
+                                        <td data-title="'状态'"  class="text-center">{{ item.status_name}}</td>
+                                        <td data-title="'处理时间'"  class="text-right">{{ item.change_time | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-show">
+        <div class="modal-dialog" style="width:1100px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>宝付详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12" id="htmlDiv">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

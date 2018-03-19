@@ -1,0 +1,496 @@
+﻿<div ng-controller="checkBillController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">票据审核</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <button class="btn btn-info" ng-click="exportExcel()">信息导出（Excel）</button>
+                                </div>
+                                <div class="pull-right">
+                                    <select class="form-control" ng-model="filter.billTypeId">
+                                        <option value="">请选择票据类型</option>
+                                        <option value="101">电票</option>
+                                        <option value="102">纸票</option>
+                                    </select>
+                                    <select class="form-control" ng-model="filter.tradeTypeCode">
+                                        <option value="">请选择出票类型</option>
+                                        <option value="701">现票卖断</option>
+                                        <option value="702">预约出票</option>
+                                    </select>
+                                    <input class="form-control" type="text" ng-model="filter.contactPerson" placeholder="请输入联系人">
+                                    <input  class="form-control" type="text" ng-model="filter.contactPhone" placeholder="请输入联系电话(严格匹配)">
+                                    <span>
+<!--
+                                        <input type="radio" name="checked"  value="" ng-model="filter.checkedType" ng-change="reflash()"> 全部
+-->
+                                        <input type="radio" name="checked" id="unchecked" value="0" ng-model="filter.checkedType" ng-change="reflash()"> 未审核
+                                        <input type="radio" name="checked" id="checked" value="1" ng-model="filter.checkedType" ng-change="reflash()"> 已审核
+                                    </span>
+                                    <button class="btn btn-sm btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-bordered table-hover table-condensed">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                            <td data-title="'汇票类型'" sortable="'bill_type_id'" class="text-center">{{ item.bill_type_name }}</td>
+                            <td data-title="'交易方式'" sortable="'trade_type_code'" class="text-center">{{ item.trade_type_name }}</td>
+                            <td data-title="'票面金额'" sortable="'bill_sum_price'" class="text-right">{{ item.bill_sum_price | currency }}</td>
+                            <td data-title="'汇票到期日'" sortable="'deadline_time'" class="text-center">{{ item.bill_deadline_time | date: 'yyyy-MM-dd' }}</td>
+                            <td data-title="'联系人'" class="text-left">{{ item.contact_name }}</td>
+                            <td data-title="'联系电话'" class="text-left">{{ item.contact_phone }}</td>
+                            <td data-title="'发布时间'" ng-if="filter.checkedType==0" sortable="'publishing_time'" class="text-center">{{ item.publishing_time | date: 'yyyy-MM-dd HH:mm' }}</td>
+                            <td data-title="'审核时间'" ng-if="filter.checkedType==1" sortable="'publishing_time'" class="text-center">{{ item.checked_time | date: 'yyyy-MM-dd HH:mm' }}</td>
+
+                            <td class="text-center width-100 text-nowrap">
+                                <button class="btn btn-info btn-xs" ng-click="check(item)" ><i class="fa fa-edit"></i><span ng-if="item.is_checked == '1'||item.is_checked == '-1'">重新</span> 审核</button>
+                                <button class="btn btn-success btn-xs" ng-click="resd(item)" ng-if="item.is_checked == '1'||item.is_checked == '-1'"><i class="fa fa-edit"></i> 详细</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal fade" id="modal-check">
+                    <div class="modal-dialog" style="width:1100px">
+                        <div class="modal-content">
+                            <ng-form name="checkForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>票据详情</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 票据类型：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.bill_type_name }}
+                                                <!--<span ng-repeat="item in billTypeData">
+                                                    <input type="radio" value="{{item.code}}" ng-change="billTypeChange()" ng-model="model.bill_type_id"> {{ item.constant_name }}
+                                                </span>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 交易方式：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.trade_type_name }}
+                                                <!--<span ng-repeat="item in tradeTypeCode">
+                                                    <input type="radio" value="{{item.code}}" ng-change="tradeTypeChange()" ng-model="model.trade_type_code"> {{ item.constant_name }}
+                                                </span>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 票面金额[元]：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                {{ model.bill_sum_price | currency }}&nbsp;&nbsp;{{ amountInWords(model.bill_sum_price) }}
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 702">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 预约交易日期：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                {{ model.product_deadline_time | date: 'yyyy-MM-dd' }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 期望利率：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                <span ng-if="model.bill_rate>0">
+                                                    {{ model.bill_rate }}
+                                                    <span ng-if="model.bill_type_id ==101">%</span>
+                                                    <span ng-if="model.bill_type_id ==102">‰</span>
+                                                </span>
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 702">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 每十万贴息[元]：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                <span ng-if="model.bill_rate>0">
+                                                    {{ model.bill_rate | currency}}&nbsp;&nbsp;{{ amountInWords(model.bill_rate) }}
+                                                </span>
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <!--ng-if="model.trade_type_code == 701"-->
+                                        <div class="form-group width-full" ng-if="(model.is_checked == '1')">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 成交金额[元]：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                <span ng-if="model.bill_deal_price>0">
+                                                    {{ model.bill_deal_price | currency }}&nbsp;&nbsp;{{ amountInWords(model.bill_deal_price) }}
+                                                </span>
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="(model.is_checked == '0')">
+                                            <label class="control-label col-md-2 h_money"><span class="g-orange">*</span> 期望金额[元]：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                <span ng-if="model.bill_deal_price>0">
+                                                    {{ model.bill_deal_price | currency }}&nbsp;&nbsp;{{ amountInWords(model.bill_deal_price) }}
+                                                </span>
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-sm-2">汇票正面：</label>
+                                            <div class="col-sm-3">
+                                                <div class="tb-booth tb-pic tb-s250">
+                                                    <a href="{{model.bill_front_photo_path}}" target="_blank" ng-if="model.bill_front_photo_path!=''">
+                                                        <img class="jqzoom" height="100%" width="100%"   src="{{model.bill_front_photo_path | addTimestamp}}" rel="{{model.bill_front_photo_path}}" alt="汇票正面未上传" />
+                                                    </a>
+
+                                                    <div ng-if="model.bill_front_photo_path==''">
+                                                        汇票正面未上传
+                                                    </div>
+                                                </div>
+                                              <span ng-if="model.bill_front_photo_path!=''">
+                                                    <input type="button" class="pull-right btn btn-info" value="编辑" ng-click="handWriting(model,0,model.bill_front_photo_path)">
+                                                </span>
+                                                <!--<img style="height: 190px; width: 300px;" ng-src="{{model.bill_front_photo_path}}" alt="没有汇票正面照片" />
+                                                <button class="btn btn-info btn-xs" style="margin-top: 40px;" ng-disabled="!model.bill_front_photo_id" ng-click="showFront()"><i class="fa fa-search"></i></button>-->
+                                            </div>
+                                            <label class="control-label col-sm-2">汇票背面：</label>
+                                            <div class="col-sm-3">
+                                                <div class="tb-booth tb-pic tb-s250" >
+                                                    <a href="{{model.bill_back_photo_path}}" target="_blank" ng-if="model.bill_back_photo_path!=''">
+                                                        <img  height="100%" width="100%"  class="jqzoom" src="{{model.bill_back_photo_path | addTimestamp }}" rel="{{model.bill_back_photo_path}}" alt="汇票正面未上传" />
+                                                    </a>
+                                                    <div ng-if="model.bill_back_photo_path==''">
+                                                        汇票背面未上传
+                                                    </div>
+                                                </div>
+                                               <span ng-if="model.bill_back_photo_path!=''">
+                                                    <input type="button" class="pull-right btn btn-info" value="编辑" ng-click="handWriting(model,1,model.bill_front_photo_path)">
+                                                </span>
+                                                <!--<img style="height: 190px; width: 300px;" ng-src="{{model.bill_front_photo_path}}" alt="没有汇票正面照片" />
+                                                <button class="btn btn-info btn-xs" style="margin-top: 40px;" ng-disabled="!model.bill_front_photo_id" ng-click="showFront()"><i class="fa fa-search"></i></button>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-sm-2">汇票正面背书：</label>
+                                            <div class="col-sm-3">
+                                                <div class="tb-booth tb-pic tb-s250">
+                                                    <a href="{{model.bill_front_photo_path|getEndorsementURL}}" target="_blank" ng-if="model.bill_front_photo_path!=''">
+                                                        <img class="jqzoom" height="100%" width="100%"   src="{{model.bill_front_photo_path | getEndorsementURL | addTimestamp}}" rel="{{model.bill_front_photo_path|getEndorsementURL}}" alt="汇票未背书" />
+                                                    </a>
+
+                                                    <div ng-if="model.bill_front_photo_path==''">
+                                                        汇票未背书
+                                                    </div>
+                                                </div>
+                                             </div>
+                                            <label class="control-label col-sm-2">汇票背面背书：</label>
+                                            <div class="col-sm-3">
+                                                <div class="tb-booth tb-pic tb-s250" >
+                                                    <a href="{{model.bill_back_photo_path|getEndorsementURL|addTimestamp}}" target="_blank" ng-if="model.bill_back_photo_path!=''">
+                                                        <img  height="100%" width="100%"  class="jqzoom" src="{{model.bill_back_photo_path|getEndorsementURL | addTimestamp }}" rel="{{model.bill_back_photo_path}}" alt="汇票背面未背书" />
+                                                    </a>
+                                                    <div ng-if="model.bill_back_photo_path==''">
+                                                        汇票背面未背书
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">附件：</label>
+                                            <div class="row">
+                                                <div class="col-md-4" ng-repeat="file in model.bill_back_files">
+                                                    <div class="tb-booth  tb-s150" >
+                                                        <a href="{{file.file_path}}" target="_blank">
+                                                            <img   src="assets/img/attach.png"  alt="附件未上传" />
+                                                            <span class="col-md-12">{{file.file_name|limitTo : 6}}{{ file.file_name.length > 6 ? '...' : '' }}</span>
+                                                        </a>
+                                                    </div>
+                                                    <!--<img style="height: 190px; width: 300px;" ng-src="{{model.bill_back_photo_path}}" alt="没有汇票背面照片" />
+                                                    <button class="btn btn-info btn-xs" style="margin-top: 40px;" ng-disabled="!model.bill_back_photo_id" ng-click="showBack()"><i class="fa fa-search"></i></button>-->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code != 702 ||model.is_checked == '1'||model.is_checked == '-1'" >
+                                            <label class="control-label col-md-2">承兑机构：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                <!--{{ model.acceptor_type_name }}-->
+                                                <select class="form-control" ng-model="model.acceptor_type_id" ng-options="item.code as item.constant_name for item in acceptorTypeData"></select>
+                                            </div>
+                                            <label class="control-label col-md-2"><font color="red">*</font>承兑银行：</label>
+                                            <div class="col-md-4 form-control-static" >
+                                                <!--{{ model.acceptor_name }}-->
+                                                <input type="text" class="form-control" ng-model="model.acceptor_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code != 702  ||model.is_checked == '1'||model.is_checked == '-1'">
+                                            <label class="control-label col-md-2">汇票到期日：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                <!--{{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}-->
+                                                <input type="text" class="form-control width-150" uib-datepicker-popup is-open="datepicker.bill_deadline_time" ng-model="model.bill_deadline_time" ng-click="datepicker.bill_deadline_time=!datepicker.bill_deadline_time" />
+                                            </div>
+                                            <label class="control-label col-md-2"><font color="red">*</font>票据号：</label>
+                                            <div class="col-md-4 form-control-static" >
+                                                <!--{{ model.bill_number }}-->
+                                                <input type="text" class="form-control" ng-model="model.bill_number" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 702 &&model.is_checked != '1'&&model.is_checked != '-1'" >
+                                            <label class="control-label col-md-2">承兑机构：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                <!--{{ model.acceptor_type_name }}-->
+
+                                                <select class="form-control" ng-model="model.acceptor_type_id" ng-disabled="true" ng-options="item.code as item.constant_name for item in acceptorTypeData"></select>
+                                            </div>
+                                            <label class="control-label col-md-2">承兑银行：</label>
+                                            <div class="col-md-4 form-control-static" >
+                                                <!--{{ model.acceptor_name }}-->
+                                                <input type="text" class="form-control" ng-model="model.acceptor_name" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 702&&model.is_checked != '1'&&model.is_checked != '-1'">
+                                            <!--<label class="control-label col-md-2">汇票到期日：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                &lt;!&ndash;{{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}&ndash;&gt;
+                                                <input type="text" class="form-control width-150" uib-datepicker-popup is-open="datepicker.bill_deadline_time" ng-model="model.bill_deadline_time" ng-click="datepicker.bill_deadline_time=!datepicker.bill_deadline_time" />
+                                            </div>-->
+                                            <label class="control-label col-md-2">票据号：</label>
+                                            <div class="col-md-4 form-control-static" >
+                                                <!--{{ model.bill_number }}-->
+                                                <input type="text" class="form-control" ng-model="model.bill_number" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">联系人姓名：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_name }}
+<!--
+                                                <input type="text" class="form-control" ng-model="model.contact_name">
+-->
+                                            </div>
+                                            <label class="control-label col-md-2">联系方式：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_phone }}
+<!--
+                                                <input type="text" class="form-control" ng-model="model.contact_phone">
+-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.bill_type_id != 101" ng-model="model.bill_location_id">
+                                            <label class="control-label col-md-2">交易地点：</label>
+                                            <div class="col-md-10 form-inline">
+                                                <select class="form-control width-150" ng-model="model.product_location_province_id" ng-options="item.id as item.address_name for item in provinceData" ng-change="provinceChange()"><option value="">省</option></select>
+                                                <select class="form-control width-150" ng-model="model.product_location_id" ng-options="item.id as item.address_name for item in cityData"><option value="">市</option></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701 && model.bill_type_id == 101">
+                                            <label class="control-label col-md-2">汇票瑕疵：</label>
+                                            <div class="col-md-10 form-control-static">
+
+                                                <span ng-repeat="item in billFlawData" class="col-sm-3">
+                                                    <input type="checkbox" ng-checked="isSelectBillFlaw(item.code,model.bill_flaw_ids)" > {{ item.constant_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701 && model.bill_type_id == 102">
+                                            <label class="control-label col-md-2">汇票瑕疵：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                <span ng-repeat="item in billFlawData2" class="col-sm-3">
+                                                    <input type="checkbox" ng-checked="isSelectBillFlaw(item.code,model.bill_flaw_ids)" > {{ item.constant_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701">
+                                            <label class="control-label col-md-2">背书次数：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                <!--{{ model.endorsement_number }}-->
+                                                <input type="number" class="form-control width-50" min="0" ng-model="model.endorsement_number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">汇票备注：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                <!--{{ model.description }}-->
+                                                <textarea class="form-control" ng-model="model.description" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">审核备注：</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" ng-model="model.check_description" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-sm btn-success" ng-click="pass()" ng-disabled="checkForm.$invalid" ng-if="filter.checkedType==0"><i class="fa fa-save"></i> 通过</button>
+                                    <button type="button" class="btn btn-sm btn-danger" ng-click="reject()"  ng-if="filter.checkedType==0"><i class="fa fa-save"></i> 不通过</button>
+                                    <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="modal-read">
+                    <div class="modal-dialog" style="width:1100px">
+                        <div class="modal-content">
+                            <ng-form name="resdForm" novalidate>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>票据详情</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 票据类型：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.bill_type_name }}
+                                                <!--<span ng-repeat="item in billTypeData">
+                                        <input type="radio" value="{{item.code}}" ng-change="billTypeChange()" ng-model="model.bill_type_id"> {{ item.constant_name }}
+                                    </span>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 交易方式：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.trade_type_name }}
+                                                <!--<span ng-repeat="item in tradeTypeCode">
+                                        <input type="radio" value="{{item.code}}" ng-change="tradeTypeChange()" ng-model="model.trade_type_code"> {{ item.constant_name }}
+                                    </span>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2"><span class="g-orange">*</span> 票面金额[元]：</label>
+                                            <div class="col-md-10 form-inline form-control-static">
+                                                {{ model.bill_sum_price }} &nbsp; &nbsp;{{ amountInWords(model.bill_sum_price) }}
+                                                <!--<input class="form-control width-150" type="number" ng-model="model.bill_sum_price"> &nbsp; &nbsp; {{ amountInWords(model.bill_sum_price) }}-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">汇票正面：</label>
+                                            <div class="col-sm-4">
+                                                <div class="tb-booth tb-pic tb-s250">
+                                                    <a href="{{model.bill_front_photo_path}}" target="_blank">
+                                                        <img class="jqzoom" src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" alt="汇票正面未上传" />
+                                                    </a>
+                                                </div>
+                                                <!--<img style="height: 190px; width: 300px;" ng-src="{{model.bill_front_photo_path}}" alt="没有汇票正面照片" />
+                                    <button class="btn btn-info btn-xs" style="margin-top: 40px;" ng-disabled="!model.bill_front_photo_id" ng-click="showFront()"><i class="fa fa-search"></i></button>-->
+                                            </div>
+                                            <label class="control-label col-md-2">汇票背面：</label>
+                                            <div class="col-sm-4">
+                                                <div class="tb-booth tb-pic tb-s250">
+                                                    <a href="{{model.bill_back_photo_path}}" target="_blank">
+                                                        <img class="jqzoom" src="{{model.bill_back_photo_path}}" rel="{{model.bill_back_photo_path}}" alt="汇票背面未上传" />
+                                                    </a>
+                                                </div>
+                                                <!--<img style="height: 190px; width: 300px;" ng-src="{{model.bill_back_photo_path}}" alt="没有汇票背面照片" />
+                                    <button class="btn btn-info btn-xs" style="margin-top: 40px;" ng-disabled="!model.bill_back_photo_id" ng-click="showBack()"><i class="fa fa-search"></i></button>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">承兑机构：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.acceptor_type_name }}
+                                                <!--<select class="form-control" ng-model="model.acceptor_type_id" ng-options="item.code as item.constant_name for item in acceptorTypeData"></select>-->
+                                            </div>
+                                            <label class="control-label col-md-2">承兑银行：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.acceptor_name }}
+                                                <!--  <input type="text" class="form-control" ng-model="model.acceptor_name">-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">汇票到期日：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}
+                                                <!--<input type="text" class="form-control width-150" uib-datepicker-popup is-open="datepicker.bill_deadline_time" ng-model="model.bill_deadline_time" ng-click="datepicker.bill_deadline_time=!datepicker.bill_deadline_time" />-->
+                                            </div>
+                                            <label class="control-label col-md-2">票据号：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.bill_number }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">联系人姓名：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_name }}
+                                                <!--<input type="text" class="form-control" ng-model="model.contact_name">-->
+                                            </div>
+                                            <label class="control-label col-md-2">联系方式：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_phone }}
+                                                <!--<input type="text" class="form-control" ng-model="model.contact_phone">-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.bill_type_id != 101" ng-model="model.bill_location_id">
+                                            <label class="control-label col-md-2">交易地点：</label>
+                                            <div class="col-md-10 form-inline">
+                                                <select class="form-control width-150" ng-model="model.product_location_province_id" ng-options="item.id as item.address_name for item in provinceData" ng-change="provinceChange()"><option value="">省</option></select>
+                                                <select class="form-control width-150" ng-model="model.product_location_id" ng-options="item.id as item.address_name for item in cityData"><option value="">市</option></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701 && model.bill_type_id == 101">
+                                            <label class="control-label col-md-2">汇票瑕疵：</label>
+                                            <div class="col-md-10 form-control-static">
+
+                                                <span ng-repeat="item in billFlawData" class="col-sm-3">
+                                                    <input type="checkbox" ng-model="item.checked"> {{ item.constant_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701 && model.bill_type_id == 102">
+                                            <label class="control-label col-md-2">汇票瑕疵：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                <span ng-repeat="item in billFlawData2" class="col-sm-3">
+                                                    <input type="checkbox" ng-model="item.checked"> {{ item.constant_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full" ng-if="model.trade_type_code == 701">
+                                            <label class="control-label col-md-2">背书次数：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.endorsement_number }}
+                                                <!--<input type="number" class="form-control width-50" min="0" ng-model="model.endorsement_number">-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">备注：</label>
+                                            <div class="col-md-10 form-control-static">
+                                                {{ model.description }}
+                                                <!--<textarea class="form-control" ng-model="model.description" rows="8"></textarea>-->
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group width-full">
+                                            <label class="control-label col-md-2">审核备注：</label>
+                                            <div class="col-md-10">
+                                                {{ model.check_description }}
+                                                <textarea class="form-control" ng-model="model.check_description" rows="4"></textarea>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!--<button type="button" class="btn btn-sm btn-success" ng-click="pass()" ng-disabled="checkForm.$invalid" ng-if="filter.checkedType==0"><i class="fa fa-save"></i> 通过</button>
+                                    <button type="button" class="btn btn-sm btn-danger" ng-click="reject()" ng-disabled="checkForm.$invalid" ng-if="filter.checkedType==0"><i class="fa fa-save"></i> 不通过</button>-->
+                                    <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

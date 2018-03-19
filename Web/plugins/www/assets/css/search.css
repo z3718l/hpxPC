@@ -1,0 +1,223 @@
+.user-nav-list ul li .icon-ticket-price2{background: url(../img/chaxun-active.png) no-repeat 0 0;}
+.user-right{
+    width: 80%;
+    background-color: white;
+}
+.user-right .right-top{
+    width: 100%;
+    height: 45px;
+    background-color: #1a2b71;
+}
+.user-right p{
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+}
+.user-right .content{
+    height: 600px;
+    background-color: white;
+}
+.explain{
+    height: 40px;
+    float: left;
+}
+
+.city li{
+    width: 80px;
+    float: left;
+}
+.highlight{
+    color: #2762b4;
+}
+.search{
+    width: 200px;
+    font-size: 18px;
+    height: 30px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #f55a14;
+    color: #fff;
+}
+
+.line{
+    height: 1px;
+    background-color: #505050;
+    float: left;
+}
+.explain p{
+    line-height: 200%;
+    font-size: 13px;
+    color: #505050;
+}
+.explain p span{
+    color: #f55a14;
+}
+.phone p{
+    width: 10%;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.phone p span{
+    color: #f55a14;
+}
+.phone .phone_t{
+    width: 30%;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.sex{
+    margin-left: 140px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.sex p{
+    width: 70px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.sex p span{
+    color: #f55a14;
+}
+.sex .sex_t{
+    width: 50px;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.deal{
+    margin-left: 103px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.deal p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.deal p span{
+    color: #f55a14;
+}
+.deal .deal_t{
+    width: 70px;
+    height: 30px;
+    margin-left: 0px;
+    margin-top: 5px;
+    float: left;
+}
+.deal img{
+    margin-top: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+    float: left;
+}
+
+
+.address{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.address p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.address .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+
+.study{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.study p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.study .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+.import_1{
+    width: 250px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_1 img{
+    margin-top: 10px;
+    width: 180px;
+    height: 120px;
+    float: left;
+}
+.import_1 p{
+    padding-top: 110px;
+    color: #505050;
+    float: left;
+}
+.import_2{
+    width: 530px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_2 img{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 150px;
+    height: 100px;
+    float: left;
+}
+.import_2 p{
+    padding-top: 90px;
+    color: #505050;
+    float: left;
+}
+.sure{
+    width: 500px;
+    height: 50px;
+    float: left;
+}
+.sure input{
+    width: 200px;
+    height: 40px;
+    background-color: #f55a14;
+    color: white;
+    border: 0px;
+    font-size: 15px;
+    margin-left: 220px;
+}

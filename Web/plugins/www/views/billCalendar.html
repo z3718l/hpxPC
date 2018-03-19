@@ -1,0 +1,174 @@
+﻿<div ng-controller="billCalendarController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right_top col-md-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 开票日历</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 开票日历</p>
+        </div>
+        <div class="container">
+            <div class="row col-md-12">
+                <div class="col-md-1">
+                    <div class="form-group ">
+                        <input type="radio" ng-click="refresh(101)" id="filmTicket" name="ticket" checked>
+                        <label for="filmTicket">电票</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="radio" ng-click="refresh(102)" id="paperTicket" name="ticket">
+                            <label for="paperTicket">纸票</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="model.billTypeId==102" class="col-md-12 offset-css-1" style="margin-bottom: 3em;">
+                <div class="row col-md-5 calendar">
+                    <div>
+                        <div >
+                          <div class="c-dropdown2-btn-group">
+                              <div class="c-dropdown2-btn">{{model.year}}年</div>
+                                <div class="c-dropdown2-btn-icon-border dropdown-toggle" data-toggle="dropdown">
+                                    <a href="Javascrip:void(0)" style="cursor:hand;" class="c-icon c-icon-triangle-down"></a>
+                                </div>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in allYears"><a href="" ng-click="setYear(item)">{{item}}年</a></li>
+                                </ul>
+                          </div>
+                            <div class="c-dropdown2-btn-group">
+                                <div class="c-dropdown3-btn-icon-border">
+                                    <div class="c-icon " ng-click="setMonth(model.month>1?model.month-1:model.month)">
+                                        <a href="Javascrip:void(0)" style="cursor:hand;"><</a>
+                                    </div>
+                                </div>
+                                <div class="c-dropdown2-btn">{{model.month}}月 
+                                    <a href="Javascrip:void(0)" style="cursor:hand;" class="c-icon c-icon-triangle-down dropdown-toggle" data-toggle="dropdown"></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="item in allMonths"><a href="" ng-click="setMonth(item)">{{item}}月</a></li>
+                                    </ul>
+                                </div>
+                                <div class="c-dropdown2-btn-icon-border">
+                                    <div class="c-icon " ng-click="setMonth(model.month<12?model.month+1:model.month)">
+                                        <a href="Javascrip:void(0)" style="cursor:hand;">></a>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="offset-left">
+                               <button type="button" class="btn btn-default" ng-click="reset()">返回今天</button>
+                           </div>
+                        </div>
+                        <div class="bor-bottom">
+                            <hr>
+                        </div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>一</th>
+                                <th>二</th>
+                                <th>三</th>
+                                <th>四</th>
+                                <th>五</th>
+                                <th class="calendar-relax">六</th>
+                                <th class="calendar-relax">日</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="item[0].week_name || $index==0" ng-repeat="item in calendarResult">
+                                    <td ng-class="{'select-active': one.day==todayStr, 'calendar-relax': one.day_status=='休息'}" ng-repeat="one in item">
+                                        <p>{{one.day | limitTo:-2}}</p>
+
+                                        <p ng-class="{true: 'selected', false: 'unselected'}[one.day_status=='休息']">{{one.day_status=='工作日'?one.bill_calendar_days+"天":one.bill_calendar_days?"休息":""}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--div class="row col-md-12 save">
+                    <form action="#">
+                        <button type="button" ng-click="queryCalendar()">保存</button>
+                    </form>
+                </div-->
+            </div>
+            <!-- 电票 -->
+            <div ng-if="model.billTypeId==101" class="row col-md-12" style="margin-bottom: 3em;">
+                <div class="row col-md-12 select-date">
+                    <span>请选择周期:</span>
+                    <button class="dropdown-toggle" data-toggle="dropdown">{{model.number==12?"一年期":"半年期"}} <img src="assets/img/btn-bottom.png" alt=""></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="" ng-click="refreshCycle(6)">半年期</a></li>
+                        <li><a href="" ng-click="refreshCycle(12)">一年期</a></li>
+                    </ul>
+                </div>
+                <div class="row col-md-5 calendar">
+                    <div>
+                        <div >
+                          <div class="c-dropdown2-btn-group">
+                              <div class="c-dropdown2-btn">{{model.year}}年</div>
+                                <div class="c-dropdown2-btn-icon-border dropdown-toggle" data-toggle="dropdown">
+                                    <a href="Javascrip:void(0)" style="cursor:hand;" class="c-icon c-icon-triangle-down"></a>
+                                </div>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in allYears"><a href="" ng-click="setYear(item)">{{item}}年</a></li>
+                                </ul>
+                          </div>
+                            <div class="c-dropdown2-btn-group">
+                                <div class="c-dropdown3-btn-icon-border">
+                                    <div class="c-icon " ng-click="setMonth(model.month>1?model.month-1:model.month)">
+                                        <a href="Javascrip:void(0)" style="cursor:hand;"><</a>
+                                    </div>
+                                </div>
+                                <div class="c-dropdown2-btn">{{model.month}}月 
+                                    <a href="Javascrip:void(0)" style="cursor:hand;" class="c-icon c-icon-triangle-down dropdown-toggle" data-toggle="dropdown"></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="item in allMonths"><a href="" ng-click="setMonth(item)">{{item}}月</a></li>
+                                    </ul>
+                                </div>
+                                <div class="c-dropdown2-btn-icon-border">
+                                    <div class="c-icon " ng-click="setMonth(model.month<12?model.month+1:model.month)">
+                                        <a href="Javascrip:void(0)" style="cursor:hand;">></a>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="offset-left">
+                               <button type="button" class="btn btn-default" ng-click="reset()">返回今天</button>
+                           </div>
+                        </div>
+                        <div class="bor-bottom">
+                            <hr>
+                        </div>
+                        <table>
+                                <thead>
+                                <tr>
+                                    <th>一</th>
+                                    <th>二</th>
+                                    <th>三</th>
+                                    <th>四</th>
+                                    <th>五</th>
+                                    <th class="calendar-relax">六</th>
+                                    <th class="calendar-relax">日</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="item[0].week_name || $index==0" ng-repeat="item in calendarResult">
+                                        <td ng-class="{'select-active': one.day==todayStr, 'calendar-relax': one.day_status=='休息'}" ng-repeat="one in item">
+                                            <p>{{one.day | limitTo:-2}}</p>
+
+                                            <p  ng-class="{true: 'selected', false: 'unselected'}[one.day_status=='休息']">{{one.day_status=='工作日'?one.bill_calendar_days+"天":one.bill_calendar_days?"休息":""}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                <!--<div class="row col-md-12 save">
+                    <form action="#">
+                        <button type="button" ng-click="queryCalendar()">保存</button>
+                    </form>
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <!-- 右侧 end-->
+</div>

@@ -1,0 +1,190 @@
+<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+<div ng-controller="customerController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right-top col-md-12 row " style="margin-left: 0px">
+            <p>个人中心 > 我的账号 > 联系人信息</p>
+        </div>
+        <div class="content col-md-12 row" style="margin-left: 0px;">
+            <div class="process row col-md-12">
+                <div class="process1 col-md-3 col-xs-3">
+                    <img src="assets/img/user-right-point.png">
+                    <h5>联系人信息</h5>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process1 col-md-3 col-xs-3">
+                    <img src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 3) ? '' : '-gray'}}.png">
+                    <h5>机构认证</h5>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process1 col-md-3 col-xs-3">
+                    <img src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 4) ? '' : '-gray'}}.png">
+                    <h5>账户绑定</h5>
+                </div>
+            </div>
+            <div class="explain col-md-12">
+                <div class="line col-md-11 text-right"></div>
+            </div>
+            <div class="table col-md-12 text-center">
+                <ng-form name="editForm" class="form-horizontal col-md-12" role="form">
+                    <div class="form-group">
+                        <div class="col-md-1"></div>
+                        <p class=" col-md-10 text-left" style="color: #505050">
+                            <span>*</span> 提示：在线交易需要完成上述三步，创建资金账户。联系人登记后的基本权利为使用汇票助手、查看报价、查看票源基本功能。
+                            填写信息的完整有助于提高平台信用等级，下列“<span>*</span>”项为必填项，其它为选填项
+                        </p>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 手机：</label>
+                        <div class="col-md-6">
+                            {{ model.phone_number }}
+                        </div>
+                    </div>
+                    <div ng-if="model.is_verified == 0">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 姓名：</label>
+                            <div class="col-md-6">
+                                <input class="form-control" ng-model="model.customer_name" placeholder="请输入姓名">
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 性别：</label>
+                            <div class="col-md-4">
+                                <div class="btn btn-default" ng-class="{'btn-warning': model.sex == '男'}" ng-click="model.sex='男'">男</div>
+                                <div class="btn btn-default" ng-class="{'btn-warning': model.sex == '女'}" ng-click="model.sex='女'">女</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-inline col-md-12">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 交易地点：</label>
+                            <div class="col-md-2">
+                                <select class="form-control" style="max-width: 110%;" ng-model="model.trade_location_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()" placeholder="省/直辖市">
+                                    <option value="">省/直辖市</option>
+                                </select>
+                            </div>
+                            <div id="tradCity" class="col-md-2" ng-if="model.trade_location_province_id !=1 || model.trade_location_province_id != 20 || model.trade_location_province_id != 860 || model.trade_location_province_id != 2462">
+                                <select class="form-control" style="max-width: 110%;display:block;" ng-model="model.trade_location_city_id" ng-options="item.id as item.address_name for item in CityData" ng-change="cityChange()" placeholder="市">
+                                    <option value="">市</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" style="max-width: 100%;" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in AddressData" placeholder="区/县">
+                                    <option value="">区/县</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 详情地址：</label>
+                            <div class="col-md-6">
+                                <input class="form-control" ng-model="model.contact_address" placeholder="请输入具体通讯地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 教育程度：</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="educational_status_code" ng-model="model.educational_status_code" class="form-control"  ng-options="item.code as item.constant_name for item in educationalStatus" placeholder="请输入学历">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 公司职位：</label>
+                            <div class="col-md-6">
+                                <input class="form-control" name="job" ng-model="model.job" placeholder="请输入联系人公司职位">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">上传名片：</label>
+                            <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setJobID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.job_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证号：</label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="id_number" ng-model="model.id_number" placeholder="请输入身份证号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证正反面：</label>
+                            <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_front_photo_address}}" />
+                            </div>
+                            <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_back_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group text-center" style="margin-top:50px;">
+                            <input type="button" class="btn btn-warning" style="width: 200px;" ng-disabled="editForm.$invalid" ng-click="save()" value="提交">
+                        </div>
+                    </div>
+                    <!-- 已经填写 -->
+                    <div ng-if="model.is_verified != 0">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 姓名：</label>
+                            <div class="col-md-6">
+                                {{ model.customer_name }}
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 性别：</label>
+                            <div class="col-md-4">
+                                {{ model.sex }}
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 control-label"><span style="color: #f55a14">*</span> 交易地点：</label>
+                            <div class="col-md-6">
+                                {{ model.trade_location_province }} <span ng-if="!model.trade_location_city">{{ model.trade_location_city }}</span> {{ model.trade_location }} {{ model.contact_address }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 教育程度：</label>
+                            <div class="col-md-6">
+                                {{ model.educational_status_name }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> 公司职位：</label>
+                            <div class="col-md-6">
+                                {{ model.job }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">上传名片：</label>
+                            <div class="col-sm-4">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.job_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证号：</label>
+                            <div class="col-md-6">
+                                {{ model.id_number }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证正反面：</label>
+                            <div class="col-sm-4">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_front_photo_address}}" />
+                            </div>
+                            <div class="col-sm-4">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_back_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group text-center" style="margin-top:50px;">
+                            <input type="button" class="btn btn-warning" style="width: 200px;" ng-disabled="editForm.$invalid" ng-click="modified()" value="修改">
+                        </div>
+                    </div>
+                </ng-form>
+
+            </div>
+        </div>
+    </div>
+    <!-- 右侧 end-->
+    <div class="modal fade" id="modal-license">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <img src="assets/img/license.png" />
+            </div>
+        </div>
+    </div>
+</div>

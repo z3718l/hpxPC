@@ -1,0 +1,62 @@
+﻿.content .p-line{
+    width:12%;
+}
+/*.user-right .form-horizontal .control-label{
+    text-align:left;
+}*/
+
+.user-right .form-horizontal .control-label{
+    padding-top:10px;
+}
+/*.user-right .Account-content .form-horizontal .control-label{
+    padding-top:10px !important;
+}*/
+.enterprise-content{
+    margin-top:30px;
+}
+.content-page{
+    margin-left:58%;
+}
+.conclude{
+    padding-right:5%;
+}
+.user-right p{
+    padding-left:12px;
+    padding-right:12px;
+}
+.retract{
+    text-indent:2em;
+}
+.btn-detail{
+    background:#fff;
+    color:#ff5a14;
+    border:1px solid #ff5a14;
+}
+.btn-detail:hover{
+    color:#ff5a14;
+}
+.AccountModal-content .form-control{
+    width:64%;
+}
+.check-status{
+    display:inline-block;
+    width:45%;
+    text-align:left;
+}
+.user-right .agent-content .control-label{
+    padding-top:2px;
+}
+.user-right .info-content .control-label{
+    padding-top:2px;
+}
+.user-right .modal-enterprise .control-label{
+    padding-top:2px;
+}
+.user-right .modal-au-con .control-label{
+    padding-top:2px;
+}
+.icon-right{
+    margin-right:4px;
+}
+
+

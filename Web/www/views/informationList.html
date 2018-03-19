@@ -1,0 +1,10 @@
+﻿<div ng-cloak ng-controller="informationListController">
+    <div ng-class="{ 'bill-query-cont': identity }">
+        <div class="list-cont row">
+            <div class="list-home">当前位置：首页  > <span>{{ typeName }}</span></div>
+            <ul>
+                <li ng-repeat="item in informations"><a href="javascript:;" ui-sref="app.free.information({ id: '{{ item.id }}' })" target="_blank">{{item.title}}</a><span>[{{ item.publishing_time | date: 'yyyy-MM-dd' }}]</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

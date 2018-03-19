@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{site.seo_title}</title>
+    <meta charset="utf-8" />
+    <meta name=”renderer” content=”webkit”>
+    <meta http-equiv=”X-UA-Compatible” content=”IE=Edge,chrome=1″ >
+    <meta name="baidu-site-verification" content="8wHB899l5W" />
+    <meta name="sogou_site_verification" content="QY1qSYeHpf" />
+    <meta name="viewport" content="width=1200px, user-scalable=true" />
+    <meta name="keywords" content="{site.seo_keyword}" />
+    <meta name="description" content="{site.seo_description}" />
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+    <link rel="shortcut icon" href="/icon.png" />
+    <link rel="bookmark" href="/favicon.ico" />
+   <link href="<%templateskin%>/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%templateskin%>/css/contenle.css" rel="stylesheet" />
+   <link href="<%templateskin%>/css/my-customklp.css" rel="stylesheet" />
+    <link href="<%templateskin%>/css/slide.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/service.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="<%templateskin%>/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/jquery.cookie.js" type="text/javascript"></script>
+   <script src="<%templateskin%>/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/jquery.fn.imgplayer.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/base.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/slide.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/sweetalert.min.js" type="text/javascript"></script>
+   <script src="<%templateskin%>/js/IE.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/jquery.vticker.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/yh.js" type="text/javascript"></script>
+
+    <style>
+        .container-fluid{
+            padding-left:0px;
+            padding-right:0px;
+
+        }
+    </style>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e55609f14990af913eec23e605300bf1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+</head>
+
+<body class="bgs">
+    <!--Header-->
+    <%template src="_header.html"%>
+    <!--/Header-->
+
+    <container>
+        <div class="container-fluid mgn">
+            <div class="row-fluid lbo">
+                <div class="span12">
+                    <div class="slide-main" id="touchMain">
+                        <div class="slide-box" id="slideContent">
+                            <div class="slide">
+                                <a href="../../aspx/main/partner.aspx" target="_blank" style="background:url(<%templateskin%>/images/banner1.jpg) center center no-repeat;"></a>
+                            </div>
+                            <div class="slide">
+                                <a href="/show-157.html" target="_blank" style="background:url(<%templateskin%>/images/banner2.png) center center no-repeat;"></a>
+                            </div>
+                            <div class="slide">
+                                <a href="/aspx/main/Loadapp.aspx" target="_blank" style="background:url(<%templateskin%>/images/banner3.png) center center no-repeat;"></a>
+                            </div>
+                            <div class="slide">
+                                <a href="/aspx/main/Extension.aspx" target="_blank" style="background:url(<%templateskin%>/images/banner4.png) center center no-repeat;"></a>
+                            </div>
+                            <div class="slide">
+                                <a href="/show-158.html" target="_blank" style="background:url(<%templateskin%>/images/banner5.png) center center no-repeat;"></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <a class="cur" stat="item1001" href="javascript:;"></a><a href="javascript:;" stat="item1002"></a><a href="javascript:;" stat="item1003"></a>
+                            <a href="javascript:;" stat="item1004"></a><a href="javascript:;" stat="item1005"></a>
+                        </div>
+                        <!-- 用户登录 start-->
+                       
+                        <div class="container " id="divLogin" style="display:none">
+                            <div class="row">
+                                <div class="container-fluid block">
+                                    <div class="login-tab-box" style="z-index: 888;margin: 0 0 0 9px;">
+                                        <div class="banner-login-bg"></div>
+                                        <div class="con">
+                                            <div class="hpx-box-hd">
+                                                登录汇票线
+                                            </div>
+                                            <div class="tab-content hpx-tab-content">
+                                                <div class="user-name">
+                                                    <label class="user-icon user-icon-1"></label>
+                                                    <input type="text" id="username" name="userName" class="form-control input-height" placeholder="请输入手机号码">
+                                                </div>
+                                                <div class="user-name">
+                                                    <label class="user-icon user-icon-2"></label>
+                                                    <input type="password" id="password" name="password" class="form-control input-height" placeholder="请输入密码">
+                                                </div>
+                                                <div class="user-name" id="dragDiv" style="display: none;">
+                                                    <div id="drag" style="width: 260px; margin-bottom: 15px;">
+                                                    </div>
+                                                </div>
+                                                <div class="login-btn">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-xs-6"><button id="logon" class="btn btn-block btn-color-login">登录</button></div>
+                                                        <div class="col-md-6 col-xs-6"><button onclick="window.location.href = '/www/index.html#/app/signup';" class="btn btn-block btn-color-border">注册</button></div>
+                                                    </div>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-xs-6">
+                                                            <label>
+                                                                <input id="rememberme" type="checkbox" value="remember-me">记住交易账号
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6 col-xs-6 text-right">
+                                                            <a href="/www/index.html#/app/forgetPassword" style="position: relative;top: 31px;color: #fff;">忘记密码？</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!-- 用户登录 end-->
+                  
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid zxxx">
+              <div class="row-fluid">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="notice">
+                        <div class="row">
+                            <div style="margin-left: auto;margin-right: auto;width:100%;">
+                            <div class="col-md-2 notice-hd col-xs-2 mkn">
+                                <em class="icon"></em>
+                                <span>最新消息:</span>
+                            </div>
+
+                            <ul class="scroll" style="height:60px;overflow:hidden;font-size:14px;width:500px">
+                                
+                                   <%set DataTable xwggList2=get_article_list("xwgg", 54, 5, "status=0")%>
+                                     <%loop xwgg2 xwggList2%>
+                                     <li style="width:500px"><a href='<%linkurl("show",{xwgg2[id]})%>' target="_blank"><%cutstring({xwgg2[title]}, 32)%></a></li>
+                                     <%/loop%>
+
+
+
+                                <!--<li> <a href="/show-126.html"> 2016-12-16   创新型票据在线交易平台汇票线上线倒计时</a></li>
+                                <li> <a href="/show-125.html"> 2016-12-15   预估同业存单或冲刺13万亿</a></li>
+                                <li> <a href="/show-117.html"> 2016-12-15   上海票据交易所开业-票据市场迎改革元年</a></li>
+                                <li> <a href="/show-114.html"> 2016-12-09   电票新时代，汇票线与你一起展望未来</a></li>
+                                <li> <a href="/show-116.html"> 2016-12-09   透析|纸票信息登记规则发布</a></li>-->
+
+                            </ul>
+                                </div>
+                            <script src="../../templates/main/js/scroll.js"></script>
+                            <script type="text/javascript">
+                        $(document).ready(function(){
+                            $(".scroll").scrollQ();
+                        });
+
+                            </script>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+                  </div>
+            </div>
+        <div class="container-fluid hwites" style="margin-top: 0px;height:200px;">
+            <div class="container-fluid hwitesk" style="margin-top: 25px;">
+                <ul>
+                    <li class="anq" style="float:left; margin-left: -37px;">
+                        <img class="imk1" src="../../templates/main/images/hpx-03.png" /><br /><br /><span class="aq1">安全</span>
+                        <div class="kp1">
+                            <p>电票"支付宝"模式<br />兴业专户托管与票款对付系统<br />制度性解决电票"打飞"烦恼</p>
+                        </div>
+                    </li>
+                    <li class="gx" style="margin-left:20px">
+                        <img class="imk2" src="../../templates/main/images/hpx-04.png" /><br /><br /><span class="aq2">高效</span>
+                        <div class="kp2">
+                            <p>在线注册10-20分钟轻松完成<br />随时在线出票30分钟内全部搞定<br />大额资金清算实时到账</p>
+                        </div>
+
+</li>
+                    <li class="jse" style="margin-left:2%">
+                        <img class="imk3" src="../../templates/main/images/hpx-05.png" /><br /><br /><span class="aq3">节省</span>
+                        <div class="kp3">
+                            <p>全国一手资金最优报价<br />省去见面交易各种费用<br />极大降低企业融资成本</p>
+                        </div>
+
+                    </li>
+                    <li class="major" style="margin-left:2%" >
+                        <img class="imk4" src="../../templates/main/images/hpx-06.png" /><br /><br /><span class="aq4">专业</span>
+                        <div class="kp4">
+                            <p>汇票助手最全面贴现工具<br />挂失查询帮您把控风险<br />专业工具全面解决您的痛点</p>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid zxxx">
+        <div class="container-fluid hwite">
+            <div class="row-fluid">
+               <div class="container-fluid hwitem">
+	<div class="row-fluid">
+		<div class="span12">
+               <ul class="zoe">
+                   <li >
+                      <div class="zme">
+                          <div class="zme1">
+                              <img src="<%templateskin%>/images/hpx-11.png" />
+                          </div>
+                          <div class="zme2">
+                               <span>累计汇票成交额</span><br />
+                            <div class="nmo"><label id="total_trade_price"></label></div>
+                          </div>
+                      </div>
+                   </li>
+                   <li>
+                       <div class="zme">
+                           <div class="zme1">
+                               <img src="<%templateskin%>/images/hpx-12.png" />
+                           </div>
+                           <div class="zme2">
+                               <span>累计电票成交额</span><br />
+                               <div class="nmo"><label id="total_electronic_trade_price"></label></div>
+                           </div>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="zme">
+                           <div class="zme1">
+                               <img src="<%templateskin%>/images/hpx-13.png" />
+                           </div>
+                           <div class="zme2">
+                               <span>昨日交易金额</span><br />
+                               <div class="nmo"><label id="yesterday_trade_price"></label></div>
+                           </div>
+                       </div>
+                   </li>
+                   <li>
+                       <div class="zme">
+                           <div class="zme1">
+                               <img src="<%templateskin%>/images/hpx-14.png" />
+                           </div>
+                           <div class="zme2">
+                               <span>平均电票交易时长</span><br />
+                               <div class="nmo"><label id="average_trade_time"></label></div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+		</div>
+	</div>
+</div>
+            </div>
+        </div>
+            </div>
+        <div class="container-fluid bders">
+            <div class="row-fluid">
+                <div class="span12">
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid listk" style="width:1204px">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="container-fluid listkl" style="width:1080px">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="pyx"><span>票源信息</span></div>
+                                <div class="dzp">
+                                    <ul>
+                                       
+                                        <li id="electricTab" class="cr nba">电票</li>
+                                        <li id="paperTab" class="cr">纸票</li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid dzble">
+                        <div class="row-fluid">
+                            <div class="span12">
+                               <div class="dzpk">
+                                   <div id="electric-memo" class="dzpimg" style="min-width:30.7%;margin-right:-9px">
+                                       <img style="width:262px" src="<%templateskin%>/images/elec.png" />
+                                   </div>
+                                   <div class="dzptable">
+                                       <table id="electric-money-list" class="table-ele tables" style="width: 100%;border-top: 2px solid #f55a14;margin-left: -10.7%;min-width: 108.5%;background:#fff;">
+                                           <thead>
+                                               <tr class="table-tit" style="display:none">
+                                                   <th class="col-md-2 col-xs-2">机构类型</th>
+                                                   <th class="col-md-2 col-xs-2">票面金额</th>
+                                                   <th class="col-md-2 col-xs-2">汇票到期日</th>
+                                                   <th class="col-md-2 col-xs-2">剩余天数</th>
+                                                   <th class="col-md-2 col-xs-2">所在地区</th>
+                                                   <th class="col-md-2 col-xs-2"></th>
+                                               </tr>
+                                           </thead>
+                                           <tbody></tbody>
+                                       </table>
+                                       <div id="electric-money-list-more" class="electric-money-list-more g-gray tsb" style="height:46px;"><a href="/www/index.html#/app/free/queryBill?type=101" target="_blank" style="font-size:16px;margin: 0 0 0 86%;">更多电票 > </a></div>
+                                   </div>
+                                   
+                               </div>
+                               
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12 klkm">
+                                <div class="dzpk">
+                                    <div id="paper-memo" class="dzpimg" style="min-width: 30%;overflow:hidden">
+                                        <img style="width:263px" src="<%templateskin%>/images/paper.png"  />
+                                    </div>
+                                    <div class="dzptable">
+                                        <table id="paper-money-list" class="table-ele hidden tables" style="width: 111%;border-top: 2px solid #f55a14;margin-left: -10.7%;min-width: 108.5%;background:#fff;">
+                                            <thead>
+                                                <tr class="table-tit" style="display:none">
+                                                    <th class="col-md-2 col-xs-2">机构类型</th>
+                                                    <th class="col-md-2 col-xs-2">票面金额</th>
+                                                    <th class="col-md-2 col-xs-2">汇票到期日</th>
+                                                    <th class="col-md-2 col-xs-2">剩余天数</th>
+                                                    <th class="col-md-2 col-xs-2">所在地区</th>
+                                                    <th class="col-md-2 col-xs-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="paper-money-list-more" class="electric-money-list-more g-gray tsb hidden"><a href="/www/index.html#/app/free/queryBill?type=102" target="_blank" style="font-size:16px;margin: 0 0 0 86%;height:46px;">更多纸票 > </a></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bder">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="container-fluid  listkl">
+                        <div class="row-fluid">
+                            <div class="span12">
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid listk" style="height:495px;">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="container-fluid listkl" style="width:1077px">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="pyx"><span>机构报价</span></div>
+                                <div class="dzps">
+                                    <ul>
+                                        <li href="javascript:;" id="billOfferTab1" class="cr nba">银电大票</li>
+                                        <li href="javascript:;" id="billOfferTab2" class="cr">银纸小票</li>
+                                        <li href="javascript:;" id="billOfferTab3" class="cr">银电小票</li>
+                                        <li href="javascript:;" id="billOfferTab4" class="cr">商票</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid dzble">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="dzpk">
+                                    <div id="electric-memo" class="dzpimg" style="height:495px;">
+                                        <img src="<%templateskin%>/images/ad.png" />
+                                    </div>
+                                    <div class="dzptable kble" style="width:73.5%;border-top:2px solid #ff5a14">
+                                     
+                                        <ul id="billOffer1-list" class="electric-money-list-kl"></ul>
+                                        <ul id="billOffer2-list" class="electric-money-list-kl hidden"></ul>
+                                        <ul id="billOffer3-list" class="electric-money-list-kl hidden"></ul>
+                                        <ul id="billOffer4-list" class="electric-money-list-kl hidden"></ul>
+                                        <div class="electric-money-list-more g-gray" style="margin: 0 0 0 82%;"><div style="line-height:35px"><a href="/www/index.html#/app/free/myOffer" target="_blank" style="font-size:16px;margin-left:22%">更多报价 ></a></div></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="container-fluid bder">
+            <div class="row-fluid">
+                <div class="span12">
+                </div>
+            </div>
+        </div>
+
+            <div class="container-fluid listk" style="height:234px;">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="container-fluid listkl">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="pyx"><span>汇票助手</span></div>
+                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid dzble">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="dzpk">
+                                       
+                                        <div class="dzptable kble" style="width:1115px;border-top:2px solid #ff5a14;height:185px;">
+                                            <div class="zsou">
+                                                <ul>
+                                                    <li class="cnt1" style="margin-left:40px;">
+                                                        <a href="/www/index.html#/app/free/calculator" style="text-decoration:none;color:#333;">
+                                                            <div class="con1"><img src="<%templateskin%>/images/bp1.png" class="conimg1" /></div>
+                                                            <div><label style="position: relative;top: -25px;">贴现计算器</label></div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="cnt2">
+                                                        <a href="/www/index.html#/app/free/calendar" style="text-decoration none;color #333;">
+                                                            <div class="con2"><img src="<%templateskin%>/images/bp2.png" class="conimg2" /></div>
+                                                            <label style="position: relative;top: -25px;">开票日历</label>
+                                                        </a>
+                                                    </li>
+                                                    <li class="cnt3">
+                                                        <a href="/www/index.html#/app/free/querypublic" style="text-decoration none;color #333;">
+                                                            <div class="con3"><img src="<%templateskin%>/images/bp4.png" class="conimg3" /></div>
+                                                            <label style="position: relative;top: -25px;">挂失查询</label>
+                                                        </a>
+                                                    </li>
+                                                    <li class="cnt4">
+                                                        <a href="/www/index.html#/app/free/querybank" style="text-decoration none;color #333;">
+                                                            <div class="con4"><img src="<%templateskin%>/images/bp5.png" class="conimg4" /></div>
+                                                            <label style="position: relative;top: -25px;">行号查询</label>
+                                                        </a>
+                                                    </li>
+                                                    <li class="cnt5" style="float:right">
+                                                        <a href="/www/index.html#/app/free/queryenterprise" style=" text-decoration none;color #333;">
+                                                            <div class="con5"><img src="<%templateskin%>/images/bp3.png" class="conimg5" /></div>
+                                                            <label style="position: relative;top: -25px;">工商查询</label>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                           
+                                            
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--<div class="container-fluid animatek" style="width:1118px" >
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="container-fluid listkl" style="height:48px;border-bottom:1px solid #f55a14;width:1087px">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="pyx"><span>汇票助手</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid animateks" style="height:190px">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="zsou">
+                        <ul>
+                            <li class="cnt1" style="float:left;margin-left:19px;">
+                                <a href="/www/index.html#/app/free/calculator" style="text-decoration:none;color:#333;">
+                                    <div class="con1"><img src="<%templateskin%>/images/bp1.png" class="conimg1" /></div>
+                                    <div><label style="position: relative;top: -10px;">贴现计算器</label></div>
+                                </a>
+                            </li>
+                            <li class="cnt2">
+                                <a href="/www/index.html#/app/free/calendar" style=" text-decoration none;color #333;">
+                                    <div class="con2"><img src="<%templateskin%>/images/bp2.png" class="conimg2"  /></div>
+                                    <label style="position: relative;top: -10px;">开票日历</label>
+                                </a>
+                            </li>
+                            <li class="cnt3">
+                                <a href="/www/index.html#/app/free/querypublic" style=" text-decoration none;color #333;">
+                                    <div class="con3"><img src="<%templateskin%>/images/bp4.png" class="conimg3"  /></div>
+                                    <label style="position: relative;top: -10px;">挂失查询</label>
+                                </a>
+                            </li>
+                            <li class="cnt4">
+                                <a href="/www/index.html#/app/free/querybank" style=" text-decoration none;color #333;">
+                                    <div class="con4"><img src="<%templateskin%>/images/bp5.png" class="conimg4"  /></div>
+                                    <label style="position: relative;top: -10px;">行号查询</label>
+                                </a>
+                            </li>
+                            <li class="cnt5" style="float:right">
+                                <a href="/www/index.html#/app/free/queryenterprise" style=" text-decoration none;color #333;">
+                                    <div class="con5"><img src="<%templateskin%>/images/bp3.png" class="conimg5"  /></div>
+                                    <label style="position: relative;top: -10px;">工商查询</label>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="container-fluid bder">
+            <div class="row-fluid">
+                <div class="span12">
+                </div>
+            </div>
+        </div>
+         <div class="container-fluid xwhite">
+             <div class="row-fluid">
+                 <div class="container-fluid lisb" style="height:50px;background:#fff">
+                     <div class="row-fluid rowsb">
+                         <div class="span8 lisb1" style="border:none;height:50px;background:#fff;line-height:50px">
+                             <div class="news" style="background-position: -30px -205px;margin: 12px 0 0 0;"></div><div class="xw">新闻公告</div><div class="gda"><a href='<%linkurl("list",54)%>'>更多 >> </a></div>
+                         </div>
+                         <div class="span4 lisb2 " style="border:none;height:50px;background:#fff;line-height:50px">
+                             <div class="news" style="background-position: -75px -205px;"></div><div class="xw">最新挂失</div><div class="gda"><a href="/www/index.html#/app/free/querypublic">更多 >> </a></div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="container-fluid lisb">
+                     <div class="row-fluid rowsb">
+                         <div class="span8 lisb1">
+                             <div id="slide" style="float:left; margin: 17px 0 0 1px;">
+                                 <%set DataTable xwggPhotoList=get_article_list("xwgg", 54, 5, "status=0 and img_url <> ''")%>
+                                 <%loop xwggPhoto xwggPhotoList%>
+                                 <a href='<%linkurl("show",{xwggPhoto[id]})%>
+                                            ' title="<%cutstring({xwggPhoto[title]}, 18)%>" target="_blank">
+                                     <img src="{xwggPhoto[img_url]}" alt="票据在线交易一站式服务平台" style="width:278px;height:173px;display:none" />
+                                 </a>
+                                 <%/loop%>
+                             </div>
+                             <div class="sle">
+                                 <ul class="col-md-6 col-xs-6 latest-news" style="padding-right: 0px; margin-top: 21px;width:107%;">
+                                     <%set DataTable xwggList=get_article_list("xwgg", 54, 5, "status=0")%>
+                                     <%loop xwgg xwggList%>
+                                     <li style="line-height: 28px; line-height: 37px;"><a href='<%linkurl("show",{xwgg[id]})%>' target="_blank"><%cutstring({xwgg[title]}, 32)%></a></li>
+                                     <%/loop%>
+                                 </ul>
+                             </div>
+                         </div>
+                         <div class="span8 liscen">
+                             
+                         </div>
+                         <div class="span4 lisb2 ">
+                             <div style="margin-top: 12px;margin-left: 0px;margin-right: 0px;font-weight: bold;width: 100%;height: 30px;background: #ebebeb;line-height: 30px;margin-bottom:-15px">
+                                 <span style="display:inline-block; width: 38%; text-align:center;">票号</span>
+                                 <span style="display:inline-block; width: 40%; text-align:center;">公告法院</span>
+                                 <span style="display:inline-block; width: 18%; text-align:center;">公告时间</span>
+                             </div>
+                             <div id="lost" style="margin-top: 21px;margin-left: 0px;margin-right: 0px;width: 100%;height: 30px;background: #fff;line-height: 30px;">
+                                 <ul style="width: 100%;"></ul>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+
+      
+        <div class="fix-service">
+            <div class="sev-trg">
+                <div id="div_udesk_im" class="sev-item olask">
+                    <div class="flash-info"></div>
+                    <span class="ico"><img src="<%templateskin%>/images/serv.png" /></span>
+                    <span class="lab">在线客服</span>
+                </div>
+                <div class="sev-item calt" id="qq">
+                    <i class="icon icon-qq"></i>
+                    <span class="lab">QQ客服</span>
+                </div>
+                <div class="sev-item downapp">
+                    <i class="icon icon-phone"></i>
+                    <span class="lab">手机APP</span>
+                    <div class="sev-sub cf">
+                        <div class="sev-follow">
+                            <i class="img"><img src="<%templateskin%>/images/qr-codes-2.png" alt="" /></i>
+                            <span>扫描下载汇票线App<br /></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sev-item weixin">
+                    <i class="icon icon-weixin"></i>
+                    <span class="lab">微信</span>
+                    <div class="sev-sub">
+                        <!--<div class="sev-follow"><i class="img"><img src="<%templateskin%>/images/qr-codes-1.png" alt="" /></i><span>汇票线官方服务号</span></div>-->
+                        <div class="sev-follow"><i class="img"><img src="<%templateskin%>/images/qr-codes-1.png" alt="" /></i><span>汇票线官方订阅号</span></div>
+                    </div>
+                </div>
+                <div class="sev-item totop">
+                    <i class="icon icon-totop"></i>
+                    <span class="lab">回到顶部</span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+           $(".anq").hover(function () {
+               $(".imk1").hide();
+               $(".aq1").hide();
+               $(".kp1").show();
+               $(".kp1  P").animate({ top: '20px' }, "slow");
+           }, function () {
+               $(".imk1").show();
+               $(".aq1").show();
+               $(".kp1").hide();
+               $(".kp1  P").animate({ top: '155px' }, "slow");
+           });
+           $(".gx").hover(function () {
+                 $(".imk2").hide();
+                 $(".aq2").hide();
+               $(".kp2").show();
+               $(".kp2  P").animate({ top: '20px' }, "slow");
+           }, function () {
+                $(".kp2").hide();
+                $(".imk2").show();
+                 $(".aq2").show();
+               $(".kp2  P").animate({ top: '155px' }, "slow");
+
+           });
+           $(".jse").hover(function () {
+                $(".imk3").hide();
+                 $(".aq3").hide();
+              $(".kp3").show();
+               $(".kp3  P").animate({ top: '20px' }, "slow");
+           }, function () {
+                $(".kp3").hide();
+                  $(".imk3").show();
+                 $(".aq3").show();
+               $(".kp3  P").animate({ top: '155px' }, "slow");
+
+           });
+           $(".major").hover(function () {
+                 $(".imk4").hide();
+                 $(".aq4").hide();
+               $(".kp4").show();
+               $(".kp4  P").animate({ top: '20px' }, "slow");
+           }, function () {
+                $(".kp4").hide();
+                 $(".imk4").show();
+                 $(".aq4").show();
+               $(".kp4  P").animate({ top: '155px' }, "slow");
+
+           });
+
+        $(".gh").hover(function () {
+            $(".con").fadeOut();
+            $(".ghk").animate({ top: '-11px' }, "slow");
+           $(".")
+        }, function () {
+
+        });
+        $(".sou").click(function(){
+            $(".ghk").animate({ top: '-224px' }, "slow");
+            $(".con").fadeIn();
+        });
+
+   $(".cr").hover(function () {
+       $(this).addClass("nba").siblings().removeClass("nba")
+       $(".klkm").show();
+    	})
+            
+  $(".kmk1").hover(function () {
+               $(".bdes").show();
+           }, function () {
+                $(".bdes").hide();
+
+           });
+
+ $(".kmk2").hover(function () {
+               $(".xgo2").show();
+           }, function () {
+                $(".xgo2").hide();
+
+           });
+
+
+
+
+ 
+ $(".cnt1").hover(function(){
+     $(".cnt1").css("margin-top", "13px");
+     $(".cnt1").css("box-shadow", "0px 3px 20px 2px #e4e4e4");
+     $(".conimg1").css("width", "80px","height","80px");
+ },function(){
+     $(".cnt1").css("margin-top", "18px");
+     $(".cnt1").css("box-shadow", "0px 0px 0px #888888");
+     $(".conimg1").css("width", "70px", "height", "70px");
+ })
+ $(".cnt2").hover(function () {
+     $(".cnt2").css("margin-top", "13px");
+     $(".cnt2").css("box-shadow", "0px 3px 20px 2px #e4e4e4");
+     $(".conimg2").css("width", "80px", "height", "80px");
+ }, function () {
+     $(".cnt2").css("margin-top", "18px");
+     $(".cnt2").css("box-shadow", "0px 0px 0px #888888");
+     $(".conimg2").css("width", "70px", "height", "70px");
+ })
+ $(".cnt3").hover(function () {
+     $(".cnt3").css("margin-top", "13px");
+     $(".cnt3").css("box-shadow", "0px 3px 20px 2px #e4e4e4");
+     $(".conimg3").css("width", "80px", "height", "80px");
+ }, function () {
+     $(".cnt3").css("margin-top", "18px");
+     $(".cnt3").css("box-shadow", "0px 0px 0px #888888");
+     $(".conimg3").css("width", "70px", "height", "70px");
+ })
+ $(".cnt4").hover(function () {
+     $(".cnt4").css("margin-top", "13px");
+     $(".cnt4").css("box-shadow", "0px 3px 20px 2px #e4e4e4");
+     $(".conimg4").css("width", "80px", "height", "80px");
+ }, function () {
+     $(".cnt4").css("margin-top", "18px");
+     $(".cnt4").css("box-shadow", "0px 0px 0px #888888");
+     $(".conimg4").css("width", "70px", "height", "70px");
+ })
+ $(".cnt5").hover(function () {
+     $(".cnt5").css("margin-top", "13px");
+     $(".cnt5").css("box-shadow", "0px 3px 20px 2px #e4e4e4");
+     $(".conimg1").css("width", "80px", "height", "80px");
+ }, function () {
+     $(".cnt5").css("margin-top", "18px");
+     $(".cnt5").css("box-shadow", "0px 0px 0px #888888");
+     $(".conimg5").css("width", "70px", "height", "70px");
+ })
+
+        </script>
+    </div>
+    </container>
+
+    <!--Footer-->
+    <%template src="_footer.html"%>
+    <!--/Footer-->
+
+
+
+    <!--<iframe id="angular" src="www/index.html" height="0" width="0" hidden="hidden"></iframe>-->
+</body>
+<script src="<%templateskin%>/js/udeakx.js" type="text/javascript"></script>
+</html>

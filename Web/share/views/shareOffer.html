@@ -1,0 +1,591 @@
+﻿<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    a {
+        text-decoration: none;
+    }
+    body {
+        background-color: #eaeaea;
+    }
+    ul li {
+        list-style: none;
+        float: left;
+    }
+    .active {
+        background-color: #000;
+        opacity: 0.3;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /*width: 100%;
+        height: 100%;*/
+        z-index: 999;
+        /*display: none;*/
+        overflow-x: 0;
+        overflow-y: auto;
+    }
+    .enterprise {
+        background-color: #fff;
+        width: 90%;
+        margin: 0 auto;
+        position: relative;
+        font-size: 14px;
+    }
+    .enterpriseName {
+        width: 90%;
+        border-bottom: 1px solid #ddd;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 21px;
+        font-size: 18px;
+        padding-top: 10px;
+        padding-top: 10px;
+    }
+    .enterprise p {
+        width: 90%;
+        line-height: 28px;
+        margin: 0 auto;
+    }
+
+    .enterprise .circle {
+        width: 40px;
+        height: 40px;
+        background-color: #eaeaea;
+        position: absolute;
+        border-radius: 50%;
+        z-index: 998;
+    }
+    .enterprise .circle:nth-child(1) {
+        top: -15px;
+        left: -15px;
+    }
+    .enterprise .circle:nth-child(2) {
+        top: -15px;
+        right: -15px;
+    }
+    .enterprise .circle:nth-child(3) {
+        bottom: -15px;
+        left: -15px;
+    }
+    .enterprise .circle:nth-child(4) {
+        bottom: -15px;
+        right: -15px;
+    }
+    .tab_one {
+        width: 90%;
+        background-color: #fff;
+        margin: 20px auto;
+        padding-bottom: 20px;
+        font-size: 14px;
+    }
+    .tab_one .dayNum {
+        width: 95%;
+        margin: 0 auto;
+        color: #feb307;
+        line-height: 35px;
+    }
+    .tab_one .tabHead {
+        width: 95%;
+        margin: 0 auto;
+        height: 40px;
+        background-color: #feb307;
+    }
+    .tab_one .tabHead span {
+        width: 25%;
+        text-align: center;
+        display: block;
+        float: left;
+        line-height: 40px;
+    }
+    .tab_one .tabHead .styles {
+        width: 50%;
+    }
+    .tab_one table {
+        margin: 0 auto;
+        width: 95%;
+        text-align: center;
+    }
+    .tab_one table td {
+        width: 25%;
+        height: 20px;
+        line-height: 25px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    .contacts {
+        width: 90%;
+        height: 90px;
+        margin: 15px auto;
+        background: -webkit-linear-gradient(left, #afa8dd, #a8c7dd);
+        display: flex;
+    }
+    .contacts .penson {
+        width: 80px;
+        height: 100%;
+        line-height: 90px;
+        font-size: 30px;
+    }
+    .contacts .penson span {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        margin: 10px auto;
+        display: block;
+        border: 1px solid #fff;
+        border-radius: 50%;
+    }
+    .glyphicon-user:before {
+        font-size: 32px;
+        color: #fff;
+    }
+    .contacts .contactsInfo {
+        height: 100%;
+        flex: 2;
+    }
+    .contacts .contactsInfo p {
+        height: 45px;
+        color: #fff;
+        margin-bottom: 0 !important;
+        line-height: 40px;
+    }
+    .remark {
+        width: 90%;
+        height: 150px;
+        margin: 10px auto;
+        margin-bottom: 0;
+        position: relative;
+    }
+    .remark .understand {
+        color: #feb307;
+        font-size: 14px;
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        cursor: pointer;
+    }
+    .btn {
+        height: 50px;
+        background-color: #feb307;
+        color: #fff;
+        text-align: center;
+        line-height: 38px;
+        width: 100%;
+    }
+    .profile {
+        width: 80%;
+        margin-left: 10%;
+        position: fixed;
+        top: 50%;
+        /*background:url(assets/img/modelimg.png)center no-repeat;*/
+        /*background-color: #fff;*/
+        z-index: 1000;
+    }
+    .profile .content {
+        width: 100%;
+        margin: 0px auto;
+        line-height: 22px;
+        background: url(assets/img/modelimg.png)center no-repeat;
+        /* background-size: 90% 100%; */
+        padding: 20px;
+        background-color: #fff;
+    }
+    .profile .content h3 {
+        /*line-height: 50px;*/
+        text-align: center;
+        margin-top: 0;
+    }
+    .close1 {
+        display: block;
+        margin: 6px auto;
+        width: 40px;
+    }
+    .txt2 {
+        margin-top: 4px;
+    }
+</style>
+<script src="../../scripts/jquery/jquery-1.11.2.min.js"></script>
+<div ng-cloak ng-controller="shareOfferController" style="font-size:16px;position:relative;padding-top:20px;">
+    <div class="active" ng-if="read_hpx"></div>
+    <div class="enterprise">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+        <div class="enterpriseName">{{model.enterprise_name}}</div>
+        <ul class="star">
+            <li ng-repeat="i in getNumber(enterpriseDetail.customer_level_id)"><img src="assets/img/star_1.png"></li>
+            <li ng-repeat="i in getNumber(5-enterpriseDetail.customer_level_id)"><img src="assets/img/star_2.png"></li>
+        </ul>
+        <!--<p style="text-align:center;color:#fdb407;font-size:18px;">
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span></p>-->
+        <!--<p>
+            {{model.enterprise_location}}  企业地址：model.enterprise_location 交易地址：{{model.trade_province}}{{model.trade_location}}
+        </p>-->
+        <!--<p>收票范围：电票  小电票 纸票  商票</p>-->
+        <p style="text-align:center;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;{{model.enterprise_location}}</p>
+
+    </div>
+    <!--银纸小票  银电小票-->                  <!--202银电大票     203银纸小票 204银电小票 (180天/360天，x-180天/x-360天，0-x天)    205商票-->
+    <div class="tab_one" ng-if="model.bill_style_id==203 || model.bill_style_id==204" ng-hide="model.offer_detail.offer_rate01==null && model.offer_detail.offer_rate11==null && model.offer_detail.offer_rate21==null && model.offer_detail.offer_rate02==null && model.offer_detail.offer_rate12==null && model.offer_detail.offer_rate22==null  && model.offer_detail.offer_rate03==null && model.offer_detail.offer_rate13==null && model.offer_detail.offer_rate23==null && model.offer_detail.offer_rate04==null && model.offer_detail.offer_rate14==null && model.offer_detail.offer_rate24==null  && model.offer_detail.offer_rate05==null && model.offer_detail.offer_rate15==null && model.offer_detail.offer_rate25==null && model.offer_detail.offer_rate06==null && model.offer_detail.offer_rate16==null && model.offer_detail.offer_rate26==null  && model.offer_detail.offer_rate07==null && model.offer_detail.offer_rate17==null && model.offer_detail.offer_rate27==null">
+        <p class="tradeType">交易方式：{{ model.trade_type_name }}</p>
+        <p class="dayNum" ng-if="model.bill_style_id==203">180天以上</p>
+        <p class="dayNum" ng-if="model.bill_style_id==204">360天以上</p>
+        <p class="tabHead">
+            <span>承兑机构</span>
+            <span>100万以上</span>
+            <span>50-100万</span>
+            <span>50万以下</span>
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" ng-if="model.bill_style_id==203 || model.bill_style_id==204">
+            <tr>
+                <td>
+                    国股
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate01 == null && model.offer_detail.offer_rate11 == null && model.offer_detail.offer_rate21 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate01 == null && model.offer_detail.offer_rate11 == null && model.offer_detail.offer_rate21 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate01 == null ? "--" :(model.offer_detail.offer_rate01 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate11 == null ? '--' :(model.offer_detail.offer_rate11 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate21 == null ? '--' :(model.offer_detail.offer_rate21 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    城商
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate02 == null && model.offer_detail.offer_rate12 == null && model.offer_detail.offer_rate22 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate02 == null && model.offer_detail.offer_rate12 == null && model.offer_detail.offer_rate22 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate02 == null ? '--' :(model.offer_detail.offer_rate02 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate12 == null ? '--' :(model.offer_detail.offer_rate12 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate22 == null ? '--' :(model.offer_detail.offer_rate21 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    三农
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate03 == null && model.offer_detail.offer_rate13 == null && model.offer_detail.offer_rate23 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate03 == null && model.offer_detail.offer_rate13 == null && model.offer_detail.offer_rate23 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate03 == null ? '--':(model.offer_detail.offer_rate03 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate13 == null ? '--':(model.offer_detail.offer_rate13 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate23 == null ? '--':(model.offer_detail.offer_rate23 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    村镇
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate04 == null && model.offer_detail.offer_rate14 == null && model.offer_detail.offer_rate24 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate04 == null && model.offer_detail.offer_rate14 == null && model.offer_detail.offer_rate24 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate04 == null ? '--':(model.offer_detail.offer_rate04 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate14 == null ? '--':(model.offer_detail.offer_rate14 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate24 == null ? '--':(model.offer_detail.offer_rate24 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    外资
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate05 == null && model.offer_detail.offer_rate15 == null && model.offer_detail.offer_rate25 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate05 == null && model.offer_detail.offer_rate15 == null && model.offer_detail.offer_rate25 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate05 == null ? '--':(model.offer_detail.offer_rate05 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate15 == null ? '--':(model.offer_detail.offer_rate15 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate25 == null ? '--':(model.offer_detail.offer_rate25 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    财务
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate06 == null && model.offer_detail.offer_rate16 == null && model.offer_detail.offer_rate26 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate06 == null && model.offer_detail.offer_rate16 == null && model.offer_detail.offer_rate26 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate06 == null ? '--':(model.offer_detail.offer_rate06 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate16 == null ? '--':(model.offer_detail.offer_rate16 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate26 == null ? '--':(model.offer_detail.offer_rate26 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td>{{ model.offer_detail.offer_rate07 == null ? '--':(model.offer_detail.offer_rate07) }}{{model.offer_detail.offer_rate07 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate17 == null ? '--':(model.offer_detail.offer_rate17) }}{{model.offer_detail.offer_rate17 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate27 == null ? '--':(model.offer_detail.offer_rate27) }}{{model.offer_detail.offer_rate27 == null ?'':'元'}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab_one" ng-if="model.bill_style_id==203 || model.bill_style_id==204" ng-hide="model.offer_detail.offer_rate31==null && model.offer_detail.offer_rate41==null && model.offer_detail.offer_rate51==null && model.offer_detail.offer_rate32==null && model.offer_detail.offer_rate42==null && model.offer_detail.offer_rate52==null  && model.offer_detail.offer_rate33==null && model.offer_detail.offer_rate43==null && model.offer_detail.offer_rate53==null && model.offer_detail.offer_rate34==null && model.offer_detail.offer_rate44==null && model.offer_detail.offer_rate54==null  && model.offer_detail.offer_rate35==null && model.offer_detail.offer_rate45==null && model.offer_detail.offer_rate55==null && model.offer_detail.offer_rate36==null && model.offer_detail.offer_rate46==null && model.offer_detail.offer_rate56==null  && model.offer_detail.offer_rate37==null && model.offer_detail.offer_rate47==null && model.offer_detail.offer_rate57==null">
+        <p class="tradeType">交易方式：{{ model.trade_type_name }}</p>
+        <p class="dayNum" ng-if="model.bill_style_id==203">{{ model.deadline_days }} - 180 天</p>
+        <p class="dayNum" ng-if="model.bill_style_id==204">{{ model.deadline_days }} - 360 天</p>
+        <p class="tabHead">
+            <span>承兑机构</span>
+            <span>100万以上</span>
+            <span>50-100万</span>
+            <span>50万以下</span>
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" ng-if="model.bill_style_id==203 || model.bill_style_id==204">
+            <tr>
+                <td>
+                    国股
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate31 == null && model.offer_detail.offer_rate41 == null && model.offer_detail.offer_rate51 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate31 == null && model.offer_detail.offer_rate41 == null && model.offer_detail.offer_rate51 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate31 == null ? "--" :(model.offer_detail.offer_rate31 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate41 == null ? '--' :(model.offer_detail.offer_rate41 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate51 == null ? '--' :(model.offer_detail.offer_rate51 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    城商
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate32 == null && model.offer_detail.offer_rate42 == null && model.offer_detail.offer_rate52 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate32 == null && model.offer_detail.offer_rate42 == null && model.offer_detail.offer_rate52 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate32 == null ? '--' :(model.offer_detail.offer_rate32 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate42 == null ? '--' :(model.offer_detail.offer_rate42 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate52 == null ? '--' :(model.offer_detail.offer_rate52 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    三农
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate33 == null && model.offer_detail.offer_rate43 == null && model.offer_detail.offer_rate53 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate33 == null && model.offer_detail.offer_rate43 == null && model.offer_detail.offer_rate53 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate33 == null ? '--':(model.offer_detail.offer_rate33 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate43 == null ? '--':(model.offer_detail.offer_rate43 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate53 == null ? '--':(model.offer_detail.offer_rate53 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    村镇
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate34 == null && model.offer_detail.offer_rate44 == null && model.offer_detail.offer_rate54 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate34 == null && model.offer_detail.offer_rate44 == null && model.offer_detail.offer_rate54 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate34 == null ? '--':(model.offer_detail.offer_rate34 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate44 == null ? '--':(model.offer_detail.offer_rate44 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate54 == null ? '--':(model.offer_detail.offer_rate54 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    外资
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate35 == null && model.offer_detail.offer_rate45 == null && model.offer_detail.offer_rate55 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate35 == null && model.offer_detail.offer_rate45 == null && model.offer_detail.offer_rate55 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate35 == null ? '--':(model.offer_detail.offer_rate35 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate45 == null ? '--':(model.offer_detail.offer_rate45 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate55 == null ? '--':(model.offer_detail.offer_rate55 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    财务
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate36 == null && model.offer_detail.offer_rate46 == null && model.offer_detail.offer_rate56 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate36 == null && model.offer_detail.offer_rate46 == null && model.offer_detail.offer_rate56 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate36 == null ? '--':(model.offer_detail.offer_rate36 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate46 == null ? '--':(model.offer_detail.offer_rate46 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate56 == null ? '--':(model.offer_detail.offer_rate56 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td>{{ model.offer_detail.offer_rate37 == null ? '--':(model.offer_detail.offer_rate37) }}{{model.offer_detail.offer_rate37 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate47 == null ? '--':(model.offer_detail.offer_rate47) }}{{model.offer_detail.offer_rate47 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate57 == null ? '--':(model.offer_detail.offer_rate57) }}{{model.offer_detail.offer_rate57 == null ?'':'元'}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab_one" ng-show="(model.bill_style_id==203  || model.bill_style_id==204) && model.deadline_days>0" ng-hide="model.offer_detail.offer_rate61==null && model.offer_detail.offer_rate71==null && model.offer_detail.offer_rate81==null && model.offer_detail.offer_rate62==null && model.offer_detail.offer_rate72==null && model.offer_detail.offer_rate82==null && model.offer_detail.offer_rate63==null && model.offer_detail.offer_rate73==null && model.offer_detail.offer_rate83==null && model.offer_detail.offer_rate64==null && model.offer_detail.offer_rate74==null && model.offer_detail.offer_rate84==null && model.offer_detail.offer_rate65==null && model.offer_detail.offer_rate75==null && model.offer_detail.offer_rate85==null && model.offer_detail.offer_rate66==null && model.offer_detail.offer_rate76==null && model.offer_detail.offer_rate86==null && model.offer_detail.offer_rate67==null && model.offer_detail.offer_rate77==null && model.offer_detail.offer_rate87==null">
+        <p class="tradeType">交易方式：{{ model.trade_type_name }}</p>
+        <p class="dayNum">0 - {{ model.deadline_days }} 天</p>
+        <p class="tabHead">
+            <span>承兑机构</span>
+            <span>100万以上</span>
+            <span>50-100万</span>
+            <span>50万以下</span>
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" ng-show="(model.bill_style_id==203  || model.bill_style_id==204) && model.deadline_days>0" ng-hide="(model.bill_style_id==203 || model.bill_style_id==204) && model.deadline_days<=0">
+            <tr>
+                <td>
+                    国股
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate61 == null && model.offer_detail.offer_rate71 == null && model.offer_detail.offer_rate81 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate61 == null && model.offer_detail.offer_rate71 == null && model.offer_detail.offer_rate81 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate61 == null ? "--" :(model.offer_detail.offer_rate61 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate71 == null ? '--' :(model.offer_detail.offer_rate71 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate81 == null ? '--' :(model.offer_detail.offer_rate81 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    城商
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate62 == null && model.offer_detail.offer_rate72 == null && model.offer_detail.offer_rate82 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate62 == null && model.offer_detail.offer_rate72 == null && model.offer_detail.offer_rate82 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate62 == null ? '--' :(model.offer_detail.offer_rate62 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate72 == null ? '--' :(model.offer_detail.offer_rate72 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate82 == null ? '--' :(model.offer_detail.offer_rate82 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    三农
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate63 == null && model.offer_detail.offer_rate73 == null && model.offer_detail.offer_rate83 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate63 == null && model.offer_detail.offer_rate73 == null && model.offer_detail.offer_rate83 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate63 == null ? '--':(model.offer_detail.offer_rate63 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate73 == null ? '--':(model.offer_detail.offer_rate73 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate83 == null ? '--':(model.offer_detail.offer_rate83 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    村镇
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate64 == null && model.offer_detail.offer_rate74 == null && model.offer_detail.offer_rate84 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate64 == null && model.offer_detail.offer_rate74 == null && model.offer_detail.offer_rate84 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate64 == null ? '--':(model.offer_detail.offer_rate64 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate74 == null ? '--':(model.offer_detail.offer_rate74 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate84 == null ? '--':(model.offer_detail.offer_rate84 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    外资
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate65 == null && model.offer_detail.offer_rate75 == null && model.offer_detail.offer_rate85 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate65 == null && model.offer_detail.offer_rate75 == null && model.offer_detail.offer_rate85 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate65 == null ? '--':(model.offer_detail.offer_rate65 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate75 == null ? '--':(model.offer_detail.offer_rate75 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate85 == null ? '--':(model.offer_detail.offer_rate85 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    财务
+                    <span ng-if="model.bill_style_id == 203">{{model.offer_detail.offer_rate66 == null && model.offer_detail.offer_rate76 == null && model.offer_detail.offer_rate86 == null ? "" : "(‰)"}}</span>
+                    <span ng-if="model.bill_style_id == 204">{{model.offer_detail.offer_rate66 == null && model.offer_detail.offer_rate76 == null && model.offer_detail.offer_rate86 == null ? "" : "(%)"}}</span>
+                </td>
+                <td>{{ model.offer_detail.offer_rate66 == null ? '--':(model.offer_detail.offer_rate66 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate76 == null ? '--':(model.offer_detail.offer_rate76 | number:2)}}</td>
+                <td>{{ model.offer_detail.offer_rate86 == null ? '--':(model.offer_detail.offer_rate86 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td>{{ model.offer_detail.offer_rate67 == null ? '--':(model.offer_detail.offer_rate67) }}{{model.offer_detail.offer_rate67 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate77 == null ? '--':(model.offer_detail.offer_rate77) }}{{model.offer_detail.offer_rate77 == null ?'':'元'}}</td>
+                <td>{{ model.offer_detail.offer_rate87 == null ? '--':(model.offer_detail.offer_rate87) }}{{model.offer_detail.offer_rate87 == null ?'':'元'}}</td>
+            </tr>
+        </table>
+    </div>
+    <!--银电大票-->
+    <div class="tab_one" ng-if="model.bill_style_id==202" ng-hide="model.offer_detail.offer_rate01==null && model.offer_detail.offer_rate02==null && model.offer_detail.offer_rate03==null && model.offer_detail.offer_rate04==null && model.offer_detail.offer_rate05==null && model.offer_detail.offer_rate06==null">
+        <p class="tradeType">交易方式：{{ model.trade_type_name }}</p>
+        <p class="tabHead">
+            <span class="styles">承兑机构</span>
+            <span class="styles">年利率</span>
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" ng-if="model.bill_style_id==202">
+            <tr>
+                <td style="width:50%;">
+                    国股
+                    <span>{{model.offer_detail.offer_rate01 == null ? "" : "%"}}</span>
+                </td>
+                <td style="width:50%;">{{model.offer_detail.offer_rate01 == null ? "--" :(model.offer_detail.offer_rate01 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    城商
+                    <span>{{model.offer_detail.offer_rate02 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate02 == null ? "--" :(model.offer_detail.offer_rate02 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    三农
+                    <span>{{model.offer_detail.offer_rate03 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate03 == null ? "--" :(model.offer_detail.offer_rate03 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    村镇
+                    <span>{{model.offer_detail.offer_rate04 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate04 == null ? "--" :(model.offer_detail.offer_rate04 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    外资
+                    <span>{{model.offer_detail.offer_rate05 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate05 == null ? "--" :(model.offer_detail.offer_rate05 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    财务
+                    <span>{{model.offer_detail.offer_rate06 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate06 == null ? "--" :(model.offer_detail.offer_rate06 | number:2)}}</td>
+            </tr>
+        </table>
+    </div>
+    <!--商票-->
+    <div class="tab_one" ng-if="model.bill_style_id==205" ng-hide="model.offer_detail.offer_rate01==null && model.offer_detail.offer_rate02==null">
+        <p class="tradeType">交易方式：{{ model.trade_type_name }}</p>
+        <p class="tabHead">
+            <span class="styles">票据类型</span>
+            <span class="styles">利率</span>
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" ng-if="model.bill_style_id==205">
+            <tr>
+                <td>
+                    电票
+                    <span>{{model.offer_detail.offer_rate01 == null ? "" : "%"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate01 == null ? "--" :(model.offer_detail.offer_rate01 | number:2)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    商票
+                    <span>{{model.offer_detail.offer_rate02 == null ? "" : "‰"}}</span>
+                </td>
+                <td>{{model.offer_detail.offer_rate02 == null ? "--" :(model.offer_detail.offer_rate02 | number:2)}}</td>
+            </tr>
+        </table>
+    </div>
+    <!--底部-->
+    <div class="contacts">
+        <div class="penson">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+        <div class="contactsInfo">
+            <p>
+                <span class="glyphicon glyphicon-earphone"></span>
+                {{ enterpriseDetail.contact_phone }}
+            </p>
+            <P>
+                <span class="glyphicon glyphicon-map-marker"></span>
+                {{model.trade_province}}{{model.trade_location}}
+            </P>
+        </div>
+    </div>
+    <div class="remark">
+        <p>
+            备注：
+            <span ng-if="model.description != '' || model.description != null">{{ model.description }}</span>
+            <span ng-if="model.description == '' || model.description == null" style="color:#ccc;">联系我们时，请先告知在汇票线平台上看到的报价。</span>
+        </p>
+        <P class="understand" ng-click="show_hpx()">了解汇票线?</P>
+    </div>
+    <a href="http://wechat.huipiaoxian.com/invitation/loadapp.html" style="height:50px;display:block;">
+        <div class="btn">下载汇票线APP，了解更多</div>
+    </a>
+    <!--弹框-->
+    <div class="profile" ng-show="read_hpx">
+        <div class="content">
+            <h3>汇票线简介</h3>
+            <div class="txt1">汇票线作为票据在线交易一站式服务平台,与兴业银行集团子公司兴业数字金融服务（上海）股份有限公司达成战略合作伙伴关系,打造票据行业的“电票支付宝”模式,制度性的解决了线下电票交易对手的信用风险,解决了安全问题,平台还通过信息直接对接,减少中间环节,有效地降低了贴现的成本,也提高了票据与资金的流转效率。</div>
+            <div class="txt2"><strong>用汇票线，安全、便捷、省钱！</strong></div>
+        </div>
+        <div>
+            <img class="close1" ng-click="close_hpx()" src="assets/img/close.png" alt="close" />
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+		setInterval(function(){
+			var hei = -($(".profile").height())/2;
+			$(".profile").css("margin-top",hei);
+		},100)
+    })
+</script>

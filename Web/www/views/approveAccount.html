@@ -1,0 +1,62 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/editstyle.css">
+<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<div ng-cloak ng-controller="approveAccountController">
+    <!-- 右侧 start-->
+    <div class="user-right" style="padding-top: 14px;">
+        <div class="right-top col-md-12 col-xs-12 row " style="margin-left: 0px">
+            <p style="color:#3a3a3a;">账户中心 > 账户绑定</p>
+        </div>
+        <div class="content col-md-12 col-xs-12 row" style="width: 100%;border-top: 1px solid #ebebeb;margin-top: -2px;height: 980px;margin-left: 0%;">
+            <div class="process row col-md-12  col-xs-12" style="padding:0px;margin:4% 0 0 0">
+                <div class="explain col-md-12 col-xs-12">
+                    <div class="line col-md-11 col-xs-11 text-right" style="height: 3px;width: 100%;background:#ebebeb;"></div>
+                </div>
+                <div class="table col-md-12 col-xs-12">
+                    <!--账号绑定-->
+                    <ng-form ng-if="singleEnterprise.enterprise_id != 0 && agentModel.isChecked != null && (AccountData.length == 0 || AccountData == '')" name="accountForm" class="form-horizontal col-md-12 col-xs-12" role="form">
+                        <div class="class=" col-md-12 col-xs-12">
+                            <div class="Account-content">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-xs-3"> 机构名称：</label>
+                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                        {{singleEnterprise.enterprise_name}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-xs-3"><span style="color: #f55a14">*</span>账号：</label>
+                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                        <input type="text" name="account_number" ng-model="accountModel.account_number" class="form-control" placeholder="请输入账号" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-xs-3"><span style="color: #f55a14">*</span>银行行号：</label>
+                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                        <input type="text" name="account_number" ng-change="findNumber()" ng-model="accountModel.cnaps_code" class="form-control" placeholder="请输入开户行行号填写至支行" ng-pattern="/\d/" maxlength="12" required />
+                                    </div>
+                                    <div class="col-md-1 col-xs-1" style="line-height: 40px;padding-left: 0;" ng-if="accountModel.cnaps_code.length != 12 && accountModel.cnaps_code"><img src="assets/img/wrong.png" alt="wrong" /></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-xs-3"> 银行名称：</label>
+                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                        <input placeholder="银行名称" ng-disabled="true" ng-model="bankModel" class="form-control"/>
+                                        <!--<span ng-if="accountModel.cnaps_code.length == 12">{{bankModel}}</span>
+                                        <span ng-if="bankModel==null && filter.isView" style="color:#ff5a14">请输入12位正确的开户行行号</span>-->
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12" style="margin-top:20px;">
+                                        <div class="col-md-4 col-xs-4"></div>
+                                        <input type="button" class="col-md-1.5 col-xs-1.5 text-center btn" style="background-color: #f55a14;border: 0px;color: white;margin-right:8px;" ng-click="saveAccount()" value="提交保存">
+                                        <input type="button" class="col-md-1.5 col-xs-1.5 text-center btn" style="background-color: #fff;border: 1px solid #f55a14;color: #f55a14;" ui-sref="app.main.accountStatus" value="跳过">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿<div ng-controller="menuController">
+    <!-- 我要出票 start-->
+    <div class="user-nav-list" ng-if="identity.can_publish == 1">
+        <div class="user-nav-list-title">我要出票</div>
+        <ul>
+            <li><a href="javascript:;" ui-sref="app.main.publish"><span class="icon icon-ticket-want1"></span>发布汇票</a></li>
+           <!-- <li><a href="javascript:;" ui-sref="app.main.myBillFail"><span class="icon icon-ticket-want2"></span>发布审核中</a></li>-->
+            <li><a href="javascript:;" ui-sref="app.main.myBill"><span class="icon icon-ticket-want2"></span>我的发布</a></li>
+            <li><a href="javascript:;" ui-sref="app.main.orderDrawer"><span class="icon icon-ticket-want3"></span>出票订单</a></li>
+            <li><a href="javascript:;" ui-sref="app.free.queryOffer"><span class="icon icon-ticket-collect2"></span>报价查询</a></li>
+        </ul>
+    </div>
+    <!-- 我要出票 end-->
+    <!-- 我要收票 start-->
+    <div class="user-nav-list" ng-if="identity.can_receive == 1">
+        <div class="user-nav-list-title">我要收票</div>
+        <ul>
+            <li><a href="javascript:;" ui-sref="app.main.myBidding"><span class="icon icon-ticket-want2"></span>我的竞价</a></li>
+            <li ng-if="identity.can_publish_offer == 1"><a href="javascript:;" ui-sref="app.main.quote"><span class="icon icon-ticket-collect1"></span>我要报价</a></li>
+            <li><a href="javascript:;" ui-sref="app.free.queryBill"><span class="icon icon-ticket-collect2"></span>汇票查询</a></li>
+            <!--<li><a href="javascript:;" ui-sref="app.main.orderWait"><span class="icon icon-ticket-collect3"></span>待确认交易</a></li>-->
+            <li><a href="javascript:;" ui-sref="app.main.orderReceiver"><span class="icon icon-ticket-collect3"></span>收票订单</a></li>
+        </ul>
+    </div>
+    <!-- 我要收票 end-->
+    <!-- 我的账户 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title">我的账户</div>
+        <ul>
+            <li><a href="javascript:;" ui-sref="app.main.customerInfo"><span class="icon icon-ticket-account2"></span>客户信息</a></li>
+            <li ng-if="identity.is_verified ==1 || identity.is_verified == 3 || identity.is_verified == 4 || identity.is_verified == 5"><a href="javascript:;" ui-sref="app.main.enterpriseAccountInfo"><span class="icon icon-ticket-account2"></span>银行账户</a></li>
+           <!-- <li><a href="javascript:;" ui-sref="app.main.addressInfo"><span class="icon icon-ticket-account2"></span>收货地址信息</a></li>-->
+            <li><a href="javascript:;"  ng-click="tbd()"><span class="icon icon-ticket-account3"></span>大额支付</a></li>
+            <li><a href="javascript:;" ui-sref="app.main.modifyPassword"><span class="icon icon-ticket-account1"></span>修改密码</a></li>
+            <li><a href="javascript:;" ui-sref="app.main.recharge"><span class="icon icon-ticket-account4"></span>在线充值</a></li>
+            <li><a href="javascript:;"  ng-click="tbd()"><span class="icon icon-ticket-account5"></span>消息中心</a></li>
+        </ul>
+    </div>
+    <!-- 我的账户 end-->
+    <!-- 汇票助手 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title">汇票助手</div>
+        <ul>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant1"></span>纸票查询</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant2"></span>公催查询</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant3"></span>行号查询</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant4"></span>工商查询</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant2"></span>开票日历</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant5"></span>我的收藏</a></li>
+            <li><a href="javascript:;" ng-click="tbd()"><span class="icon icon-ticket-assistant6"></span>我的推送</a><span class="remind-number">2</span></li>
+        </ul>
+    </div>
+    <!-- 汇票助手 end-->
+</div>

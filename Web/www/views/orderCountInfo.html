@@ -1,0 +1,49 @@
+﻿<div ng-controller="orderCountController">
+    <ng-form name="editForm" novalidate>
+        <div class="form-horizontal form-inline">
+
+            <div class="form-group width-full"
+                 ng-class="{ 'has-error': editForm.total_trade_price.$invalid && editForm.total_trade_price.$dirty }">
+                <label class="col-md-3 control-label"><font color="red">*</font> 总交易额：</label>
+                <div class="col-md-9">
+                    <input type="text" name="total_trade_price" ng-model="model.total_trade_price" class="form-control"
+                           required>
+                </div>
+            </div>
+            <div class="form-group width-full"
+                 ng-class="{ 'has-error': editForm.total_electronic_trade_price.$invalid && editForm.total_electronic_trade_price.$dirty }">
+                <label class="col-md-3 control-label"><font color="red">*</font> 总电票交易额：</label>
+                <div class="col-md-9">
+                    <input type="text" name="total_electronic_trade_price" ng-model="model.total_electronic_trade_price" class="form-control"
+                           required>
+                </div>
+            </div>
+            <div class="form-group width-full"
+                 ng-class="{ 'has-error': editForm.today_trade_price.$invalid && editForm.today_trade_price.$dirty }">
+                <label class="col-md-3 control-label"><font color="red">*</font> 昨日交易额：</label>
+                <div class="col-md-9">
+                    <input type="text" name="today_trade_price" ng-model="model.today_trade_price" class="form-control"
+                           required>
+                </div>
+            </div>
+            <div class="form-group width-full"
+                 ng-class="{ 'has-error': editForm.average_hour.$invalid && editForm.average_hour.$dirty &&editForm.average_minute.$invalid && editForm.average_minute.$dirty&&editForm.average_second.$invalid && editForm.average_second.$dirty }">
+                <label class="col-md-3 control-label"><font color="red">*</font> 平均交易时间：</label>
+                <div class="col-md-9">
+                    <input type="text" name="average_hour" ng-model="model.average_hour" class="form-control"
+                           required>小时
+                    <input type="text" name="average_minute" ng-model="model.average_minute" class="form-control"
+                           required>分钟
+                    <input type="text" name="average_second" ng-model="model.average_second" class="form-control"
+                           required>秒
+                </div>
+            </div>
+            <div class="form-group width-full">
+                <button type="submit" class="btn btn-sm btn-success col-sm-offset-4 m-r-10" ng-click="save()"
+                        ng-disabled="editForm.$invalid"><i class="fa fa-save"></i> 保存
+                </button>
+            </div>
+        </div>
+    </ng-form>
+</div>
+

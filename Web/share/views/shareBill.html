@@ -1,0 +1,150 @@
+﻿<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    a {
+        text-decoration: none;
+    }
+    body {
+        background-color: #eaeaea;
+    }
+    ul li {
+        list-style: none;
+        line-height: 36px;
+    }
+    .active {
+        background-color: #000;
+        opacity: 0.3;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /*width: 100%;
+        height: 100%;*/
+        z-index: 999;
+        /*display: none;*/
+        overflow-x: 0;
+        overflow-y: auto;
+    }
+    .billContent {
+        padding-top: 5px;
+        font-size: 14px;
+        background: url(assets/img/billground.png)center no-repeat;
+        background-size: 96% 100%;
+    }
+    .billContent li {
+        margin-left: 8%;
+    }
+    .billFront h3 {
+        margin-left: 5%;
+    }
+    .billFront img {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        width: 75%;
+        height: 100%;
+        border: 6px solid #fff;
+    }
+    .remark {
+        width: 90%;
+        height: 58px;
+        margin: 10px auto;
+        margin-bottom: 0;
+        position: relative;
+    }
+    .remark .understand {
+        color: #feb307;
+        font-size: 14px;
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        cursor: pointer;
+    }
+    .btn {
+        height: 50px;
+        background-color: #feb307;
+        color: #fff;
+        text-align: center;
+        line-height: 38px;
+        width: 100%;
+    }
+    .profile {
+        width: 80%;
+        margin-left: 10%;
+        position: fixed;
+        top: 50%;
+        /*background:url(assets/img/modelimg.png)center no-repeat;*/
+        /*background-color: #fff;*/
+        z-index: 1000;
+    }
+    .profile .content {
+        width: 100%;
+        margin: 0px auto;
+        line-height: 22px;
+        background: url(assets/img/modelimg.png)center no-repeat;
+        /* background-size: 90% 100%; */
+        padding: 20px;
+        background-color: #fff;
+    }
+    .profile .content h3 {
+        /*line-height: 50px;*/
+        text-align: center;
+        margin-top: 0;
+    }
+    .close1 {
+        display: block;
+        margin: 6px auto;
+        width: 40px;
+    }
+    .txt2 {
+        margin-top: 4px;
+    }
+</style>
+<div ng-cloak ng-controller="shareBillController" style="height:730px">
+    <div class="active" ng-if="read_hpx"></div>
+    <div class="billPage">
+        <ul class="billContent">
+            <li><span>票据号：</span>{{ model.bill_number }}</li>
+            <li><span>票据类型：</span>{{ model.bill_type_name }} {{ model.acceptor_type_name }}</li>
+            <li><span>票面金额：</span>{{ model.bill_sum_price | currency }}</li>
+            <li><span>汇票到期日：</span>{{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}</li>
+            <li><span>背书次数：</span>{{ model.endorsement_number }}次</li>
+            <li><span>承兑人：</span>{{ model.acceptor_name }}</li>
+            <li><span>票据瑕疵：</span><span ng-repeat="item in model.bill_flaw_names">{{ item }}&nbsp;&nbsp;&nbsp;</span></li>
+        </ul>
+        <div class="billFront">
+            <h3>票面：</h3>
+            <div class="billImg">
+                <img src="{{ model.bill_front_photo_path }}" rel="{{ model.bill_front_photo_path }}" alt="汇票正面未上传" width="230" height="200" />
+            </div>
+        </div>
+        <div class="remark">
+            <P class="understand" ng-click="show_hpx()">了解汇票线?</P>
+        </div>
+        <a href="http://wechat.huipiaoxian.com/invitation/loadapp.html" style="height:50px;display:block;">
+            <div class="btn">下载汇票线APP，了解更多</div>
+        </a>
+    </div>
+    <!--弹框-->
+    <div class="profile" ng-show="read_hpx">
+        <div class="content">
+            <h3>汇票线简介</h3>
+            <div class="txt1">汇票线作为票据在线交易一站式服务平台,与兴业银行集团子公司兴业数字金融服务（上海）股份有限公司达成战略合作伙伴关系,打造票据行业的“电票支付宝”模式,制度性的解决了线下电票交易对手的信用风险,解决了安全问题,平台还通过信息直接对接,减少中间环节,有效地降低了贴现的成本,也提高了票据与资金的流转效率。</div>
+            <div class="txt2"><strong>用汇票线，安全、便捷、省钱！</strong></div>
+        </div>
+        <div>
+            <img class="close1" ng-click="close_hpx()" src="assets/img/close.png" alt="close" />
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        setInterval(function () {
+            var hei = -($(".profile").height()) / 2;
+            $(".profile").css("margin-top", hei);
+        }, 100)
+    })
+</script>

@@ -1,0 +1,30 @@
+﻿<div ng-cloak ng-controller="shareBillController">
+    <div class="page5">
+        <ul class="list h424">
+            <li class="li100"><span>票据号：</span>{{ model.bill_number }}</li>
+            <li class="li100"><span>票据类型：</span>{{ model.bill_type_name }} {{ model.acceptor_type_name }}</li>
+            <li class="li100"><span>票面金额：</span>{{ model.bill_sum_price | currency }}</li>
+            <li class="li100"><span>汇票到期日：</span>{{ model.bill_deadline_time | date: 'yyyy-MM-dd' }}</li>
+            <li class="li100"><span>背书次数：</span> {{ model.endorsement_number }}次</li>
+            <li class="li100"><span>承兑人：</span>{{ model.acceptor_name }}</li>
+            <li class="li100"><span>票据瑕疵：</span><span ng-repeat="item in model.bill_flaw_names" style="margin-left:95px">{{ item }}&nbsp;&nbsp;&nbsp;</span></li>
+        </ul>
+        <div class="box">
+            <h3>票面：</h3>
+            <img align="right" src="{{ model.bill_front_photo_path }}" rel="{{ model.bill_front_photo_path }}" alt="汇票正面未上传" width="230" height="200" />
+        </div>
+        <div class="operate">
+            <a href="https://www.huipiaoxian.com/" class="btn">下载汇票线，了解更多</a>
+            <a href="" class="more js_details">了解汇票线</a>
+        </div>
+    </div>
+
+
+    <div class="alert alert-details">
+        <div class="box">
+            <h3>汇票线简介</h3>
+            <div class="txt">汇票线作为票据在线交易一站式服务平台，其通过兴业银行监管的“票据支付宝”模式，制度性地解决了线下电票交易对手的信用风险，解决了安全问题；平台还通过信息直接对接，减少中间环节，有效地降低了贴现的成本，也提高了票据与资金的流转效率。</div>
+            <div class="txt2">用汇票线，安全、便捷、省钱！</div>
+        </div>
+    </div>
+</div>

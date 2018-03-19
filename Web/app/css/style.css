@@ -1,0 +1,534 @@
+.app-top-bar {
+    background-color: #f55a14 !important;
+}
+
+.slider-pager .slider-pager-page {
+    color: white;
+}
+
+.slider-pager {
+    bottom: 11%;
+}
+.uploadimg {
+	width:3rem;
+	height:2.1rem;
+	background: center .65rem no-repeat #e5e5e5;
+	background-size:.75rem .58rem;
+	text-align:center;
+	margin:.2rem auto;
+	color:#6e6e6e;
+	position:relative;
+}
+.page-search .part1 .con1 a.on {
+    color:#f55a14;
+}
+.select-box .select-left li.on {
+    color:#f55a14;
+	background-color:#fff;
+	box-shadow:-.1rem 0 .1rem 0 #ddd
+}
+.select-box .select-right .con li.on {
+    color:#f55a14;
+	background-color:#fff;
+	box-shadow:-.1rem 0 .1rem 0 #ddd
+}
+.page-search .operate {
+	padding:.8rem 0
+}
+.page-search .operate input[type=submit] {
+	width:2rem;
+	margin:0 auto;
+	border-radius:2px;
+	display:block;
+	font-size:.3rem
+}
+
+.imgMagnify{
+    background-color:#000;
+}
+.imgMagnify img.rotate{
+    transform:rotate(-90deg);
+}
+.imgMagnify img {
+    margin:0.9rem auto;
+}
+.part41-1 input[type=number] {
+    display:inline-block;
+	width:1.7rem;
+	border:none;
+    text-align:center;
+}
+part41-1 input[type=date] {
+    display:inline-block;
+	width:2.7rem;
+    text-align:center;
+}
+.part41-1 input[type=number].i1 {
+	width:2.6rem
+}
+.part41-1 input[type=number].i2 {
+	width:3.0rem
+}
+.part41-1 input[type=number].i3 {
+	width:1.8rem
+}
+.part41-1 .date {
+	background:url(images/date.png) right center no-repeat;
+    position:absolute;
+    left:0.5rem;
+    top:0.1rem;
+    display:inline-block;
+	background-size:.41rem .4rem;
+	padding-right:.45rem;
+	width:2.9rem!important;
+    background-color:transparent;
+    z-index:2;
+    text-align:center;
+}
+.part41-1 p.p_date {
+	/*background:url(images/date.png) right center no-repeat;*/
+    position:absolute;
+    left:0.4rem;
+    top:0.06rem;
+    display:inline-block;
+	background-size:.41rem .4rem;
+    height:.7rem;
+	padding-right:.45rem;
+	width:2.9rem!important;
+    background-color:#fff;
+    z-index:1;
+    font-size:14px;
+    color:#aaa;
+    text-align:center;
+}
+.part41-2 .li2-select i {
+    width:.8rem;
+    height:.6rem;
+    overflow:hidden;
+}
+.page50 .result .item .center{
+    margin:0 auto;
+    text-align:center;
+    float:right;
+}
+.page50 .result .item .btn1 {
+	text-shadow:0 0 .05rem #333;
+	border-radius:.05rem;
+    font-size:.2rem;
+	padding:0.1rem .3rem;
+}
+.page50 .result .item .on {
+	background-color:#f55a14;
+	border-color:#f55a14;
+	color:#fff
+}
+.page50 .result .item .p {
+    float:left;
+}
+.page50 .result .item .pre {
+    display:inline-block;
+    font-size:.29rem;
+    color:#666;
+    word-break:break-word;
+    width:4.6rem;
+}
+
+
+.calculator .main{
+    width:100%;
+    height:14rem;
+}
+
+.calculator .result{
+    display: block;
+    width: 100%;
+    height: 30%;
+    background:#202020;
+    box-sizing: border-box;
+    border:none;
+    padding: 0;
+    margin: 0;
+    resize: none;
+    color: #fff;
+    font-size: 80px;
+    text-align: right;
+    line-height: 270px;
+    overflow: hidden;
+    background-clip: border-box;
+
+}
+.calculator .row{
+    height: 14%;
+    background: #d7d8da;
+    box-sizing: border-box;
+    border: 1px solid #202020;
+    overflow: hidden;
+    padding: 0 0 4px 0;
+}
+
+.calculator .col{
+    height: 100%;
+    box-sizing: border-box;
+    border-right:1px solid #202020;
+    float: left;
+    color: #202020;
+    font-size: 28px;
+    text-align: center;
+    line-height: 83px;
+}
+.calculator .normal{
+    width: 25%;
+}
+.calculator .end-no{
+    width: 25%;
+    border-right: none;
+    background: #f78e11;
+    color: #fff;
+
+}
+.calculator .zero{
+width: 50%;
+}
+
+.page12-1 .part2 select {
+	display:inline-block;
+	width:2.3rem;
+	margin:0 .2rem
+}
+
+.part41-1 select.s1 {
+    position:absolute;
+    left:0rem;
+    top:0.1rem;
+	width:1.5rem;
+    text-align:center;
+}
+.page-modify-phone .on {
+	background-color:#f55a14
+}
+.yzm .on {
+	background-color:#f55a14
+}
+.part41-1 li.center {
+	text-align:center!important
+}
+.part41-1 .billType, .part41-1 .interest, .part41-2 .interest{
+    background-color:#fff;
+}
+
+.part41-1 li.left {
+    position:relative;
+}
+.page45-2 li.right select{
+    background-color:#fff;
+}
+.page45-2 li {
+    width:25%;
+}
+.page45-2 li.right {
+    width:75%;
+}
+.page50 input[type=text] {
+    height: 0.85rem;
+}
+.page-forget-pwd input[type=password] {
+    width: 4.7rem;
+    display:inline-block;
+}
+.page-forget-pwd input[type=password].newPassword {
+    width: 4.2rem;
+}
+
+.page-search .part1 input[type=date] {
+	background:url(images/date.png) right center no-repeat;
+    position:absolute;
+    left:0.1rem;
+    top:0.4rem;
+    display:inline-block;
+	background-size:.41rem .4rem;
+	padding-right:.45rem;
+	width:2.7rem!important;
+    background-color:transparent;
+    z-index:2;
+    text-align:center;
+}
+.page-search .part1 p.p_date {
+	/*background:url(images/date.png) right center no-repeat;*/
+    position:absolute;
+    left:0;
+    top:0.5rem;
+    display:inline-block;
+	background-size:.41rem .4rem;
+    height:.7rem;
+	padding-right:.45rem;
+	width:2.7rem!important;
+    background-color:transparent;
+    z-index:1;
+    font-size:14px;
+    color:#aaa;
+    text-align:center;
+}
+.register .con {
+    padding: .4rem 1.5rem 0;
+}
+.my-account .user-info h3 {
+    color: #fff;
+}
+.page47-date span {
+    border-radius: 100%;
+}
+.page73 .part1 li {
+    height: 1rem;
+}
+.page73 .info3 .hd {
+    height: 0.75rem;
+}
+.page73 .info3 {
+    height: 0.5rem;
+}
+.page73 .info3-on {
+    height: 7.5rem;
+}
+.page73 .info2 {
+    height: 2rem;
+}
+.page73 .contact-details li.li58 {
+    width: 57%;
+    float: left;
+}
+.page73 .info {
+    height: 2.5rem;
+}
+/*.yzm .btn-yzm {
+    top: 0rem;
+}*/
+.page47-date td {
+    height: 1.09rem;
+}
+.ion-scroll {
+    height: 4.59rem;
+}
+.btn-setting {
+    position: absolute;
+    z-index: 2;
+    top: -0.1rem;
+    right: 0rem;
+    width: .9rem;
+    height: .9rem;
+    display: block;
+    line-height: .5rem;
+    background: url(images/setting.png) center center no-repeat;
+    background-size: .59rem .59rem;
+}
+.btn-share {
+    position: absolute;
+    z-index: 2;
+    top: -0.1rem;
+    right: 0rem;
+    width: .9rem;
+    height: .9rem;
+    display: block;
+    line-height: .5rem;
+	background:url(images/share.png) center center no-repeat;
+    background-size: .59rem .59rem;
+}
+.part41-2 li i {
+    font-size:16px;
+    width:3rem;
+    color: #666;
+}
+.page1 .hot span i {
+	color:#f55a14
+}
+.page-search .part2 .title {
+    background-color: #f2f2f2;
+}
+.page1 .hot .btn3 {
+    height: .7rem;
+    line-height: .7rem;
+    background-color: #f45a14;
+    color: #fff;
+    margin-top: -.35rem;
+    border-radius: .05rem;
+    font-size: .28rem;
+    text-shadow: 0 0 0.05rem #333;
+}
+.page1 .hot .btn3 {
+    width: 1.4rem;
+    position: absolute;
+    right: 17px;
+    top: 67%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.page1 .hot span.name {
+    margin-right: .1rem;
+}
+.page1 .hot .addr {
+	background:url(images/addr.png) left center no-repeat;
+	background-size:.17rem .22rem;
+	padding-left:.25rem;
+    float:right;
+}
+/*.page1 .hot .addr:hover {
+    color: #000;
+}*/
+ .header-select-botttom option {
+	color:#333
+}
+ .page1 .hot .con2 {
+    position: relative;
+}
+ .wrap .star {
+	width:.2rem;
+	height:.18rem;
+	background:url(images/star.png) center center no-repeat;
+	background-size:100% 100%;
+	display:inline-block;
+	margin-left:-.05rem
+}
+.wrap .star.on {
+	background-image:url(images/star-on.png)
+}
+.alert-online-service .aBlock {
+    width:100%;
+    height:100%;
+    display: block;
+}
+.part41-2 li.li1 {
+    width: 25%;
+}
+.part41-2 li.li2 {
+    width: 55%;
+}
+.part41-2 li.li3 {
+    width: 20%;
+}
+.ad-top img {
+    display: block;
+    height: 3.4rem;
+}
+
+.titleAddr {
+    background: url(images/addr3.png) 0 center no-repeat;
+    background-size: .23rem .3rem;
+    color: #fff;
+    font-size: .24rem;
+    padding-left: .35rem;
+    line-height: .74rem;
+}
+/*.addr:hover {
+    color: #fff;
+}*/
+.dateTopTitle {
+    font-size: 18px;
+    margin: 0 auto;
+    position: absolute;
+    top: .1rem;
+    line-height: 18px;
+    left: 0;
+    right: 0;
+}
+.header-select-botttom {
+    width: auto;
+    background-color: transparent;
+    border: none;
+    font-size: .2rem;
+    color: #fff;
+    line-height: .38rem;
+    height: .38rem;
+    margin: 0.5rem auto;
+}
+.dateTopTitle.titleCenter {
+    top: .27rem;
+}
+.register input[type=password], .register input[type=text] {
+    border-radius: 2px;
+    font-size: .3rem;
+    height: .77rem;
+}
+.tabBox4 {
+    font-size: .26rem;
+    height: 100%;
+}
+.page17-1 .part1 a {
+    height: 1.2rem;
+}
+.page20-identification2 h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    /*font-weight: bold;*/
+}
+.page64 h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    /*font-weight: bold;*/
+}
+.page64 .part2 .upload {
+    margin: .2rem auto;
+}
+.page73 .part1 span {
+    width: 5.4em;
+    text-align:left;
+}
+.page-modify-contact .tradCity {
+    display: none;
+}
+.page66 .part2 li a.off {
+	background-color:#c4c4c4;
+}
+.part41-2 select {
+    width: 1.5rem;
+}
+.page1 .hot-title {
+    padding: 0;
+    margin: .15rem .1rem .15rem 0;
+}
+.page1 .hot-title.center{
+    text-align:center;
+}
+.g-table {
+    width: 100%;
+}
+.page17-2 .con2 {
+    display: block;
+}
+/*.page17-2 .hot-title .addr:hover {
+    color: #000;
+}*/
+/*.page17-2 .hot-title :hover {
+    color: #000;
+}*/
+.page73 .info input[type=number] {
+	border-radius:2px;
+	width:1.1rem;
+	margin:0 .05rem;
+	font-size:.2rem;
+	display:inline-block!important
+}
+.page73 .info2 input[type=number] {
+	border-radius:2px;
+	width:1rem;
+	margin:0 .05rem;
+	display:inline-block!important
+}
+.page73 .info3 input[type=number] {
+	border-radius:2px;
+	width:1rem;
+	margin:0 .05rem;
+	display:inline-block!important
+}
+.page20-identification2 .part1 input[type=text].i1 {
+    background-color: #fff;
+}
+.page1 .hot table {
+    width:78%;
+}

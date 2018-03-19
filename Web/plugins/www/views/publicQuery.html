@@ -1,0 +1,93 @@
+﻿<div ng-controller="publicQueryController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right_top col-md-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 挂失查询</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 挂失查询</p>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <form class="form-horizontal col-md-12" role="form">
+                <div>
+                    <h1>&nbsp;</h1>
+                </div>
+                <div class="form-group form-inline col-xs-12">
+                    <h4>请输入汇票票号：</h4>
+                </div>
+                <div>
+                    <div class="form-group form-inline col-md-5">
+                        <input type="text" ng-model="model.billNumber" placeholder="请输入16位或后8位汇票票号" ng-change="updateBillNumber()" class="col-xs-12 public-search">
+                    </div>
+                    <div class="col-md-4">
+                        <div ng-if="model.billNumberValidate==true"><img src="assets/img/right.png" alt="right" /></div>
+                        <div ng-if="model.billNumberValidate==false"><img src="assets/img/wrong.png" alt="wrong" /></div>
+                    </div>
+                </div>
+                <div class="form-group form-inline col-xs-12">
+                    <button class="btn btn-1 btn-orange border-orange" ng-click="query()">查询</button>
+                    <button class="btn btn-1 btn-grey border-orange" ng-click="clear()">清空</button>
+                </div>
+                <div ng-if="queryResult">
+                    <div class="col-md-12" style="margin-bottom:15px;">
+                        <div class="line col-md-11 text-right"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 票据号：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.bill_number }}
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label class="col-md-3 control-label"> 票面金额：</label>
+                        <div class="col-md-4" style="margin-top:0.3rem;">
+                            {{ queryResult.bill_sum_price }}元
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label class="col-md-3 control-label"> 公告法院：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.announce_court }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 申请人：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.enterprise_name }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 出票日期：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.draw_time|date:'yyyy-MM-dd' }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 公告日期：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.announce_time|date:'yyyy-MM-dd' }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"> 公告详情：</label>
+                        <div class="col-md-6" style="margin-top:0.3rem;">
+                            {{ queryResult.description }}
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="padding-bottom:3.5em;">
+                        <div class="line col-md-11 text-right"></div>
+                    </div>
+                </div>
+                <div ng-if="!queryResult" class="form-group form-inline col-xs-12">
+                    <p>温馨提示：</p>
+                    <p>1、请输入16位或后8位汇票票号；</p>
+                    <p>2、挂失查询数据来源于央行、人民法院报、其他省市法制报及其他报纸；</p>
+                    <p>3、免责声明：本工具旨在最大化帮助用户识别汇票业务的风险，因此本工具未收录的相关挂失数据导致的风险，与本工具无关。</p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!-- 右侧 end-->
+</div>

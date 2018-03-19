@@ -1,0 +1,54 @@
+<div ng-controller="handWritingController">
+    <!--
+        <img hidden src="{{model.bill_back_photo_path}}" ng-if="type == 1"  id="originImg">
+    -->
+    <!--	<img hidden ng-src="{{imgUrl}}" id="originImg" >-->
+    <div>
+
+    </div>
+    <canvas class="handwriting-canvas" id="canvas" style="cursor:pointer;border: 1px green solid">
+        您的浏览器暂不支持canvas
+    </canvas>
+    <div class="handwriting-canvas-setting">
+            画笔粗细：
+            <select  ng-model="size">
+                <option value="5">极细</option>
+                <option value="10">细</option>
+                <option value="15" ng-selected="true">普通</option>
+                <option value="20">粗</option>
+                <option value="25">极粗</option>
+            </select>
+            <a class="btn btn-info btn-xs" ng-click="clockwise()"><i class="fa fa-rotate-right"></i>顺时针</a>
+            <a class="btn btn-warning btn-xs" ng-click="eastern()"><i class="fa fa-rotate-left"></i>逆时针</a>
+
+            <!--			颜色：
+                        <input type="color" ng-model="pencil.color" >-->
+        <div class="pull-right">
+            <input ng-click="saveImage()" class="btn btn-success" type="button" value="保存"/>
+            <input ng-click="replaceImage()" class="btn btn-success" type="button" value="替换原图"/>
+            <input ng-click="resetCanvas()" class="btn btn-warning" type="button" value="重置"/>
+        </div>
+    </div>
+    <div class="modal fade" id="progressModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" align="center">{{progressInfo}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar progress-bar-success progress-bar-striped"
+                             role="progressbar" ng-style="progressStyle">
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+
+

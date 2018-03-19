@@ -1,0 +1,45 @@
+.msn .blue-p{
+    color: #1a2b71;
+    font-size: 22px;
+}
+
+.msn .f-size{}
+
+.msn .f-size th{
+    padding: 4px;
+}
+.msn .f-size td{
+    font-size: 10px;
+}
+
+.msn .add{
+
+    margin-left: 45px;
+    margin-right: 10px;
+    border: none;
+    background-color: #f55a14;
+    border-radius: 2px;color: white;
+    border: 1px solid #f55a14;
+
+}
+
+.msn .chg{
+    margin-left: 10px;
+    border: 1px solid #f55a14;
+    border-radius: 2px;
+    color: #f55a14;
+}
+
+.msn .dbtn{
+    padding: 0px;
+    border: none;
+    border-radius: 2px
+}
+
+.table-input{
+  width: 80%;
+}
+
+.table-input-span{
+  margin-top:6px;margin-left: 3%;color:#333;
+}

@@ -1,0 +1,10 @@
+.handwriting-canvas{
+    display: block;
+    margin: 0 auto;
+}
+
+.handwriting-canvas-setting{
+	display: block;
+	margin: 0 auto;
+	width: 800px;
+}

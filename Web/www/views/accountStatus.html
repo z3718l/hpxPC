@@ -1,0 +1,307 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/editstyle.css">
+<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<div ng-cloak ng-controller="accountStatusController">
+    <!-- 右侧 start-->
+    <div class="user-right" style="padding-top: 14px;">
+        <div class="right-top col-md-12 col-xs-12 row " style="margin-left: 0px">
+            <p style="color:#3a3a3a;">我的账户 > 账户中心</p>
+        </div>
+        <div class="content col-md-12 col-xs-12 row" style="width: 100%;margin-top: -2px;height: 980px;margin-left: 0%;">
+            <div class="process row col-md-12  col-xs-12" style="padding:0px;margin:4% 0 0 0">
+                <div class="table col-md-12 col-xs-12">
+                    <ng-form name="dribletForm" class="form-horizontal col-md-12 col-xs-12" role="form">
+                        <div class="class=" col-md-12 col-xs-12">
+                            <div class="save-content">
+                                <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed">
+                                    <tr>
+                                        <td></td>
+                                        <td>信息</td>
+                                        <td>状态</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    <tr>
+                                        <td>联系人信息</td>
+                                        <td ng-if="model.is_verified != 0">{{model.customer_name}}</td>
+                                        <td ng-if="model.is_verified == 0">暂无信息</td>
+                                        <td ng-if="model.is_verified == 0"><span class="check-status"><i class="icon-right"><img src="assets/img/wrong.png" /></i>未提交</span></td>
+                                        <td ng-if="model.is_verified != 0"><span class="check-status"><i class="icon-right"><img src="assets/img/rightCar.png" /></i>已提交</span></td>
+                                        <td ng-if="model.is_verified == 0 || !isViewEdit" ui-sref="app.main.approveCustomer"><button class="btn btn-detail">完善个人信息</button></td>
+                                        <td ng-if="model.is_verified != 0 && isViewEdit" ng-click="infoModel()"><button class="btn btn-detail">详细</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>机构认证</td>
+                                        <td ng-if="singleEnterprise.enterprise_id != '' && singleEnterprise.enterprise_id != null">{{singleEnterprise.enterprise_name}}</td>
+                                        <td ng-if="singleEnterprise.enterprise_id == '' || singleEnterprise.enterprise_id == null">未提交企业信息</td>
+                                        <td ng-if="!singleEnterprise.enterprise_id || singleEnterprise.enterprise_id == '' || singleEnterprise.enterprise_id == null"><span class="check-status"><i class="icon-right"><img src="assets/img/wrong.png" /></i>未提交</span></td>
+                                        <td ng-if="singleEnterprise.enterprise_id && singleEnterprise.is_alive == 2"><span class="check-status"><i class="icon-right"><img src="assets/img/wait.png" /></i>待审核</span></td>
+                                        <td ng-if="singleEnterprise.enterprise_id && singleEnterprise.is_alive >= 3"><span class="check-status"><i class="icon-right"><img src="assets/img/rightCar.png" /></i>审核通过</span></td>
+                                        <td ng-if="singleEnterprise.enterprise_id && singleEnterprise.is_alive == -1"><span class="check-status"><i class="icon-right"><img src="assets/img/warm.png" /></i>审核失败</span></td>
+                                        <!--<td ng-if="!singleEnterprise.enterprise_id || singleEnterprise.enterprise_id == '' || singleEnterprise.enterprise_id == null"><button class="btn btn-detail" ui-sref="app.main.approveEnterprise">认证机构</button></td>-->
+                                        <td ng-if="!singleEnterprise.enterprise_id || singleEnterprise.enterprise_id == '' || singleEnterprise.enterprise_id == null"><button class="btn btn-detail" ng-click="checkEnterprise()">认证机构</button></td>
+                                        <td ng-if="singleEnterprise.enterprise_id && singleEnterprise.is_alive != -1" ng-click="enterDetail()"><button class="btn btn-detail">详细</button></td>
+                                        <td ng-if="singleEnterprise.enterprise_id && singleEnterprise.is_alive == -1"><button class="btn btn-detail" ui-sref="app.main.approveEnterprise">重新审核</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>业务授权</td>
+                                        <td ng-if="agentModel && agentModel.isChecked != null">{{agentModel.agent_treasurer_name}}</td>
+                                        <td ng-if="!agentModel || agentModel.isChecked == null">未提交业务授权</td>
+                                        <td ng-if="!agentModel || agentModel.isChecked == null"><span class="check-status"><i class="icon-right"><img src="assets/img/wrong.png" /></i>未提交</span></td>
+                                        <td ng-if="agentModel && agentModel.isChecked == 0"><span class="check-status"><i class="icon-right"><img src="assets/img/wait.png" /></i>待授权</span></td>
+                                        <td ng-if="agentModel && agentModel.isChecked == 1"><span class="check-status"><i class="icon-right"><img src="assets/img/rightCar.png" /></i>授权成功</span></td>
+                                        <td ng-if="agentModel && agentModel.isChecked == -1"><span class="check-status"><i class="icon-right"><img src="assets/img/warm.png" /></i>授权失败</span></td>
+                                        <td ng-if="agentModel && (agentModel.isChecked == 1 || agentModel.isChecked == 0)" ng-click="authorizaDetail()"><button class="btn btn-detail">详细</button></td>
+                                        <!--<td ng-if="!agentModel || agentModel.isChecked == null"><button class="btn btn-detail" ui-sref="app.main.approveAgent">业务授权</button></td>-->
+                                        <td ng-if="!agentModel || agentModel.isChecked == null"><button class="btn btn-detail" ng-click="checkAgent()">业务授权</button></td>
+                                        <td ng-if="agentModel && agentModel.isChecked == -1"><button class="btn btn-detail" ui-sref="app.main.approveAgent">重新授权</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>账户绑定</td>
+                                        <td ng-if="AccountData[0] && AccountData[0].status">{{AccountData[0].account_number}}</td>
+                                        <td ng-if="isLoging && identity.customer_id && singleEnterprise.enterprise_id"></td>
+                                        <td ng-if="(!AccountData[0] || AccountData[0].status == null || AccountData[0].status == '') && (!isLoging)">未进行账户绑定</td>
+                                        <td ng-if="isLoging && identity.customer_id && singleEnterprise.enterprise_id"><span class="check-status"><i class="icon-right"><img src="assets/img/loging.png" /></i>加载中</span></td>
+                                        <td ng-if="(!AccountData[0] || AccountData[0].status == null || AccountData[0].status == '') && (!isLoging)"><span class="check-status"><i class="icon-right"><img src="assets/img/wrong.png" /></i>未提交</span></td>
+                                        <td ng-if="AccountData[0].status == 5 || AccountData[0].status == 3"><span class="check-status"><i class="icon-right"><img src="assets/img/wait.png" /></i>待鉴定</span></td>
+                                        <td ng-if="AccountData[0].status == 1"><span class="check-status"><i class="icon-right"><img src="assets/img/rightCar.png" /></i>鉴定成功</span></td>
+                                        <td ng-if="AccountData[0].status == 6"><span class="check-status"><i class="icon-right"><img src="assets/img/rightCar.png" /></i>鉴定失败</span></td>
+                                        <!--<td ng-if="!AccountData[0] || AccountData[0].status == null || AccountData[0].status == ''"><button class="btn btn-detail" ui-sref="app.main.approveAccount">绑定</button></td>-->
+                                        <td ng-if="(!AccountData[0] || AccountData[0].status == null || AccountData[0].status == '') && (!isLoging)"><button class="btn btn-detail" ng-click="checkBind()">绑定</button></td>
+                                        <td ng-if="AccountData[0].status == 5 || AccountData[0].status == 3" ng-click="authentication()"><button class="btn btn-detail">鉴定</button></td>
+                                        <td ng-if="AccountData[0].status == 1" ui-sref="app.main.electronicAccount"><button class="btn btn-detail">详细</button></td>
+                                        <td ng-if="isLoging && identity.customer_id && singleEnterprise.enterprise_id"></td>
+                                    </tr> 
+                                </table>
+                            </div>
+                        </div>
+                        <!--联系人信息详情-->
+                        <div id="modal-info" class="modal fade">
+                            <div class="modal-dialog" style="margin-left:calc(50% - 800px/2);">
+                                <div class="modal-content" style="width:800px;">
+                                    <ng-form name="BusAuthorizationForm" novalidate>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <div class="modal-title form-group text-center">
+                                                <h2>联系人信息</h2>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="info-content">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label"> 手机：</label>
+                                                    <div class="col-md-6 col-xs-6">
+                                                        {{ model.phone_number }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label"> 姓名：</label>
+                                                    <div class="col-md-6 col-xs-6">
+                                                        {{model.customer_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">性别：</label>
+                                                    <div class="col-md-4 col-xs-4">
+                                                        {{model.sex}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">交易地点：</label>
+                                                    <div class="col-md-4 col-xs-4">
+                                                        {{model.trade_location_province}}<span ng-if="model.trade_location_province_id != 1 && model.trade_location_province_id != 20 && model.trade_location_province_id != 860 && model.trade_location_province_id != 2462">{{model.trade_location_city}}</span>{{model.trade_location}}{{model.contact_address}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">身份证号：</label>
+                                                    <div class="col-md-6 col-xs-6">
+                                                        {{model.id_number}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">身份证正反面：</label>
+                                                    <div class="col-sm-4">
+                                                        <img style="height: 160px; width: 260px;" ng-src="{{model.id_front_photo_address}}" />
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <img style="height: 160px; width: 260px;" ng-src="{{model.id_back_photo_address}}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer conclude">
+                                            <div class="text-right form-group">
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" ng-click=""><i class="fa fa-share-square-o"></i> 取消</button>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--机构认证详情-->
+                        <div id="modal-enterprise" class="modal fade">
+                            <div class="modal-dialog" style="margin-left:calc(50% - 750px/2);">
+                                <div class="modal-content" style="width:750px;">
+                                    <ng-form name="BusAuthorizationForm" novalidate>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <div class="modal-title form-group text-center">
+                                                <h2>机构认证</h2>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="modal-enterprise">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">企业名称： </label>
+                                                    <div class="col-md-4">
+                                                        {{singleEnterprise.enterprise_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label"> 详情地址：</label>
+                                                    <div class="col-md-6 col-xs-6">
+                                                        {{singleEnterprise.location_province}}<span ng-if="singleEnterprise.location_province_id != 1 && singleEnterprise.location_province_id != 20 && singleEnterprise.location_province_id != 860 && singleEnterprise.location_province_id != 2462">{{singleEnterprise.location_city}}</span>{{singleEnterprise.location}}{{singleEnterprise.enterprise_address}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">营业执照号：</label>
+                                                    <div class="col-md-4">
+                                                        {{singleEnterprise.credential_number}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">营业执照上传：</label>
+                                                    <div class="col-sm-4">
+                                                        <img style="height: 250px; width: 181px;border:1px solid #ccc;display:inline-block;" ng-src="{{singleEnterprise.credential_photo_address}}" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">法人代表：</label>
+                                                    <div class="col-sm-3">
+                                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{singleEnterprise.artificial_person_front_photo_address}}" required />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{singleEnterprise.artificial_person_back_photo_address}}" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer conclude">
+                                            <div class="text-right form-group">
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" ng-click=""><i class="fa fa-share-square-o"></i> 取消</button>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--业务授权详情-->
+                        <div id="modal-busAuthoriza" class="modal fade">
+                            <div class="modal-dialog" style="margin-left:calc(50% - 800px/2);">
+                                <div class="modal-content" style="width:800px;">
+                                    <ng-form name="BusAuthorizationForm" novalidate>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <div class="modal-title form-group text-center">
+                                                <h2>业务授权</h2>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="modal-au-con">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3">姓名：</label>
+                                                    <div class="col-md-4  col-xs-4">
+                                                        {{agentModel.agent_treasurer_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3">身份证号码：</label>
+                                                    <div class="col-md-4 col-xs-4">
+                                                        {{agentModel.agent_treasurer_cert_no}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3">手机号：</label>
+                                                    <div class="col-md-4 col-xs-4">
+                                                        {{agentModel.agent_treasurer_phone}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-3 control-label">经办人身份证 : </label>
+                                                    <div class="col-sm-3">
+                                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{agentModel.agent_treasurer_cert_photo_front_address}}" required />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <img style="height: 116px; width: 183px;border:1px solid #ccc;display:inline-block;" ng-src="{{agentModel.agent_treasurer_cert_photo_back_address}}" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer conclude">
+                                            <div class="text-right form-group">
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" ng-click=""><i class="fa fa-share-square-o"></i> 取消</button>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--鉴权验证详情-->
+                        <div id="modal-authentication" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <ng-form name="BusAuthorizationForm" novalidate>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <div class="modal-title form-group text-center">
+                                                <h2>鉴权验证</h2>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="AccountModal-content">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3"> 机构名称：</label>
+                                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                                        {{enterpriseModel.enterprise_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3">账号：</label>
+                                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                                        {{AccountData[0].account_number}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3">银行行号：</label>
+                                                    <div class="col-md-5 col-xs-5 form-control-static">
+                                                        {{AccountData[0].bank_number}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3"> 银行名称：</label>
+                                                    <div class="col-md-8 col-xs-8 form-control-static">
+                                                        {{AccountData[0].bank_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-xs-3"> 账户验证：</label>
+                                                    <div class="col-md-8 col-xs-8">
+                                                        <input class="col-md-3 col-xs-3 form-control" type="text" ng-model="valid.verify_string" placeholder="请输入该账户收款金额" required /><span style="vertical-align:middle;padding-top:4px;" class="col-md-1 col-xs-1">元</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer conclude">
+                                            <div class="text-right form-group">
+                                                <button type="button" class="btn btn-sm btn-success" data-dismiss="modal" ng-click="smallValid()"><i class="fa fa-share-square-o"></i>鉴权</button>
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

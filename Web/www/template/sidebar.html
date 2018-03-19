@@ -1,0 +1,46 @@
+<!-- begin #sidebar -->
+<div id="sidebar" class="sidebar sidebar-grid" ng-controller="sidebarController" ng-class="{ 'sidebar-transparent': setting.layout.pageSidebarTransparent }">
+    <!-- begin sidebar scrollbar -->
+    <div data-scrollbar="true" data-height="100%">
+        <!-- begin sidebar user -->
+        <ul class="nav">
+            <li class="nav-profile">
+                <div class="image">
+                    <a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
+                </div>
+                <div class="info">
+                    {{ identity.username }}
+                    <small>{{ identity.role_name }}</small>
+                </div>
+            </li>
+        </ul>
+        <!-- end sidebar user -->
+        <!-- begin sidebar nav -->
+        <ul class="nav">
+            <li class="nav-header">导航菜单</li>
+            <li ui-sref-active="active"><a ui-sref="app.home"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+            <li id="{{menu.resource_name}}" is-parent="true" ng-class="{'active': $state.includes(menu.resource_name), 'has-sub': menu.sub_menus != null }" ng-repeat="menu in systemMenus">
+                <a href="javascript:;" ui-sref="{{menu.resource_uri}}" ng-click="menuClick('menu' + menu.resource_name)">
+                    <i class="fa fa-certificate"></i>
+                    <span>{{ menu.menu_name }}</span>
+                </a>
+                <ul id="{{ 'menu' + menu.resource_name }}" class="sub-menu">
+                    <li ng-repeat="subMenu in menu.sub_menus" ui-sref-active="active" class="child-menu">
+                        <a menu-parent="{{menu.resource_name}}" href="javascript:;" ui-sref="{{ subMenu.resource_uri }}">
+                            {{ subMenu.sub_menu_name }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- begin sidebar minify button -->
+            <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+            <!-- end sidebar minify button -->
+        </ul>
+        <!-- end sidebar nav -->
+    </div>
+    <!-- end sidebar scrollbar -->
+</div>
+<div class="sidebar-bg"></div>
+<!-- end #sidebar -->

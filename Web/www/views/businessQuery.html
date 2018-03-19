@@ -1,0 +1,270 @@
+﻿<div ng-cloak ng-controller="businessQueryController">
+    <!-- 右侧 start-->
+    <div class="user-right">
+        <div class="right_top col-md-12 col-xs-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 工商查询</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 工商查询</p>
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12  enterprise-search">
+            <div class="search col-md-12 col-xs-12">
+                <span>请输入企业名称关键字：</span><input type="text" ng-model="enterpriseName" name="" placeholder="请至少输入四个关键字" class="right-50">
+                <button class="btn btn-1 btn-orange border-orange" ng-click="query(enterpriseName)">查询</button>
+            </div>
+            <table class="col-md-12 col-xs-12">
+                <thead>
+                    <tr>
+                        <th class="col-md-2 col-xs-2">序号</th>
+                        <th class="col-md-4 col-xs-4">企业全称</th>
+                        <th class="col-md-2 col-xs-2">注册时间</th>
+                        <th class="col-md-3 col-xs-3">信用代码</th>
+                        <th class="col-md-1 col-xs-1"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in enterpriseInfo">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.start_date}}</td>
+                        <td>{{item.credit_code}}</td>
+                        <td class="text-center width-100 text-nowrap">
+                            <button class="btn btn-success btn-xs" ng-click="read(item)"><i class="fa fa-edit"></i> 详细</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 弹出详情 -->
+        <div class="modal fade" id="modal-read">
+            <div class="modal-dialog" style="width: 600px;">
+                <div class="modal-content">
+                    <ng-form name="readForm" novalidate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>企业详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal form-inline">
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-  3" style="width: 140px;">企业全称</label>
+                                    <div class="col-md-9 col-xs-  9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.name }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">注册时间</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.start_date }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">营业执照</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.number }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">信用代码</label>
+                                    <div class="col-md-3 col-xs-3">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.credit_code }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">公司法人</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.artificial_person_name }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">成立时间</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.start_date }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">登记机构</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.belong_organization }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">注册资金</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.registered_capital }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">经营状态</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.status }}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group width-full">
+                                    <label class="control-label col-md-3 col-xs-3" style="width: 140px;">营业范围</label>
+                                    <div class="col-md-9 col-xs-9">
+                                        <div class="form-control-static" style="width: 400px;">{{ model.scope }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--提示弹窗-->
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog">
+            <div class="modal-content h_permissions h_login" style="width:500px;">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body h_goumai">
+                    <p>您的“工商查询”工具使用权限已用完！请登录</p>
+                    <div class="hp_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn h_btns" ng-click="hpxLgoin()">前往登录</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions h_renzheng" style="width:500px;">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body h_goumai">
+                    <p>您的“工商查询”工具使用权限已用完！请进行机构认证</p>
+                    <div class="hp_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn h_btns" ng-click="phxRenzheng()">前往认证</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions prompt">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body">
+                    <p>您的“工商查询”工具免费使用时限已到期，可通过两种方式进行续期：<strong>①现金充值购买使用权限；②参与“邀请朋友免费获取工具使用权限”活动。</strong></p>
+                    <div class="h_footer">
+                        <button type="button" class="btn h_btn" ng-click="money()">现金购买</button>
+                        <button type="button" class="btn h_btn" ng-click="invitation()">邀请朋友</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions frient">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">邀请朋友</h4>
+                    <h6>免费获取 “工商查询” 工具使用权限</h6>
+                </div>
+                <div class="modal-body h_bodys" style="color:#333;">
+                    <div class="hpx_one"><i class="h_one h_ones"></i><p class="hp_one">扫一扫下图二维码，按步骤邀请朋友成功注册后，可增加“工商查询”工具免费使用时限，邀请人每成功邀请3人（票据同行朋友）注册后增加1个月“工商查询”免费使用特权时限，可最高累计至12个月的免费使用时限；</p></div>
+                    <div class="clear"></div>
+                    <div class="hpx_two"><i class="h_two h_one"></i><p>每位邀请人填写邀请码注册后也可获得双重惊喜特权，被邀请人必须为<span class="h_new">汇票线新用户</span>；</p></div>
+                    <div class="clear"></div>
+                    <div class="hpx_three"><i class="h_three h_one"></i><p>本活动最终解释权归汇票线所有，可咨询客服 <br /><span class="h_new">201-6881-0650</span></p></div>
+                    <div class="h_saoma">
+                        <i class="h_sao"></i>
+                        <p>赶紧扫码参与活动增加“工商查询”工具免费使用权时限</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions h_buy">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true" ng-click="queding()">×</button>
+                    <h4 class="modal-title">购买“工商查询”使用权限</h4>
+                </div>
+                <div class="modal-body h_bodyes">
+                    <div class="h_enterprise">
+                        <p>企业名称：<span>{{identity.enterprise_name}}</span></p><p>联系人：<span>{{identity.customer_name}}</span></p>
+                    </div>
+                    <div class="h_choose">
+                        <p>购买工具使用权限时长选择</p>
+                        <div class="h_bty">
+                            <section ng-repeat="packages in package" style="width:24%;padding:0;display:inline-block;" ng-init="refresh()">
+                                <div class="h_o">
+                                    <input type="radio" name="sex" value="" $index />
+                                    <input type="hidden" name="package_id" value="{{packages.id}}" price="{{packages.package_price}}" />
+                                    <span>{{packages.package_timeornum}}</span><span>次</span>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="hp_money">
+                        <p>金额：￥<span class="h_c" style="color:#f55a14;font-size:32px;">30</span></p>
+                    </div>
+                    <div class="h_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal" ng-click="queding()">取消</button>
+                        <button type="button" class="btn h_btns" ng-click="buy()">购买</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions h_chongzhi" style="width:500px;">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true" ng-click="queding()">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body h_goumai">
+                    <p>您已完成充值，请前往购买“工商查询”工具使用权限！</p>
+                    <div class="hp_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal" ng-click="queding()">取消</button>
+                        <button type="button" class="btn h_btns" ng-click="hpxBuy()">前往购买</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions noMoney" style="width:500px;">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true" ng-click="queding()">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body h_goumai">
+                    <p>您的账户余额不足，请充值！！！</p>
+                    <div class="hp_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal" ng-click="queding()">取消</button>
+                        <button type="button" class="btn h_btns" ng-click="hpxCharge()">前往充值</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_permissions h_chenggong" style="width:500px;">
+                <div class="modal-header h_tan">
+                    <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body h_body h_goumai">
+                    <p>恭喜您！已完成购买，可以使用“工商查询”工具！</p>
+                    <div class="hpx_foot">
+                        <button type="button" class="btn h_btns" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content h_zhifu">
+                <ng-form name="addForm" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>在线充值</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-3 control-label"><font color="red">*</font> 充值金额: </label>
+                                <div class="col-md-9 col-xs-9">
+                                    <input type="number" min="0" name="account_number" ng-model="model.recharge_price" class="form-control" style="display: inline;width: 80%;" required />
+                                    <label class="md-col-2">元</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-success" ng-click="submit()" ng-disabled="addForm.$invalid"><i class="fa fa-save"></i> 提交</button>
+                        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+</div>

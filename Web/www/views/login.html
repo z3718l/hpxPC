@@ -1,0 +1,51 @@
+<!-- begin login -->
+<meta charset="utf-8"/>
+<div class="login login-with-news-feed" ng-controller="loginController">
+    <!-- begin news-feed -->
+    <div class="news-feed">
+        <div class="news-image">
+            <img src="assets/img/bg-6.jpg" data-id="login-cover-image" alt="" />
+        </div>
+        <div class="news-caption">
+            <h4 class="caption-title">专业 · 安全 · 高效</h4>
+            <p>汇票线——银行级安全保障</p>
+            <div style="position: absolute; top: 16px; right: 25px;"><img src="assets/img/login-logo.png"/></div>
+        </div>
+    </div>
+    <!-- end news-feed -->
+    <!-- begin right-content -->
+    <div class="right-content">
+        <!-- begin login-header -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span>汇票线
+                <small>Draft Line</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end login-header -->
+        <!-- begin login-content -->
+        <div class="login-content">
+            <ng-form name="loginForm" class="margin-bottom-0" novalidate>
+                <div class="form-group m-b-15" ng-class="{ 'has-error': loginForm.account.$invalid && !loginForm.account.$pristine }">
+                    <input type="text" name="account" ng-model="loginRequest.username" class="form-control input-lg" placeholder="用户账号" required ng-keyup="login($event)" />
+                </div>
+                <div class="form-group m-b-15" ng-class="{ 'has-error': loginForm.password.$invalid && !loginForm.password.$pristine }">
+                    <input type="password" name="password" ng-model="loginRequest.password" class="form-control input-lg" placeholder="登录密码" required ng-keyup="login($event)" />
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" ng-click="login($event)" class="btn btn-success btn-block btn-lg" ng-disabled="loginForm.$invalid">登录</button>
+                </div>
+                <hr />
+                <p class="text-center text-inverse">
+                    &copy; 2016 汇票线 版权所有
+                </p>
+            </ng-form>
+        </div>
+        <!-- end login-content -->
+    </div>
+    <!-- end right-container -->
+</div>
+<!-- end login -->

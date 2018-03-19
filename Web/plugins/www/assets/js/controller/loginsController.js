@@ -1,0 +1,3 @@
+﻿hpxAdminApp.controller('loginsController', function () {
+    
+});

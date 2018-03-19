@@ -1,0 +1,312 @@
+﻿<div ng-controller="discountCalculatorController">
+    <!-- 右侧 start-->
+    <div class="user-right" >
+        <div class="right_top col-md-12 row">
+            <p class="right_top_p" ng-if="identity">汇票助手 > 贴现计算器</p>
+            <p class="right_top_p" ng-if="!identity"><a class="right_top_p" href="/index.aspx">主页</a> > 贴现计算器</p>
+        </div>
+        <div>
+            <form action="" class="col-md-6">
+                <div class="col-md-12 singleselect">
+                    <label class="radio-inline text-left col-md-4 singleselect_1">
+                        <!--<input class="singleselect_input1 " type="radio" name="inlineRadioOptions" ng-click="chooseMany=0" id="inlineRadio1" value="option1" checked="true"> 按利率计算-->
+                        <input class="singleselect_input1 " type="radio" name="inlineRadioOptions" ng-click="changeMode(0)" id="inlineRadio1" value="option1" checked="checked"> 按利率计算
+                    </label>
+                    <label class="radio-inline col-md-5">
+                        <!--<input class="singleselect_input2" type="radio" name="inlineRadioOptions" ng-click="chooseMany=1" id="inlineRadio2" value="option2"> 每10万计算-->
+                        <input class="singleselect_input2" type="radio" name="inlineRadioOptions" ng-click="changeMode(1)" id="inlineRadio2" value="option2"> 每10万计算
+                    </label>
+                    <div class="col-md-2"></div>
+                </div>
+                <div ng-if="!chooseMany">
+                  <div class="form-group col-md-12 text-left worth">
+                      <label class="col-sm-4 col-md-5 control-label text-left worth_label"><span class="color_org">*</span>票面金额:</label>
+                      <div class="col-sm-8 col-md-6 worth_input">
+                          <input type="number" ng-model="model.denomination" class="form-control" >
+                      </div>
+                      <label class="col-md-1 unit_1">万元</label>
+                  </div>
+                  <div class="col-md-12 row">
+                      <div class="form-group col-md-12 text-left line_right_top">
+                          <label class="col-sm-4 col-md-6 control-label text-left worth_label" style="margin-right:2.2%;"><span class="color_org">*</span>利率:</label>
+                          <div class="btn-group col-md-4 interest_year">
+                              <button type="button" class="btn interest_year_btn_2 ">{{model.interest_type == 'month' ? '月利率':'年利率'}}</button>
+                              <button type="button" class="btn btn-default dropdown-toggle btn_caret_2" data-toggle="dropdown">
+                                  <span class="caret_2"><img src="assets/img/caret_2.png" alt="" /></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu">
+                                  <li><a href="" ng-click="model.interest_type='year';model.bill_type='elec';model.adjust_day=0;">年利率</a></li>
+                                  <li><a href="" ng-click="model.interest_type='month';model.bill_type='paper';model.adjust_day=0;">月利率</a></li>
+                              </ul>
+                          </div>
+                          <div class="worth_input col-md-3 interest_year" style="width:22%;">
+                              <input type="number" ng-model="model.interest" class="form-control inquiry_input" min="0">
+                          </div>
+                          <label class="col-md-1 interest_label2">{{model.interest_type == 'month' ? '‰':'%'}}</label>
+                      </div>
+                      <div class="form-group col-md-12 text-left line_right_top" style="white-space:nowrap">
+                          <label class="col-sm-4 col-md-4 control-label text-left discounted_label"><span class="color_org">*</span>贴现日:</label>
+                          <div class="dropdown">
+                            <a class="dropdown-toggle" id="dropdown0" role="button" data-toggle="dropdown">
+                              <div class="col-sm-8 col-md-5">
+                                  <input type="text" ng-model="model.start_time" class="form-control discounted_input date_input-1">
+                              </div>
+                              <img class="col-md-2 date_input-img-1" src="assets/img/calendar_small.png" style="width: 15%!important;" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <datetimepicker data-ng-model="model.start_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown0', minView: 'day', modelType: 'YYYY-MM-DD' }" data-on-set-time="onTimeSet(newDate, oldDate, 'start_time')"/>
+                            </ul>
+                          </div>
+                          <label ng-if="model.start_time_tip" style="color:gray;margin-top: 1.5%;">({{model.start_time_tip}})</label>
+                      </div>
+                      <div class="form-group col-md-12 text-left line_right_top" style="white-space:nowrap">
+                          <label class="col-sm-4 col-md-4 control-label text-left discounted_label"><span class="color_org">*</span>到期日:</label>
+                          <div class="dropdown">
+                            <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown">
+                              <div class="col-sm-8 col-md-5">
+                                  <input type="text" ng-model="model.end_time" class="form-control discounted_input date_input-2">
+                              </div>
+                              <img class="col-md-2 date_input-img-2" src="assets/img/calendar_small.png" style="width: 15%!important;" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <datetimepicker data-ng-model="model.end_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown1', minView: 'day', modelType: 'YYYY-MM-DD' }" data-on-set-time="onTimeSet(newDate, oldDate, 'end_time')"/>
+                            </ul>
+                          </div>
+                          <label ng-if="model.end_time_tip" style="color:gray;margin-top: 1.5%;">({{model.end_time_tip}})</label>
+                      </div>
+                  </div>
+                  <div class="form-group col-md-12 text-left line_right_top">
+                      <label class="col-sm-4 col-md-5 control-label text-left inquiry_label">票据类型:</label>
+                        <div class="btn-group col-md-4">
+                            <button type="button" class="btn interest_year_btn_2 ">{{ model.interest_type=='year' ? '电票':'纸票' }}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle btn_caret_2" data-toggle="dropdown">
+                                <span class="caret_2"><img src="assets/img/caret_2.png" alt="" /></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" ng-click="model.bill_type='elec';model.adjust_day=0;model.interest_type='year';">电票</a></li>
+                                <li><a href="" ng-click="model.bill_type='paper';model.adjust_day=3;model.interest_type='month';">纸票</a></li>
+                            </ul>
+                        </div>
+                        <!--div class="worth_input col-md-3" style="width:22%;margin-left:-12px;">
+                            <input type="number" ng-disabled="true" ng-model="model.adjust_day" class="form-control inquiry_input" min="0">
+                        </div>
+                        <label class="col-md-1 interest_label2">天</label-->
+                  </div>
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-5 control-label text-left inquiry_label"><span class="color_org"> </span>手续费:</label>
+                        <div class="col-sm-8 col-md-4">
+                            <input type="number" ng-model="model.every_plus" class="form-control poundage_input" min="0">
+                        </div>
+                        <label class="col-md-3 poundage_label_2">元<span>(每10万加)</span></label>
+                    </div>
+                  <div class="form-group col-md-12 text-left line_right_top">
+                      <label class="col-sm-4 col-md-5 control-label text-left inquiry_label">查询及划款费:</label>
+                      <div class="col-sm-8 col-md-4">
+                          <input type="number" ng-model="model.commission" class="form-control inquiry_input" min="0">
+                      </div>
+                      <label class="col-md-4 poundage_label_2">元</label>
+                  </div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-10 btn_cal_del">
+                      <button type="button" class="btn btn_cal col-md-4" ng-click="calcuInterest()">计算</button>
+                      <div class="col-md-1"></div>
+                      <button type="button" class="btn btn_del col-md-4" ng-click="clear()">清空</button>
+                  </div>
+                </div>
+                <!-- 10万元 -->
+                <div ng-if="chooseMany">
+                  <div class="form-group col-md-12 text-left worth">
+                      <label class="col-sm-4 col-md-5 control-label text-left worth_label"><span class="color_org">*</span>票面金额:</label>
+                      <div class="col-sm-8 col-md-5 worth_input">
+                          <input type="number" ng-model="model.denomination" class="form-control" >
+                      </div>
+                      <label class="col-md-1 unit_1">万元</label>
+                  </div>
+                  <div class="col-md-12 row">
+                      <div class="form-group col-md-12 text-left line_right_top">
+                          <label class="col-sm-4 col-md-5 control-label text-left poundage_label"><span class="color_org">*</span>每10万贴息:</label>
+                          <div class="col-sm-8 col-md-5 ">
+                              <input type="number" ng-model="model.every_plus" class="form-control poundage_input" >
+                          </div>
+                          <label class="col-md-2 poundage_label_2">元</label>
+                      </div>
+                      <div class="form-group col-md-12 text-left line_right_top" style="white-space:nowrap">
+                          <label class="col-sm-4 col-md-4 control-label text-left discounted_label"><span class="color_org"> </span>贴现日:</label>
+                          <div class="dropdown">
+                            <div class="col-sm-8 col-md-5">
+                                <input type="text" ng-model="model.many_start_time" class="form-control discounted_input date_input-1">
+                            </div>
+                            <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown">
+                              <img class="col-md-2 date_input-img-1" src="assets/img/calendar_small.png" style="width: 15%!important;" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <datetimepicker data-ng-model="model.many_start_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day', modelType: 'YYYY-MM-DD' }" data-on-set-time="onTimeSet(newDate, oldDate, 'many_start_time')"/>
+                            </ul>
+                          </div>
+                          <label ng-if="model.many_start_time_tip" style="color:gray;margin-top: 1.5%;">({{model.many_start_time_tip}})</label>
+                      </div>
+                      <div class="form-group col-md-12 text-left line_right_top" style="white-space:nowrap">
+                          <label class="col-sm-4 col-md-4 control-label text-left discounted_label"><span class="color_org"> </span>到期日:</label>
+                          <div class="dropdown">
+                            <div class="col-sm-8 col-md-5">
+                                <input type="text" ng-model="model.many_end_time" class="form-control discounted_input date_input-2">
+                            </div>
+                            <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown">
+                              <img class="col-md-2 date_input-img-2" src="assets/img/calendar_small.png" style="width: 15%!important;" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <datetimepicker data-ng-model="model.many_end_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown4', minView: 'day', modelType: 'YYYY-MM-DD' }" data-on-set-time="onTimeSet(newDate, oldDate, 'many_end_time')"/>
+                            </ul>
+                          </div>
+                          <label ng-if="model.many_end_time_tip" style="color:gray;margin-top: 1.5%;">({{model.many_end_time_tip}})</label>
+                      </div>
+                  </div>
+                  <div class="form-group col-md-12 text-left line_right_top">
+                      <label class="col-sm-4 col-md-5 control-label text-left inquiry_label">票据类型:</label>
+                        <div class="btn-group col-md-4">
+                            <button type="button" class="btn interest_year_btn_2 ">{{model.bill_type == 'paper' ? '纸票':'电票'}}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle btn_caret_2" data-toggle="dropdown">
+                                <span class="caret_2"><img src="assets/img/caret_2.png" alt="" /></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" ng-click="model.bill_type='elec';model.adjust_day=0;">电票</a></li>
+                                <li><a href="" ng-click="model.bill_type='paper';model.adjust_day=3;">纸票</a></li>
+                            </ul>
+                        </div>
+                        <!--div class="worth_input col-md-3" style="width:22%;margin-left:-12px;">
+                            <input type="number" ng-disabled="true" ng-model="model.adjust_day" class="form-control inquiry_input" min="0">
+                        </div>
+                        <label class="col-md-1 interest_label2">天</label-->
+                  </div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-10 btn_cal_del">
+                      <button type="button" class="btn btn_cal col-md-4" ng-click="calcuInterest('ten')">计算</button>
+                      <div class="col-md-1"></div>
+                      <button type="button" class="btn btn_del col-md-4" ng-click="clear()">清空</button>
+                  </div>
+                </div>
+
+            </form>
+            <div class="col-md-1 divideline" ng-class="{1:'divideline2',0:'divideline'}[chooseMany]">
+                <div></div>
+            </div>
+            <div ng-if="!chooseMany" class="col-md-5 line_right">
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left worth">
+                    </div>
+                    <div class="form-group col-md-12 text-left worth">
+                        <label class="col-sm-4 col-md-5 control-label text-left worth_label">调整天数:</label>
+                        <div class="col-sm-8 col-md-2 worth_input">
+                            <input type="text" value="" ng-model="interestResult.adjust_day" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">天</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-5 control-label text-left worth_label">计息天数:</label>
+                        <div class="col-sm-8 col-md-2 worth_input">
+                            <input type="text" value="" ng-model="interestResult.day" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">天</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-4 control-label text-left worth_label">每10万贴息:</label>
+                        <div class="col-sm-8 col-md-4 worth_input">
+                            <input type="text" ng-model="interestResult.every_plus_amount" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">元</label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-4 control-label text-left worth_label">贴现利息:</label>
+                        <div class="col-sm-8 col-md-4 worth_input">
+                            <input type="text" ng-model="interestResult.discount_interest" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">元</label>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-4 control-label text-left worth_label">贴现金额:</label>
+                        <div class="col-sm-8 col-md-7 worth_input">
+                            <input type="text" ng-model="interestResult.discount_amount" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label3">元</label>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="chooseMany" class="col-md-5 line_right">
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left worth">
+                    </div>
+                    <div ng-if="model.many_start_time && model.many_end_time" class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-5 control-label text-left worth_label">调整天数:</label>
+                        <div class="col-sm-8 col-md-2 worth_input">
+                            <input type="text" value="" ng-model="interestResult.adjust_day" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">天</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <div ng-if="model.many_start_time && model.many_end_time" class="form-group col-md-12 text-left line_right_top">
+                            <label class="col-sm-4 col-md-5 control-label text-left worth_label">计息天数:</label>
+                            <div class="col-sm-8 col-md-2 worth_input">
+                                <input type="text" value="" ng-model="interestResult.day" class="form-control" >
+                            </div>
+                            <label class="col-md-1 control-label right_label2">天</label>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div ng-if="model.many_start_time && model.many_end_time" class="form-group col-md-12 text-left line_right_top" style="padding-left: 0;">
+                        <label class="col-md-4 interest_label3">利率:</label>
+                        <div class="btn-group col-md-4 interest_year" style="margin-left: 0.3rem;">
+                            <button type="button" class="btn interest_year_btn_2 ">{{model.interest_type == 'month' ? '月利率':'年利率'}}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle btn_caret_2" data-toggle="dropdown">
+                                <span class="caret_2"><img src="assets/img/caret_2.png" alt=""/></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" ng-click="model.interest_type='year'">年利率</a></li>
+                                <li><a href="" ng-click="model.interest_type='month'">月利率</a></li>
+                            </ul>
+                        </div>
+                        <div class="worth_input col-md-2 interest_year" style="width:15%;">
+                            <input type="text" ng-model="interestResult['interest_'+model.interest_type]" class="form-control" >
+                        </div>
+                        <label class="col-md-2 interest_label2">{{model.interest_type == 'month' ? '‰':'%'}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-4 control-label text-left worth_label">贴现利息:</label>
+                        <div class="col-sm-8 col-md-4 worth_input">
+                            <input type="text" ng-model="interestResult.discount_interest" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label2">元</label>
+                        <!--button type="button" class="btn col-md-12 btn_recalculate">再计算</button-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group col-md-12 text-left line_right_top">
+                        <label class="col-sm-4 col-md-4 control-label text-left worth_label">贴现金额:</label>
+                        <div class="col-sm-8 col-md-7 worth_input">
+                            <input type="text" ng-model="interestResult.discount_amount" class="form-control" >
+                        </div>
+                        <label class="col-md-1 control-label right_label3">元</label>
+
+                    </div>
+                </div>
+                <!--div class="form-group">
+                    <div class="col-md-4 "></div>
+                    <button type="button" class="btn col-md-12 btn_recalculate">再计算</button>
+                </div-->
+            </div>
+        </div>
+    </div>
+    <!-- 右侧 end-->
+</div>

@@ -1,0 +1,231 @@
+﻿<ion-view cache-view="false">
+    <!--referring to queryOffer in Web-->
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-icon icon ion-funnel" menu-toggle="right" ui-sref="app.billOfferSearchCity"></button>-->
+        <a href="" ui-sref="app.billOfferSearchCity" class="titleAddr">{{locationModel.city_name}}</a>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="dateTopTitle">机构报价</div>
+        <select name="" id="" class="header-select-botttom" ng-model="dateFilter.date_index" ng-options="item.index as item.date for item in dates" ng-change="doRefresh()">
+        </select>
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <!--<header>
+            <select name="" id="" class="header-select-botttom">
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+                <option value="">2016-12-12  周一</option>
+            </select>
+            <a href="" class="addr">杭州</a>
+        </header>-->
+   
+
+        <div id="tabBox1" class="tabBox4" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+            <div class="hd">
+                <ul>
+                    <!--<li ng-repeat="item in billStyleData"><span></span></li>-->
+                    <li ng-class="{'on': tab == 1}"><a href="javascript:void(0)" ng-click="setTab(1)"><span>银电大票</span></a></li>
+                    <li ng-class="{'on': tab == 2}"><a href="javascript:void(0)" ng-click="setTab(2)"><span>银纸小票</span></a></li>
+                    <li ng-class="{'on': tab == 3}"><a href="javascript:void(0)" ng-click="setTab(3)"><span>银电小票</span></a></li>
+                    <li ng-class="{'on': tab == 4}"><a href="javascript:void(0)" ng-click="setTab(4)"><span>商票</span></a></li>
+                </ul>
+            </div>
+            <div class="bd" id="tabBox1-bd">
+                <!-- 银电大票 -->
+                <!--<div class="con" ng-if="filter.billStyleId == 202">-->
+                <div class="con" ng-if="tab==1">
+                    <div>
+                        <!--<a href="" class="more"></a>-->
+                        <table class="g-table">
+                            <tr>
+                                <th>名称</th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(0)">国股<i ng-if="filter.sort==0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate01]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(1)">城商<i ng-if="filter.sort==1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate02]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(2)">三农<i ng-if="filter.sort==2" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate03]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(3)">村镇<i ng-if="filter.sort==3" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate04]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(4)">外资<i ng-if="filter.sort==4" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate05]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(5)">财务公司<i ng-if="filter.sort==5" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate06]"></i></a></th>
+                            </tr>
+                            <tr ng-if="(show[1] || bill.trade_location_id == billOfferSearchModel.city_id) &&  (show[2] || bill.trade_province_id == billOfferSearchModel.province_id) " class="item" ng-repeat="bill in listData202" ng-click="changeBillOfferId(bill.id)" ui-sref="app.billOfferDetail">
+                                <td>
+                                    <h3>
+                                        <span>{{bill.enterprise_name | limitTo:6}}...</span>
+                                        <br />
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 0">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 1">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 2">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 3">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 5">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 3">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 2">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 1">
+                                    </h3>
+                                    <!--<img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 0">
+            <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 1">
+            <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 2">
+            <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 3">
+            <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 4">
+            <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 5">
+            <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 4">
+            <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 3">
+            <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 2">
+            <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 1">-->
+                                    <p class="addr">{{bill.enterprise_location.length > 6 ? (bill.enterprise_location | limitTo:3) : bill.enterprise_location}}</p>
+                                </td>
+                                <td>{{bill.offer_detail.offer_rate01 == null ? "--" : bill.offer_detail.offer_rate01}}</td>
+                                <td>{{bill.offer_detail.offer_rate02 == null ? "--" : bill.offer_detail.offer_rate02}}</td>
+                                <td>{{bill.offer_detail.offer_rate03 == null ? "--" : bill.offer_detail.offer_rate03}}</td>
+                                <td>{{bill.offer_detail.offer_rate04 == null ? "--" : bill.offer_detail.offer_rate04}}</td>
+                                <td>{{bill.offer_detail.offer_rate05 == null ? "--" : bill.offer_detail.offer_rate05}}</td>
+                                <td>{{bill.offer_detail.offer_rate06 == null ? "--" : bill.offer_detail.offer_rate06}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /银电大票 -->
+                <!-- 银纸小票 -->
+                <!--<div class="con" ng-if="filter.billStyleId == 203">-->
+                <div class="con" ng-if="tab==2">
+                    <div>
+                        <!--<a href="" class="more"></a>-->
+                        <table class="g-table">
+                            <tr>
+                                <th>名称</th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(0)">国股<i ng-if="filter.sort==0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate01]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(1)">城商<i ng-if="filter.sort==1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate02]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(2)">三农<i ng-if="filter.sort==2" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate03]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(3)">村镇<i ng-if="filter.sort==3" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate04]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(4)">外资<i ng-if="filter.sort==4" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate05]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(5)">财务公司<i ng-if="filter.sort==5" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate06]"></i></a></th>
+                            </tr>
+                            <tr ng-if="(show[1] || bill.trade_location_id == billOfferSearchModel.city_id) &&  (show[2] || bill.trade_province_id == billOfferSearchModel.province_id) " class="item" ng-repeat="bill in listData203" ng-click="changeBillOfferId(bill.id)" ui-sref="app.billOfferDetail">
+                                <td>
+                                    <h3>
+                                        <span>{{bill.enterprise_name | limitTo:6}}...</span>
+                                        <br />
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 0">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 1">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 2">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 3">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 5">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 3">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 2">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 1">
+                                    </h3>
+                                    <p class="addr" ng-bind="bill.enterprise_location"></p>
+                                </td>
+                                <td>{{bill.offer_detail.offer_rate01 == null ? "--" : bill.offer_detail.offer_rate01}}</td>
+                                <td>{{bill.offer_detail.offer_rate02 == null ? "--" : bill.offer_detail.offer_rate02}}</td>
+                                <td>{{bill.offer_detail.offer_rate03 == null ? "--" : bill.offer_detail.offer_rate03}}</td>
+                                <td>{{bill.offer_detail.offer_rate04 == null ? "--" : bill.offer_detail.offer_rate04}}</td>
+                                <td>{{bill.offer_detail.offer_rate05 == null ? "--" : bill.offer_detail.offer_rate05}}</td>
+                                <td>{{bill.offer_detail.offer_rate06 == null ? "--" : bill.offer_detail.offer_rate06}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /银纸小票 -->
+                <!-- 银电小票 -->
+                <!--<div class="con" ng-if="filter.billStyleId == 204">-->
+                <div class="con" ng-if="tab==3">
+                    <div>
+                        <!--<a href="" class="more"></a>-->
+                        <table class="g-table">
+                            <tr>
+                                <th>名称</th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(0)">国股<i ng-if="filter.sort==0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate01]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(1)">城商<i ng-if="filter.sort==1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate02]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(2)">三农<i ng-if="filter.sort==2" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate03]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(3)">村镇<i ng-if="filter.sort==3" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate04]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(4)">外资<i ng-if="filter.sort==4" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate05]"></i></a></th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(5)">财务公司<i ng-if="filter.sort==5" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate06]"></i></a></th>
+                            </tr>
+                            <tr ng-if="(show[1] || bill.trade_location_id == billOfferSearchModel.city_id) &&  (show[2] || bill.trade_province_id == billOfferSearchModel.province_id) " class="item" ng-repeat="bill in listData204" ng-click="changeBillOfferId(bill.id)" ui-sref="app.billOfferDetail">
+                                <td>
+                                    <h3>
+                                        <span>{{bill.enterprise_name | limitTo:6}}...</span>
+                                        <br />
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 0">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 1">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 2">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 3">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 5">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 3">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 2">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 1">
+                                    </h3>
+                                    <p class="addr" ng-bind="bill.enterprise_location"></p>
+                                </td>
+                                <td>{{bill.offer_detail.offer_rate01 == null ? "--" : bill.offer_detail.offer_rate01}}</td>
+                                <td>{{bill.offer_detail.offer_rate02 == null ? "--" : bill.offer_detail.offer_rate02}}</td>
+                                <td>{{bill.offer_detail.offer_rate03 == null ? "--" : bill.offer_detail.offer_rate03}}</td>
+                                <td>{{bill.offer_detail.offer_rate04 == null ? "--" : bill.offer_detail.offer_rate04}}</td>
+                                <td>{{bill.offer_detail.offer_rate05 == null ? "--" : bill.offer_detail.offer_rate05}}</td>
+                                <td>{{bill.offer_detail.offer_rate06 == null ? "--" : bill.offer_detail.offer_rate06}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /银电小票 -->
+                <!-- 商票 -->
+                <!--<div class="con" ng-if="filter.billStyleId == 205">-->
+                <div class="con" ng-if="tab==4">
+                    <div>
+                        <!--<a href="" class="more"></a>-->
+                        <table class="g-table">
+                            <tr>
+                                <th style="width:50%">名称</th>
+                                <th><a href="" class="btn2 on" ng-click="rateClick(0)">电票<i ng-if="filter.sort==0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate01]"></i></a></th>
+                                <th><a href="" class="btn3 on" ng-click="rateClick(1)">纸票<i ng-if="filter.sort==1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.rate02]"></i></a></th>
+                            </tr>
+                            <tr ng-if="(show[1] || bill.trade_location_id == billOfferSearchModel.city_id) &&  (show[2] || bill.trade_province_id == billOfferSearchModel.province_id) " class="item" ng-repeat="bill in listData205" ng-click="changeBillOfferId(bill.id)" ui-sref="app.billOfferDetail">
+                                <td style="width:50%">
+                                    <h3>
+                                        <span>{{bill.enterprise_name | limitTo:6}}...</span>
+                                        <br />
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 0">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 1">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 2">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 3">
+                                        <img src="images/star-on.png" alt="" class="icon" ng-if="bill.star > 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 5">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 4">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 3">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 2">
+                                        <img src="images/star.png" alt="" class="icon" ng-if="bill.star < 1">
+                                    </h3>
+                                    <p class="addr" ng-bind="bill.enterprise_location"></p>
+                                </td>
+                                <td>{{bill.offer_detail.offer_rate01 == null ? "--" : bill.offer_detail.offer_rate01}}</td>
+                                <td>{{bill.offer_detail.offer_rate02 == null ? "--" : bill.offer_detail.offer_rate02}}</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /商票 -->
+
+
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

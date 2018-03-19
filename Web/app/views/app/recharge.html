@@ -1,0 +1,28 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <p ui-sref="app.rechargerecord" style="align-self:center">充值记录</p>
+        <!--<button class="button" ng-click="app.rechargerecord">充值记录</button>-->
+    </ion-nav-buttons>
+    <ion-nav-title>
+        我要充值
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page19-2">
+            <div class="part1">
+                充值金额：  <input type="number" min="0" ng-model="model.recharge_price" placeholder="请输入充值金额">
+            </div>
+            <h3>支付方式</h3>
+            <ul class="pay">
+                <li class="on">
+                    <img src="images/pay.png" alt="" class="icon">选择支付宝支付
+                </li>
+            </ul>
+            <div class="g-single-submit">
+                <input type="submit"  ng-click="submit()" value="确认支付">
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-view>

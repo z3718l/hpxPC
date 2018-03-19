@@ -1,0 +1,142 @@
+﻿<link rel="stylesheet" href="../../templates/main/css/my-customkl.css" />
+<div ng-cloak ng-controller="queryBillController">
+    <div>
+        <div class="user-right">
+            <div class="right-top col-md-12 row " style="margin-left: 0px;margin-bottom: 3%;">
+                <p style="font-size:14px;color:#3a3a3a;">我要收票 > 票源查询</p>
+            </div>
+            <div class="content col-md-12 row" style="margin-left: 0px;height: 590px;">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #f55a14;margin-left: -15px;color:#3a3a3a;font-size:16px">票源查询  条件选择</div>
+                <div class="explain col-md-12">
+                </div>
+                <div class="table col-md-12 text-center">
+                    <form class="form-horizontal col-md-12" role="form">
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">票据类型</div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0" ng-repeat="item in billTypeData">
+                                <input type="radio" name="billtype" style="height: 15px" value="{{item.code}}" ng-model="filter.billTypeID" ng-change="billTypeChange()"> {{ item.constant_name }}
+                            </span>
+                            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">交易方式</div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0" ng-repeat="item in tradeTypeData">
+                                <input type="radio" name="tradetype" style="height: 15px" value="{{item.code}}" ng-model="filter.tradeTypeCode"> {{ item.constant_name }}
+                            </span>
+                            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">汇票状态</div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                <input type="radio" name="status" style="height: 15px" value="801,802,803,804,805,806,807,808,809,810,811,812,813,814,815,816" ng-model="filter.billStatusCode"> 全部
+                            </span>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                <input type="radio" name="status" style="height: 15px" value="801" ng-model="filter.billStatusCode"> 发布中
+                            </span>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                <input type="radio" name="status" style="height: 15px" value="802,803,804,805,806,807,808,809" ng-model="filter.billStatusCode"> 交易中
+                            </span>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                <input type="radio" name="status" style="height: 15px" value="810,811,812,813" ng-model="filter.billStatusCode"> 交易完成
+                            </span>
+                            <!--<hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                                <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                                <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                    <input type="radio" name="status" style="height: 15px" value="814,815" ng-model="filter.billStatusCode"> 申请退款
+                                </span>
+                                <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0">
+                                    <input type="radio" name="status" style="height: 15px" value="816" ng-model="filter.billStatusCode"> 交易终止
+                                </span>-->
+                            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">承兑机构</div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 checkbox" style="padding-top: 0">
+                                <input type="checkbox" style="height: 15px" ng-model="filter.acceptorTypeAll" ng-change="acceptorTypeChangeAll()"> 全部
+                            </span>
+                            <span class="col-md-2 col-sm-2 col-xs-2 checkbox" style="padding-top: 0" ng-repeat="item in acceptorTypeData3">
+                                <input type="checkbox" style="height: 15px" value="{{item.code}}" ng-model="item.checked" ng-change="acceptorTypeChange()"> {{ item.constant_name }}
+                            </span>
+                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                            <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 checkbox" style="padding-top: 0" ng-repeat="item in acceptorTypeData4 track by $index">
+                                <input type="checkbox" style="height: 15px" value="{{item.code}}" ng-model="item.checked" ng-change="acceptorTypeChange()"> {{ item.constant_name }}
+                            </span>
+                            <hr class="col-md-12" style="width: 95%; margin-top:0;" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">票据特点</div>
+                            <span class="col-md-2 col-sm-2 col-xs-2 radio" style="padding-top: 0" ng-repeat="item in billCharacterData">
+                                <input type="radio" name="billcharacter" style="height: 15px" value="{{item.code}}" ng-model="filter.billCharacterCode" ng-change="billCharacterChange()"> {{ item.constant_name }}
+                            </span>
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                <div class="question" ng-click="Reminder()"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2">所在地区</div>
+                            <div class="col-md-2 col-sm-3 col-xs-3">
+                                <select class="form-control" style="margin:0;margin-left: -18%;" ng-model="filter.ProvinceID" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="filterProvinceChange()">
+                                    <option value="">省/直辖市</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-3" style="margin-right: -2%;">
+                                <select class="form-control" style="margin:0; margin-left: -17%;" ng-model="filter.CityID" ng-options="item.id as item.address_name for item in CityData" ng-change="filterCityChange()">
+                                    <option value="">市/区</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-3 col-xs-3 col-md-offset-4 col-sm-offset-4 col-xs-offset-2 text-center" style="height:43px; border:0;border-radius:3px; background-color:#f55a14;margin-top:2%;margin-left:41%"><a href="javascript:;" style="font-size:18px;color:#fff;line-height:2.3em;" ng-click="reflash()">我要查询</a></div>
+                        </div>
+                        <line></line>
+                    </form>
+                </div>
+            </div>
+            <div class="content col-md-12 row" style="margin-left: 0;">
+                <form>
+                    <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed text-center">
+                        <tr class="text-center p_text" style="background:#fff">
+                            <th>汇票类型</th>
+                            <th>交易方式</th>
+                            <th>承兑机构</th>
+                            <th>票面金额
+                                <!--<div class="sximg" style="width:10px;float:right;line-height:10px;">
+                                    <div class="shang" ng-click="sortByType('bill_sum_price')">s</div>
+                                    <div class="xia" ng-click="sortByType('bill_sum_price')">x</div>
+                                </div>-->
+                            </th>
+                            <th>发布时间</th>
+                            <th>到期时间
+                                <!--<div class="sximgs">
+                                    <div class="shangs" ng-click="sortByType('bill_deadline_time')"></div>
+                                    <div class="xias" ng-click="sortByType('bill_deadline_time')"></div>
+                                </div>-->
+                            </th>
+                            <th>地区</th>
+                            <th>出价数</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr ng-repeat="item in $data | orderBy:sort:desc" class="text-center">
+                            <td data-title="'汇票类型'" sortable="'bill_type_id'">{{ item.bill_type_name }}</td>
+                            <td data-title="'交易方式'">{{ item.trade_type_name }}</td>
+                            <td data-title="'承兑机构'" sortable="'acceptor_type_id'">{{ item.acceptor_type_name }}</td>
+                            <td data-title="'票面金额'" sortable="'bill_sum_price'">{{ item.bill_sum_price | currency }}</td>
+                            <td data-title="'发布时间'" sortable="'publishing_time'">{{ item.publishing_time | date: 'yyyy-MM-dd' }}</td>
+                            <td data-title="'到期时间'" sortable="'bill_deadline_time'">{{ item.bill_deadline_time | date: 'yyyy-MM-dd' }}</td>
+                            <td data-title="'地区'">{{ item.product_location }}</td>
+                            <td data-title="'出价数'" sortable="'bid_number'">{{ item.bid_number }}</td>
+                            <td data-title="'状态'" sortable="'bill_status_code'">{{ item.bill_status_name }}</td>
+                            <td data-title="'操作'" class="text-center width-100 text-nowrap">
+                                <a class="det" href="javascript:;" ng-click="jingjia(item)" ng-if="item.bill_status_code==801"><i class="fa fa-edit"></i>我要竞价</a>
+                                <a class="det" href="javascript:;" ng-click="findDetail(item)" ng-if="item.bill_status_code!=801"><i class="fa fa-edit"></i>查看</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

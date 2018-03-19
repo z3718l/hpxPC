@@ -1,0 +1,35 @@
+﻿<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" href="../../www/assets/css/udekx.css" />
+<div ng-cloak ng-controller="hpxTestController">
+    <div class="user-right">
+        <div class="explain col-md-12 col-xs-12">
+            <div class="line col-md-12 text-center" style="margin-top: 10px; margin-left: -25px"></div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 row">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border-left: 5px solid #f55a14;color:#202020;">
+                <div><span style="color: #f55a14" ng-if="model.trade_type_code==701 || ($stateParams.id!=null && $scope.model.trade_type_code == 702 && $scope.model.bill_type_id == 101)"></span> <label style="font-size:16px">上传汇票</label><laber style="color: #999999;font-size:14px"> （汇票正面）</laber></div>
+            </div>
+            <div class="explain col-md-12 col-xs-12">
+                <div class="line col-md-12 col-xs-12 text-center" style="margin-top: 20px;background-color: white"></div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="tb-booth tb-pic tb-s250" style="float: right" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                    <img class="jqzoom_front" src="{{model.bill_front_photo_path}}" rel="{{model.bill_front_photo_path}}" />
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-12 text-center">
+                <img class="col-mx-12" style="margin-top: 20px" ng-click="removeFront()" src="assets/img/erro.png">
+            </div>
+            <div class="col-md-4">
+                <div class="tb-booth tb-pic tb-s250" style="float: right" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                    <img class="jqzoom_back" src="{{model.bill_back_photo_path}}" rel="{{model.bill_back_photo_path}}" />
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-12 text-center">
+                <img class="col-mx-12" style="margin-top: 20px" ng-click="removeBack()" src="assets/img/erro.png">
+            </div>
+        </div>
+    </div>
+</div>

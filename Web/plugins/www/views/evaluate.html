@@ -1,0 +1,420 @@
+﻿<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<div ng-controller="evaluateController">
+    <div class="user-right">
+        <div class="right-top col-md-12 row right-top-nav" ng-if="model.gettype==1">
+            <p>我要出票 > 我的发布 > 交易完成</p>
+        </div>
+        <div class="right-top col-md-12 row right-top-nav" ng-if="model.gettype==3">
+            <p>我要收票 > 我的竞价 > 交易完成</p>
+        </div>
+        <!-- 向导栏 start-->
+        <div class="content col-md-12 row col-xs-12" style="margin-left: 0px;">
+            <!--<div class="process row col-md-12 col-xs-12" ng-if="model.type_id==101">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 804 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 805 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">支付票款</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 807 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">出票方</h6>
+                    <h6 style="width: 90px">&nbsp;&nbsp;背书</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 808 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">&nbsp;&nbsp;签收</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img style="margin-bottom: 5px" src="{{model.order_status_id >= 810 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}">
+                    <h6 style="width: 50px">&nbsp;&nbsp;监管户</h6>
+                    <h6 style="width: 90px">支付票款</h6>
+                </div>
+            </div>
+            <div class="process row col-md-12 col-xs-12" ng-if="model.type_id==102">
+                <div class="process3 col-md-1 col-xs-2">
+                    <img src="{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;出票方</h6>
+                    <h6 style="width: 90px">发布信息</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-2">
+                    <img src="{{model.bill_status_code >= 801 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;收票方</h6>
+                    <h6 style="width: 90px">竞价购票</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 804 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;出票方</h6>
+                    <h6 style="width: 90px">确认交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 805 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;双方</h6>
+                    <h6 style="width: 90px">自行交易</h6>
+                </div>
+                <div class="p-line col-md-1 col-xs-1"></div>
+                <div class="process3 col-md-1 col-xs-4">
+                    <img src="{{model.bill_status_code >= 810 ? 'assets/img/user-right-point.png' : 'assets/img/user-right-point-gray.png'}}" style="margin-bottom: 5px">
+                    <h6 style="width: 50px">&nbsp;&nbsp;确认</h6>
+                    <h6 style="width: 90px">完成交易</h6>
+                </div>
+            </div>-->
+        </div>
+        <!-- 向导栏 end-->
+
+        <div class="form-horizontal" style="margin-bottom:60px;" ng-if="model.bill_status_code==810 || model.bill_status_code==811">
+            <div ng-if="drawerevalutaModel.description!=null">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;margin-top:5px;color:#1a2b71;">评价详情</div>
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">出票方评价</strong>
+                    <div class="form-inline col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">评分</div>
+                        <div class="col-md-10">
+                            <img src="{{ drawerevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=1" span style="color:red;font-size:larger;">非常不满意</span>-->
+                            <img src="{{ drawerevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=2" span style="color:red;font-size:larger;">不满意</span>-->
+                            <img src="{{ drawerevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=3" span style="color:red;font-size:larger;">一般</span>-->
+                            <img src="{{ drawerevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=4" span style="color:red;font-size:larger;">满意</span>-->
+                            <img src="{{ drawerevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=5" span style="color:red;font-size:larger;">非常满意</span>-->
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-control-static">
+                        <div class="col-lg-offset-1 col-md-1">内容</div>
+                        <div class="col-md-10">
+                            {{ drawerevalutaModel.description }}
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-md-12 form-group">
+                      <strong style="margin-left:50px;">收票方评价</strong>
+                    <div class="form-inline col-md-12">
+                         <div class="col-lg-offset-2 col-md-10">收票方还未进行评价！</div>
+                    </div>
+               </div>-->
+          </div>
+            <div ng-if="addevaluateModel.additional_description!=null">
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">收票方评价</strong>
+                    <div class="form-inline col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">评分</div>
+                        <div class="col-md-10">
+                            <img src="{{ receiverevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=1" span style="color:red;font-size:larger;">非常不满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=2" span style="color:red;font-size:larger;">不满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=3" span style="color:red;font-size:larger;">一般</span>-->
+                            <img src="{{ receiverevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=4" span style="color:red;font-size:larger;">满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=5" span style="color:red;font-size:larger;">非常满意</span>-->
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-control-static">
+                        <div class="col-lg-offset-1 col-md-1">内容</div>
+                        <div class="col-md-10">
+                            {{ receiverevalutaModel.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(model.bill_status_code==810 || model.bill_status_code==811) && drawerevalutaModel.description==null && model.gettype==1">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;margin-top:5px;color:#1a2b71;">评价详情</div>
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">出票方评价</strong>
+                    <div class="form-inline form-group col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">评分</div>
+                        <div class="form-inline col-md-3">
+                            <a href="javascript:;"><img id="star1" ng-click="clickimg1()" src="{{filter.star >= 1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star2" ng-click="clickimg2()" src="{{filter.star >= 2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star3" ng-click="clickimg3()" src="{{filter.star >= 3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star4" ng-click="clickimg4()" src="{{filter.star >= 4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star5" ng-click="clickimg5()" src="{{filter.star >= 5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                        </div>
+                        <div class="form-inline col-md-7">
+                            <div class="form-inline" ng-if="filter.star == 1 ">您的评价为：<span style="color:red;font-size:larger;">1</span>星<span style="color:red;font-size:larger;">(非常不满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 2 ">您的评价为：<span style="color:red;font-size:larger;">2</span>星<span style="color:red;font-size:larger;">(不满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 3 ">您的评价为：<span style="color:red;font-size:larger;">3</span>星<span style="color:red;font-size:larger;">(一般)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 4 ">您的评价为：<span style="color:red;font-size:larger;">4</span>星<span style="color:red;font-size:larger;">(满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 5 ">您的评价为：<span style="color:red;font-size:larger;">5</span>星<span style="color:red;font-size:larger;">(非常满意)</span></div>
+                        </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="col-lg-offset-1 col-md-1">内容</div>
+                        <div class="col-md-12 form-control-static">
+                        <textarea class="t_area" style="width:90%;height:150px;margin-left:40px;margin-top:10px;overflow:visible" placeholder="请在此输入您对收票方的具体评价（如价格，打款，信用等方面）" ng-model="model.description" required></textarea>
+                    </div>
+                    <div class="form-horizontal" style="margin-bottom:40px;">
+                        <button type="button" class="btn btn-success width-100" ng-click="showEvaluatesell()" style="text-align:center;margin-left:375px;" ng-disabled="t_area.$invalid">提交评价</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div ng-if="(model.bill_status_code==810 || model.bill_status_code==811) && addevaluateModel.additional_description==null && model.gettype==3">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;margin-top:5px;color:#1a2b71;" ng-if="model.bill_status_code==810">评价详情</div>
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">收票方评价</strong>
+                    <div class="form-inline form-group col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">评分</div>
+                        <div class="col-md-3">
+                            <a href="javascript:;"><img id="star1" ng-click="clickimg1()" src="{{filter.star >= 1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star2" ng-click="clickimg2()" src="{{filter.star >= 2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star3" ng-click="clickimg3()" src="{{filter.star >= 3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star4" ng-click="clickimg4()" src="{{filter.star >= 4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                            <a href="javascript:;"><img id="star5" ng-click="clickimg5()" src="{{filter.star >= 5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                        </div>
+                        <div class="form-inline col-md-7">
+                            <div class="form-inline" ng-if="filter.star == 1 ">您的评价为：<span style="color:red;font-size:larger;">1</span>星<span style="color:red;font-size:larger;">(非常不满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 2 ">您的评价为：<span style="color:red;font-size:larger;">2</span>星<span style="color:red;font-size:larger;">(不满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 3 ">您的评价为：<span style="color:red;font-size:larger;">3</span>星<span style="color:red;font-size:larger;">(一般)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 4 ">您的评价为：<span style="color:red;font-size:larger;">4</span>星<span style="color:red;font-size:larger;">(满意)</span></div>
+                            <div class="form-inline" ng-if="filter.star == 5 ">您的评价为：<span style="color:red;font-size:larger;">5</span>星<span style="color:red;font-size:larger;">(非常满意)</span></div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">内容</div>
+                        <div class="col-md-12 form-control-static">
+                            <textarea class="t_area" style="width:90%;height:150px;margin-left:40px;margin-top:10px;overflow:visible" placeholder="请在此输入您对出票方的具体评价（如票据背书，信用等方面）" ng-model="model.description" required></textarea>
+                        </div>
+                        <div class="form-horizontal" style="margin-bottom:40px;">
+                            <button type="button" class="btn btn-success width-100" ng-click="showEvaluatesell()" style="text-align:center;margin-left:375px;" ng-disabled="t_area.$invalid">提交评价</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="form-horizontal" style="margin-bottom:60px;" ng-if="model.bill_status_code==811">
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价详情</div>
+            <div class="col-md-12 form-group">
+                <strong style="margin-left:50px;">出票方评价</strong>
+                <div class="form-inline col-md-12">
+                    <div class="col-lg-offset-1 col-md-1">评分</div>
+                    <div class="col-md-10">
+                        <img src="{{ drawerevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.star>=1" span style="color:red;font-size:larger;">非常不满意</span>
+                        <img src="{{ drawerevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.star>=2" span style="color:red;font-size:larger;">不满意</span>
+                        <img src="{{ drawerevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.star>=3" span style="color:red;font-size:larger;">一般</span>
+                        <img src="{{ drawerevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.star>=4" span style="color:red;font-size:larger;">满意</span>
+                        <img src="{{ drawerevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.star>=5" span style="color:red;font-size:larger;">非常满意</span>
+                    </div>
+                </div>
+                <div class="col-md-12 form-control-static">
+                    <div class="col-lg-offset-1 col-md-1">内容</div>
+                    <div class="col-md-10">
+                        {{ drawerevalutaModel.description }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <strong style="margin-left:50px;">收票方评价</strong>
+                <div class="col-md-12">
+                    <div class="col-lg-offset-1 col-md-1"><strong>评分</strong></div>
+                    <div class="col-md-10">
+                         <a href="javascript:;"><img id="star1" ng-click="clickimg1()" src="{{filter.star >= 1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                         <a href="javascript:;"><img id="star2" ng-click="clickimg2()" src="{{filter.star >= 2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                         <a href="javascript:;"><img id="star3" ng-click="clickimg3()" src="{{filter.star >= 3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                         <a href="javascript:;"><img id="star4" ng-click="clickimg4()" src="{{filter.star >= 4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                         <a href="javascript:;"><img id="star5" ng-click="clickimg5()" src="{{filter.star >= 5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png'}}" /></a>
+                    </div>
+                    <div class="form-inline col-md-8" style="margin-left:250px;margin-top:5px;">
+                         <div class="form-inline" ng-if="filter.star == 1 ">您的评价为：<span style="color:red;font-size:larger;">1</span>星<span style="color:red;font-size:larger;">(非常不满意)</span></div>
+                         <div class="form-inline" ng-if="filter.star == 2 ">您的评价为：<span style="color:red;font-size:larger;">2</span>星<span style="color:red;font-size:larger;">(不满意)</span></div>
+                         <div class="form-inline" ng-if="filter.star == 3 ">您的评价为：<span style="color:red;font-size:larger;">3</span>星<span style="color:red;font-size:larger;">(一般)</span></div>
+                         <div class="form-inline" ng-if="filter.star == 4 ">您的评价为：<span style="color:red;font-size:larger;">4</span>星<span style="color:red;font-size:larger;">(满意)</span></div>
+                         <div class="form-inline" ng-if="filter.star == 5 ">您的评价为：<span style="color:red;font-size:larger;">5</span>星<span style="color:red;font-size:larger;">(非常满意)</span></div>
+                   </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <strong class="col-md-3" style="margin-left:20px;">评价描述</strong>
+                    <div class="col-md-12 form-control-static">
+                        <textarea class="t_area" style="width:90%;height:150px;margin-left:40px;margin-top:10px;overflow:visible" placeholder="请在此输入您的具体评价！（如操作方便、交易便捷等）" ng-model="model.description" required></textarea>
+                    </div>
+                    <div class="form-horizontal" style="margin-bottom:40px;">
+                        <button type="button" class="btn btn-success width-100" ng-click="showEvaluatesell()" style="text-align:center;margin-left:375px;" ng-disabled="t_area.$invalid">提交评价</button>
+                    </div>
+                </div>
+        </div>-->
+        <!--<div class="form-horizontal" style="margin-bottom:60px;" ng-if="model.bill_status_code==812">
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价详情</div>
+            <div class="col-md-12 form-group">
+                <strong style="margin-left:50px;">出票方评价</strong>
+                <div class="form-inline col-md-12">
+                    <div class="col-lg-offset-2 col-md-10">出票方还未进行评价！</div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <strong style="margin-left:50px;">收票方评价</strong>
+                <div class="form-inline col-md-12">
+                    <div class="col-lg-offset-1 col-md-1">评分</div>
+                    <div class="col-md-10">
+                        <img src="{{ receiverevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.drawer_appraisal_star>=1" span style="color:red;font-size:larger;">非常不满意</span>
+                        <img src="{{ receiverevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.drawer_appraisal_star>=2" span style="color:red;font-size:larger;">不满意</span>
+                        <img src="{{ receiverevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.drawer_appraisal_star>=3" span style="color:red;font-size:larger;">一般</span>
+                        <img src="{{ receiverevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.drawer_appraisal_star>=4" span style="color:red;font-size:larger;">满意</span>
+                        <img src="{{ receiverevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><span ng-if="drawerevalutaModel.drawer_appraisal_star>=5" span style="color:red;font-size:larger;">非常满意</span>
+                    </div>
+                </div>
+                <div class="col-md-12 form-control-static">
+                    <div class="col-lg-offset-1 col-md-1">内容</div>
+                    <div class="col-md-10">
+                        {{ receiverevalutaModel.description }}
+                    </div>
+                </div>
+            </div>
+        </div>-->
+            <div class="form-horizontal" style="margin-bottom:60px;" ng-if="model.bill_status_code==812 || model.bill_status_code==813">
+                <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;margin-top:5px;color:#1a2b71;">评价详情</div>
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">出票方评价</strong>
+                    <div class="form-inline col-md-12" ng-if="drawerevalutaModel.description==null">
+                        <div class="col-lg-offset-2 col-md-10">默认好评！</div>
+                    </div>
+                    <div ng-if="drawerevalutaModel.description!=null">
+                        <div class="form-inline col-md-12">
+                            <div class="col-lg-offset-1 col-md-1">评分</div>
+                            <div class="col-md-10">
+                                <img src="{{ drawerevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=1" span style="color:red;font-size:larger;">非常不满意</span>-->
+                                <img src="{{ drawerevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=2" span style="color:red;font-size:larger;">不满意</span>-->
+                                <img src="{{ drawerevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=3" span style="color:red;font-size:larger;">一般</span>-->
+                                <img src="{{ drawerevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=4" span style="color:red;font-size:larger;">满意</span>-->
+                                <img src="{{ drawerevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.star>=5" span style="color:red;font-size:larger;">非常满意</span>-->
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-control-static">
+                            <div class="col-lg-offset-1 col-md-1">内容</div>
+                            <div class="col-md-10">
+                                {{ drawerevalutaModel.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <strong style="margin-left:50px;">收票方评价</strong>
+                    <div class="form-inline col-md-12">
+                        <div class="col-lg-offset-1 col-md-1">评分</div>
+                        <div class="col-md-10">
+                            <img src="{{ receiverevalutaModel.star>=1 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=1" span style="color:red;font-size:larger;">非常不满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=2 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=2" span style="color:red;font-size:larger;">不满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=3 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=3" span style="color:red;font-size:larger;">一般</span>-->
+                            <img src="{{ receiverevalutaModel.star>=4 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=4" span style="color:red;font-size:larger;">满意</span>-->
+                            <img src="{{ receiverevalutaModel.star>=5 ? 'assets/img/stars2.png' : 'assets/img/stark2.png' }}" /><!--<span ng-if="drawerevalutaModel.drawer_appraisal_star>=5" span style="color:red;font-size:larger;">非常满意</span>-->
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-control-static">
+                        <div class="col-lg-offset-1 col-md-1">内容</div>
+                        <div class="col-md-10">
+                            {{ receiverevalutaModel.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-12 form-control-static">
+                <strong class="col-md-3" style="margin-left:5px;">追加评价</strong>
+                <textarea class="t_area" style="width:90%;height:200px;margin-left:40px;margin-top:10px;overflow:visible" placeholder="请在此输入您的追加评价！" ng-model="addevaluateModel.additional_description" required></textarea>
+            </div>
+            <div class="form-horizontal" style="margin-bottom:40px;">
+                <button type="button" class="btn btn-success width-100" ng-click="showaddEvaluatesell()" style="text-align:center;margin-left:375px;" ng-disabled="t_area.$invalid">追加评价</button>
+            </div>
+        </div>-->
+            <!--<div class="col-md-12" style="margin-left:20px;" ng-if="model.bill_status_code>=813">
+            <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价详情</div>
+            <div class="col-md-12">
+                <div class="tb-booth tb-pic tb-s250" style="margin-left:35px;">
+                    <strong>星级评价</strong>
+                    <div ng-if="filter.star == 1"><img src="assets/img/stark2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><span span style="color:red;font-size:larger;">非常不满意</span></div>
+                    <div ng-if="filter.star == 2"><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><span span style="color:red;font-size:larger;">不满意</span></div>
+                    <div ng-if="filter.star == 3"><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stars2.png" /><img src="assets/img/stars2.png" /><span span style="color:red;font-size:larger;">一般</span></div>
+                    <div ng-if="filter.star == 4"><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stars2.png" /><span span style="color:red;font-size:larger;">满意</span></div>
+                    <div ng-if="filter.star == 5"><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><img src="assets/img/stark2.png" /><span span style="color:red;font-size:larger;">非常满意</span></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                 <div class="model.description">
+                      <strong class="col-md-3" style="margin-left:20px;">首次评价</strong>
+                      {{ evalutaModel.description }}
+                 </div>
+            </div>
+            <div class="col-md-12">
+                 <div class="additional_description">
+                      <strong class="col-md-3" style="margin-left:20px;">追加评价</strong>
+                        {{ addevaluateModel.additional_description }}
+                 </div>
+            </div>
+        </d-->
+            <!--<div class="col-md-12">
+            <div class="col-md-4">
+                <div class="tb-booth tb-pic tb-s250" style="margin-left:20px;">
+                    <strong><span style="color:red;font-size:15px;">*</span>&nbsp;&nbsp;卖家服务</strong>
+                    <ul>
+                        <li>
+                            <div id="starttwo2" class="block clearfix">
+                                <div class="star_score" ng-model="model.star2"></div>
+                                <p style="float:left;">您的评分：<span class="fenshu"></span> 分</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+            <!--<div clas
+        s="form-horizontal
+        " style="margin-bottom:60px;">
+                        <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #1a2b71;margin-left: 0px;color:#1a2b71;">评价交易对手</div>
+                        <div class="col-md-12" ng-if="model.order_status_id == 810">
+                            <div class="col-md-12">
+                                 <div class="tb-booth tb-pic tb-s250" style="margin-left:20px;">
+                                        <strong>星级评价</strong>
+                                        <ul>
+                                            <li>
+                                                <div id="starttwo2" class="block clearfix">
+                                                    <div class="star_score" ng-model="model.star2"></div>
+                                                    <p style="float:left;">您的评价为：<span class="fenshu"></span> 星<span class="atu"></span></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <strong class="col-md-3" style="margin-left:5px;">评价描述</strong>
+                                <div class="col-md-12 form-control-static">
+                                    <textarea class="t_area" style="width:85%;height:150px;margin-left:55px;" placeholder="请在此输入您的具体评价！（如票面信息完整、交易对手回复及时等）" ng-model="model.description"></textarea>
+                                </div>
+                            </div>
+                                <div class="form-horizontal" style="margin-bottom:40px;">
+                                    <button type="button" class="btn btn-success width-100" ng-click="showEvaluatesell()" style="text-align:center;margin-left:375px;">提交评价</button>
+                                </div>
+                            </div>
+
+                     </div>
+
+
+          </div>
+        </div>-->
+       </div>
+ </div>
+ 
+
+ 
+        
+
+    
+        

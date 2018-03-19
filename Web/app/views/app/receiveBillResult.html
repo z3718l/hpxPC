@@ -1,0 +1,43 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我要收票
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page12-2">
+
+            <div class="hot">
+
+                <div ng-repeat="bill in listData" class="item">
+                    <div class="hot-title">
+                        <a href="">
+                            <!--<span class="tag">{{bill.bill_type_name}}</span>{{bill.drawer_name}}
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>0]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>1]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>2]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>3]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>4]"></i>-->
+                            <span class="addr">{{bill.enterprise_location.length > 6 ? (bill.product_location | limitTo:3) : bill.enterprise_location}}</span>
+                        </a>
+                    </div>
+                    <div class="con" ui-sref="app.myReleaseDetail({myReleaseBillId:bill.id})">
+                        <a href="">
+                            <p>票面金额：<i>¥ <b>{{bill.bill_sum_price / 10000 |number:2 }} 万</b></i></p>
+                            <p>承兑机构 ：{{bill.acceptor_type_name}}</p>
+                            <p>到期日：{{bill.publishing_time | date: 'yyyy-MM-dd'}}<time>{{bill.remaining_day}}天</time></p>
+                            <span class="btn1">{{bill.bill_status_name}}</span>
+                        </a>
+                    </div>
+                </div>
+               
+
+            </div>
+            <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

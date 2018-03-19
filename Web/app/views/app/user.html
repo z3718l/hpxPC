@@ -1,0 +1,49 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-icon icon ion-gear-a" menu-toggle="right" ui-sref="app.setting"></button>-->
+        <a class="btn-setting" ui-sref="app.setting"/></a>
+    </ion-nav-buttons>
+    <ion-nav-title>
+       我的账户
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="my-account">
+            <div class="user-info">
+                <a id="online-service" ng-click="openService()" class="btn-online-service"><i></i>联系客服</a>
+                <img src="images/face151.png" ng-if="!isSignIn" ui-sref="app.signin" class="face">
+                <img src="images/face151.png" ng-if="isSignIn" ui-sref="app.userInfo" class="face">
+                <h3 ui-sref="app.signin" ng-if="!isSignIn">未登录</h3>
+                <h3 ui-sref="app.userInfo" ng-if="isSignIn" ng-bind="customerInfo.phone_number"></h3>
+                <p><a href="" class="btn-details" ui-sref="app.userInfo" ng-if="model.is_verified != 0 && isSignIn">详细信息</a></p>
+                <p><a href="" class="btn-details" ui-sref="app.userInfo" ng-if="model.is_verified == 0 && isSignIn">完善信息即可交易</a></p>
+            </div>
+            <div class="cnav2">
+                <div class="item1"><img src="images/icon152-1.png" alt="">账户余额<i ng-if="customerInfo.platform_balance">{{customerInfo.platform_balance + '元'}}</i><i ng-if="!customerInfo.platform_balance">0.00元</i></div>
+                <div class="item2"><a ui-sref="app.recharge"><img src="images/icon152-2.png" alt="">我要充值</a></div>
+            </div>
+            <ul class="cnav3">
+                <li><a ui-sref="app.myReleaseElecAll">我的发布<i ng-bind="customerInfo.publish_active_number"></i></a></li>
+                <li><a ui-sref="app.myBidding">我的竞价<i ng-bind="customerInfo.bid_active_number"></i></a></li>
+                <li><a ui-sref="app.myTask">我的任务<i ng-bind="customerInfo.mission_number"></i></a></li>
+            </ul>
+            <ul class="list15">
+                <li><a ui-sref="app.accredit"><img src="images/icon153-1.png" alt="" class="icon">机构认证</a></li>
+                <li><a ui-sref="app.authorizate"><img src="images/icon153-6.png" alt="" class="icon">业务授权</a></li>
+                <li><a ui-sref="app.accountBind"><img src="images/icon153-2.png" alt="" class="icon">账户绑定</a></li>
+                <li><a ui-sref="app.security"><img src="images/icon153-3.png" alt="" class="icon">安全中心</a></li>
+                <li><a ui-sref="app.message"><img src="images/icon153-4.png" alt="" class="icon">消息中心<i ng-bind="customerInfo.notification_number"></i></a></li>
+                <li><a ui-sref="app.follow"><img src="images/icon153-5.png" alt="" class="icon">我的关注与收藏</a></li>
+            </ul>
+        </div>
+        <div class="alert-online-service"style="display:block" ng-click="closeService()" ng-if="alertOnlineService">
+            <div class="box">
+                <!--<a href="" class="close" ng-click="closeService()"></a>-->
+                <ul>
+                    <li><a href="" class="aBlock" ng-click="onlineService()"><img src="images/online.png" alt="" class="icon">在线咨询客服</a></li>
+                    <li><a href="tel:40077205757" class="aBlock" ><img src="images/tel.png"alt="" class="icon">400-772-0575</a></li>
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

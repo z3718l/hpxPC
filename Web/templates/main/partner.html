@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>全国“独家代理”招募</title>
+    <meta name="viewport" content="width=1200px, initial-scale=1.0, user-scalable=true">
+    <meta name="keywords" content="票源查询,纸票竞价,电票竞价,汇票线官网" />
+    <meta name="description" content="用户在查询纸票和电票票源后,可对中意的汇票进行竞价收票交易,完成相关交易步骤就能完成收票流程。" />
+    <meta http-equiv=”X-UA-Compatible” content=”IE =Edge,chrome =1″>
+    <meta name="baidu-site-verification" content="8wHB899l5W" />
+    <meta name="sogou_site_verification" content="QY1qSYeHpf" />
+    <meta name="viewport" content="width=1200px, user-scalable=true" />
+    <meta name="keywords" content="{site.seo_keyword}" />
+    <meta name="description" content="{site.seo_description}" />
+    <script src="<%templateskin%>/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="<%templateskin%>/js/sweetalert.min.js" type="text/javascript"></script>
+    <link href="<%templateskin%>/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="<%templateskin%>/css/contenle.css" rel="stylesheet" />
+    <link href="<%templateskin%>/css/sweetalert.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="background: #f1f1f0;">
+    <!--Header-->
+    <%template src="_header.html"%>
+    <!--/Header-->
+    <strong><em></em></strong>
+    <script>
+        window.onload = function () {
+            $(".fter").css('margin', '3% 0 0 0');
+            $(".fter").css('width', '100%');
+            $(".header").css('top', '0px');
+        }
+    </script>
+  
+
+    <!--<img style="width:100%" src="../../templates/main/images/huodong.png" />-->
+   <div class="huodongbanner">
+       <div class="banner">
+           <img src="../../templates/main/images/pc_banner.png" />
+       </div>
+       <div class="main">
+           <div class="main_one">
+               <div class="main_one_left"></div>
+               <P class="word">
+                   电票时代的到来，<br />
+                   使得传统票据市场的获利空间被大大压缩！<br />
+                   也使得原来的运营模式赚钱越来越难……<br />
+                   然而，也正是在这个时代，<br />
+                   显现出了票据互联网风口期的巨大红利！<br />
+                   所以，我们不忍辜负这个时代，<br />
+                   诚邀您成为汇票线“独家代理”的一员！
+               </P>
+               <p class="englishUrl">
+                   <img src="../../templates/main/images/url.png" />
+               </p>
+               <div class="radius">
+                   <img src="../../templates/main/images/radius.png" />
+               </div>
+           </div>
+           <div class="main_two">
+               “独家代理”是汇票线重力推出的一项共赢计划，旨在打造出下沉到各城市（区域）的票据互联网服务体系，真正实现平台与不同城市（区域）的优质票据企业机构的资源共享。<br />
+               成为汇票线独家代理，能让您得益于平台的票据创新模式，激活传统业务；同时，还将受惠于平台运营及活动带来的利好，共享平台辐射到全国各地的大量优质资源，让票据交易触手可及，低成本解决票据融资难题。如果在担当独家代理期间，取得优秀业绩，还有望升级为汇票线平台的“合伙人”！<br />
+               处于“互联网+票据”的时代洪流之中，我们“船”已造好，欢迎各位想证明自己能力的“水手”上船。<br />
+               现广发英雄帖，招募全国各城市（区域）的企业机构及票据行业的有识之士，加盟成为汇票线平台独家代理，从而实现与国内其他城市区域的票据、资金资源的无缝对接，互惠共赢，分享电票时代的发展红利。
+           </div>
+           <div class="main_thr">
+               <div class="main_thr_top"></div>
+               <p>
+                   成为汇票线独家代理，还有更多特权福利，等你来撩！<br />
+                   欲知独家代理细则，可通过微信或电话咨询招募经理。<br />
+                   地区代理名额有限，犹豫就会错过，赶紧的！
+               </p>
+           </div>
+       </div>
+       <div class="person">
+           <div class="managers">
+               <div class="manage_yu">
+                   <p>
+                       招募经理：虞经理<br />
+                       联系电话：18918578958<span>（微信同号）</span>
+                   </p>
+               </div>
+               <div class="manage_dong">
+                   <p>
+                       招募经理：董经理<br />
+                       联系电话：15990052902<span>（微信同号）</span>
+                   </p>
+               </div>
+           </div>
+       </div>
+       <!--<div class="container-fluid huodongsmk">
+
+       </div>-->
+        <%template src="_footer.html"%>
+   </div>
+    <script>
+        $("#nan").click(function(){
+            if ($.cookie('customer') && $.cookie('customer') != "null") {
+               
+                window.location.href = "/www/index.html#/app/main/publish"
+            }
+            else {
+             
+                window.location.href = "/www/index.html#/app/loginInfo"
+               
+
+            }
+        });
+        
+    </script>
+    <!--Footer-->
+   
+    <!--/Footer-->
+</body>
+</html>

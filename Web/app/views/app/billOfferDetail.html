@@ -1,0 +1,142 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-share" menu-toggle="right" ng-click="share()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        报价机构详情-{{model.bill_style_name}}
+    </ion-nav-title>
+   
+
+    <ion-content>      
+        <body class="bg">
+            <div class="page17-1">
+                <div class="part1">
+                    <a href="" class="a1" ng-click="changeBillStyleId('202')" ng-class="{'on':model.bill_style_id == '202'}">银电大票</a>
+                    <a href="" class="a2" ng-click="changeBillStyleId('203')" ng-class="{'on':model.bill_style_id == '203'}">银纸小票</a>
+                    <a href="" class="a3" ng-click="changeBillStyleId('204')" ng-class="{'on':model.bill_style_id == '204'}">银电小票</a>
+                    <a href="" class="a4" ng-click="changeBillStyleId('205')" ng-class="{'on':model.bill_style_id == '205'}">商票</a>
+                </div>
+                <div class="part2">
+                    <p>机构名称：</p>
+                    <h3>
+                        <span ng-bind="model.enterprise_name"></span>
+                        <br />
+                        <img src="images/star-on.png" alt="" class="icon" ng-if="star > 0">
+                        <img src="images/star-on.png" alt="" class="icon" ng-if="star > 1">
+                        <img src="images/star-on.png" alt="" class="icon" ng-if="star > 2">
+                        <img src="images/star-on.png" alt="" class="icon" ng-if="star > 3">
+                        <img src="images/star-on.png" alt="" class="icon" ng-if="star > 4">
+                        <img src="images/star.png" alt="" class="icon" ng-if="star < 5">
+                        <img src="images/star.png" alt="" class="icon" ng-if="star < 4">
+                        <img src="images/star.png" alt="" class="icon" ng-if="star < 3">
+                        <img src="images/star.png" alt="" class="icon" ng-if="star < 2">
+                        <img src="images/star.png" alt="" class="icon" ng-if="star < 1">
+                    </h3>
+                    <a href="" ng-if="model.is_collection_enterprise" class="g-btn-focus on" ng-click="follow(0)">取消关注</a>
+                    <a href="" ng-if="!model.is_collection_enterprise" class="g-btn-focus" ng-click="follow(1)">关注</a>
+                </div>
+                <div class="part3">
+                    <div class="g-line-title2"><i></i>价格信息</div>
+                    <div class="con">
+                        <ul>
+                            <li style="display:inline-block;width:25%">期限：</li>
+                            <li style="display:inline-block;width:25%" ng-bind="model.deadline_type"></li>
+                            <li style="display:inline-block;width:25%">交易方式：</li>
+                            <li style="display:inline-block;width:25%" ng-bind="model.trade_type_name"></li>
+                        </ul>
+                        <table class="g-table">
+                            <tr>
+                                <td>承兑机构</td>
+                                <td ng-show="model.bill_style_id != 205">国股</td>
+                                <td ng-show="model.bill_style_id != 205">城商</td>
+                                <td ng-show="model.bill_style_id != 205">三农</td>
+                                <td ng-show="model.bill_style_id != 205">村镇</td>
+                                <td ng-show="model.bill_style_id != 205">外贸</td>
+                                <td ng-show="model.bill_style_id != 205">财务</td>
+                                <td ng-show="model.bill_style_id == 205">电票</td>
+                                <td ng-show="model.bill_style_id == 205">纸票</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>月利率</td>
+                                <td>{{model.offer_detail.offer_rate01 == null ? "--" : model.offer_detail.offer_rate01}}</td>
+                                <td>{{model.offer_detail.offer_rate02 == null ? "--" : model.offer_detail.offer_rate02}}</td>
+                                <td ng-show="model.bill_style_id != 205">{{model.offer_detail.offer_rate03 == null ? "--" : model.offer_detail.offer_rate03}}</td>
+                                <td ng-show="model.bill_style_id != 205">{{model.offer_detail.offer_rate04 == null ? "--" : model.offer_detail.offer_rate04}}</td>
+                                <td ng-show="model.bill_style_id != 205">{{model.offer_detail.offer_rate05 == null ? "--" : model.offer_detail.offer_rate05}}</td>
+                                <td ng-show="model.bill_style_id != 205">{{model.offer_detail.offer_rate06 == null ? "--" : model.offer_detail.offer_rate06}}</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td ng-show="model.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            </tr>
+                        </table>
+                        <ul>
+                            <li><span>备注：</span>{{model.description}}<!--<input type="text" placeholder="联系我们时，请先告知在汇票线上看到的信息。" />--></li><!--备注-->
+                        </ul>
+                    </div>
+                </div>
+                <!--<div class="part4">
+                    <div class="g-line-title2"><i></i>价格信息</div>
+                    <ul>
+                        <li><span>交易方式：</span>{{model.trade_type_name}}</li>
+                        <li><span>备注：</span>{{model.description}}</li>
+                    </ul>
+                </div>-->
+                <div class="part5">
+                    <div class="g-line-title2"><i></i>业务信息</div>
+                    <ul>
+                        <li class=""><img src="images/icon171.png" alt="" class="icon">{{model.contact_name}}</li>
+                        <li class=""><img src="images/icon172.png" alt="" class="icon">{{model.contact_phone}}</li>
+                        <li class=""><img src="images/icon173.png" alt="" class="icon">{{model.enterprise_location}}</li>
+                    </ul>
+                    <a href="tel:{{model.contact_phone}}" class="btn-call">联系他</a>
+                </div>
+                <div class="g-discuss-panel">
+                    <div class="title-more" ng-click="getorderAppraisal()">评论：</div>
+                    <div class="dis-con">
+                        <div class="dis-item">
+                            <p>
+                                <span ng-bind="model.enterprise_name"></span><!--189××××××××-->
+                                <span class="r" ng-repeat="item in model.star">
+                                    <!--item-->
+                                    综合评分
+                                    <img src="images/star-on.png" alt="" class="icon">
+                                </span>
+                            </p>
+                            <p ng-bind="model.description"><!--贴现速度××××××××--></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 拨打电话弹框 -->
+            <div class="g-alert-call">
+                <div class="box">
+                    <h3>{{model.contact_phone}}</h3>
+                    <div class="operate">
+                        <a href="" class="btn-cancle">取消</a>
+                        <a href="tel:{{model.contact_phone}}" class="btn-sure">拨打</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 分享弹框 -->
+            <div class="g-alert-shares">
+                <div class="box">
+                    <ul class="con">
+                        <li><a href="javascript:;" ng-click="shareToWechatFriend()"><img src="images/share1.png" alt="">微信好友</a></li>
+                        <li><a href="javascript:;" ng-click="shareToWechat()"><img src="images/share2.png" alt="">微信朋友圈</a></li>
+                        <li><a href="javascript:;" ng-click="shareToWeibo()"><img src="images/share3.png" alt="">新浪微博</a></li>
+                        <li><a href="javascript:;" ng-click="shareToQQ()"><img src="images/share4.png" alt="">QQ好友</a></li>
+                        <li><a href="javascript:;" ng-click="shareToQQZone()"><img src="images/share5.png" alt="">QQ空间</a></li>
+                    </ul>
+                    <a href="javascript:;" ng-click="shareClose()" class="btn-cancle">取 消</a>
+                </div>
+            </div>
+        </body>
+    </ion-content>
+</ion-view>

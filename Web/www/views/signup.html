@@ -1,0 +1,77 @@
+﻿<div ng-cloak ng-controller="signupController">
+    <div class="kind-money-all-bg reg-padding">
+        <div class="container" style="margin-top:20px">
+            <div class="register-cont rows mb" style="text-align:right">
+                <label style="margin-right:2%;color:#000;">已有账号？<a href="/www/index.html#/app/loginInfo" style="color:#ff6a00;">请登录</a></label>
+            </div>
+            <div class="register-cont row bp">
+                <div class="log"><span>欢迎注册</span></div>
+                <div class="reg-right col-md-7 col-xs-7 col-sm-12 row sion">
+                    <div class="klk" style="height:463px;width:400px"><img src="assets/img/zhuce.png" style="margin-left: 9%;margin-top: 32%;width: 75%;height: auto;"/></div>
+                    <ng-form name="signupForm">
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-8 col-xs-8 row form-inline" >
+                                <label class="reg-icon reg-icon-1"></label>
+                                <input class="reg-ipt col-md-11 col-xs-11" type="text" name="phone" ng-pattern="/^1\d{10}$/" ng-model="model.phone_number" placeholder="请输入手机号码" ng-change="PhoneChange()">
+                            </div>
+                            <div style="color:red;height:70px;line-height:70px;overflow:hidden;" class="col-md-4 col-xs-4">
+                                <div ng-if="filter.choicePhone==2 && model.phone_number.length == 11"><img src="assets/img/right.png" alt="right"/></div>
+                                <div ng-if="model.phone_number && filter.choicePhone==3 || model.phone_number.length>11 || model.phone_number.length<11 || (signupForm.phone.$invalid && signupForm.phone.$dirty)" style="margin-left: -8%;"><img src="assets/img/wrong.png" alt="wrong" />请输入有效的手机号码！</div>
+                                <div ng-if="filter.choicePhone==1">手机号已注册，请<a href="/index.aspx" style="color: #337ab7;">直接登录</a></div>
+                            </div>
+                        </div>
+                        <div class="reg-form-list form-inline">
+                            <div class="reg-form-list-cont col-md-8 col-xs-8 row form-inline">
+                                <label class="reg-icon reg-icon-2"></label>
+                                <input class="reg-ipt col-md-11 col-xs-11" type="password" ng-model="model.password" placeholder="请输入6-12位密码，建议包含数字和字母">
+                            </div>
+                            <div class="col-md-4 col-xs-4" style="height:70px;line-height:70px;">
+                                <div ng-if="model.password.length>=6 && model.password.length<=12"><img src="assets/img/right.png" alt="right" /></div>
+                                <div ng-if="model.password.length>12"><img src="assets/img/wrong.png" alt="wrong" /></div>
+                                <div ng-if="model.password && model.password.length<6" style="color:red;">密码长度不够</div>
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-8 col-xs-8 row form-inline">
+                                <label class="reg-icon reg-icon-2"></label>
+                                <input class="reg-ipt col-md-11 col-xs-11" type="password" ng-model="model.password2" placeholder="请再次输入密码">
+                            </div>
+                            <div style="color:red;height:70px;line-height:70px;overflow:hidden;" class="col-md-4 col-xs-4">
+                                <div ng-if="model.password.length == model.password2.length && model.password2.length>=6 && model.password2.length<=12 && model.password === model.password2"><img src="assets/img/right.png" alt="right" /></div>
+                                <div class="phone_number_signup" ng-if="(model.password != model.password2 && model.password.length == model.password2.length) || (model.password2 && model.password2.length>0 && model.password.length != model.password2.length)">两次输入密码不一致</div>
+                            </div>
+                        </div>
+
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-8 col-xs-8 row">
+                                <label class="reg-icon reg-icon-3"></label>
+                                <input class="reg-mess col-md-7 col-xs-7" type="text" ng-model="model.phone_verify_code" placeholder="请输入短信验证码">
+                                <button class="btn btn-sup col-md-4 col-xs-4" ng-class="{'btn-mess':filter.choicePhone!=2,'btn-success':filter.choicePhone==2}" ng-click="getVerify()" ng-disabled="disableVerify || filter.choicePhone!=2">{{ verifyStr }}</button>
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-8  col-xs-8 row">
+                                <label class="reg-icon reg-icon-4"></label>
+                                <input class="reg-ipt col-md-11 col-xs-11" type="text" ng-model="model.invite_code" placeholder="请输入邀请码，若没有，可不填">
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-8 col-xs-8 row">
+                                <label for="phone_number_agree" class="agree"><input type="checkbox" style="height: auto;" name="checkbox" ng-model="filter.rule"> 我已阅读并同意<a href="/aspx/main/announce.aspx" style="color: #337ab7;" target="_blank">《汇票线用户注册协议》</a></label>
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list col-md-8 col-xs-8 row">
+                                <button class="btn btn-reg col-md-11 col-xs-11 col-sm-12" ng-disabled="!filter.rule" ng-click="signup()">立即注册</button>
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 col-xs-12 row" style="display:none">
+                                <b>提示：</b>注册登录完成后，请完善联系人信息</div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+!function(t){"use strict";!function(){t(document).on("click",".js_details",function(e){e.preventDefault(),t(".alert-details").fadeIn(300)}),t(document).on("click",".alert-details",function(e){e.preventDefault(),t(this).fadeOut("300")})}()}(jQuery);

@@ -1,0 +1,304 @@
+
+.user-nav-list ul li .icon-ticket-want2{background: url(../img/mypost-active.png) no-repeat 0 7px;}
+.user-right{
+    width: 80%;
+    background-color: white;
+}
+.user-right .right-top{
+    width: 100%;
+    height: 45px;
+    background-color: #1a2b71;
+}
+.user-right p{
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+}
+.user-right .content{
+    height: 882px;
+    background-color: white;
+    padding: 20px 49px;
+}
+.content nav ul{
+    height: 34px;
+    border-bottom: 1px solid #d8d8d8;
+}
+.content nav li{
+    float: left;
+    width: 120px;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px 0;
+
+}
+.content nav li a{
+    letter-spacing: 0.5em;
+
+}
+.content-nav-act{
+    background: #f55a14;
+}
+.content-nav-act a{
+    color: #fff;
+
+}
+.screen{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+.screen ul{
+    width:100%;
+    margin-top:20px;
+}
+.screen li{
+    display: block;
+    margin:0 13px;
+    float:left;
+    text-align: center;
+    border:1px solid #e8e8e8;
+    font-size: 18px;
+    height: 34px;
+    line-height: 34px;
+    position: relative;
+}
+.screen .screen-li-act{
+    border:1px solid #f55a14;
+}
+.screen .tri{
+    display: none;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top:32px;
+}
+.screen-li-act .tri{
+    display: block;
+}
+.table tr:nth-child(even){
+    background: #f5f5f5;
+
+}
+.table th{
+    height: 30px;
+    border-top: none !important;
+    border-bottom:2px solid #bdbdbd;
+}
+.table td{
+    border-top:1px solid #bdbdbd;
+    height: 40px;
+    line-height: 40px !important;
+    padding: 5px !important;
+}
+.table .det{
+    background: #1a2b71;
+    padding: 0 8px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 29px;
+}
+.table .del{
+    width: 25px;
+    height: 29px;
+    background: url(../img/del.png) no-repeat;
+    background-position: 2px;
+    border:none;
+    position: relative;top:10px;
+}
+.white{
+    left: 65px;
+    border-top: 10px solid #fff;
+    border-right: 5px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 5px solid transparent;
+}
+.yel{
+    left: 63px;
+    border-top: 12px solid #f55a14;
+    border-right: 7px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 7px solid transparent;
+}
+.page .total{
+    line-height: 36px;
+}
+.page span{
+    line-height: 36px;
+    float: left;
+}
+.page li{
+    display: block;
+    padding: 0 5px;
+    border: 1px solid #dbdbdb;
+    margin:5px;
+    float: left;
+}
+
+.phone p{
+    width: 10%;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.phone p span{
+    color: #f55a14;
+}
+.phone .phone_t{
+    width: 30%;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.sex{
+    margin-left: 140px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.sex p{
+    width: 70px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.sex p span{
+    color: #f55a14;
+}
+.sex .sex_t{
+    width: 50px;
+    height: 30px;
+    margin-left: 15px;
+    margin-top: 5px;
+    float: left;
+}
+
+.deal{
+    margin-left: 103px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.deal p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+.deal p span{
+    color: #f55a14;
+}
+.deal .deal_t{
+    width: 70px;
+    height: 30px;
+    margin-left: 0px;
+    margin-top: 5px;
+    float: left;
+}
+.deal img{
+    margin-top: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+    float: left;
+}
+
+
+.address{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.address p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.address .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+
+.study{
+    margin-left: 113px;
+    margin-top: 7px;
+    width: 500px;
+    height: 40px;
+    float: left;
+}
+
+.study p{
+    width: 120px;
+    color: #505050;
+    font-size: 18px;
+    float: left;
+}
+
+.study .deal_t{
+    width: 200px;
+    height: 30px;
+    margin-left: -10px;
+    margin-top: 5px;
+    float: left;
+}
+.import_1{
+    width: 250px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_1 img{
+    margin-top: 10px;
+    width: 180px;
+    height: 120px;
+    float: left;
+}
+.import_1 p{
+    padding-top: 110px;
+    color: #505050;
+    float: left;
+}
+.import_2{
+    width: 530px;
+    height: 130px;
+    margin-left: 223px;
+    float: left;
+}
+.import_2 img{
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 150px;
+    height: 100px;
+    float: left;
+}
+.import_2 p{
+    padding-top: 90px;
+    color: #505050;
+    float: left;
+}
+.sure{
+    width: 500px;
+    height: 50px;
+    float: left;
+}
+.sure input{
+    width: 200px;
+    height: 40px;
+    background-color: #f55a14;
+    color: white;
+    border: 0px;
+    font-size: 15px;
+    margin-left: 220px;
+}

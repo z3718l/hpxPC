@@ -1,0 +1,23 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我的任务
+    </ion-nav-title>
+    <ion-content>
+        <div class="page24">
+            <div class="item" ng-repeat="item in listData">
+                <p>票据号：{{item.bill_number}}</p>
+                <p>票据类型：电票  {{item.acceptor_type_name}}</p>
+                <p>票面金额（元）：¥{{item.bill_sum_price}}</p>
+                <p ng-if="item.task_code == 0">票据状态：已付款请背书<a href="" class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, 'myReleaseOrderId': item.order_id, check: 1})">未完成&gt;&gt;</a></p>
+                <p ng-if="item.task_code == 1">票据状态：已确认交易请付款<a href="" class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, 'myReleaseOrderId': item.order_id, check: 1}">未完成&gt;&gt;</a></p>
+                <p ng-if="item.task_code == 1">票据状态：已背书请签收<a href="" class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, 'myReleaseOrderId': item.order_id, check: 1}">未完成&gt;&gt;</a></p>
+            </div>
+            <!--<div class="item">
+                <p>票据号：3412341512341234</p>
+                <p>票据类型：电票  国股</p>
+                <p>票面金额（元）：¥20,000.00</p>
+                <p>票据状态：已付款请背书<a href="" class="r">未完成&gt;&gt;</a></p>
+            </div>-->
+        </div>
+    </ion-content>
+</ion-view>

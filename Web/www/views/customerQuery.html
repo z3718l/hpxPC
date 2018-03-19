@@ -1,0 +1,115 @@
+﻿<div class="modal-dialog" ng-controller="customerQueryController">
+    <!--<div class="modal fade" id="modal-show">
+        <div class="modal-dialog" style="width:1100px">-->
+            <div class="modal-content">
+                <ng-form name="checkForm" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>企业用户详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+
+                            <div class="form-group width-full">
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 企业名称：</label>
+                                <div class="col-md-4 form-control-static">
+                                    {{ model.enterprise_admin.name }}
+                                </div>
+                            </div>
+                            <div class="form-group width-full">
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 企业电话：</label>
+                                <div class="col-md-4 form-control-static">
+                                    {{ model.telephone }}
+                                </div>
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 企业传真：</label>
+                                <div class="col-md-4 form-control-static">
+                                    {{ model.fax_number }}
+                                </div>
+                            </div>
+                            <div class="form-group width-full">
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 管理员名称：</label>
+                                <div class="col-md-4 form-control-static">
+                                    {{ model.enterprise_admin.name }}
+                                </div>
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 管理员手机：</label>
+                                <div class="col-md-4 form-control-static">
+                                    {{ model.enterprise_admin.phone }}
+                                </div>
+                            </div>
+                            <div class="form-group width-full">
+                                <label class="control-label col-md-2" style="padding-left:0;"><span class="g-orange">*</span> 企业详细地址：</label>
+                                <div class="col-md-8 form-control-static">
+                                    {{ model.enterprise_address }}
+                                </div>
+                            </div>
+                            <div class="form-group width-full">
+                                <label class="control-label col-md-2"><span class="g-orange">*</span> 描述：</label>
+                                <div class="col-md-8 form-control-static">
+                                    {{ model.description }}
+                                </div>
+                            </div>
+                            <div class="form-group width-full">
+                                <h4>企业操作员</h4>
+                                <hr />
+                                <table class="table table-striped table-bordered table-hover table-condensed" ng-if="model.enterprise_operators.length > 0">
+                                    <tr>
+                                        <th class="text-center">操作员名称</th>
+                                        <th class="text-center">操作员手机号</th>
+                                    </tr>
+                                    <tr ng-repeat="item in model.enterprise_operators">
+                                        <td class="text-center">{{ item.name }}</td>
+                                        <td class="text-center">{{ item.phone }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="form-group width-full">
+                                <h4>出票账户</h4>
+                                <hr />
+                                <table class="table table-striped table-bordered table-hover table-condensed" ng-if="model.enterprise_accounts_501.length > 0">
+                                    <tr>
+                                        <th class="text-center">账户名称</th>
+                                        <th class="text-center">账户号码</th>
+                                    </tr>
+                                    <tr ng-repeat="item in model.enterprise_accounts_501">
+                                        <td class="text-center">{{ item.account_person }}</td>
+                                        <td class="text-center">{{ item.account_number }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="form-group width-full">
+                                <h4>收票账户</h4>
+                                <hr />
+                                <table class="table table-striped table-bordered table-hover table-condensed" ng-if="model.enterprise_accounts_502.length > 0">
+                                    <tr>
+                                        <th class="text-center">账户名称</th>
+                                        <th class="text-center">账户号码</th>
+                                    </tr>
+                                    <tr ng-repeat="item in model.enterprise_accounts_502">
+                                        <td class="text-center">{{ item.account_person }}</td>
+                                        <td class="text-center">{{ item.account_number }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info btn-xs" ng-click="freeze(item)">
+                            <i class="fa fa-edit"></i> 审核
+                        </button>
+                        <button class="btn btn-info btn-xs">
+                            <i class="fa fa-edit"></i> 冻结
+                        </button>
+                        <button class="btn btn-info btn-xs">
+                            <i class="fa fa-edit"></i> 手续费管理
+                        </button>
+                        <button class="btn btn-info btn-xs">
+                            <i class="fa fa-edit"></i> 银行账户审核
+                        </button>
+                        <button class="btn btn-info btn-xs">
+                            <i class="fa fa-edit"></i> 平台充值管理
+                        </button>
+                    </div>
+                </ng-form>
+            </div>
+        <!--</div>
+    </div>-->
+</div>

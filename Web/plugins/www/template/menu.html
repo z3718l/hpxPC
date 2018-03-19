@@ -1,0 +1,56 @@
+﻿<div ng-controller="menuController">
+    <!-- 我要出票 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title" ng-class="{'title-active': ($state.includes('app.main.publish') || $state.includes('app.main.myBill') || $state.includes('app.main.orderDrawerInfo') || $state.includes('app.free.readBill?check=1'))}">我要出票</div>
+        <ul>
+            <li ng-class="{'list-active': $state.includes('app.main.publish')}"><a href="javascript:;" ui-sref="app.main.publish"><span class="icon icon-ticket-want1"></span>发布汇票</a></li>
+            <li ng-class="{'list-active': ($state.includes('app.main.myBill') || $state.includes('app.main.orderDrawerInfo') || $state.includes('app.free.readBill?check=1'))}"><a href="javascript:;" ui-sref="app.main.myBill"><span class="icon icon-ticket-want2"></span>我的发布</a></li>
+            <!--<li><a><span class="icon icon-ticket-want3"></span>出票订单</a><span class="remind-number">2</span></li>-->
+        </ul>
+    </div>
+    <!-- 我要出票 end-->
+    <!-- 我要收票 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title" ng-class="{'title-active': ($state.includes('app.free.queryBill') || $state.includes('app.main.myBidding') || $state.includes('app.main.orderReceiverInfo') || $state.includes('app.free.readBill?check=3') || $state.includes('app.free.readBill?check=2'))}">我要收票</div>
+        <ul>
+            <li ng-class="{'list-active': ($state.includes('app.free.queryBill') || $state.includes('app.free.readBill?check=2'))}"><a href="javascript:;" ui-sref="app.free.queryBill"><span class="icon icon-ticket-collect1"></span>票源查询</a></li>
+            <li ng-class="{'list-active': ($state.includes('app.main.myBidding') || $state.includes('app.main.orderReceiverInfo') || $state.includes('app.free.readBill?check=3'))}"><a href="javascript:;" ui-sref="app.main.myBidding"><span class="icon icon-ticket-collect2"></span>我的竞价</a></li>
+            <!--<li><a><span class="icon icon-ticket-collect3"></span>收票订单</a><span class="remind-number">2</span></li>-->
+        </ul>
+    </div>
+    <!-- 我要收票 end-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title" ng-class="{'title-active': ($state.includes('app.main.quote') || $state.includes('app.free.queryOffer') || $state.includes('app.main.editQuote') || $state.includes('app.free.readOffer'))}">机构报价</div>
+        <ul>
+            <li ng-class="{'list-active': ($state.includes('app.main.quote') || $state.includes('app.main.editQuote'))}" ng-if="identity.can_publish_offer == 1"><a href="javascript:;" ui-sref="app.main.quote"><span class="icon icon-ticket-price1"></span>我要报价</a></li>
+            <li ng-class="{'list-active': ($state.includes('app.free.queryOffer') || $state.includes('app.free.readOffer'))}"><a href="javascript:;" ui-sref="app.free.queryOffer"><span class="icon icon-ticket-price2"></span>报价查询</a></li>
+        </ul>
+    </div>
+    <!-- 我的账户 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title" ng-class="{'title-active': ($state.includes('app.main.customerInfo') || $state.includes('app.main.enterpriseInfo') || $state.includes('app.main.enterpriseAccountInfo') || $state.includes('app.main.modifyPassword') || $state.includes('app.main.recharge') || $state.includes('app.main.messageCenter'))}">我的账户</div>
+        <ul>
+            <li ng-class="{'list-active': $state.includes('app.main.customerInfo')}"><a href="javascript:;" ui-sref="app.main.customerInfo"><span class="icon icon-ticket-account1"></span>联系人信息</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.enterpriseInfo')}" ng-if="identity.is_verified ==1 || identity.is_verified >= 2"><a href="javascript:;" ui-sref="app.main.enterpriseInfo"><span class="icon icon-ticket-account2"></span>机构认证</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.enterpriseAccountInfo')}" ng-if="identity.is_verified ==1 || identity.is_verified >= 3"><a href="javascript:;" ui-sref="app.main.enterpriseAccountInfo"><span class="icon icon-ticket-account3"></span>账户绑定</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.modifyPassword')}"><a href="javascript:;" ui-sref="app.main.modifyPassword"><span class="icon icon-ticket-account4"></span>安全中心</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.recharge')}"><a href="javascript:;" ui-sref="app.main.recharge"><span class="icon icon-ticket-account5"></span>在线充值</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.messageCenter')}"><a href="javascript:;" ui-sref="app.main.messageCenter"><span class="icon icon-ticket-account6"></span>消息中心</a></li>
+        </ul>
+    </div>
+    <!-- 我的账户 end-->
+    <!-- 汇票助手 start-->
+    <div class="user-nav-list">
+        <div class="user-nav-list-title" ng-class="{'title-active': ($state.includes('app.main.discountCalculator') || $state.includes('app.main.bankQuery') || $state.includes('app.main.billCalendar') || $state.includes('app.main.publicQuery') || $state.includes('app.main.businessQuery'))}">汇票助手</div>
+        <ul>
+            <li ng-class="{'list-active': $state.includes('app.main.discountCalculator')}"><a href="javascript:;" ui-sref="app.main.discountCalculator"><span class="icon icon-ticket-assistant1"></span>贴现计算器</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.bankQuery')}"><a href="javascript:;" ui-sref="app.main.bankQuery"><span class="icon icon-ticket-assistant3"></span>行号查询</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.billCalendar')}"><a href="javascript:;" ui-sref="app.main.billCalendar"><span class="icon icon-ticket-assistant6"></span>开票日历</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.publicQuery')}"><a href="javascript:;" ui-sref="app.main.publicQuery"><span class="icon icon-ticket-assistant2"></span>挂失查询</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.businessQuery')}"><a href="javascript:;" ui-sref="app.main.businessQuery"><span class="icon icon-ticket-assistant4"></span>工商查询</a></li>
+            <li><a href="javascript:;" ui-sref="app.loginInfo"><span class="icon icon-ticket-assistant4"></span>登录测试专用</a></li>
+        </ul>
+    </div>
+    <!-- 汇票助手 end-->
+</div>
+

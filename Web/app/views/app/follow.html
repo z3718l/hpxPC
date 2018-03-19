@@ -1,0 +1,97 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我的关注
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page17-2">
+            <div class="hd">
+                <a href="" ng-class="{'on': tab == 1}"  ng-click="setTab(1)">报价机构</a><a href="" ng-class="{'on': tab == 2}" ng-click="setTab(2)">票源信息</a>
+            </div>
+            <div class="bd">
+                <div class="con1" ng-if="tab==1">
+                    <ul ng-repeat="item in listData">
+                        <li>机构名称：  {{item.collection_enterprise_name}} <a href="" class="addr">{{item.collection_enterprise_address}}</a></li>
+                    </ul>
+                </div>
+                <div class="con2 hot" ng-if="tab==2">
+
+                    <div class="item" ng-repeat="item in billListData">
+                        <div class="hot-title">
+                            <a href="">
+                                <span class="tag">{{item.bill_type_name}}</span>{{item.drawer_name}}
+                                <i ng-class="{true: 'star on', false: 'star'}[item.star>0]"></i>
+                                <i ng-class="{true: 'star on', false: 'star'}[item.star>1]"></i>
+                                <i ng-class="{true: 'star on', false: 'star'}[item.star>2]"></i>
+                                <i ng-class="{true: 'star on', false: 'star'}[item.star>3]"></i>
+                                <i ng-class="{true: 'star on', false: 'star'}[item.star>4]"></i>
+                                <span class="addr">{{item.drawer_address}}</span>
+                            </a>
+                        </div>
+                        <div class="con">
+                            <a href="">
+                                <p>票面金额：<i>¥ <b>{{(item.bill_sum_price / 10000).toFixed(2)}}万</b></i></p>
+                                <p>承兑机构 ：{{item.acceptor_type_name}}</p>
+                                <p>到期日：{{item.deadline_time | date:'yyyy-MM-dd'}}<time>{{item.offsetDays}}天</time></p>
+                                <span class="btn1">{{item.bill_status_name}}</span>
+                            </a>
+                        </div>
+                        <!-- 去掉样式show就不会显示了 -->
+                        <div class="operate">
+                            <a href="" class="btn-cancle" ng-click="followBill(item.collection_bill_id, 0)">取消收藏</a>
+                        </div>
+                    </div>
+                    <!--<div class="item">
+                        <div class="hot-title">
+                            <a href="">
+                                <span class="tag">银电大票</span>浦发温州瑞安支行营业部
+                                <i class="star on"></i>
+                                <i class="star on"></i>
+                                <i class="star on"></i>
+                                <i class="star"></i>
+                                <i class="star"></i>
+                                <span class="addr">宁波市</span>
+                            </a>
+                        </div>
+                        <div class="con">
+                            <a href="">
+                                <p>票面金额：<i>¥ <b>640.00 万</b></i></p>
+                                <p>承兑机构 ：国股</p>
+                                <p>到期日：2017-01-06<time>80天</time></p>
+                                <span class="btn1">竞价中</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hot-title">
+                            <a href="">
+                                <span class="tag">银电大票</span>浦发温州瑞安支行营业部
+                                <i class="star on"></i>
+                                <i class="star on"></i>
+                                <i class="star on"></i>
+                                <i class="star"></i>
+                                <i class="star"></i>
+                                <span class="addr">宁波市</span>
+                            </a>
+                        </div>
+                        <div class="con">
+                            <a href="">
+                                <p>票面金额：<i>¥ <b>640.00 万</b></i></p>
+                                <p>承兑机构 ：国股</p>
+                                <p>到期日：2017-01-06<time>80天</time></p>
+                                <span class="btn1">竞价中</span>
+                            </a>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

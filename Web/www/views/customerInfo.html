@@ -1,0 +1,193 @@
+<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+<link rel="stylesheet" type="text/css" href="../../templates/main/css/my-custom.css">
+<div ng-cloak ng-controller="customerController">
+    <!-- 右侧 start-->
+    <div class="user-right"style="padding-top: 14px;">
+        <div class="right-top col-md-12 col-xs-12 row " style="margin-left: 0px">
+            <p style="color:#3a3a3a;">我的账号 > 联系人信息</p>
+            </div>
+              <div class="content col-md-12 col-xs-12 row" style="width: 100%;border-top: 1px solid #ebebeb;margin-top: -2px;height: 980px;margin-left: 0%;" >
+                  <div class="process row col-md-12  col-xs-12" style="padding:0px;margin:4% 0 0 4%">
+                      <div class="process1 col-md-3  col-xs-3 ">
+                          <!--<img src="assets/img/user-right-point.jpg" style="padding-left:20px;">-->
+                          <img ng-src="assets/img/user-right-point{{identity.is_verified >= 1 ? '' : '-gray'}}.jpg"/>
+                          <h5 style="margin-left:-11%;" ng-class="{'zhende':identity.is_verified >= 1,'jiade':(identity.is_verified < 1)}">联系人信息</h5>
+                      </div>
+                      <div class="p-line col-md-1  col-xs-1 "></div>
+                      <div class="process1 col-md-3 col-xs-3 ">
+                          <img ng-src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 3) || (findEnterprise.is_alive == 1 || findEnterprise.is_alive >= 3) ? '' : '-gray'}}.jpg">
+                          <h5 ng-class="{'zhende':(identity.is_verified == 1 || identity.is_verified >= 3 || findEnterprise.is_alive == 1 || findEnterprise.is_alive >= 3),'jiade':(identity.is_verified < 1)}" >企业审核</h5>
+                      </div>
+                      <div class="p-line col-md-1  col-xs-1 "></div>
+                      <div class="process1 col-md-3  col-xs-3 ">
+                          <img ng-src="assets/img/user-right-point{{(identity.is_verified == 1 || identity.is_verified >= 4) || (findEnterprise.is_alive == 1 || findEnterprise.is_alive >= 4) ? '' : '-gray'}}.jpg">
+                          <h5 ng-class="{'zhende':(identity.is_verified == 1 || identity.is_verified >= 4 || findEnterprise.is_alive == 1 || findEnterprise.is_alive >= 4),'jiade':(identity.is_verified < 1)}">账户绑定</h5>
+                      </div>
+                  </div>
+            <div class="explain col-md-12 col-xs-12">
+                <div class="line col-md-11 col-xs-11 text-right" style="height: 3px;width: 100%;background:#ebebeb;"></div>
+            </div>
+            <div class="table col-md-12 col-xs-12 text-center">
+                <ng-form name="editForm" class="form-horizontal col-md-12 col-xs-12" role="form">
+                    <div ng-if="model.is_verified == 0">
+                        <div class="form-group" style="margin-top: -80px;">
+                            <div class="col-md-1 col-xs-1"></div>
+                            <p class="col-md-10 col-xs-10 text-left" style="color: #505050">
+                                <span style="color:#f55a14">*</span> 提示：在线交易需要完成上述三步，创建资金账户。联系人登记后的基本权利为使用汇票助手、查看报价、查看票源基本功能。
+                                填写信息的完整有助于提高平台信用等级，下列“*”项为必填项，其它为选填项。
+                            </p>
+                            <div class="col-md-1 col-xs-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label"> <span style="color: #f55a14">*</span> 手机：</label>
+                            <div class="col-md-6 col-xs-6">
+                                {{ model.phone_number }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 姓名：</label>
+                            <div class="col-md-6 col-xs-6">
+                                <input class="form-control" ng-model="model.customer_name" placeholder="请输入姓名">
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 性别：</label>
+                            <div class="col-md-4 col-xs-4">
+                                <div class="btn btn-default" style="margin-left: -68%;" ng-class="{'btn-warning': model.sex == '男'}" ng-click="model.sex='男'">男</div>
+                                <div class="btn btn-default" ng-class="{'btn-warning': model.sex == '女'}" ng-click="model.sex='女'">女</div>
+                            </div>
+                        </div>
+                        <div class="form-group form-inline col-md- col-xs-12">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 交易地点：</label>
+                            <div class="col-md-2 col-xs-2">
+                                <select class="form-control" style="max-width:110%;" ng-model="model.trade_location_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()" placeholder="省/直辖市">
+                                    <option value="">省/直辖市</option>
+                                </select>
+                            </div>
+                            <div id="tradCity" class="col-md-2 col-xs-2" ng-if="model.trade_location_province_id !=1 && model.trade_location_province_id != 20 && model.trade_location_province_id != 860 && model.trade_location_province_id != 2462">
+                                <select class="form-control" style="max-width:110%;display:block;" ng-model="model.trade_location_city_id" ng-options="item.id as item.address_name for item in CityData" ng-change="cityChange()" placeholder="市">
+                                    <option value="">市</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-xs-2">
+                                <select class="form-control" style="max-width: 100%;" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in AddressData" placeholder="区/县">
+                                    <option value="">区/县</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md- col-xs-3 control-label"> 详情地址：</label>
+                            <div class="col-md- col-xs-6">
+                                <input class="form-control" ng-model="model.contact_address" placeholder="请输入具体通讯地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label">身份证号：</label>
+                            <div class="col-md-4 col-xs-4">
+                                <input class="form-control" name="id_number" ng-model="model.id_number" placeholder="请输入身份证号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label">身份证正反面：</label>
+                            <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_front_photo_address}}" />
+                            </div>
+                            <div class="col-sm-4" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_back_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group text-center" style="margin-top:50px;">
+                            <input type="button" class="btn btn-warning" style="width: 200px;margin:0 0 0 16%" ng-disabled="editForm.$invalid" ng-click="save()" value="提交">
+                        </div>
+                        <div class="form-group hpxFile" style="width: 930px;margin-left: -5%;color:#fff;">
+                            <div class="fileHead"><label>企业创建兴业（执剑人）电子账户前，需要准备的资料:</label><div class="rote" id="trans" ng-click="ycimg()">﹀</div></div>
+                            <ul class="accordionshow" id="fileaccordion">
+                                <li><Label style="margin-left: 3%;">（1）营业执照正本彩色原件扫描件；</Label></li>
+                                <li><label style="margin-left: 3%;">（2）法定代表人的身份证正、反面彩色原件扫描件；</label></li>
+                                <li><label style="margin-left: 3%;">（3）企业授权委托书扫描件，必须盖有公司公章及法人签章或法人签字；</label><a href="../../www/font/模板.rar" style="color:#ff5a14;cursor:pointer;font-weight:bold;text-decoration:underline">下载模板</a></li>
+                                <li><label style="margin-left: 3%;">（4）任一对公银行账户，可以是基本户或一般户（收票类型企业，须关联兴业银行对公账户）。</label></li>
+                                <li><Label style="margin-left: 3%;"><span style="color:red">扫描件必须为小于10M的彩色原件扫描件</span></Label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 已经填写 -->
+                    <div ng-if="model.is_verified != 0">
+                        <div class="form-group" style="margin-top: -80px;">
+                            <div class="col-md-1 col-xs-1"></div>
+                            <p class="col-md-10 col-xs-10 text-left" style="color: #505050">
+                                <span style="color:#f55a14">*</span> 提示：在线交易需要完成上述三步，创建资金账户。联系人登记后的基本权利为使用汇票助手、查看报价、查看票源基本功能。
+                                填写信息的完整有助于提高平台信用等级，下列“*”项为必填项，其它为选填项。
+                            </p>
+                            <div class="col-md-1 col-xs-1"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label"> <span style="color: #f55a14">*</span> 手机：</label>
+                            <div class="col-md-6 col-xs-6">
+                                {{ model.phone_number }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 姓名：</label>
+                            <div class="col-md-6 col-xs-6">
+                                {{ model.customer_name }}
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 性别：</label>
+                            <div class="col-md-4 col-xs-4" style="margin-left:8%">
+                                {{ model.sex }}
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-md-3 col-xs-3 control-label"><span style="color: #f55a14">*</span> 交易地点：</label>
+                            <div class="col-md-6 col-xs-6">
+                                {{ model.trade_location_province }} <span ng-show="model.trade_location_city">{{ model.trade_location_city }}</span> {{ model.trade_location }} {{ model.contact_address }}<!--<span ng-if="model.contact_address==''">无</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label">身份证号：</label>
+                            <div class="col-md-6 col-xs-6">
+                                {{ model.id_number }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-3 control-label">身份证正反面：</label>
+                            <div class="col-sm-4">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_front_photo_address}}" />
+                            </div>
+                            <div class="col-sm-4">
+                                <img style="height: 160px; width: 260px;" ng-src="{{model.id_back_photo_address}}" />
+                            </div>
+                        </div>
+                        <div class="form-group text-center" style="margin-top:50px;">
+                            <input type="button" class="btn btn-warning" style="width: 130px;height: 38px;font-size:18px" ng-disabled="editForm.$invalid" ng-click="modified()" value="修改">
+                        </div>
+                        <div class="form-group hpxFile" style="width: 930px;margin-left: -5%;color:#fff}">
+                            <div class="fileHead"><label>企业创建兴业（执剑人）电子账户前，需要准备的资料:</label><div class="rote" id="trans" ng-click="ycimg()">﹀</div></div>
+                            <ul class="accordionshow" id="fileaccordion">
+                                <li><Label style="margin-left: 3%;">（1）营业执照正本彩色原件扫描件；</Label></li>
+                                <li><Label style="margin-left: 3%;">（2）法定代表人的身份证正、反面彩色原件扫描件；</Label></li>
+                                <li><Label style="margin-left: 3%;">（3）企业授权委托书扫描件，必须盖有公司公章及法人签章或法人签字；</Label><a href="../../www/font/模板.rar" style="color:#ff5a14;cursor:pointer;font-weight:bold;text-decoration:underline">下载模板</a></li>
+                                <li><Label style="margin-left: 3%;">（4）任一对公银行账户，可以是基本户或一般户（收票类型企业，须关联兴业银行对公账户）。</Label></li>
+                                <li><Label style="margin-left: 3%;"><span style="color:red">扫描件必须为小于10M的彩色原件扫描件</span></Label></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </ng-form>
+            </div>
+        </div>
+    </div>
+    <!-- 右侧 end-->
+    <div class="modal fade" id="modal-license">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <img src="assets/img/license.png" />
+            </div>
+        </div>
+    </div>
+
+</div>
+    

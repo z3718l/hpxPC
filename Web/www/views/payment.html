@@ -1,0 +1,23 @@
+﻿<link rel="stylesheet" href="../../www/assets/css/udekx.css" />
+<script src="../../templates/main/js/udex1.js"></script>
+<script src="../../templates/main/js/udex2.js"></script>
+<div ng-cloak ng-controller="paymentController">
+    <div class="bill-query-cont">
+        <div class="user-line-hd"><strong>付款</strong></div>
+        <ng-form name="editForm" novalidate>
+            <div class="upload-bill row">
+                <div class="user-line-hd"><span class="g-orange">*</span>上传付款截图</div>
+                <div class="col-sm-5 upload-tu" ngf-select="uploadFiles($files, $invalidFiles, setFrontID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                    <img style="height: 190px; width: 300px;" ng-src="{{model.bill_front_photo_address}}" />
+                </div>
+                <div class="col-sm-5 upload-tu" ngf-select="uploadFiles($files, $invalidFiles, setBackID)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB">
+                    <img style="height: 190px; width: 300px;" ng-src="{{model.bill_back_photo_address}}" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="text-center bill-button row">
+                <a href="" ng-click="save()" class="electric-money-button button-bgcolor-orange white query-button">上传</a>
+            </div>
+        </ng-form>
+    </div>
+</div>

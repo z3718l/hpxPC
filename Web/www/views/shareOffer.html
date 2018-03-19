@@ -1,0 +1,380 @@
+﻿<!--<div ng-cloak ng-controller="shareOfferController">
+    <div class="page1">
+        <div class="title">机构名称：{{model.enterprise_name}}</div>
+        <ul class="list">
+            <li class="li100">交易方式：{{ model.trade_type_name }}</li>
+            <li class="li100">期限： {{ model.deadline_type }}</li>
+
+            <li class="li100" ng-if="model.bill_style_id==201">国股：{{ model.offer_detail.offer_rate01 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==201">城商：{{ model.offer_detail.offer_rate02 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==201">三农：{{ model.offer_detail.offer_rate03 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==201">村镇：{{ model.offer_detail.offer_rate04 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==201">外贸：{{ model.offer_detail.offer_rate05 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==201">财务：{{ model.offer_detail.offer_rate06 }}‰</li>
+
+            <li class="li100" ng-if="model.bill_style_id==202">国股：{{ model.offer_detail.offer_rate01 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==202">城商：{{ model.offer_detail.offer_rate02 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==202">三农：{{ model.offer_detail.offer_rate03 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==202">村镇：{{ model.offer_detail.offer_rate04 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==202">外贸：{{ model.offer_detail.offer_rate05 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==202">财务：{{ model.offer_detail.offer_rate06 }}%</li>
+
+            <li class="li100" ng-if="model.bill_style_id==203">180天</li>
+            <li class="li100" ng-if="model.bill_style_id==203">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate01 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate02 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate03 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate04 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate05 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate06 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate07 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate11 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate12 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate13 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate14 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate15 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate16 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate17 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate21 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate22 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate23 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate24 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate25 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate26 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate27 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">{{ model.deadline_days }} - 180 天</li>
+            <li class="li100" ng-if="model.bill_style_id==203">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate31 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate32 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate33 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate34 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate35 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate36 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate37 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate41 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate42 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate43 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate44 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate45 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate46 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate47 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate51 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate52 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate53 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate54 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate55 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate56 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate57 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">0 - {{ model.deadline_days }} 天</li>
+            <li class="li100" ng-if="model.bill_style_id==203">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate61 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate62 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate63 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate64 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate65 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate66 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate67 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate71 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate72 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate73 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate74 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate75 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate76 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate77 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==203">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==203">国股：{{ model.offer_detail.offer_rate81 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">城商：{{ model.offer_detail.offer_rate82 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">三农：{{ model.offer_detail.offer_rate83 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">村镇：{{ model.offer_detail.offer_rate84 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">外贸：{{ model.offer_detail.offer_rate85 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">财务：{{ model.offer_detail.offer_rate86 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==203">每十万加：{{ model.offer_detail.offer_rate87 }}元</li>
+
+            <li class="li100" ng-if="model.bill_style_id==204">360天</li>
+            <li class="li100" ng-if="model.bill_style_id==204">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate01 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate02 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate03 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate04 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate05 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate06 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate07 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate11 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate12 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate13 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate14 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate15 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate16 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate17 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate21 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate22 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate23 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate24 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate25 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate26 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate27 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">{{ model.deadline_days }} - 360 天</li>
+            <li class="li100" ng-if="model.bill_style_id==204">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate31 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate32 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate33 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate34 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate35 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate36 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate37 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate41 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate42 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate43 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate44 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate45 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate46 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate47 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate51 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate52 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate53 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate54 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate55 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate56 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate57 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">0 - {{ model.deadline_days }} 天</li>
+            <li class="li100" ng-if="model.bill_style_id==204">100万以上</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate61 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate62 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate63 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate64 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate65 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate66 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate67 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万-100万</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate71 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate72 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate73 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate74 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate75 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate76 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate77 }}元</li>
+            <li class="li100" ng-if="model.bill_style_id==204">50万以下</li>
+            <li class="li100" ng-if="model.bill_style_id==204">国股：{{ model.offer_detail.offer_rate81 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">城商：{{ model.offer_detail.offer_rate82 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">三农：{{ model.offer_detail.offer_rate83 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">村镇：{{ model.offer_detail.offer_rate84 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">外贸：{{ model.offer_detail.offer_rate85 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">财务：{{ model.offer_detail.offer_rate86 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id==204">每十万加：{{ model.offer_detail.offer_rate87 }}元</li>
+
+            <li class="li100" ng-if="model.bill_style_id==205">电票：{{ model.offer_detail.offer_rate01 }}%</li>
+            <li class="li100" ng-if="model.bill_style_id==205">纸票：{{ model.offer_detail.offer_rate02 }}‰</li>
+            <li class="li100" ng-if="model.bill_style_id == 205">贸易背景：{{ model.trade_background }}</li>
+            <li class="li100" ng-if="model.bill_style_id == 205">额度：{{ model.max_price | currency }}</li>
+        </ul>
+        <ul class="other">
+            <li class="li50">联系人：{{ model.contact_name }}</li>
+            <li class="li50">联系方式：{{ model.contact_phone }}</li>
+            <li>备注：{{ model.description }}</li>
+        </ul>
+        <div class="operate">
+            <a href="" class="btn">下载汇票线，了解更多</a>
+            <a href="" class="more js_details">了解汇票线</a>
+        </div>
+    </div>
+
+
+
+    <div class="alert alert-details">
+        <div class="box">
+            <h3>汇票线简介</h3>
+            <div class="txt">汇票线作为票据在线交易一站式服务平台，其通过兴业银行监管的“票据支付宝”模式，制度性地解决了线下电票交易对手的信用风险，解决了安全问题；平台还通过信息直接对接，减少中间环节，有效地降低了贴现的成本，也提高了票据与资金的流转效率。</div>
+            <div class="txt2">用汇票线，安全、便捷、省钱！</div>
+        </div>
+    </div>
+</div>-->
+<link rel="stylesheet" href="../assets/css/main.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<div ng-cloak ng-controller="shareOfferController">
+    <div class="container-fluid swal">
+        <div class="row-fluid shead">
+            <span>机构名称：{{model.enterprise_name}}</span>
+        </div>
+
+    </div>
+    <div class="swalk"><span>交易方式：</span><label>{{ model.trade_type_name }}</label></div>
+    <div class="swalkl"><div>18天以上</div></div>
+    <div class="swalkb">
+        <table>
+            <tr>
+                <td>承兑机构</td>
+                <td>100万以上</td>
+                <td>50万-100万</td>
+                <td>50万以下</td>
+            </tr>
+            <tr>
+                <td>国股</td>
+                <td><span ng-if="model.bill_style_id==201">{{ model.offer_detail.offer_rate01 }}</span>%</td>
+                <td><span ng-if="model.bill_style_id==202">{{ model.offer_detail.offer_rate02 }}</span>%</td>
+                <td><span ng-if="model.bill_style_id==203">{{ model.offer_detail.offer_rate03 }}</span>%</td>
+            </tr>
+            <tr>
+                <td>城商</td>
+                <td><span ng-if="model.bill_style_id==202">{{ model.offer_detail.offer_rate02 }}</span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>三农</td>
+                <td><span>{{ model.offer_detail.offer_rate03 }}</span>%</td>
+                <td><span ng-if="model.bill_style_id==203"></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>村镇</td>
+                <td><span>{{ model.offer_detail.offer_rate04 }}</span>%</td>
+                <td><span ng-if="model.bill_style_id==204"></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>外贸</td>
+                <td><span>{{ model.offer_detail.offer_rate05 }}</span>%</td>
+                <td ng-if="model.bill_style_id==205"><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>财务</td>
+                <td><span>{{ model.offer_detail.offer_rate06 }}</span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td><span>{{ model.offer_detail.offer_rate87 }}</span>元</td>
+                <td><span></span>元</td>
+                <td><span></span>元</td>
+            </tr>
+        </table>
+    </div>
+    <br /><br />
+    <div class="swalk"><span>交易方式：</span><label>45456</label></div>
+    <div class="swalkl"><div>dg</div></div>
+    <div class="swalkb">
+        <table>
+            <tr>
+                <td>承兑机构</td>
+                <td>100万以上</td>
+                <td>50万-100万</td>
+                <td>50万以下</td>
+            </tr>
+            <tr>
+                <td>国股</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>城商</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>三农</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>村镇</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>外贸</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>财务</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td><span></span>元</td>
+                <td><span></span>元</td>
+                <td><span></span>元</td>
+            </tr>
+        </table>
+    </div>
+    <br /><br />
+    <div class="swalk"><span>交易方式：</span><label>45456</label></div>
+    <div class="swalkl"><div>dg</div></div>
+    <div class="swalkb">
+        <table>
+            <tr>
+                <td>承兑机构</td>
+                <td>100万以上</td>
+                <td>50万-100万</td>
+                <td>50万以下</td>
+            </tr>
+            <tr>
+                <td>国股</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>城商</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>三农</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>村镇</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>外贸</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>财务</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+                <td><span></span>%</td>
+            </tr>
+            <tr>
+                <td>每十万加</td>
+                <td><span></span>元</td>
+                <td><span></span>元</td>
+                <td><span></span>元</td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div class="sli"><span>联系人：</span><label>张三</label></div>
+    <div class="sli"><span>联系方式：</span><label>张三</label></div>
+    <div class="sli"><span>交易地点：</span><label>张三</label></div>
+    <div class="sli"><span>备注：</span></div>
+    <div class="hpxload">下载汇票线，了解更多</div><br />
+    <div class="hpxloadm">了解汇票线</div><br />
+</div>

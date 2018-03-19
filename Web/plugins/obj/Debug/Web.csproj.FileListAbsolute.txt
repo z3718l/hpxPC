@@ -1,0 +1,6 @@
+D:\Project\www.huipiaoxian.com\hpx\Web\bin\Web.dll.config
+D:\Project\www.huipiaoxian.com\hpx\Web\bin\Web.dll
+D:\Project\www.huipiaoxian.com\hpx\Web\bin\Web.pdb
+D:\Project\www.huipiaoxian.com\hpx\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+D:\Project\www.huipiaoxian.com\hpx\Web\obj\Debug\Web.dll
+D:\Project\www.huipiaoxian.com\hpx\Web\obj\Debug\Web.pdb

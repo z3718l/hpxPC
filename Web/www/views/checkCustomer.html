@@ -1,0 +1,317 @@
+﻿<div ng-controller="checkCustomerController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                           data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title">企业审核</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline filter-option">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <button class="btn btn-info" ng-click="exportExcel()">信息导出（Excel）</button>
+                                </div>
+                                <div class="pull-right">
+                                    <span>
+                                        <input type="radio" name="checked" id="unchecked" value="0"
+                                               ng-model="filter.checkedType" ng-change="reflash()"> 未审核
+                                        <input type="radio" name="checked" id="checked" value="1"
+                                               ng-model="filter.checkedType" ng-change="reflash()"> 已审核
+                                    </span>
+                                    <button class="btn btn-sm btn-info" ng-click="reflash()"><i
+                                            class="fa fa-search"></i> 筛选
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html"
+                               class="table table-striped table-bordered table-hover table-condensed">
+                            <tr ng-repeat="item in $data">
+                                <td data-title="'序号'" width="10%" class="text-center">{{ first + $index }}</td>
+                                <td data-title="'企业编号'" class="text-center">{{ item.id}}</td>
+                                <td data-title="'企业名称'" class="text-center">{{ item.enterprise_name }}</td>
+                                <td data-title="'联系人'" class="text-center">{{ item.contact_person}}</td>
+                                <td data-title="'联系电话'" class="text-center">{{ item.contact_phone}}</td>
+                                <td data-title="'审核时间'" class="text-center">{{ item.review_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td data-title="'提交审核时间'" class="text-center">{{ item.request_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                                <td class="text-center width-100 text-nowrap">
+                                    <button class="btn btn-info btn-xs" ng-click="check(item)"
+                                            ng-if="filter.checkedType==0"><i class="fa fa-edit"></i> 审核
+                                    </button>
+                                    <button class="btn btn-info btn-xs" ng-click="read(item)"
+                                            ng-if="filter.checkedType==1"><i class="fa fa-edit"></i> 详细
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal fade" id="modal-read">
+                    <div class="modal-dialog" style="width:1100px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>资料详情</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <ng-form name="editForm" novalidate>
+
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">企业名称: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.enterprise_name }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">联系人: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_person }}
+                                            </div>
+                                            <label class="col-md-2 control-label">联系电话: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_phone }}
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group width-full">
+                                            <div class="form-group width-full">
+                                                <div class="col-sm-4 form-control-static ">
+                                                    <label class="control-label"> 营业执照: </label>
+
+                                                    <div class="tb-booth tb-pic tb-s250">
+                                                        <img class="jqzoom"
+                                                             src="{{model.credential_photo_address}}"
+                                                             rel="{{model.credential_photo_address}}" alt="图片不存在"/>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4 form-control-static">
+                                                    <label class="control-label">法人身份证正面: </label>
+
+                                                    <div class="tb-booth tb-pic tb-s250">
+
+                                                        <img class="jqzoom"
+                                                             src="{{model.artificial_person_front_photo_address}}"
+                                                             rel="{{model.artificial_person_front_photo_address}}"
+                                                             alt="图片不存在"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4 form-control-static ">
+                                                    <label class="control-label">法人身份证反面: </label>
+
+                                                    <div class="tb-booth tb-pic tb-s250">
+                                                        <img class="jqzoom"
+                                                             src="{{model.artificial_person_back_photo_address}}"
+                                                             rel="{{model.artificial_person_back_photo_address}}"
+                                                             alt="图片不存在"/>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">统一社会信用代码：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.unified_social_credit_code}}
+                                            </div>
+                                            <label class="control-label col-md-2">营业执照注册号：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.licence_register_no}}
+                                            </div>
+                                            <label class="control-label col-md-2">组织结构代码号：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.organization_code_number}}
+                                            </div>
+                                            <label class="control-label col-md-2">营业执照名称：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.licence_name}}
+                                            </div>
+                                            <label class="control-label col-md-2">法定代表人住址：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.licence_addr}}
+                                            </div>
+                                            <label class="control-label col-md-2">法定代表人姓名：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.legal_name}}
+                                            </div>
+                                            <label class="control-label col-md-2">法人身份证号码：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.legal_cert_no}}
+                                            </div>
+                                            <label class="control-label col-md-2">纳税人名称：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.tax_cert_name}}
+                                            </div>
+                                            <label class="control-label col-md-2">企业类型：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.licence_type}}
+                                            </div>
+                                            <label class="control-label col-md-2">公司成立日期：</label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{model.founded_date | date:'yyyy-MM-dd HH:mm:ss'}}
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i
+                                        class="fa fa-share-square-o"></i> 关闭
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modal-edit">
+                    <div class="modal-dialog" style="width:1100px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>资料详情</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <ng-form name="editForm" novalidate>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">企业名称: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.enterprise_name }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group width-full">
+                                            <label class="col-md-2 control-label">联系人: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_person }}
+                                            </div>
+                                            <label class="col-md-2 control-label">联系电话: </label>
+                                            <div class="col-md-4 form-control-static">
+                                                {{ model.contact_phone }}
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group width-full">
+                                            <div class="form-group width-full">
+                                                <div class="col-sm-4 form-control-static ">
+                                                    <label class="control-label"> 营业执照: </label>
+
+                                                    <div class="tb-booth tb-pic tb-s250">
+                                                        <img class="jqzoom"
+                                                             src="{{model.credential_photo_address}}"
+                                                             rel="{{model.credential_photo_address}}" alt="图片不存在"/>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4 form-control-static">
+                                                    <label class="control-label">法人身份证正面: </label>
+                                                    <div class="tb-booth tb-pic tb-s250">
+
+                                                        <img class="jqzoom"
+                                                             src="{{model.artificial_person_front_photo_address}}"
+                                                             rel="{{model.artificial_person_front_photo_address}}"
+                                                             alt="图片不存在"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4 form-control-static ">
+                                                    <label class="control-label">法人身份证反面: </label>
+
+                                                    <div class="tb-booth tb-pic tb-s250">
+                                                        <img class="jqzoom"
+                                                             src="{{model.artificial_person_back_photo_address}}"
+                                                             rel="{{model.artificial_person_back_photo_address}}"
+                                                             alt="图片不存在"/>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="form-group width-full">
+                                                <label class="control-label col-md-2"><font color="red">*</font>统一社会信用代码：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.unified_social_credit_code" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>营业执照注册号：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.licence_register_no" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>组织结构代码号：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.organization_code_number" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>营业执照名称：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.licence_name" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>法定代表人住址：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.licence_addr" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>法定代表人姓名：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.legal_name" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>法人身份证号码：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.legal_cert_no" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>纳税人名称：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.tax_cert_name" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>企业类型：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="text" class="form-control" ng-model="model.licence_type" required>
+                                                </div>
+                                                <label class="control-label col-md-2"><font color="red">*</font>公司成立日期：</label>
+                                                <div class="col-md-4 form-control-static">
+                                                    <input type="date" class="form-control" ng-model="model.founded_date" required>
+                                                </div>
+                                        </div>
+                                        <hr />
+                                        <div class="form-group width-full">
+                                            <label class="control-label col-md-2">审核备注：</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" ng-model="model.verify_description"
+                                                          rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <!--<button type="button" class="btn btn-sm btn-success hp_btn" disabled="disabled"><i class="fa fa-save"></i> 通过</button>-->
+                                <button type="button" class="btn btn-sm btn-success h_btn" ng-click="pass()"
+                                        ng-disabled="editForm.$invalid"><i class="fa fa-save"></i> 通过
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger h_btn" ng-click="reject()"
+                                        ><i class="fa fa-save"></i> 不通过
+                                </button>
+                                <!--<button type="button" class="btn btn-sm btn-danger hp_btn" disabled="disabled"><i class="fa fa-save"></i> 不通过</button>-->
+                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i
+                                        class="fa fa-share-square-o"></i> 关闭
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,52 @@
+﻿<div ng-controller="queryOfferController">
+    <div ng-class="{ 'bill-query-cont': identity }">
+        <div class="list-cont row">
+            <div class="user-line-hd"><strong>报价查询</strong></div>
+            <div class="controls row">
+                <label class="control-label-bill col-md-2">票据类型</label>
+                <span class="control-label-bill col-md-2" ng-repeat="item in billStyleData">
+                    <input type="radio" name="billStyle" value="{{item.code}}" ng-model="filter.billStyleId" ng-change="reflash()" > {{ item.constant_name }}
+                </span>
+            </div>
+            <div class="controls row">
+                <label class="control-label-bill col-md-2">报价机构</label>
+                <div class="col-md-5">
+                    <input type="text" name="enterpriseName" ng-model="filter.enterpriseName" class="form-control" />
+                </div>
+            </div>
+            <!--<div class="controls row form-group">
+                <label class="control-label-bill col-md-2">报价时间</label>
+                <div class="col-md-10 form-inline">
+                    <label class="control-label-bill">从</label>
+                    <input type="text" class="form-control width-150" uib-datepicker-popup is-open="datepicker.publishingTimeS" ng-model="filter.publishingTimeS" ng-click="datepicker.publishingTimeS=!datepicker.publishingTimeS" />
+                    <label class="control-label-bill">到</label>
+                    <input type="text" class="form-control width-150" uib-datepicker-popup is-open="datepicker.publishingTimeB" ng-model="filter.publishingTimeB" ng-click="datepicker.publishingTimeB=!datepicker.publishingTimeB" />
+                </div>
+            </div>-->
+            <div class="text-center bill-button user-line-hd">
+                <a href="javascript:;" class="electric-money-button button-bgcolor-orange white query-button" ng-click="reflash()">我要查询</a>
+            </div>
+
+            <div class="user-line-hd"><strong>报价信息</strong></div>
+            <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped table-hover table-condensed">
+                <tr ng-repeat="item in $data">
+                    <td data-title="'序号'"  class="text-center">{{ $index + 1 }}</td>
+                    <td data-title="'报价机构'" class="text-left">{{ item.enterprise_name }}</td>
+                    <!--<td data-title="'汇票属性'" class="text-center">{{ item.bill_style_name }}</td>-->
+                    <td data-title="'报价时间'" class="text-center">{{ item.offer_time|date:'yyyy-MM-dd' }}</td>
+                    <td data-title="'国股行'" class="text-center" ng-if="filter.billStyleId != 205"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate01">{{ item.offer_detail.offer_rate01 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>
+                    <td data-title="'城商行'" class="text-center" ng-if="filter.billStyleId != 205"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate02">{{ item.offer_detail.offer_rate02 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>
+                    <td data-title="'三农行'" class="text-center" ng-if="filter.billStyleId != 205"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate03">{{ item.offer_detail.offer_rate03 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>
+                    <!--<td data-title="'村镇'" class="text-center"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate04">{{ item.offer_detail.offer_rate04 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>
+                    <td data-title="'外资'" class="text-center"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate05">{{ item.offer_detail.offer_rate05 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>
+                    <td data-title="'财务公司'" class="text-center"><span ng-if="item.bill_style_id != 205 && item.offer_detail.offer_rate06">{{ item.offer_detail.offer_rate06 }}{{ item.bill_style_id == 202 ? '%' : '‰' }}</span></td>-->
+                    <td data-title="'电票'" class="text-center" ng-if="filter.billStyleId == 205"><span ng-if="item.bill_style_id == 205 && item.offer_detail.offer_rate01">{{ item.offer_detail.offer_rate01 }}%</span></td>
+                    <td data-title="'纸票'" class="text-center" ng-if="filter.billStyleId == 205"><span ng-if="item.bill_style_id == 205 && item.offer_detail.offer_rate02">{{ item.offer_detail.offer_rate02 }}‰</span></td>
+                    <td class="text-center width-100 text-nowrap">
+                        <a href="javascript:;" class="btn btn-success btn-xs" style="color: white;" ui-sref="app.free.readOffer({'id': item.id})" target="_blank"><i class="fa fa-edit"></i> 详细</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

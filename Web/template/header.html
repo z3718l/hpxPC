@@ -1,0 +1,62 @@
+<div ng-controller="headerController">
+    <!-- 头部 start-->
+    <header>
+        <!-- 顶部 start-->
+        <nav class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-4">
+                        <div class="telBox">
+                            <span class="tel"><em></em>客服电话：400-772 0575</span>
+                        </div>
+                    </div>
+                    <span class="col-md-9 col-xs-8 contact text-right">
+                        <span ng-if="identity">
+                            欢迎您！{{identity.customer_name}}
+                            <span class="line">|</span>
+                            <a href="javascript:"; ui-sref="app.main.accountInfo">个人中心</a>
+                            <span class="line">|</span>
+                            <a href="javascript:;" ng-click="logout();">退出登录</a>
+                        </span>
+                        <span ng-if="!identity">
+                            <a href="javascript:;" ui-sref="home">登录</a>
+                            <span class="line">|</span>
+                            <a href="javascript:;" ui-sref="app.signup">注册</a>
+                        </span>
+                        <a href="" class="weixin icontu" ng-mouseenter="weixin = true" ng-mouseleave="weixin = false"><img src="assets/img/weixin.jpg" ng-show="weixin" style="position: absolute; left:-140px; top:40px; z-index:999;" /></a>
+                        <a href="" class="phone icontu" title="正在开发中..."></a> &nbsp;&nbsp;&nbsp;
+                    </span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </nav>
+<!-- 顶部 end-->
+<!-- logo+导航 start-->
+<nav class="main-nav hpx-nav">
+    <div class="container">
+        <div class="row">
+            <!-- logo start-->
+            <div class="logo">
+                <a href="" target="_self"><img src="assets/img/logo.jpg" /></a>
+            </div>
+            <!-- logo end-->
+            <!-- 导航 start-->
+            <div class="navside">
+                <ul class="navbar-nav" style="padding-top: 40px;">
+                    <li style="padding: 0 30px;"><a href="javascript:;" ui-sref="home">首页</a></li>
+                    <li style="padding: 0 30px;"><a href="javascript:;" ui-sref="app.main.publish">我要出票</a></li> 
+                    <li style="padding: 0 30px;"><a href="javascript:;" ui-sref="app.free.queryBill">我要收票</a></li> 
+                    <li style="padding: 0 30px;"><a href="javascript:;" ui-sref="app.main.editQuote">我要报价</a></li>
+                    <li style="padding: 0 30px;"><a href="javascript:;" ng-click="tbd()">汇票助手</a></li>
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
+            <!-- 导航 end-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</nav>
+<!-- logo+导航 end-->
+    </header>
+<!-- 头部 end-->
+</div>

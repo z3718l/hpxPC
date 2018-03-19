@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="hpxAdminApp">
+<head>
+	<meta charset="utf-8" />
+    <base href="/">
+	<title>汇票线官网_汇票贴现承兑交易助手_票据承兑在线服务平台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description" content="汇票线交易平台提供汇票票据承兑贴现交易业务,平台出票和收票安全高效,贴现计算便利,到期查询方便,开启票据全天候在线交易服务,降低票据承兑贴现成本,汇票贴现服务更人性化,致力于打造为电子汇票圈的标杆,是企业与商家值得信赖的保障。" />
+	<meta name="keywords" content="汇票贴现,汇票承兑,汇票在线交易助手,票据承兑贴现交易,汇票到期查询，贴现利率,票据贴现计算,汇票线出票收票平台"  />
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="assets/css/animate.min.css" rel="stylesheet" />
+	<link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/plugins/ng-table/dist/ng-table.min.css" rel="stylesheet" />
+    <link href="assets/plugins/fullcalendar/fullcalendar.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/jquery/jquery.imagezoom.min.js"></script>
+    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/FileSaver.js/FileSaver.min.js"></script>
+    <script src="assets/plugins/fullcalendar/moment.js"></script>
+    <script src="assets/plugins/fullcalendar/fullcalendar.js"></script>
+    <script src="assets/plugins/fullcalendar/gcal.js"></script>
+    <!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN BASE ANGULAR JS ================== -->
+    <script src="assets/plugins/angularjs/angular.min.js"></script>
+    <script src="assets/plugins/angularjs/angular-animate.min.js"></script>
+    <script src="assets/plugins/angularjs/angular-locale_zh-cn.js"></script>
+    <script src="assets/plugins/angularjs/angular-local-storage.min.js"></script>
+    <script src="assets/plugins/angularjs/angular-ui-route.min.js"></script>
+    <script src="assets/plugins/angularjs/restangular.min.js"></script>
+    <script src="assets/plugins/angularjs/lodash.compat.min.js"></script>
+    <script src="assets/plugins/angularjs/ocLazyLoad.min.js"></script>
+    <script src="assets/plugins/angularjs/calendar.js"></script>
+    <script src="assets/plugins/bootstrap-angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="assets/plugins/ng-table/dist/ng-table.js"></script>
+    <script src="assets/plugins/ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<!-- ================== END BASE ANGULAR JS ================== -->
+</head>
+<body>
+    <div ui-view></div>
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/js/angular-app.js"></script>
+    <script src="assets/js/angular-service.js"></script>
+    <script src="assets/js/angular-controller.js"></script>
+    <script src="config.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+
+    <!-- begin #loading -->
+    <div ng-include src="'template/loading.html'"></div>
+    <!-- end #loading -->
+</body>
+</html>

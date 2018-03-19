@@ -1,0 +1,49 @@
+﻿<div ng-controller="signupController">
+    <div class="kind-money-all-bg reg-padding">
+        <div class="container">
+            <div class="register-cont row">
+                <div class="register-cont-bg"><img src="assets/img/hpx-reg-bg.png" /></div>
+                <div class="reg-left col-md-6 col-md-10 text-center"><img src="assets/img/hpx-reg.jpg" /></div>
+                <div class="reg-right col-md-5 col-sm-12 row">
+                    <p>还没有账户？<span>赶紧注册吧！</span></p>
+                    <ng-form>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 row">
+                                <label class="reg-icon reg-icon-1"></label>
+                                <input class="reg-ipt col-sm-12" type="text" ng-model="model.phone_number" placeholder="请输入手机号码">
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 row">
+                                <label class="reg-icon reg-icon-2"></label>
+                                <input class="reg-ipt col-sm-12" type="password" ng-model="model.password" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 row">
+                                <label class="reg-icon reg-icon-2"></label>
+                                <input class="reg-ipt col-sm-12" type="password" ng-model="model.password2" placeholder="请重复密码">
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 row">
+                                <label class="reg-icon reg-icon-3"></label>
+                                <input class="reg-mess col-md-7 col-sm-7" type="text" ng-model="model.phone_verify_code" placeholder="请输入短信验证码">
+                                <button class="btn btn-mess col-md-5 col-sm-5" ng-click="getVerify()" ng-disabled="disableVerify">{{ verifyStr }}</button>
+                            </div>
+                        </div>
+                        <div class="reg-form-list">
+                            <div class="reg-form-list-cont col-md-12 row">
+                                <label class="reg-icon reg-icon-4"></label>
+                                <input class="reg-ipt col-sm-12" type="text" ng-model="model.invite_code" placeholder="请确认邀请码">
+                            </div>
+                        </div>
+                        <div class="reg-form-list col-md-12 row">
+                            <button class="btn btn-reg col-md-12 col-sm-12" ng-click="signup()">立即注册</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

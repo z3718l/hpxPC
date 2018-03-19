@@ -1,0 +1,23 @@
+User-agent: Baiduspider
+Allow: /css
+Allow: /js/yh.js
+Allow: /js/udeakx.js
+Allow: /js/bootstrap.min.js
+Allow: /js/jquery.fn.imgplayer.js
+Allow: /js/base.js
+Allow: /js/jquery.min.js
+Allow: /js/slide.js
+Allow: /js/sweetalert.min.js
+Allow: /js/drag.js
+Allow: /js/IE.js
+Allow: /js/jquery.vticker.min.js
+Allow: /www/config.js
+
+
+Disallow: /js/jquery.cookie.js
+
+
+
+
+User-agent: *
+Disallow: /

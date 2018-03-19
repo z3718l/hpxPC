@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+       
+      
+         
+    </style>
+    <link rel="stylesheet" href="../../www/assets/css/udekx.css" />
+    <script src="../../templates/main/js/udex2.js"></script>
+</head>
+<body>
+    <div class="kmi">
+        <img src="/templates/main/images/qr-codes-3.png" /><br />
+        <label>扫描下载汇票线APP</label>
+    </div>
+    <div class="kmi1">
+        <ul>
+            <li>
+                <img src="/templates/main/images/qr-codes-1.png" /><br />
+                <label>汇票线官方服务号</label>
+            </li>
+            <li>
+                <img src="/templates/main/images/qr-codes-2.png" /><br />
+                <label>汇票线官方订阅号</label>
+            </li>
+        </ul>
+    </div>
+    <div class="hdng"></div>
+        <div class="fudex">
+            <ul>
+                <li  class="ud1" id="div_udesk_im">
+                   
+                    <img src="/templates/main/images/serv.png" />
+                    <label>在线客服</label>
+                </li>
+                <li class="ud2" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=1926998270&site=qq&menu=yes')">
+                   <div class="lkm"></div>
+                    <div class="qf"></div>
+                    <label>QQ</label>
+                    <span>客服</span>
+                </li>
+                <li class="ud3" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=1926998270&site=qq&menu=yes')">
+                    <div class="lkm1"></div>
+                    <div class="qf1"></div>
+                    <label>手机</label>
+                    <span>APP</span>
+                </li>
+                <li class="ud4">
+                    <div class="lkm2"></div>
+                    <div class="qf2"></div>
+                    <label>微信</label>
+                </li>
+                <li class="ud5">
+                    <div class="lkm3"></div>
+                    <div class="qf3">
+                        <label>回到<br/>顶部</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <script src="../../scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script>
+        $(".ud1").hover(function () {
+            $(".ud1").css("border-radius", "50px");
+            $(".ud1 img").css("display", "none");
+            $(".ud1 label").css("display", "block");
+            $(".ud1 label").css("top", "1px");
+
+        }, function () {
+            $(".ud1 img").css("display", "block");
+            $(".ud1").css("border-radius","0%");
+            $(".ud1 label").css("display", "none");
+            $(".ud1 label").css("top", "-42px");
+        });
+        $(".ud2").hover(function () {
+            $(".ud2").css("background", "none");
+            $(".qf").css("display", "block");
+            $(".ud2 label").css("display", "block");
+            $(".ud2 span").css("display", "block");
+
+        }, function () {
+            $(".ud2").css("background", "#d9d9d9");
+            $(".qf").css("display", "none");
+            $(".ud2 label").css("display", "none");
+            $(".ud2 span").css("display", "none");
+
+        });
+        $(".ud3").hover(function () {
+            $(".ud3").css("background", "none");
+            $(".qf1").css("display", "block");
+            $(".ud3 label").css("display", "block");
+            $(".ud3 span").css("display", "block");
+            $(".kmi").css("display", "block");
+
+        }, function () {
+            $(".ud3").css("background", "#d9d9d9");
+            $(".qf1").css("display", "none");
+            $(".ud3 label").css("display", "none");
+            $(".ud3 span").css("display", "none");
+            $(".kmi").css("display", "none");
+
+        });
+        $(".ud4").hover(function () {
+            $(".ud4").css("background", "none");
+            $(".qf2").css("display", "block");
+            $(".ud4 label").css("display", "block");
+            $(".kmi1").css("display", "block");
+        }, function () {
+            $(".ud4").css("background", "#d9d9d9");
+            $(".qf2").css("display", "none");
+            $(".ud4 label").css("display", "none");
+            $(".kmi1").css("display", "none");
+        });
+        $(".ud5").hover(function () {
+            $(".lkm3").css("display", "none");
+            $(".qf3").css("display", "block");
+         
+        }, function () {
+            $(".lkm3").css("display", "block");
+            $(".qf3").css("display", "none");
+        });
+        $(".ud5").click(function () {
+            $("html,body").animate({ scrollTop: 0 }, 500);
+
+        });
+     </script>
+</body>
+</html>
