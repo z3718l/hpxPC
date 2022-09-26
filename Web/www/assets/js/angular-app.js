@@ -8,7 +8,7 @@ var hpxAdminApp = angular.module('hpxAdminApp', [
     'restangular',
     'ngCookies',
     'ngAnimate',
-    'ui.bootstrap.datetimepicker'  
+    'ui.bootstrap.datetimepicker'
 
 ]);
 
@@ -21,7 +21,7 @@ hpxAdminApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             url: '/',
             data: { pageTitle: '首页' },
             templateUrl: 'views/home.html'
-            
+
 
         })
         .state('app', {
@@ -147,7 +147,7 @@ hpxAdminApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         })
         .state('app.main.electronicAccount', {
             url: '/electronicAccount',
-            data: { pageTitle: '兴业电子账户' },
+            data: { pageTitle: '--电子账户' },
             templateUrl: 'views/electronicAccount.html'
         })
         .state('app.main.operater', {
@@ -192,7 +192,7 @@ hpxAdminApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             data: { pageTitle: '我的发布' },
             templateUrl: 'views/myBill.html'
         })
-        
+
         .state('app.main.myBidding', {
             url: '/myBidding',
             data: { pageTitle: '我的竞价' },

@@ -8,7 +8,7 @@
 
         <div class="page66">
             <div class="part1" ng-if="accountTypeCode == 501">注：（卖方/出票方可绑定任一银行账户）</div>
-            <div class="part1" ng-if="accountTypeCode == 502">注：（买方/收票方须绑定兴业银行账户）</div>
+            <div class="part1" ng-if="accountTypeCode == 502">注：（买方/收票方须绑定--银行账户）</div>
             <div class="part2">
                 <h3>客户名称：{{ model.enterprise_person }}</h3>
                 <ul>
@@ -34,12 +34,12 @@
                 </ion-header-bar>
                 <ion-content>
                     <div class="page69">
-                        <h3><img src="images/icon691.png" alt="" class="icon">恭喜您的兴业电子账户已经创建成功！</h3>
+                        <h3><img src="images/icon691.png" alt="" class="icon">恭喜您的--电子账户已经创建成功！</h3>
                         <div class="txt">
                             <p>{{identifyModel.enterprise_name}},</p>
-                            <p>您的兴业电子账户登录用户名为{{identifyModel.xingYeUserName}}，</p>
+                            <p>您的--电子账户登录用户名为{{identifyModel.xingYeUserName}}，</p>
                             <p>初始登录密码为{{identifyModel.xingYePassword}}。</p>
-                            <p>请及时登录<a href="">兴业执剑人见证代管系统（兴业银行集团旗下系统）</a>重新设置登录密码和支付密码。</p>
+                            <p>请及时登录<a href="">--执剑人见证代管系统（--银行集团旗下系统）</a>重新设置登录密码和支付密码。</p>
                         </div>
                         <div class="info">
                             <p>您关联的账户信息如下：</p>
@@ -48,9 +48,9 @@
                             <p>银行账号：{{identifyModel.account_name}}</p>
                         </div>
                         <div class="operate">
-                            <a href="" class="btn" ng-click="closeTipModal()">登录兴业执剑人见证代管系统</a>
+                            <a href="" class="btn" ng-click="closeTipModal()">登录--执剑人见证代管系统</a>
                         </div>
-                        <div class="tips"><b>温馨提示：</b>建议前往电脑端登录<a href="">兴业执剑人见证代管系统（兴业银行集团旗下系统）</a>重新设置登录密码和支付密码。</div>
+                        <div class="tips"><b>温馨提示：</b>建议前往电脑端登录<a href="">--执剑人见证代管系统（--银行集团旗下系统）</a>重新设置登录密码和支付密码。</div>
                     </div>
                 </ion-content>
             </ion-modal-view>

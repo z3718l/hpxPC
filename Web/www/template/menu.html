@@ -35,10 +35,10 @@
             <!--<li ng-class="{'list-active': $state.includes('app.main.customerInfo')}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.customerInfo"><span class="icon icon-ticket-account1"></span>联系人信息</a></li>
             <li ng-class="{'list-active': $state.includes('app.main.enterpriseInfo')}"><a ng-click="checkCustomer()" href="javascript:;"><span class="icon icon-ticket-account2"></span>企业审核</a></li>
             <li ng-class="{'list-active': $state.includes('app.main.enterpriseAccountInfo')}"><a ng-click="checkEnterprise()" href="javascript:;"><span class="icon icon-ticket-account3"></span>账户绑定</a></li>
-            <li ng-class="{'list-active': $state.includes('app.main.electronicAccount')}" ng-hide="identity.is_verified <4" ng-if="identity.is_verified ==1 || identity.is_verified >= 3||identity.is_verified ==4||identity.is_verified ==5"><a onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.electronicAccount"><span class="icon icon-ticket-account3"></span>兴业电子账户</a></li>-->
+            <li ng-class="{'list-active': $state.includes('app.main.electronicAccount')}" ng-hide="identity.is_verified <4" ng-if="identity.is_verified ==1 || identity.is_verified >= 3||identity.is_verified ==4||identity.is_verified ==5"><a onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.electronicAccount"><span class="icon icon-ticket-account3"></span>--电子账户</a></li>-->
             <li ng-class="{'list-active': ($state.includes('app.main.accountStatus') || $state.includes('app.main.approveCustomer') || $state.includes('app.main.approveEnterprise') || $state.includes('app.main.approveAgent') || $state.includes('app.main.approveAccount'))}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.accountStatus"><span class="icon icon-ticket-account1"></span>账户中心</a></li>
             <li ng-class="{'list-active': $state.includes('app.main.operater')}"><a ng-click="checkOperater()" href="javascript:;"><span class="icon icon-ticket-account2"></span>操作员</a></li>
-            <li ng-class="{'list-active': $state.includes('app.main.electronicAccount')}"><a onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ng-click="eleAccount()"><span class="icon icon-ticket-account3"></span>兴业电子账户</a></li>
+            <li ng-class="{'list-active': $state.includes('app.main.electronicAccount')}"><a onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ng-click="eleAccount()"><span class="icon icon-ticket-account3"></span>--电子账户</a></li>
             <li ng-class="{'list-active': $state.includes('app.main.modifyPassword')}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.modifyPassword"><span class="icon icon-ticket-account4"></span>安全中心</a></li>
             <li ng-class="{'list-active': $state.includes('app.main.recharge')}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.recharge"><span class="icon icon-ticket-account5"></span>在线充值 </a></li>
             <li ng-class="{'list-active': $state.includes('app.main.messageCenter')}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.messageCenter"><span class="icon icon-ticket-account6"></span>消息中心</a></li>
@@ -54,13 +54,9 @@
             <li ng-class="{'list-active': ($state.includes('app.main.billCalendar') || $state.includes('app.free.calendar'))}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);"  href="javascript:;" ui-sref="app.main.billCalendar"><span class="icon icon-ticket-assistant6"></span>开票日历</a></li>
             <li ng-class="{'list-active': ($state.includes('app.main.publicQuery') || $state.includes('app.free.querypublic'))}"><a class="jk" onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);"  href="javascript:;" ui-sref="app.main.publicQuery"><span class="icon icon-ticket-assistant2"></span>挂失查询</a></li>
             <li ng-class="{'list-active': ($state.includes('app.main.businessQuery') || $state.includes('app.free.queryenterprise'))}"><a class="jk"  onclick="javascript:$('body,html').animate({ scrollTop: 0 }, 500);" href="javascript:;" ui-sref="app.main.businessQuery"><span class="icon icon-ticket-assistant4"></span>工商查询</a></li>
-            
+
         </ul>
     </div>
     <!-- 汇票助手 end-->
 </div>
 <script src="../../templates/main/js/hover.js"></script>
-
-
-
-

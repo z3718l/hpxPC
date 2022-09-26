@@ -247,7 +247,7 @@
 
             payingService.getAgentTreasurer($scope.models.enterpriseId).then(function (result) {
                 $scope.agentModel = result;
-            });       
+            });
     };
     // 根据支行行号查询银行名称
     $scope.findNumber = function () {
@@ -255,7 +255,7 @@
             $scope.model.bank_branch_name = data.bank_branch_name
         })
     }
-    
+
     //账户验证
     $scope.verifyStr = "账户验证";
     $scope.disableVerify = false;
@@ -290,7 +290,7 @@
                     }
                 });
             } else {
-                swal("您没有兴业银行卡，请绑定兴业银行卡！！！")
+                swal("您没有--银行卡，请绑定--银行卡！！！")
             }
         }
 
@@ -321,7 +321,7 @@
         //                }
         //            });
         //        } else{
-        //            swal("您没有兴业银行卡，请绑定兴业银行卡！！！")
+        //            swal("您没有--银行卡，请绑定--银行卡！！！")
         //        }
         //    }
         //}

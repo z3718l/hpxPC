@@ -1,4 +1,4 @@
-<div ng-cloak ng-controller="accountInfoController">  
+<div ng-cloak ng-controller="accountInfoController">
     <!-- 右侧 start-->
     <div class="user-right" >
         <div class="col-md-12 col-xs-12">
@@ -83,11 +83,11 @@
                               <tr ng-if="identity.is_verified == 2">
                                   <td class="col-md-10 ">机构认证资料已提交，正在审核中，请稍候！</td>
                                   <td class="col-md-2">
-                                     
+
                                   </td>
                               </tr>
                               <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 0">
-                                  <td class="col-md-10 col-xs-10">如需进行电票交易，请前往机构认证--经办人信息，创建兴业电子账户！</td>
+                                  <td class="col-md-10 col-xs-10">如需进行电票交易，请前往机构认证--经办人信息，创建--电子账户！</td>
                                   <td class="col-md-2 col-xs-2">
                                       <button class="release-btn" ui-sref="app.main.enterpriseInfo">马上创建</button>
                                   </td>
@@ -95,7 +95,7 @@
                               <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 1">
                                   <td class="col-md-10 col-xs-10">经办人资料已提交，正在审核中，请稍候！</td>
                                   <td class="col-md-2 col-xs-2">
-                                      
+
                                   </td>
                               </tr>
                               <tr ng-if="(identity.is_verified == 2 || identity.is_verified == 3) && filter.is_agentChecked == 2">

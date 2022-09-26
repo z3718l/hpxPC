@@ -9,7 +9,7 @@
                 <a href="" ng-class="{'on': accountTypeCode == 501}" ng-click="changeType(501)">卖方/出票方</a><a href="" ng-class="{'on': accountTypeCode == 502}" ng-click="changeType(502);">买方/收票方</a>
             </div>
             <div class="part2">
-                <h3>添加银行账户<span ng-if="accountTypeCode == 501">（卖方/出票方可绑定任一银行账户）</span><span ng-if="accountTypeCode == 502">（买方/收票方须绑定兴业银行账户）</span></h3>
+                <h3>添加银行账户<span ng-if="accountTypeCode == 501">（卖方/出票方可绑定任一银行账户）</span><span ng-if="accountTypeCode == 502">（买方/收票方须绑定--银行账户）</span></h3>
 
                 <div class="line"></div>
                 <ul class="part3" ng-repeat="item in AccountData" ng-if="item.account_type_code == accountTypeCode">

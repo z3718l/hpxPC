@@ -50,7 +50,7 @@ hpxAdminApp.controller('accountInfoController', function ($scope, $rootScope, $s
         billService.getBillsNumber(102).then(function (data) {
             $scope.paperNumber = data;
         })
-        
+
         if ($rootScope.identity.is_verified == 2 || $rootScope.identity.is_verified == 3) {
             payingService.getAgentTreasurer($rootScope.identity.enterprise_id).then(function (result) {
                 $scope.agentModel = result;
@@ -162,7 +162,7 @@ hpxAdminApp.controller('accountStatusController', function ($scope, $rootScope, 
             })
         });
     }
-    
+
     // 显示个人信息
     $scope.infoModel = function () {
         $('#modal-info').modal({
@@ -1188,13 +1188,13 @@ hpxAdminApp.controller('autonymAuthenticationController', function ($scope, $roo
         enterprise_proxy_agree: false,
         enterprise_check: 1,
         agent_check: 1,
-        choiceenterprise: 1, 
+        choiceenterprise: 1,
     };
     var emptyEntity = {};
     var newEntity = angular.copy(emptyEntity, newEntity);
     // 默认图片
     $scope.model = {
-        
+
     };
     //获取自己的注册资料；调用provinceChange获取市，调用cityChange获取区；设置默认显示的证件图片
     customerService.getCustomer().then(function (data) {
@@ -1486,7 +1486,7 @@ hpxAdminApp.controller('autonymAuthenticationController', function ($scope, $roo
             });
         }
     };
-    
+
     // 企业审核失败
     //$scope.enterpriseCheck = function () {
     //    $scope.filter.enterprise_check = -1;
@@ -1875,7 +1875,7 @@ hpxAdminApp.controller('baofooAccountController', function ($interval,$rootScope
                 return data;
             });
         }
-    }); 
+    });
 
     //刷新
     $scope.reflash = function () {
@@ -2414,7 +2414,7 @@ hpxAdminApp.controller('checkAccountController', function ($interval,$rootScope,
                 return data;
             });
         }
-    }); 
+    });
 
     //点击跳转到新页面，放大图片
     $scope.showFront = function () {
@@ -2791,7 +2791,7 @@ hpxAdminApp.controller('checkCustomerController', function (exportService, $inte
     constantsService.queryConstantsType(3).then(function (data) {
         $scope.customerTypeData = data;
     })
-    
+
     //获取未审核或已审核的客户资料信息
     $scope.tableParams = new NgTableParams({'sorting': {'id': 'asc'}}, {
         getData: function (params) {
@@ -3040,7 +3040,7 @@ hpxAdminApp.controller('constantsController', function ($scope, $rootScope, $sta
     //获取所有的常量类型的对应常量（即是获取所有的常量）
     constantsTypeService.queryByConstantTypeID($scope.filter.constantTypeId).then(function (data) {
         $scope.constantsTypes = data;
-    }); 
+    });
     //constantsTypeService.queryAll().then(function (data) {
     //    $scope.constantsTypes = data.constant_types;
     //});
@@ -3119,7 +3119,7 @@ hpxAdminApp.controller('constantsTypeController', function ($scope, $rootScope, 
     $scope.reflash = function () {
         $scope.tableParams.reload();
     }
- 
+
     $scope.edit = function (data) {
         if (data == null) {         //弹出新建窗口
             $scope.model = newEntity;
@@ -3135,7 +3135,7 @@ hpxAdminApp.controller('constantsTypeController', function ($scope, $rootScope, 
             constantsTypeService.add($scope.model).then(function (data) {
                 $scope.tableParams.reload();
                 angular.copy(emptyEntity, newEntity);
-                $scope.editForm.$setPristine(); 
+                $scope.editForm.$setPristine();
                 $('#modal-edit').modal('hide');
             });
         }
@@ -3431,7 +3431,7 @@ hpxAdminApp.controller('customerLevelController', function ($scope, $rootScope, 
     $scope.reflash = function () {
         $scope.tableParams.reload();
     }
-    
+
     $scope.edit = function (data) {
         if (data == null) {         //弹出新建窗口
             $scope.model = newEntity;
@@ -3747,7 +3747,7 @@ hpxAdminApp.controller('editQuoteController', function ($rootScope, $scope, $tim
         }
         //else if ($rootScope.identity.enterprise_id == 0) {
         //    $('#link5').attr("disabled", true)
-        
+
         //} else if ($rootScope.identity.enterprise_id == 0) {
         //    $('#link5').attr("disabled", true)
         //}
@@ -3896,7 +3896,7 @@ hpxAdminApp.controller('electronicAccountController', function ($scope, $rootSco
             });
         });
     };
-    
+
     // 账户绑定
     //读取对应银行账户的详细信息
     $scope.read = function (data) {
@@ -4016,7 +4016,7 @@ hpxAdminApp.controller('electronicAccountController', function ($scope, $rootSco
                     }
                 });
             } else {
-                swal("您没有兴业银行卡，请绑定兴业银行卡！！！")
+                swal("您没有--银行卡，请绑定--银行卡！！！")
             }
         }
     }
@@ -4077,7 +4077,7 @@ hpxAdminApp.controller('endorsementController', function ($rootScope, $scope, $t
             });
         });
     };
-    //设置图片id，url 
+    //设置图片id，url
     $scope.setFrontID = function (response) {
         $timeout(function () {
             $scope.model.bill_front_photo_id = response.data.data.id;
@@ -4346,7 +4346,7 @@ hpxAdminApp.controller('enterpriseAccountController', function ($scope, $rootSco
 
             payingService.getAgentTreasurer($scope.models.enterpriseId).then(function (result) {
                 $scope.agentModel = result;
-            });       
+            });
     };
     // 根据支行行号查询银行名称
     $scope.findNumber = function () {
@@ -4354,7 +4354,7 @@ hpxAdminApp.controller('enterpriseAccountController', function ($scope, $rootSco
             $scope.model.bank_branch_name = data.bank_branch_name
         })
     }
-    
+
     //账户验证
     $scope.verifyStr = "账户验证";
     $scope.disableVerify = false;
@@ -4389,7 +4389,7 @@ hpxAdminApp.controller('enterpriseAccountController', function ($scope, $rootSco
                     }
                 });
             } else {
-                swal("您没有兴业银行卡，请绑定兴业银行卡！！！")
+                swal("您没有--银行卡，请绑定--银行卡！！！")
             }
         }
 
@@ -4420,7 +4420,7 @@ hpxAdminApp.controller('enterpriseAccountController', function ($scope, $rootSco
         //                }
         //            });
         //        } else{
-        //            swal("您没有兴业银行卡，请绑定兴业银行卡！！！")
+        //            swal("您没有--银行卡，请绑定--银行卡！！！")
         //        }
         //    }
         //}
@@ -4772,10 +4772,10 @@ hpxAdminApp.controller('enterpriseController', function ($scope, $rootScope, $in
         if ($scope.model.id == null || $scope.model.id == 0) {
             customerService.insertEnterprise($scope.model).then(function (data) {
                 customerService.getAllEnterprise().then(function (data) {
-                    $scope.model = data;                    
+                    $scope.model = data;
                     swal({ 'title': '保存成功，请继续完成经办人绑定！' }, function () {
                         window.location.reload();
-                    });       
+                    });
                 });
             });
         } else {
@@ -5061,7 +5061,7 @@ hpxAdminApp.controller('evaluateController', function ($rootScope, $scope, $stat
     };
     $scope.showEvaluatesell = function () {
         $scope.model.star = $scope.filter.star;
-       
+
         enterprisesService.insertAppraisal($scope.model).then(function (data) {
             $state.go('app.main.myBill');
         });
@@ -5099,7 +5099,7 @@ hpxAdminApp.controller('evaluateController', function ($rootScope, $scope, $stat
                 }
             });
         };
-       
+
     };
     init();
 
@@ -5197,7 +5197,7 @@ hpxAdminApp.controller('evaluatesController', function ($rootScope, $scope, $sta
 
 });
 hpxAdminApp.controller('footerController', function ($rootScope, $scope, $state) {
-     
+
 });
 
 hpxAdminApp.controller('forgetPasswordController', function ($rootScope, $scope, $state, $interval, billService, customerService, constantsService) {
@@ -5286,7 +5286,7 @@ hpxAdminApp.controller('freezeEnterpriseController', function ($scope, $rootScop
             });
         }
     });
-    
+
     // 刷新
     $scope.reflash = function () {
         $scope.tableParams.reload();
@@ -5294,10 +5294,10 @@ hpxAdminApp.controller('freezeEnterpriseController', function ($scope, $rootScop
 
     //查看企业详细信息
     $scope.read = function (item) {
-        $scope.model = angular.copy(item);        
-        $('#modal-read').modal('show');     
+        $scope.model = angular.copy(item);
+        $('#modal-read').modal('show');
     };
-    
+
     //弹出冻结企业框
     $scope.freeze = function (item) {
         $scope.model = angular.copy(item);
@@ -5305,7 +5305,7 @@ hpxAdminApp.controller('freezeEnterpriseController', function ($scope, $rootScop
         $scope.model.description = '违规操作';
         $('#modal-freeze').modal('show');
     };
-    
+
     //冻结企业
     $scope.confirmFreeze = function () {
         enterpriseService.freezeEnterprise($scope.model).then(function (data) {
@@ -5713,7 +5713,7 @@ hpxAdminApp.controller('holidayInfoController', function ($scope, $rootScope, $s
     $scope.refresh = function () {
         $scope.tableParams.reload();
     }
-    
+
     $scope.edit = function (data) {
         if (data == null) {         //弹出新建窗口
             $scope.model = newEntity;
@@ -5753,13 +5753,13 @@ hpxAdminApp.controller('holidayInfoController', function ($scope, $rootScope, $s
     };
 })
 hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, ngTableParams, addressService, constantsService, bankService, $cookieStore, Restangular, customerService, portalService, orderService, billService, toolService) {
-    //��¼�¼�
+    //��¼�¼�
     $scope.login = function (e) {
         var keycode = window.event ? e.keyCode : e.which;
         if (keycode != 13 && keycode != 0 && keycode != 1 && keycode != undefined) {
             return;
         }
-        //��¼���ܣ���¼�ɹ�����ת����������
+        //��¼���ܣ���¼�ɹ�����ת����������
         $scope.loginRequest.enterprise_id = 29
         customerService.customerLogin($scope.loginRequest).then(function (data) {
             $cookieStore.put('customer', data);
@@ -5770,35 +5770,35 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
             $state.go('app.main.accountInfo');
         });
     };
-    //��ȡ������Ϣ
+    //��ȡ������Ϣ
     portalService.lastInformation(2).then(function (data) {
         $scope.news = data;
     });
-    //��ȡ�жһ�������
+    //��ȡ�жһ�������
     constantsService.queryConstantsType(4).then(function (data) {
         $scope.acceptorTypeData = data;
     })
-    //��������
+    //��������
     portalService.lastInformation(3).then(function (data) {
         $scope.guides = data;
     });
-    //��ת��ע�����
+    //��ת��ע�����
     $scope.tosignup = function () {
         $state.go("app.signup");
     }
-    //��ȡ���׶�
+    //��ȡ���׶�
     orderService.orderCount().then(function (data) {
         $scope.orderCount = data;
     });
-    //��ȡ��ҳ��Ʊ������Ϣ
+    //��ȡ��ҳ��Ʊ������Ϣ
     billService.billProductElectronic().then(function (data) {
         $scope.billProductElectronic = data.bill_products;
     });
-    //��ȡ��ҳֽƱ������Ϣ
+    //��ȡ��ҳֽƱ������Ϣ
     billService.billProductPaper().then(function (data) {
         $scope.billProductPaper = data.bill_products;
     });
-    //��ȡ��ҳ����������Ϣ
+    //��ȡ��ҳ����������Ϣ
     billService.billOfferPaper().then(function (data) {
         $scope.billOfferPaper = data.bill_offers;
 
@@ -5813,9 +5813,9 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
     $scope.showCalculator = function () {
         //$('#modal-calculator').modal('show');
         $('#modal-calculator').modal({
-            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
-            keyboard: false,//���̹رնԻ���
-            show: true//�����Ի���
+            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
+            keyboard: false,//���̹رնԻ���
+            show: true//�����Ի���
         });
     }
 
@@ -5828,9 +5828,9 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
     $scope.showEnterprise = function () {
         //$('#modal-enterprise').modal('show');
         $('#modal-enterprise').modal({
-            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
-            keyboard: false,//���̹رնԻ���
-            show: true//�����Ի���
+            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
+            keyboard: false,//���̹رնԻ���
+            show: true//�����Ի���
         });
     }
 
@@ -5843,18 +5843,18 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
     $scope.showBank = function () {
         //$('#modal-bank').modal('show');
         $('#modal-bank').modal({
-            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
-            keyboard: false,//���̹رնԻ���
-            show: true//�����Ի���
+            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
+            keyboard: false,//���̹رնԻ���
+            show: true//�����Ի���
         });
     }
 
     $scope.showCalendar = function () {
         //$('#modal-calendar').modal('show');
         $('#modal-calendar').modal({
-            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
-            keyboard: false,//���̹رնԻ���
-            show: true//�����Ի���
+            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
+            keyboard: false,//���̹رնԻ���
+            show: true//�����Ի���
         });
     }
 
@@ -5862,7 +5862,7 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
 
     }
 
-    //��ȡ���е������˻���Ϣ������ʾ�Ƿ�ΪĬ�������˻�
+    //��ȡ���е������˻���Ϣ������ʾ�Ƿ�ΪĬ�������˻�
     $scope.tableParams = new ngTableParams({ }, {
         getData: function (params) {
             if ($scope.filter.headBankId || $scope.filter.bankAddressId || $scope.filter.keyword) {
@@ -5872,28 +5872,28 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
             }
         }
     });
-    //ˢ��
+    //ˢ��
     $scope.submitBank = function () {
         $scope.tableParams.reload();
     }
 
-    //��ȡ���е������˻�������Ϣ
+    //��ȡ���е������˻�������Ϣ
     bankService.queryAll().then(function (data) {
         $scope.bankData = data;
     });
 
-    //��ȡ���е�ʡ����ַ
+    //��ȡ���е�ʡ����ַ
     addressService.queryAll().then(function (data) {
         $scope.ProAddressData = data;
         $scope.ProvinceChange();
     });
 
-    //��ȡ��Ӧʡ���м���ַ
+    //��ȡ��Ӧʡ���м���ַ
     $scope.ProvinceChange = function () {
         if ($scope.filter.bankprovince) {
             return addressService.getCity($scope.filter.bankprovince).then(function (data) {
                 $scope.BankCityData = data;
-                addressService.queryAll().then(function (Pdata) {       //��ȡ���еĵ�ַ��Ϣ���ҵ���Ӧ��id���Ѷ�Ӧ��addressname������������ʡ
+                addressService.queryAll().then(function (Pdata) {       //��ȡ���еĵ�ַ��Ϣ���ҵ���Ӧ��id���Ѷ�Ӧ��addressname������������ʡ
                     for (var i = 0; i < Pdata.length; i++) {
                         if ($scope.model.bankprovince == Pdata[i].id) {
                             $scope.model.bank_province = Pdata[i].address_name;
@@ -5907,9 +5907,9 @@ hpxAdminApp.controller('homeController', function ($rootScope, $scope, $state, n
     $scope.showCalendar = function () {
         //$('#modal-calendar').modal('show');
         $('#modal-calendar').modal({
-            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
-            keyboard: false,//���̹رնԻ���
-            show: true//�����Ի���
+            backdrop: "static",//����հ״����رնԻ���  ���ֱ����false �򱳾�û�л�ɫ͸��
+            keyboard: false,//���̹رնԻ���
+            show: true//�����Ի���
         });
     }
 });
@@ -6164,7 +6164,7 @@ hpxAdminApp.controller('imgController', function ($rootScope, $scope, $state, $s
 });
 
 hpxAdminApp.controller('informationController', function ($rootScope, $scope, $state, $stateParams, $sce, portalService) {
-    //��ȡָ��id�ķ�����Ϣ
+    //��ȡָ��id�ķ�����Ϣ
     portalService.getInformation($stateParams.id).then(function (data) {
         $scope.model = data;
         $scope.detail = $sce.trustAsHtml(data.detail);
@@ -6172,11 +6172,11 @@ hpxAdminApp.controller('informationController', function ($rootScope, $scope, $s
 });
 
 hpxAdminApp.controller('informationListController', function ($rootScope, $scope, $state, $stateParams, ngTableParams, portalService) {
-    //��ȡ������Ϣ����
+    //��ȡ������Ϣ����
     portalService.getInformationType($stateParams.type).then(function (data) {
         $scope.typeName = data.information_type_name;
     });
-    //��ȡ���з�����Ϣ
+    //��ȡ���з�����Ϣ
     portalService.queryInformation($stateParams.type).then(function (data) {
         $scope.informations = data;
     });
@@ -6248,7 +6248,7 @@ hpxAdminApp.controller('loginInfoController', function ($rootScope, $scope, $sta
 });
 
 hpxAdminApp.controller('loginsController', function () {
-    
+
 });
 
 hpxAdminApp.controller('mainController', function ($rootScope, $scope, $state, $timeout, customerService, $cookieStore, payingService) {
@@ -6268,7 +6268,7 @@ hpxAdminApp.controller('mainController', function ($rootScope, $scope, $state, $
             $rootScope.identity.is_verified = data.is_verified;
             $rootScope.identity.corp_id = data.corp_id;
         }
-        
+
         $cookieStore.put('customer', $rootScope.identity);
     })
     if ($rootScope.identity.enterprise_id > 0) {
@@ -6344,7 +6344,7 @@ hpxAdminApp.controller('menuController', function ($rootScope, $scope, $state, c
             $state.go("app.main.enterpriseAccountInfo");
         }
     }
-    // 点击兴业电子账户
+    // 点击--电子账户
     $scope.eleAccount = function () {
         if ($scope.menuEnterprise <= 3) {
             swal({
@@ -6364,7 +6364,7 @@ hpxAdminApp.controller('messageCenterController', function ($rootScope, $scope, 
         choiceRead: 0,
         choiceMessageType: 1,
         MessageType: 1,
-        isRead:0 
+        isRead:0
     }
     //获取全部信息
     $scope.tableParams = new ngTableParams({ 'sorting': { 'id': 'desc' } }, {
@@ -6521,8 +6521,8 @@ hpxAdminApp.controller('modifyPasswordController', function ($rootScope, $scope,
         }
 
         //修改密码
-        customerService.customerModifyPassword($scope.model).then(function () {    
-           
+        customerService.customerModifyPassword($scope.model).then(function () {
+
             swal({
             title: "修改密码成功,请回到首页重新登录?",
             type: "warning",
@@ -6534,7 +6534,7 @@ hpxAdminApp.controller('modifyPasswordController', function ($rootScope, $scope,
             customerService.customerLogout().then(function () {
                 customerService.logout();
                 window.location.href = '/index.aspx';
-                
+
             });
             });
         })
@@ -6717,7 +6717,7 @@ hpxAdminApp.controller('myBiddingController', function ($rootScope, $scope, $sta
     //交易完成
     $scope.choiceTradeStatusComplete = function () {
         $scope.filter.iselectronic = 1;
-        $scope.filter.status = 810;       
+        $scope.filter.status = 810;
         $scope.filter.choiceStatus = 883;
         $scope.tableParams.reload();
     }
@@ -6742,7 +6742,7 @@ hpxAdminApp.controller('myBiddingController', function ($rootScope, $scope, $sta
                 $scope.billsNumber();
             })
         })
-        
+
     }
     $scope.deleteOrder = function (data) {
         swal({
@@ -6757,7 +6757,7 @@ hpxAdminApp.controller('myBiddingController', function ($rootScope, $scope, $sta
                 $scope.billsNumber();
                 $scope.tableParams.reload();
                 swal("当前您无权进行此操作")
-              
+
             });
         });
     }
@@ -6829,10 +6829,10 @@ hpxAdminApp.controller('myBillController', function ($rootScope, $scope, $state,
     $scope.billsNumber = function () {
         billService.getBillsNumber($scope.filter.choiceBillType).then(function (data) {
             $scope.numberModel = data;
-            
+
         })
     }
-   
+
 
     $scope.billsNumber();
 
@@ -6925,7 +6925,7 @@ hpxAdminApp.controller('myBillController', function ($rootScope, $scope, $state,
         $scope.filter.choiceorder = 0;
         $scope.tableParams.reload();
     };
-   
+
     //选择纸票
     $scope.choicePBillType = function () {
         $scope.filter.choiceBillType = 102;
@@ -6961,7 +6961,7 @@ hpxAdminApp.controller('myBillController', function ($rootScope, $scope, $state,
             $scope.tableParams.reload();
 
         }
-        
+
     }
     //平台审核
     $scope.choiceTradeStatusCheck = function () {
@@ -7004,7 +7004,7 @@ hpxAdminApp.controller('myBillController', function ($rootScope, $scope, $state,
             $scope.filter.isAlive = null;
             $scope.filter.status = null;
         };
-        
+
         //$scope.filter.bill_status_code = [803, 804, 805, 806, 807, 808, 809];
         //$scope.filter.is_checked = 1;
 
@@ -7122,7 +7122,7 @@ hpxAdminApp.controller('myBillController', function ($rootScope, $scope, $state,
         }
     }
 
-    
+
     $scope.deleteOrder = function (data) {
         swal({
             title: "是否确认删除？",
@@ -7629,7 +7629,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
     if ($stateParams.id) {
         $scope.filter.id = $stateParams.id;
     }
-    
+
     init = function () {
         toolService.getSystemTime().then(function (date) {
             var newSystemDate = new Date().getTime();
@@ -7645,7 +7645,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
                 var timejson = data.time;
                 $scope.hpxDates = [];
                 angular.forEach(timejson, function (data) {
-                    $scope.hpxDates[data.id] = data.TIME;              
+                    $scope.hpxDates[data.id] = data.TIME;
                 });
             })
 
@@ -7681,7 +7681,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
         });
     }
     init();
-   
+
 
     waitTime = function () {
         var newdate = new Date().getTime();
@@ -7698,7 +7698,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
                 var waitdate = newdate - $scope.model.order_update_time + difference;
             }
         }
-        
+
         if (waitdate > 1000) {
             var waitTime = new Date(waitdate);
             $scope.filter.waitTimeD = waitTime.getDate();
@@ -7875,7 +7875,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
         $state.go('app.main.evaluate', { type_id: $scope.model.bill_type_id, to_id: $scope.model.id, gettype: 1 });
     };
 
-  
+
     //追加评价
     $scope.showaddEvaluatesell = function () {
         $scope.addevaluatesell = {};
@@ -7906,7 +7906,7 @@ hpxAdminApp.controller('orderDrawerInfoController', function ($rootScope, $scope
         });
     };
 
-    
+
     $scope.verifyStr = "获取验证码";
     $scope.disableVerify = false;
     var second = 90;
@@ -8022,9 +8022,9 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
     }
      //设置每隔一段时间进行刷新
     var i = 0;
-    
+
     init = function () {
-        
+
         toolService.getSystemTime().then(function (date) {
             var newSystemDate = new Date().getTime();
             difference = newSystemDate - date;
@@ -8042,7 +8042,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
                     $scope.hpxDates[data.id] = data.TIME;
                 });
             })
-            
+
 
 
             if ($scope.model.order_status_id == 804 || $scope.model.order_status_id == 806 || $scope.model.order_status_id == 807 || $scope.model.order_status_id == 808) {
@@ -8079,7 +8079,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
                 var waitdate = newdate - $scope.model.order_update_time + difference;
             }
         }
-        
+
         if (waitdate > 1000) {
             var waitTime = new Date(waitdate);
             $scope.filter.waitTimeD = waitTime.getDate();
@@ -8142,7 +8142,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
         payingService.getAccount(enterpriseId).then(function (data) {
             $scope.accounts = data.acct_list;
         });
-        
+
         $scope.model.order_pay_type_id = 1203;
         $scope.model.verifyCode = null;
         //$('#modal-address').modal('show');
@@ -8236,10 +8236,10 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
     }
 
     //支付票款
-    $scope.pay = function () {    
+    $scope.pay = function () {
         //if (!$scope.model.verifyCode || $scope.model.verifyCode.length != 6) {
         //    swal("请输入正确的短信验证码！");
-        //} 
+        //}
         //else {
         payingService.getVacctNos($scope.hfindAccY.saler_buyer_v_acct_no, $scope.secondSing.contractNum, $scope.model.bill_id).then(function (data) {
             $scope.xuNiS = data;
@@ -8258,7 +8258,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
             closeOnConfirm: true
         }, function () {
             $scope.isDisable = true;
-            payingService.queryAccount($rootScope.identity.token).then(function (data) {        
+            payingService.queryAccount($rootScope.identity.token).then(function (data) {
                 $scope.queryAccountS = data
                     orderService.updateOrderAccountReceiver($scope.model.id, $scope.hfindAccY.id).then(function (data) {
                         orderService.updateOrderReceiver($scope.model.id, $scope.model).then(function (data) {
@@ -8272,7 +8272,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
                                         keyboard: false,//键盘关闭对话框
                                         show: true//弹出对话框
                                     });
-                                    $scope.xingyePayA = function () {                                      
+                                    $scope.xingyePayA = function () {
                                         var html = $scope.payData.biz_order.recharge_url;
                                         //http://139.224.112.243:8000/v1
                                         var url = API_URL+'/xingyeRecharge?recharge_url=' + html;
@@ -8287,16 +8287,16 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
                                             }
                                         })
                                     }, 10000);
-                                } else if ($scope.payData.order_status == 806) {                                      
+                                } else if ($scope.payData.order_status == 806) {
                                     //$(".clokykm").fadeIn();
-                                    //$(".swal").fadeIn();  
+                                    //$(".swal").fadeIn();
                                     swal({
                                         title: "收票方付款成功！",
                                         confirmButtonText: "OK",
                                     }, function () {
                                         window.location.reload();
                                     })
-                                }   
+                                }
                             });
                             $('#modal-address').modal('hide');
                         });
@@ -8317,7 +8317,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
         $('#modal-pay-confirm').modal('hide');
     };
     //确认签收
-    $scope.showendorsements = function () {     
+    $scope.showendorsements = function () {
         //$('#modal-Hvalidate').modal('show');
         $('#modal-Hvalidate').modal({
             backdrop: "static",//点击空白处不关闭对话框  如果直接是false 则背景没有灰色透明
@@ -8347,7 +8347,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
     //    $(".clokykms").fadeOut();
     //    window.location.reload();
     //}
-    
+
 
     //$scope.hpxxy = function () {
     //    var newWin = window.open('loading page');
@@ -8376,7 +8376,7 @@ hpxAdminApp.controller('orderReceiverInfoController', function ($rootScope, $sco
                     window.location.reload();
                 })
             });
-     
+
     //$scope.verifyStr = "获取验证码";
     //$scope.disableVerify = false;
         });
@@ -8905,7 +8905,7 @@ hpxAdminApp.controller('portalInformationTypeController', function ($scope, $roo
         $('#modal-edit').modal('show');
         $('#modal-edit').draggable();
     };
-  
+
 
     $scope.save = function () {
         if ($scope.model.id == null) {
@@ -8958,7 +8958,7 @@ hpxAdminApp.controller('portalSuggestionController', function ($scope, $rootScop
     $scope.reflash = function () {
         $scope.tableParams.reload();
     }
-    
+
     $scope.edit = function (data) {
         if (data == null) {     //弹出新增窗口
             $scope.model = newEntity;
@@ -9009,7 +9009,7 @@ hpxAdminApp.controller('portalSuggestionController', function ($scope, $rootScop
             $scope.editForm.$setPristine();
             $('#modal-read').modal('hide');
         });
-        
+
     };
 
 
@@ -9047,7 +9047,7 @@ hpxAdminApp.controller('portalSuggestionInfoController', function ($scope, $root
     $scope.reflash = function () {
         $scope.tableParams.reload();
     }
-    
+
     $scope.edit = function (data) {
         if (data == null) {         //弹出新增窗口
             $scope.model = newEntity;
@@ -9094,7 +9094,7 @@ hpxAdminApp.controller('portalSuggestionTypeController', function ($scope, $root
 
     $scope.filter = {};
 
-    
+
     $scope.tableParams = new NgTableParams({ sorting: { 'username': 'asc' } }, {
         getData: function (params) {
             portalSuggestionTypeService.queryAll().then(function (data) {
@@ -9795,7 +9795,7 @@ hpxAdminApp.controller('publishController', function ($rootScope, $scope, $timeo
     }
     //点击汇票到期日，默认选中的时间
     $scope.billTypeChange = function (id) {
-        
+
         $scope.model.bill_type_id = id;
 
         if ($scope.model.bill_type_id == 101) {
@@ -9807,7 +9807,7 @@ hpxAdminApp.controller('publishController', function ($rootScope, $scope, $timeo
             $("#Billnumbers").css("display", "block");
         }
         else {
-           
+
             $scope.model.bill_deadline_time = new Date().setMonth(new Date().getMonth() + 6);
         }
     }
@@ -10059,7 +10059,7 @@ hpxAdminApp.controller('publishController', function ($rootScope, $scope, $timeo
                     billService.updateBillProduct($scope.model.id, $scope.model).then(function (data) {
                         swal('修改成功！\n请等待后台审核（30分钟内完成）。');
                         $state.go("app.main.myBill");
-                        
+
                     });
                 }
             }
@@ -10245,7 +10245,7 @@ hpxAdminApp.controller('queryBillController', function ($rootScope, $scope, $sta
         $scope.filter.locationId = $scope.filter.CityID;
         $scope.tableParams.reload();
     }
-    
+
     $scope.tableParams = new ngTableParams({ 'sorting': { 'publishing_time': 'desc' } }, {
         getData: function (params) {
 
@@ -10434,7 +10434,7 @@ hpxAdminApp.controller('queryenterpriseController', function ($rootScope, $scope
             swal("至少输入四个关键字！");
             return;
         } else {
-            customerService.enterpriseDetail($scope.enterpriseModel.keyword).then(function (data) {  
+            customerService.enterpriseDetail($scope.enterpriseModel.keyword).then(function (data) {
                 $scope.enterpriseResult = data[0];
             })
         }
@@ -10565,7 +10565,7 @@ hpxAdminApp.controller('queryOfferController', function ($rootScope, $scope, $st
         $scope.tableParams.reload();
 
     };
-    
+
     // 排序
     //$scope.sortByType = function (type) {
     //    $scope.sort = type;
@@ -10680,11 +10680,11 @@ hpxAdminApp.controller('quoteController', function ($rootScope, $scope, $timeout
         getData: function (params) {
             return billService.getAllOwnBillOffer(params, $scope.filter.billTypeId, $scope.filter.billStyleId, $scope.filter.maxPrice, $scope.filter.tradeLocationId, $scope.filter.keyword).then(function (data) {
                 $scope.first = $scope.getFirst(params);
-               
+
                 for (var i = 0; i < data.length; i++) {
                     try {
                         data[i].offer_detail = JSON.parse(data[i].offer_detail);
-                      
+
                     }
                     catch (e) {
                     }
@@ -10712,11 +10712,11 @@ hpxAdminApp.controller('quoteController', function ($rootScope, $scope, $timeout
             });
         });
     }
-    
+
     $scope.edit = function (data) {
         if (data == null) {         //跳转至新建报价
             $state.go('app.main.editQuote');
-        } 
+        }
         else {      //跳转到报价详细信息
             $state.go('app.main.editQuote', { 'id': data.id });
         }
@@ -10954,7 +10954,7 @@ hpxAdminApp.controller('readBillController', function ($rootScope, $scope, $stat
         $scope.rateModel = {};
         if (!$scope.biddingModel.bid_every_plus || !$scope.biddingModel.bill_rate) {
             $scope.isdisabled = false;
-        } 
+        }
         if ($scope.biddingModel.bid_rate == null || $scope.biddingModel.bid_rate == "" || $scope.biddingModel.bid_rate == undefined) {
             $scope.biddingModel.bid_deal_price = "";
             $scope.biddingModel.bid_rate_price = "";
@@ -11567,13 +11567,13 @@ hpxAdminApp.controller('readBillController', function ($rootScope, $scope, $stat
         $('#modal-rule').modal('hide');
     }
 
-    //选择交易方          
+    //选择交易方
     $scope.finishBidding = function (item) {
         //if ($scope.filter.submitRule == 0) {
         //    swal('请先阅读并同意质押协议！');
         //    return;
         //}
-        
+
         swal({
             title: "确认选择该收票人进行交易吗?",
             type: "warning",
@@ -11687,7 +11687,7 @@ hpxAdminApp.controller('readBillController', function ($rootScope, $scope, $stat
 });
 
 hpxAdminApp.controller('readOfferController', function ($rootScope, $scope, $state, $stateParams, ngTableParams, addressService, billService, constantsService) {
-    //����id��ȡ������ϸ��Ϣ
+    //����id��ȡ������ϸ��Ϣ
     if ($stateParams.id) {
         billService.getBillOffer($stateParams.id).then(function (data) {
             $scope.model = data;
@@ -11768,7 +11768,7 @@ hpxAdminApp.controller('rechargeController', function ($scope, $rootScope, $stat
 hpxAdminApp.controller('resourceInfoController', function ($scope, $rootScope, $state, NgTableParams, resourceService) {
     var emptyEntity = {};
     var newEntity = angular.copy(emptyEntity, newEntity);
-    
+
     $scope.filter = {};
     //获取所有可管理的资源信息
     $scope.tableParams = new NgTableParams({ sorting: { 'resource_name': 'asc' } }, {
@@ -11832,7 +11832,7 @@ hpxAdminApp.controller('resourceInfoController', function ($scope, $rootScope, $
 hpxAdminApp.controller('roleInfoController', function ($scope, $rootScope, $state, NgTableParams, roleService, userService, resourceService, cacheService) {
     var emptyEntity = {};
     var newEntity = angular.copy(emptyEntity, newEntity);
-    
+
     $scope.filter = {};
     //获取所有用户信息
     userService.queryAll().then(function (data) {
@@ -11877,9 +11877,9 @@ hpxAdminApp.controller('roleInfoController', function ($scope, $rootScope, $stat
             $('#modal-Resources').modal('show');
         });
     },
-    
+
     $scope.Determine = function (item) {
-        if (item.can_get_checked) {  
+        if (item.can_get_checked) {
             item.can_get = 1;
         } else {
             item.can_get = 0;
@@ -11916,7 +11916,7 @@ hpxAdminApp.controller('roleInfoController', function ($scope, $rootScope, $stat
             //$('#modal-Resources').modal('hide');
         })
     }
-    
+
     // 删除指定角色的指定权限
     $scope.removePower = function (item) {
         return roleService.removeRoleResource(item).then(function (data) {
@@ -12009,7 +12009,7 @@ hpxAdminApp.controller('selectBackgroundInformationController', function (export
         //billCharacterCode: ''
     };
 
-    
+
     //刷新
     $scope.reflash = function () {
         $scope.tableParams.reload();
@@ -12037,7 +12037,7 @@ hpxAdminApp.controller('selectBackgroundInformationController', function (export
             $scope.filter.tradeProvinceId = $scope.filter.ProvinceID + 1;
             $scope.filter.locationId = $scope.filter.ProvinceID;
             //$scope.tableParams.reload();
-            
+
             return addressService.queryCity($scope.filter.tradeProvinceId).then(function (data) {
                 $scope.CityData = data;
             });
@@ -12058,7 +12058,7 @@ hpxAdminApp.controller('selectBackgroundInformationController', function (export
     // 查询
     $scope.hpxFind = function () {
         messageService.findMessage({
-            
+
         }).then(function (data) {
             console.log(data)
         })
@@ -12079,8 +12079,8 @@ hpxAdminApp.controller('selectBackgroundInformationController', function (export
             console.log(data)
         })
     }
-    
-    
+
+
 
     //导出表格
     $scope.exportExcel = function () {
@@ -12115,7 +12115,7 @@ hpxAdminApp.controller('selectBackgroundInformationController', function (export
             newWin.location.href = result.data.data;
         })
     }
-    
+
 });
 
 hpxAdminApp.controller('shareBillController', function ($rootScope, $scope, $state, $stateParams, $filter, $timeout, billService) {
@@ -12427,7 +12427,7 @@ hpxAdminApp.controller('stopOrderController', function ($scope, $rootScope, $sta
 hpxAdminApp.controller('userInfoController', function ($scope, $rootScope, $state, NgTableParams, userService, roleService) {
 
     var emptyEntity = {};
-    var newEntity = angular.copy(emptyEntity, newEntity); 
+    var newEntity = angular.copy(emptyEntity, newEntity);
     $scope.filter = {};
     //获取所有角色信息
     roleService.queryAll().then(function (data) {
@@ -12499,7 +12499,7 @@ hpxAdminApp.controller('userInfoController', function ($scope, $rootScope, $stat
             });
         }
     };
-  
+
 });
 hpxAdminApp.controller('weixinPortalController', function ($scope, $rootScope, $state, $stateParams, $window, API_URL, NgTableParams, portalInformationService, portalInformationTypeService) {
     //portalInformationTypeService.get($stateParams.type).then(function (data) {
@@ -12546,17 +12546,17 @@ hpxAdminApp.controller('weixinPortalController', function ($scope, $rootScope, $
 
     function IsURL(str_url) {
         var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
-        + '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
-        + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
-        + '|' // 允许IP和DOMAIN（域名） 
-        + '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
-        + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
-        + '[a-z]{2,6})' // first level domain- .com or .museum 
-        + '(:[0-9]{1,4})?' // 端口- :80 
-        + '((/?)|' // a slash isn't required if there is no file name 
+        + '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@
+        + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184
+        + '|' // 允许IP和DOMAIN（域名）
+        + '([0-9a-z_!~*\'()-]+.)*' // 域名- www.
+        + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名
+        + '[a-z]{2,6})' // first level domain- .com or .museum
+        + '(:[0-9]{1,4})?' // 端口- :80
+        + '((/?)|' // a slash isn't required if there is no file name
         + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$';
         var re = new RegExp(strRegex);
-        //re.test() 
+        //re.test()
         if (re.test(str_url)) {
             return (true);
         } else {

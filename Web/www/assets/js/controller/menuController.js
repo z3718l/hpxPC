@@ -77,7 +77,7 @@
             $state.go("app.main.operater");
         }
     }
-    // 点击兴业电子账户
+    // 点击--电子账户
     $scope.eleAccount = function () {
         if ($scope.menuEnterprise.is_alive <= 3) {
             swal({

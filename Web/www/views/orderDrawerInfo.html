@@ -179,7 +179,7 @@
                         </div>
                         <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
                     </div>
-                    
+
                     <div class="form-inline">
                         <label class="control-label col-md-3">汇票瑕疵：</label>
                         <div class="col-md-9 form-control-static">
@@ -191,7 +191,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div ng-if="model.bill_type_id==101" class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;margin-left: 0px;color:#333;font-size:16px">订单信息</div>
             <div class="col-md-12" ng-if="model.bill_type_id==101" style="width: 96%;border: 1px solid #ebebeb;margin-left: 2%;margin-top: 2%;margin-bottom: 2%;padding:0 0 0 0 ">
                 <div class="col-md-8" style="margin-top:3%;">
@@ -220,7 +220,7 @@
                         </div>
                         <label class="control-label col-md-3" ng-if="model.trade_type_code==702"></label>
                         <div class="col-md-3 form-control-static" ng-if="model.trade_type_code==702">
-                            
+
                         </div>
                         <div ng-if="model.order_type_name=='预约出票'">
                             <label ng-if="model.trade_type_code==702" class="col-md-3 control-label">每十万贴息：</label>
@@ -233,7 +233,7 @@
                     </div>
                     <div class="form-inline col-md-12">
                         <label class="control-label col-md-3">贴现金额：</label>
-                        <div class="col-md-4 form-control-static">                           
+                        <div class="col-md-4 form-control-static">
                             {{ model.order_total_price | currency }}
                         </div>
                         <label class="control-label col-md-3" style="margin-left: -44px;">生成时间：</label>
@@ -391,7 +391,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group" ng-if="model.order_status_id >= 804 && model.bill_type_id==101">
                 <div class="text-center" ng-if="model.order_status_id < 810">
                     <div class="form-group form-inline col-xs-12 col-md-12">
@@ -424,7 +424,7 @@
                     </div>
                     <div class="text-center" ng-if="model.order_status_id == 810">
                         <font class="col-md-12" size="3" color="blue">银行已解冻资金</font>
-                        <font class="col-md-12" size="3" color="blue">请登录<a ng-click="identifySubmit()">兴业执剑人见证代管系统</a>提现</font>
+                        <font class="col-md-12" size="3" color="blue">请登录<a ng-click="identifySubmit()">--执剑人见证代管系统</a>提现</font>
                     </div>
                 </div>
             </div>
@@ -445,7 +445,7 @@
                 <button class="cloky" ng-click="renow()">OK</button>
             </div>
         </div>-->
-     
+
         <div id="modal-endorsement" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content" style="width:600px;">
@@ -502,7 +502,7 @@
                             <button type="button" class="btn btn-sm btn-success" ng-click="remove(-1)" ng-disabled="!model.endorsement_file"><i class="fa fa-trash-o"></i> 删除背书文件</button>
                             <button class="btn btn-sm btn-success" ngf-select="uploadFiles($files, $invalidFiles, add)" ngf-pattern="'*'" accept="*" ngf-max-size="10MB" ng-disabled="model.endorsement_file.length==1"><i class="fa fa-share-square-o"></i> 上传背书文件</button>
                             <button type="button" class="btn btn-sm btn-success" ng-click="endorsement()" ng-disabled="!model.verify_code"><i class="fa fa-share-square-o"></i> 确认</button>
-                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>                 
+                            <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 取消</button>
                         </div>
                     </ng-form>
                 </div>
@@ -511,4 +511,3 @@
         </div>
     </div>
 </div>
-

@@ -180,7 +180,7 @@
                         </div>
                         <div class="line col-md-12 text-center" style="width:100%;height:1px"></div>
                     </div>
-                    
+
                     <div class="form-inline col-md-12">
                         <label class="control-label col-md-3">汇票瑕疵：</label>
                         <div class="col-md-9 form-control-static">
@@ -193,7 +193,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;color:#333;font-size:16px">
                 订单信息
             </div>
@@ -209,7 +209,7 @@
                             {{ model.order_type_name }}
                         </div>
                     </div>
-                    <div class="form-inline col-md-12">                     
+                    <div class="form-inline col-md-12">
                         <label class="control-label col-md-3" ng-if="model.trade_type_code==701">贴现利率：</label>
                         <div class="col-md-3 form-control-static"  ng-if="model.trade_type_code==701">
                             {{ model.order_rate }}<span ng-if="model.bill_type_id==101">%</span><span ng-if="model.bill_type_id==102">‰</span>
@@ -250,7 +250,7 @@
                         <label class="control-label col-md-8" style="margin-left: -35%;">订单状态：</label>
                         <label style="color:#ff5a14"><span><label ng-if="model.order_status_id >= 810">总时长：{{hpxDatekx}}</label></span></label>
                         <div class="col-md-12 form-control-static form-group">
-                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div> 
+                            <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div>
                             <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 806),'rosl':(model.bill_status_code != 806)}"><em>●</em><font>收票方支付票款</font><label style="margin-left: 20%;">{{hpxDates[2]}}</label></div>
                             <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 807),'rosl':(model.bill_status_code != 807)}"><em>●</em><font>出票方背书确认</font><label style="margin-left: 20%;">{{hpxDates[3]}}</label></div>
                             <div class="accordionhide" id="fileaccordion">
@@ -269,7 +269,7 @@
                             <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 807),'rosl':(model.bill_status_code != 807)}"><em>●</em><font>出票方背书确认</font><label style="margin-left: 20%;">{{hpxDates[3]}}</label></div>
                             <div class="accordionhide" id="fileaccordion">
                                 <div class="text-left "  style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 806),'rosl':(model.bill_status_code != 806)}"><em>●</em><font>收票方支付票款</font><label style="margin-left: 20%;">{{hpxDates[2]}}</label></div>
-                                <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div> 
+                                <div class="text-left " style="margin-left: 10%;" ng-class="{'ros':(model.bill_status_code == 804),'rosl':(model.bill_status_code != 804)}"><em>●</em><font>出票方确认交易</font><label style="margin-left: 20%;">{{hpxDates[1]}}</label></div>
                             </div>
                             <span ng-click="tog()" style="margin-left: 45%;position: relative;top: 14px;color: #87868B;cursor:pointer;">查看详情 <label class="rote" id="trans" style="margin-left: 5%;font-size: 21px;position: relative;top: 3px;">﹀</label></span>-->
                         </div>
@@ -283,7 +283,7 @@
                     </div>
                 </div>
 
-           
+
             </div>
             <!--<div ng-if="model.order_status_id == 804 && model.bill_type_id==101">
                 <div class="col-md-11 col-sm-11 col-xs-11" style="border-left: 5px solid #ff5a14;color:#333;font-size:16px">
@@ -458,14 +458,14 @@
             <button type="button" class="btn btn-success width-100" ng-if="model.order_status_id == 810 || model.order_status_id == 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 评价</button>
             <!--<button type="button" class="btn btn-success width-100" ng-if="model.order_status_id >= 811" ng-click="showEvaluatesell()"><i class="fa fa-share-square-o"></i> 追加评价</button>-->
             <div class="col-md-12 form-group form-inline text-center" ng-if="model.bill_type_id==101 && model.order_status_id == 804">
-                <div class="text-left col-md-6 col-md-offset-3"><strong>温馨提示：</strong>请尽快进行确认付款操作，操作成功后，款项将冻结在兴业代管专户。操作前，可先确认兴业执剑人见证代管系统账户中有足够余额。</div>
+                <div class="text-left col-md-6 col-md-offset-3"><strong>温馨提示：</strong>请尽快进行确认付款操作，操作成功后，款项将冻结在--代管专户。操作前，可先确认--执剑人见证代管系统账户中有足够余额。</div>
             </div>
             <div class="col-md-12 form-group form-inline text-center" ng-if="model.bill_type_id==101 && model.order_status_id == 805">
                 <!--<div style="background-color:#fefef0;width:100%;">-->
                     <div class="text-left col-md-7 col-md-offset-3" style="border:1px dashed #87868B;margin-top:25px;background: #fafaf0;">
                         <strong>温馨提示：</strong>充值付款过程中，如遇以下情况，请及时处理！
                         <p>1、在15分钟内充值成功且余额充足，仍停留在此页面时，请联系客服协助处理；</p>
-                        <p>2、超过15分钟后未完成充值或充值后仍余额不足，请登录<a href="#">兴业执剑人见证代管系统</a>进行充值付款</p>
+                        <p>2、超过15分钟后未完成充值或充值后仍余额不足，请登录<a href="#">--执剑人见证代管系统</a>进行充值付款</p>
                     </div>
                 <!--</div>-->
             </div>
@@ -577,8 +577,8 @@
                                             <span style="font-weight:bold">三、 信息平台：</span>指丙方开发的<span>汇票线平台</span>，为交易双方提供交易服务的互联网网站及交易系统，根据本合同表述的需要，丙方在本合同中也可称之为信息平台。<br />
                                             <span style="font-weight:bold">四、标的票据：</span>指转让方在信息平台上发布的转让方拟转让其票据应收款于受让方的商业汇票。<br />
                                             <span style="font-weight:bold">五、 发布日：</span>就一笔标的票据而言，指其发布时间所在日期。<br />
-                                            <span style="font-weight:bold">六、 兴业数字金融服务（上海）股份有限公司票据流转资金代管专户：</span>指甲方、乙方、丙方同意，由丙方合作机构兴业数字金融服务（上海）股份有限公司（简称“兴业数金”）为方便转让方与受让方资金流转和安全而在兴业银行开立的票据流转资金代管专户（简称“票据流转资金代管专户”）。<br />
-                                            <span style="font-weight:bold">七、 服务费：</span>指信息平台及合作机构兴业数金基于其为交易双方提供的票据应收款转让相关服务而向受让方单方收取的服务费。<br />
+                                            <span style="font-weight:bold">六、 --数字金融服务（上海）股份有限公司票据流转资金代管专户：</span>指甲方、乙方、丙方同意，由丙方合作机构--数字金融服务（上海）股份有限公司（简称“--数金”）为方便转让方与受让方资金流转和安全而在--银行开立的票据流转资金代管专户（简称“票据流转资金代管专户”）。<br />
+                                            <span style="font-weight:bold">七、 服务费：</span>指信息平台及合作机构--数金基于其为交易双方提供的票据应收款转让相关服务而向受让方单方收取的服务费。<br />
                                             <span style="font-weight:bold;">八、提现费（电汇费）:指转让方提现产生的费用，实际上由受让方承担</span><br />
                                             <span style="font-weight:bold"><label>九、</label> 票据应收款：</span>指标的票据的承兑人承担的在票据到期日无条件支付的票据款项。<br />
                                             <span style="font-weight:bold"><label>十、</label>  票据应收款转让：</span>指转让方通过信息平台提供的服务在信息平台与受让方达成协议将票据背书转让方式将票据应收款无条件不可撤销地转让给受让方的行为。<br />
@@ -594,22 +594,22 @@
                                             2.本合同项下甲方转让的标的票据不存在任何争议、纠纷。<br />
                                             3.甲方已将标的票据成功背书给乙方。<br />
                                             第四条 对价支付<br />
-                                            一、上述第三条约定的对价支付的前提条件全部满足之后，乙方委托丙方（并且甲方同意由乙方委托丙方）将数额等于实收金额的资金通过兴业银行资金代管专户转入甲方银行账户。<br />
-                                            二、本合同各方均同意，在前述第三条约定前提条件全部满足的情形下，丙方合作机构兴业数金将根据乙方的委托于成交日当日将乙方提前划入票据流转资金代管专户的数额等于实收金额的资金通过票据流转资金代管专户转入甲方指定的银行账户，但若因系统关闭或故障等待特殊原因无法成交日当日完成划款，则兴业数金可于下一个工作日完成划款。<br />
+                                            一、上述第三条约定的对价支付的前提条件全部满足之后，乙方委托丙方（并且甲方同意由乙方委托丙方）将数额等于实收金额的资金通过--银行资金代管专户转入甲方银行账户。<br />
+                                            二、本合同各方均同意，在前述第三条约定前提条件全部满足的情形下，丙方合作机构--数金将根据乙方的委托于成交日当日将乙方提前划入票据流转资金代管专户的数额等于实收金额的资金通过票据流转资金代管专户转入甲方指定的银行账户，但若因系统关闭或故障等待特殊原因无法成交日当日完成划款，则--数金可于下一个工作日完成划款。<br />
                                             三、本合同各方均确认及同意有关款项的计算规则：甲方实收金额（成交金额）=乙方实扣金额-转让服务费。<br />
 
                                             第五条 转让服务费<br />
-                                            一、甲乙双方确认本合同基于丙方提供的转让服务达成，并同意由乙方单方面向丙方支付转让服务费；甲乙双方无条件不可撤销地同意，委托兴业数金通过其自主研发的执剑人票据见证代管系统为甲乙双方提供票据流转见证、资金代管等服务，由此产生的相关服务费包含在乙方向丙方支付的转让服务费中并由丙方代收。<br />
+                                            一、甲乙双方确认本合同基于丙方提供的转让服务达成，并同意由乙方单方面向丙方支付转让服务费；甲乙双方无条件不可撤销地同意，委托--数金通过其自主研发的执剑人票据见证代管系统为甲乙双方提供票据流转见证、资金代管等服务，由此产生的相关服务费包含在乙方向丙方支付的转让服务费中并由丙方代收。<br />
                                             二、转让服务费等于乙方实际支付的实扣金额与甲方实际收取金额之间的差额，转让服务费=转让票据票面金额*转让服务费率，乙方同意根据本合同约定的服务费率向丙方支付转让服务费。转让服务费率以丙方公布的收费规则为准。<br />
-                                            三、乙方委托兴业数金代管资金时，其向票据流转资金代管专户划转受让票据应收款的资金时应同时将转让服务费一并转让。<br />
+                                            三、乙方委托--数金代管资金时，其向票据流转资金代管专户划转受让票据应收款的资金时应同时将转让服务费一并转让。<br />
 
                                             第六条 信息对接、资金代转及划转服务<br />
                                             一、丙方及丙方合作机构根据标的票据转让订单为甲乙双方提供信息对接、资金代管及划转服务：<br />
                                             1.转让方将拟转让的标的票据于丙方信息平台发布后，受让方对其进行报价，转让方同意成交金额并确认在线签署本合同后，订单生效，进入实际交易阶段。<br />
-                                            2.受让方在有效时间内（30分钟）成功提交有效付款指令将受让资金及相应服务费划转入票据流转资金代管专户后，兴业银行将自动将成交金额及服务费从受让方银行账户中划入票据流转资金代管专户，同时信息平台就该笔转让订单对受让方显示“你已支付交易款，请等待持票方完成背书”，对转让方显示“资金方已打款，请完成背书并确认”。<br />
+                                            2.受让方在有效时间内（30分钟）成功提交有效付款指令将受让资金及相应服务费划转入票据流转资金代管专户后，--银行将自动将成交金额及服务费从受让方银行账户中划入票据流转资金代管专户，同时信息平台就该笔转让订单对受让方显示“你已支付交易款，请等待持票方完成背书”，对转让方显示“资金方已打款，请完成背书并确认”。<br />
                                             3.当一笔标的票据在信息平台上对转让方显示“资金方已打款，请完成背书并确认”的状态时，转让方应当根据丙方及丙方合作机构执剑人票据见证代管系统的提示在有效时间内（30分钟）办理标的票据的背书手续；若转让方将标的票据成功背书给受让方，且转让方在有效时间内点击确认完成背书操作，则信息平台就该笔转让订单对转让方显示“你已完成背书，请等待资金方签收电票”，对受让方显示“持票方已背书，请完成签收和申请解冻交易款”；<br />
                                             4.当一笔标的票据在信息平台上对受让方显示“持票方已背书，请完成签收和申请解冻交易款”的状态时，受让方应在有效时间（30分钟）内点击确认完成签收操作并解冻交易款。若受让方未在有效时间内接收票据背书，则视为拒绝接收票据背书。若在受让方签收票据背书之前，转让方撤销票据背书导致受让方无法签收票据，则视为撤销背书。<br />
-                                            5.若受让方接收标的票据背书后在信息平台确认签收并解冻交易款，丙方合作机构兴业银行通过执剑人票据见证代管系统将对标的票据的背书状态进行见证核实，若转让方成功将标的票据背书给受让方，则构成转让成功。转让成功后，则转让方可通过执剑人票据见证代管系统发出指令将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内；若受让方接收标的票据背书后未在信息平台确认签收并解冻交易款，且执剑人票据代管系统进行核验后，确认受让方已成功接收标的票据背书，则执剑人票据见证代管系统有权自行将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内，由此产生的任何后果由受让方承担。<br />
+                                            5.若受让方接收标的票据背书后在信息平台确认签收并解冻交易款，丙方合作机构--银行通过执剑人票据见证代管系统将对标的票据的背书状态进行见证核实，若转让方成功将标的票据背书给受让方，则构成转让成功。转让成功后，则转让方可通过执剑人票据见证代管系统发出指令将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内；若受让方接收标的票据背书后未在信息平台确认签收并解冻交易款，且执剑人票据代管系统进行核验后，确认受让方已成功接收标的票据背书，则执剑人票据见证代管系统有权自行将票据流转资金代管专户内数额等于成交金额的资金划入转让方银行指定账户内，由此产生的任何后果由受让方承担。<br />
                                             6.在前述情形下，若受让方未于有效时间内成功提交有效付款指令将资金转入票据流转资金代管专户，或受让方银行账户内资金不足成交金额及服务费，或受让方主动取消交易，或拒绝接收票据背书，则票据应收款转让失败，由此产生合同无法履行的责任由受让方承担。若受让方已经将资金转入票据流转资金代管专户，转让方未在有效时间将标的票据背书，或转让方在票据背书后撤销背书、或转让方主动取消交易，则票据应收款转让失败，由此产生合同无法履行的责任由转让方承担。<br />
                                             7.转让失败的，信息平台向转让方及受让方发出转让失败通知，同时票据流转资金代管专户将账户内数额等于受让方实付金额的资金退回受让方执剑人票据见证代管系统的电子账户内；转让方与受让方将无法对该笔标的票据转让订单进行任何操作。<br />
                                             二、信息平台正常发起转让的时间段为银行工作日的9：00-16：30，在16：30时后需要进行票据应收款转让见证审核的订单，将在次日进行；信息平台根据业务情况针对转让的时间段进行调整并经预先公告的，则按照公告后的时间段进行转让。<br />
@@ -624,7 +624,7 @@
                                             七、 除根据本合同甲方与乙方之间因转让票据产生的权利及负担外，标的票据及票据应收款均不能存在本合同未做披露的任何债务负担或者第三方的权利主张、抵消权、质押或其他负担，甲方享有的票据收益权不存在本合同未做披露的法律上的障碍，且转让后票据应收款上不存在本合同未做披露的任何债务负担或第三方的权利主张或抵消权。<br />
                                             八、 本合同生效后，甲方无权再对标的票据进行向除乙方之外的任何第三方转让标的票据。<br />
                                             九、 甲方在丙方提交的标的票据信息、背书账户信息等信息真实有效，否则由甲方提供信息错误造成的一切损失由甲方承担。<br />
-                                            十、甲方在此无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并委托丙方合作机构兴业数金代管票据应收款转让项下的款项。<br />
+                                            十、甲方在此无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并委托丙方合作机构--数金代管票据应收款转让项下的款项。<br />
                                             十一、 标的票据转让过程中，甲方所有操作必须依照信息平台的提示进行并保障甲方联系方式的畅通，否则由于甲方操作失误造成的一切损失由甲方承担。所需注意环节包括但不限于在订单进行中时，且满足本协议第6条情形下，甲方才可进行背书，并在对应环节有效时间内完成相应的操作行为，否则，自愿承担由此产生的全部不利结果。<br />
                                             十二、 甲方保证履行本合同项下转让方的承诺及义务。<br />
 
@@ -634,7 +634,7 @@
                                             三、 签署本合同是乙方真实意思表示，本合同的签署不会导致违反适用于乙方的任何法律法规、规范性文件或乙方章程或类似文件，也不会违反其与任何第三方签订的任何协议或承诺；本合同生效后，将构成乙方有约束力及执行力的义务。<br />
                                             四、 乙方不存在任何可能对本合同履行产生重大不利影响的诉讼、仲裁、执行、申诉、复议、重组、破产、清算等程序及其他事件或情况。<br />
                                             五、 乙方在丙方信息平台提交的标的票据被背书账户信息等真实有效，否则由乙方提供信息错误造成的一切损失由乙方承担。<br />
-                                            六、 乙方无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并由丙方合作机构兴业数金代管票据应收款转让项下的资金。<br />
+                                            六、 乙方无条件不可撤销地授权丙方及丙方的合作机构通过电子商业汇票系统查询标的票据的票面信息、背书记录、影像等相关信息，并由丙方合作机构--数金代管票据应收款转让项下的资金。<br />
                                             七、 标的票据转让过程中，乙方所有操作必须依照信息平台的提示进行并保障乙方联系方式的畅通，否则由于乙方操作失误造成的一切损失由乙方承担。所需注意环节包括但不限于满足本协议第六条情形下，乙方需及时根据本协议约定办理票据背书相关手续，并在对应环节有效时间内完成相关操作；否则，自愿承担由此产生的全部不利结果。<br />
                                             八、 乙方保证履行本合同项下受让方的承诺及义务。<br />
 
@@ -759,7 +759,7 @@
                             <button type="button" class="close h_x" data-dismiss="modal" aria-hidden="true" style="font-size:56px;margin-right:10px;">×</button>
                         </div>
                         <div class="modal-body">
-                            <span style="font-size:21px;margin-bottom:18px;display:block;padding-left:5px;">您好，您的兴业（执剑人）电子账户余额不足，请及时</span>
+                            <span style="font-size:21px;margin-bottom:18px;display:block;padding-left:5px;">您好，您的--（执剑人）电子账户余额不足，请及时</span>
                             <span style="font-size:21px;padding-left:5px;">进行充值付款，以免影响交易！</span>
                         </div>
                         <div class="modal-footer">
@@ -791,7 +791,7 @@
                             <h4 class="modal-title"><i class="fa fa-lg fa-edit text-success"></i>请确认账户余额</h4>
                         </div>
                         <div class="modal-body">
-                            <span>您好，您的兴业（执剑人）电子账户余额不足，请及时登录<a>兴业执剑人见证代管系统</a>进行充值并付款，以免影响交易！</span>
+                            <span>您好，您的--（执剑人）电子账户余额不足，请及时登录<a>--执剑人见证代管系统</a>进行充值并付款，以免影响交易！</span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-sm btn-success" ng-click="payRecharge()"><i class="fa fa-share-square-o"></i> 前往充值及付款</button>
